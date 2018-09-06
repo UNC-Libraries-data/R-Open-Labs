@@ -1,2 +1,2 @@
 # R-Open-Labs
-http://ropenlabs.web.unc.edu/
+<a href=http://ropenlabs.web.unc.edu/>Home Page</a>
