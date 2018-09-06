@@ -179,69 +179,13 @@ ggplot(airquality, aes(x = Temp, y = Ozone)) +
   geom_point() + geom_smooth(method="loess")
 ```
 
-Let's a generate a boxplot of 
-
-```{r boxplot}
-ggplot(airquality, aes(x = Month, y = Ozone)) +
-        geom_boxplot()
-
-```
-
-Looks like I left out something geom_boxplot() needs. Time for google!
-
-Yes, I'm live googling in a class. [The pros do it all the time](https://medium.com/make-better-software/against-the-whiteboard-f1df0013954f). You should too.
-
-
-```{r boxplot2}
-ggplot(airquality, aes(x = Month, y = Ozone, group=Month)) +
-        geom_boxplot()
-
-```
-
-Let's fix up the x-axis labels.
-```{r month}
-airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
-ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
-        geom_boxplot()
-```
-
-Getting there, let's try a few more tweaks.
-
-```{r month2}
-airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
-ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
-        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw()
-```
-
-What if I want to see the original data and the boxplots?
-
-```{r month3}
-airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
-ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
-        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_point()
-```
-
-That's hard to read, so let's try using geom_jitter()
-
-```{r month4}
-airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
-ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
-        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_jitter()
-```
-
-Maybe I can make the jittering a bit more compact. Time for the R help system, which we can access through the RStudio Help pane.
-
-```{r month5}
-airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
-ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
-        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_jitter(width=0.2)
-```
-
 What if we want to plot the data over time? We'll have to do a little work.
 
 ## Creating a date variable
 
 I don't remember how to create dates in R, so let's do a little searching.
+
+Yes, I'm live googling in a class. [The pros do it all the time](https://medium.com/make-better-software/against-the-whiteboard-f1df0013954f). You should too.
 
 This [stackoverflow.com page](https://stackoverflow.com/questions/26334763/merge-three-different-columns-into-a-date-in-r) suggests a solution.
 
@@ -308,6 +252,64 @@ Oops. Let's try that again.
 ggplot(airquality, aes(x=Date, y=Ozone)) +
   geom_point() + geom_smooth(method="loess") + theme_bw()
 ```
+
+## Other geoms: geom_boxplot() and geom_jitter()
+
+
+```{r boxplot}
+ggplot(airquality, aes(x = Month, y = Ozone)) +
+        geom_boxplot()
+
+```
+
+Looks like I left out something geom_boxplot() needs. Time for google!
+
+
+```{r boxplot2}
+ggplot(airquality, aes(x = Month, y = Ozone, group=Month)) +
+        geom_boxplot()
+
+```
+
+Let's fix up the x-axis labels.
+```{r month}
+airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot()
+```
+
+Getting there, let's try a few more tweaks.
+
+```{r month2}
+
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw()
+```
+
+What if I want to see the original data and the boxplots?
+
+```{r month3}
+
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_point()
+```
+
+That's hard to read, so let's try using geom_jitter()
+
+```{r month4}
+
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_jitter()
+```
+
+Maybe I can make the jittering a bit more compact. Time for the R help system, which we can access through the RStudio Help pane.
+
+```{r month5}
+
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_jitter(width=0.2)
+```
+
 
 ## Facets
 
