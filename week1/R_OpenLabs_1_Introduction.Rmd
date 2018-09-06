@@ -49,7 +49,7 @@ This workshop **does not** aim to give a comprehensive introduction to R.  We as
 
 If you don't have any R experience, don't worry!  The Open Labs can still provide support and a community to help you learn, **but** you'll need to work outside the Open Labs to learn some of the basics.  
 
-We also hope to empower you to become self-sufficient R user, so we'll be showing you examples of how to troubleshoot and debug R code.
+We also hope to empower you to become a self-sufficient R user, so we'll be showing you examples of how to troubleshoot and debug R code.
 
 ##Today
 
@@ -68,7 +68,7 @@ This introductory workshop aims to:
 1) Download R at https://cran.r-project.org/
 
 
-2) If possible, install the additional R developer tools. This can help in the future because some libraries require these. If your computer is not up-to-date on operating system version, this can get a little hairy, so don't worry if you can't get this done today.
+2) If possible, install the additional R developer tools. This can help in the future because some libraries require these. If your computer is not updated to the latest version of your operating system, this can get a little hairy, so don't worry if you can't get this done today.
 
 - For Windows: https://cran.r-project.org/bin/windows/Rtools/
 
@@ -179,17 +179,88 @@ ggplot(airquality, aes(x = Temp, y = Ozone)) +
   geom_point() + geom_smooth(method="loess")
 ```
 
-What if we want to plot the data by time? We'll have to do a little work.
+Let's a generate a boxplot of 
+
+```{r boxplot}
+ggplot(airquality, aes(x = Month, y = Ozone)) +
+        geom_boxplot()
+
+```
+
+Looks like I left out something geom_boxplot() needs. Time for google!
+
+Yes, I'm live googling in a class. [The pros do it all the time](https://medium.com/make-better-software/against-the-whiteboard-f1df0013954f). You should too.
+
+
+```{r boxplot2}
+ggplot(airquality, aes(x = Month, y = Ozone, group=Month)) +
+        geom_boxplot()
+
+```
+
+Let's fix up the x-axis labels.
+```{r month}
+airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot()
+```
+
+Getting there, let's try a few more tweaks.
+
+```{r month2}
+airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw()
+```
+
+What if I want to see the original data and the boxplots?
+
+```{r month3}
+airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_point()
+```
+
+That's hard to read, so let's try using geom_jitter()
+
+```{r month4}
+airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_jitter()
+```
+
+Maybe I can make the jittering a bit more compact. Time for the R help system, which we can access through the RStudio Help pane.
+
+```{r month5}
+airquality$MonthFac <- factor(airquality$Month,labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+ggplot(airquality, aes(x = MonthFac, y = Ozone)) +
+        geom_boxplot() + xlab("Month") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality")  + theme_bw() + geom_jitter(width=0.2)
+```
+
+What if we want to plot the data over time? We'll have to do a little work.
 
 ## Creating a date variable
 
-I don't remember how to create dates in R, so let's do a little searching:
+I don't remember how to create dates in R, so let's do a little searching.
 
-The [stackoverflow.com page](https://stackoverflow.com/questions/26334763/merge-three-different-columns-into-a-date-in-r) leads us to this solution:
+This [stackoverflow.com page](https://stackoverflow.com/questions/26334763/merge-three-different-columns-into-a-date-in-r) suggests a solution.
+
+First, we'll create a new column in the airquality dataframe for the year.
+
+```{r year}
+airquality$Year <- "1973"
+```
+There's a lot going on in that one line of code.
+
+* We are using the $ operator. This is a way to access individual columns of a dataframe.
+
+* We are dealing with a brand new data type, character. This is indicated by the quotation marks around 1973.
+
+* We are using the assignment operator <-, which can be read as "assign the character value 1973 to the Year column of the airquality dataframe."
+
+Now we can use the code snippet we found on stackoverflow.
 
 ```{r create new data}
-airquality$Year <- "1973"
-
 airquality$Date <- as.Date(with(airquality, paste(Year, Month, Day, sep="-"), "%Y-%m-%d"))
 ```
 Let's figure out why this works using R's help system. 
@@ -200,13 +271,20 @@ Let's figure out why this works using R's help system.
 #equivalent to help("as.Date")
 #also try ??date
 ```
-So as.Date() is a function that can take a character representation of a date and convert it into a Date object.
+So as.Date() is a function that can take a character representation of a date and convert it into a Date object (or vice versa).
 
 ```{r help2}
 ?with
 ```
 
 with() is a function that allows us to reference elements of data frame without having to type the data frame's name repeatedly. This suggests we could get the same results as above with:
+
+```{r create new data 2}
+airquality$Date2 <- as.Date(paste(airquality$Year, airquality$Month, airquality$Day, sep="-"), "%Y-%m-%d")
+```
+
+We can check the dataframe viewer to see that the results are indentical or we can use the all.equal() function.
+
 
 ```{r help3}
 ?paste
@@ -215,29 +293,35 @@ with() is a function that allows us to reference elements of data frame without 
 
 paste() lets us stick a bunch of character values together.
 
-```{r create new data 2}
-airquality$Date2 <- as.Date(paste(airquality$Year, airquality$Month, airquality$Day, sep="-"), "%Y-%m-%d")
-```
+
 
 Finally, we can create a plot.
 
 ```{r second ggplot, error=TRUE}
 ggplot(airquality, aes(x=Date, y=ozone)) +
-  geom_point() + geom_smooth(method="loess")
+  geom_point() + geom_smooth(method="loess") + theme_bw()
 ```
 
 Oops. Let's try that again.
 
 ```{r second ggplot2}
 ggplot(airquality, aes(x=Date, y=Ozone)) +
-  geom_point() + geom_smooth(method="loess")
+  geom_point() + geom_smooth(method="loess") + theme_bw()
+```
+
+## Facets
+
+```{r facet}
+ggplot(airquality, aes(x=Temp, y=Ozone)) + geom_point() + geom_smooth(method = "lm") + facet_grid(. ~ Month) + xlab("Maxiumum Daily Temperature (degrees Fahrenheit") + ylab("Mean Daily Ozone (ppb)") + ggtitle("New York City Air Quality") + theme_bw()
 ```
 
 ## Other Resources
 
-**Quick Reference for Base R:**
+**Quick References**
 
-[Quick-R](https://www.statmethods.net/)
+[Tidyverse Cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+
+[Quick-R for Base R](https://www.statmethods.net/)
 
 
 **Useful R Packages:**
