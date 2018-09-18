@@ -39,7 +39,7 @@ Open a console with git enabled.  This could be your terminal / command prompt o
 
 Type:
 
-	`git`
+`git`
 
 to ensure that the command is properly installed and available in your chosen interface.
 Navigate to the folder you want to store your repository in. For example:
