@@ -10,14 +10,14 @@ However, you can also keep up to date using Git.
 
 You might already have Git installed as part of another piece of software.  To test this, open a Terminal (Mac) or Command Line (PC) and type:
 
- `git --version`
+`git --version`
 
 If you have Git installed, you'll see your version, if not you'll see an error message like:
 
- `'git' is not recognized as an internal or external command,
+`'git' is not recognized as an internal or external command,
 operable program or batch file.` (PC)
 
- `bash: git: command not found` (Mac)
+`bash: git: command not found` (Mac)
 
 If you see one of these errors, you'll need to install Git:
 
