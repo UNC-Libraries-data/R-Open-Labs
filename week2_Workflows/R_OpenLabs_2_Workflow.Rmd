@@ -115,6 +115,27 @@ str(airbnb_dc)
 
 ```
 
+##What is an object in R? What is a class?
+
+R is an **object-oriented programming language**. One way to understand how objects work in programming is to look at how objects work in real life.
+
+&nbsp; 
+![](figures/objects1.png)
+&nbsp; 
+
+We tend to group objects by their structure. For example, there are many objects we call cars, and they all tend to share similarities in structure - they have wheels, windows, doors, etc. An *individual* car such as *my* car or *your* car is an **instance** of this structure. Cars also have a set of **properties** such as make, model, year and color. Each individual car has some variation of these properties.
+
+Objects in R work in a similar way.
+
+&nbsp; 
+![](figures/objects2.png)
+&nbsp; 
+
+In the diagram above, we are looking at three **data structures** often used in R: **vectors**, **matrices** and **data frames**. We can create individual objects from these data structures, and those objects have their own properties. The way R defines what properties a given object has is through it's **class**. You can think of a class as a contract between R and its users, defining the structure and properties of an object.  People who develop R libraries take advantage of this system to customize the behavior of functions. Depending on which class an object belongs to, a custom function can be written. For example, type `print.` into your console
+
+
+Even if you don't plan on writing your own R libraries, this information can useful when you are debugging R code. 
+
 ## Airbnb Data Analysis 4: Tables for categorical data
 We can use the table() function to view counts/frequencies of categorical variables.
 
@@ -180,9 +201,9 @@ with(airbnb_dc, cor(price, number_of_reviews))
 
 ```
 
-## Missing Data
+## Airbnb Data Analysis 6: Missing Data
 
-There are some missing values in the review_scores_rating and reviews_per_month columns, even within the first six rows. We can check which values of review_scores_rating are NA with is.na()
+There are some missing values in the review_scores_rating and reviews_per_month columns, even within the first six rows. We can check which values of review_scores_rating are NA with `is.na()`
 
 ```{r missing}
 # Continuous Variables  ----------------------------------------
@@ -207,7 +228,9 @@ Handling missing data is an advanced topic that is a bit beyond the scope of thi
 One of the bad ways to handle missing data is what's known as a complete case analysis. In this kind of analysis, you only keep observations (rows) where you have observed (non-missing) values for ALL columns. 
 
 R has built-in functions to facilitate this:
+
 * `complete.cases` returns a logical vector indicating whether or not an entire row of a dataset contains any missing values.  You can also use this function on a subset of columns to determine if only those columns are complete
+
 * `na.omit` returns a new dataframe with only the complete cases (as identified above)
 
 For most R functions, the default is to return NA is any of the values are NA:
@@ -223,7 +246,7 @@ Some functions, like the linear regression function lm(), perform a complete-cas
 lm(review_scores_rating~price, data=airbnb_dc)
 ```
 
-When a function complains about missing values and fails, there usually an argument that can be modified to change it to a complete-case analysis:
+When a function complains about missing values and fails, there's usually an argument that can be modified to change it to a complete-case analysis:
 
 ```{r mean2}
 mean(airbnb_dc$review_scores_rating, na.rm=TRUE)
@@ -233,7 +256,7 @@ with(airbnb_dc, cor(review_scores_rating, reviews_per_month, use="pairwise.compl
 
 Complete-case analysis is OK for exploratory data analysis, but if your goal is statistical inference, you'll want to use a different method (e.g. multiple imputation using the mice library)
 
-## Airbnb Data Analysis 6: ggplot
+## Airbnb Data Analysis 7: ggplot
 
 Last week, we introduced ggplot2 for statistical graphics. This library implements the grammar of graphics, which provides a structured, modular way to think about plots. The three most commonly altered components are:
 
@@ -288,8 +311,15 @@ ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
 ```
 
 
-## Airbnb Data Analysis 7: Saving output
+## Airbnb Data Analysis 8: Saving output
 
+Suppose, we've done some computation, and we want to save our modified dataframe. We can use write_csv() to save our dataset as comma separated values file.
+
+```{r writing}
+
+airbnb_dc$price_gt_500 <- (airbnb_dc$price > 500)
+write_csv(airbnb_dc, "data/modified_airbnb.csv")
+```
 
 
 ## Additional resources for reproducible workflow
@@ -311,7 +341,8 @@ ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
 2. What is the most common and least common cancellation policy?
 3. What percent of Airbnb property types are houses? Hint: To find what percent of X is Y, use this formula: Y/X * 100
 4. How many listings get a review rating below 50?
-5. Try installing the visdat library, and explore different ways to visualize missing data.
+5. Try generating a scatterplot of price against bedrooms. Now add an overlay of a loess line. Now try creating subplots for each of the property types.
+6. Try installing the visdat library, and explore different ways to visualize missing data.
 
 
 ## Feedback
