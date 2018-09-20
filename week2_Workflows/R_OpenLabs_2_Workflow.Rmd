@@ -252,7 +252,7 @@ ggplot(airbnb_dc, aes(x=review_scores_rating)) + geom_histogram()
 To get a smoothed histogram (aka kernel density estimate), all we have to do is change to geom_density:
 
 ```{r density}
-ggplot(airbnb_dc, aes(x=review_scores_rating)) + geom_density()
+ggplot(airbnb_dc, aes(x=review_scores_rating)) + geom_density() 
 
 ```
 
@@ -260,16 +260,31 @@ If we want to look at the distribution of reviews across different room types, w
 
 ```{r density2}
 
-ggplot(airbnb_dc, aes(x=review_scores_rating, color=room_type)) + geom_density()
+ggplot(airbnb_dc, aes(x=review_scores_rating, color=room_type)) + geom_density() + guides(color=guide_legend(title="Room Type")) + theme_bw()
 
 ```
 
 Since, there a lot of overlap, we could use facets to create a subplot for each room_type:
 
-```{r density2}
+```{r density3}
 
-ggplot(airbnb_dc, aes(x=review_scores_rating, color=room_type)) + geom_density()
+ggplot(airbnb_dc, aes(x=review_scores_rating, color=)) + geom_density() + facet_wrap(~ room_type) + xlab("Review Score Rating") + theme_bw()
 
+
+```
+
+So far, we've looked a single continuous variable (review_scores_rating) as it related to a categorical variables (room_type). If we want to look at how two continuous variables are related, we could create a scatterplot by specifiying x and y aesthetics and using geom_point()
+
+```{r scatter}
+ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
+  geom_point() + xlab("Review Scores Rating") + ylab("Number of Reviews") + theme_bw()
+```
+
+Again, we can use facets to look at how this varies across room_type:
+
+```{r scatter2}
+ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
+  geom_point() + xlab("Review Scores Rating") + ylab("Number of Reviews") + theme_bw() + facet_wrap(~ room_type)
 ```
 
 
