@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Introduction
 #### University of North Carolina at Chapel Hill
 #### Nuvan Rathnayaka
-#### September 13, 2018
+#### September 20, 2018
 
 ## Data and other downloads
 [Airbnb listings from Washington DC ](http://guides.lib.unc.edu/ld.php?content_id=40263741)
@@ -116,19 +116,44 @@ str(airbnb_listings)
 ```
 
 ## Airbnb Data Analysis 4: Tables for categorical data
+We can use the table() function to view counts/frequencies of categorical variables.
 
 ```{r tables}
 # Categorical Variables  ----------------------------------------
 table(airbnb_listings$property_type)
+```
 
+As we saw in week 1, you can also next functions within each other. Here, let's generate a contingency table using table(), then sort it by count using sort().
+
+```{r table2}
 sort(table(airbnb_listings$property_type), decreasing=TRUE)
+```
+That works, but it's a little hard to read. We could try breaking this into two steps and storing our intermediate output.
 
+```{r table3}
+property_type_table <- table(airbnb_listings$property_type)
+sort(property_type_table, decreasing = TRUE)
+```
+
+This works ok, but it does mean we're creating an additional object, property_type_table, and we could end up with lots of objects that are trivially different from each other if we do this too often. In the next lesson, we'll introduce the pipe operator, which makes this kind of nested computation easier to read.
+
+Last week talked about different kinds of vectors. Recall, a vector is a column of data of a single type, and a data frame is a collection of vectors of the same length. Last week we introduced integer, numeric, character, and factor vectors. There's another commonly used vector type: logical. This is just a vector of TRUE or FALSE values. Suppose we want to know whether a listings price is greater than 500.
+
+```{r logical}
+airbnb_listings$price > 500 #Note that since we're not assigning this vector to a variable, R displays it, but doesn't save it as an object in the environment.
+```
+
+You can see other logical operators [here](https://www.statmethods.net/management/operators.html).
+
+We can feed this logical vector into the table() function to get a count of how many listings have prices above $500.
+```{r table4}
 table(airbnb_listings$price > 500)
+```
 
+We can also use the table function to look at the joint counts of multiple categorical variables. For example, if we want to look at the how many properties have prices above $500 across different property types.
+
+```{r table5}
 with(airbnb_listings, table(property_type, price > 500))
-
-
-
 ```
 
 ## Airbnb Data Analysis 5: Exploring continuous data
@@ -154,6 +179,15 @@ colSums(is.na(airbnb_listings))
 [A detailed guide to reproducible workflows in collaborative settings](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 
 [For more complicated projects, consider using make and docker](http://www.jonzelner.net/statistics/make/docker/reproducibility/2016/05/31/reproducibility-pt-1/)
+
+
+## Exercises
+
+1. What are the different types of cancellation policies offered at Airbnb?
+2. What is the most common and least common cancellation policy?
+3. What percent of Airbnb property types are houses? Hint: To find what percent of X is Y, use this formula: Y/X * 100
+4. How many listings get a review rating below 50?
+
 
 
 ## Feedback
