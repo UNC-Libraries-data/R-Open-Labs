@@ -1,0 +1,191 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Open Labs
+## Introduction
+#### University of North Carolina at Chapel Hill
+#### Nuvan Rathnayaka
+#### September 13, 2018
+
+## Data and other downloads
+[Airbnb listings from Washington DC ](http://guides.lib.unc.edu/ld.php?content_id=40263741)
+
+
+##Today
+
+This introductory workshop aims to cover:
+
+* Reproducible workflow
+    + importing data
+    + scripts
+    + projects
+    + saving output
+* [R for Data Science Chapters 4,6,8](http://r4ds.had.co.nz/workflow-basics.html)
+
+## What is reproducibility?
+
+1. Scientific reproducibility - if you repeat my experiment, you will get the same results as me. This is beyond the scope of this workshop ([see here for an overview](https://en.wikipedia.org/wiki/Replication_crisis))
+
+2. Computational reproducibility - if I give you my data and code, you will get the same results as me. This is what we'll focus on today
+
+## Why does computational reproducibility matter?
+
+1. Your most important collaborator is you six months from now.
+2. We want Science (with a capital S) to be self-correcting. Since you're human, you will make mistakes, so you want to make it as easy as possible for others to catch your errors (see [the Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646) and [the Guinea worm wars](https://www.cgdev.org/blog/mapping-worm-wars-what-public-should-take-away-scientific-debate-about-mass-deworming) for recent examples)
+
+
+
+## Your script is real, your environment is not
+
+For your results to be reproducible, every step you take to manipulate the data should be explicitly documented in an R script.
+
+This also means that you want to make sure that your results don't hidden/implicit dependencies on your R environment. There are two steps you can to take to prevent this.
+
+1. Reconfigure RStudio not to save your workspace between sessions.
+![](figures/rstudio-workspace.png)
+
+2. Restart RStudio from scratch and rerun the current script often.
+    + Cmd/Ctrl + Shift + F10 to restart RStudio
+    + Cmd/Ctrl + Shift + S to rerun the current script
+
+Note: If you have learned R in the past, you may have been taught to use the command rm(list = ls()) to clear your R environment. [This will not actually return R to a blank slate!](https://community.rstudio.com/t/first-line-of-every-r-script/799/12) Although this code will delete objects in your R environment, it won't reset global settings that have been changed. It is always safer and more effective to restart RStudio.
+
+## RStudio Projects
+
+You can use the R command setwd() to point to locations of data files, but this isn't ideal for reproducible research. When you switch between computers, it is extremely unlikely that the **absolute** directory path is the same, so you'll have to modify the path for each computer. Users of your code will not have the same absolute directory path that you have, so they will have to modify the path in the setwd() command before they can use your code.
+
+RStudio Projects provide a way to bundle together data, code, and other files together so that you can refer to files with **relative** directory paths, which creates a much more portable structure that won't need to be modified between computers or users.
+
+## Airbnb Data Analysis 1: Configuring the RStudio project
+
+1. File > New Project > New Directory > New Project
+2. Create a new subdirectory inside this project to store the data
+3. Copy the Airbnb data (listings.csv) into this data directory
+4. Create a new R Script for the data analysis in this project.
+
+## Comments are your friend
+
+In R, the # symbol indicates the beginning of a comment. Everything to the right of that is ignored by R, so you can write plain text to document what you're doing, organize your code, and explain any tricky or unusual steps.
+
+## Airbnb Data Analysis 2: Import the data
+
+```{r import}
+# Purpose: Exploratory data analysis of airbnb data
+# Author: Nuvan Rathnayaka
+# Date: September 2018
+
+# Setup -----------------------------------------------------------
+library(tidyverse)
+
+# Data Import ------------------------------------------------------
+airbnb_listings <- read_csv("data/listings.csv") #Since I'm using an RStudio project, I only have to specify the path relative to the top directory
+
+head(airbnb)
+
+str(airbnb)
+dim(airbnb)
+table(airbnb$property_type)
+sort(table(airbnb$property_type), decreasing=TRUE)
+table(airbnb$price > 500)
+table(airbnb$property_type, airbnb$price > 500)
+cor(airbnb$price, airbnb$number_of_reviews)
+
+sum(is.na(airbnb$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values
+colSums(is.na(airbnb))
+
+ggplot(airbnb, aes(x=))
+
+```
+
+## Aside on coding conventions
+Something that I've glossed over is that you have options for how to name variables. For example, we called our imported data airbnb_listings, but we could have called it airbnbListings, or airbnb.listings
+
+Having a consistent way you name objects and functions helps you remember what things are called. It's especially useful when you're working with others to agree upon a coding convention. There are many coding conventions you could choose. It doesn't particularly matter which one you choose, as long as you choose a convention and stick to it.
+
+To be consistent with the text, we will stick to the Tidyverse style guide:
+http://style.tidyverse.org/index.html
+
+## Airbnb Data Analysis 3: Some useful commands
+
+```{r useful}
+# Some useful commands  ----------------------------------------
+dim(airbnb)
+head(airbnb)
+str(airbnb)
+
+table(airbnb$property_type)
+sort(table(airbnb$property_type), decreasing=TRUE)
+table(airbnb$price > 500)
+table(airbnb$property_type, airbnb$price > 500)
+cor(airbnb$price, airbnb$number_of_reviews)
+
+sum(is.na(airbnb$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values
+colSums(is.na(airbnb))
+
+ggplot(airbnb, aes(x=))
+
+```
+
+## Airbnb Data Analysis 4: Tables for categorical data
+
+```{r tables}
+# Categorical Variables  ----------------------------------------
+table(airbnb$property_type)
+
+sort(table(airbnb$property_type), decreasing=TRUE)
+
+table(airbnb$price > 500)
+
+table(airbnb$property_type, airbnb$price > 500)
+
+cor(airbnb$price, airbnb$number_of_reviews)
+
+sum(is.na(airbnb$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values
+colSums(is.na(airbnb))
+
+ggplot(airbnb, aes(x=))
+
+```
+
+## Airbnb Data Analysis 5: Exploring continuous data
+
+```{r continuous}
+# Continuous Variables  ----------------------------------------
+table(airbnb$property_type)
+
+sort(table(airbnb$property_type), decreasing=TRUE)
+
+table(airbnb$price > 500)
+
+table(airbnb$property_type, airbnb$price > 500)
+
+cor(airbnb$price, airbnb$number_of_reviews)
+
+sum(is.na(airbnb$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values
+colSums(is.na(airbnb))
+
+ggplot(airbnb, aes(x=))
+
+```
+
+## Additional resources for reproducible workflow
+
+[Why setwd() is bad practice](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
+
+[Concise guide to basic computational reproducibility](https://kbroman.org/steps2rr/)
+
+[Eight things you can do to make your open science more understandable](http://datacolada.org/69)
+
+[A detailed guide to reproducible workflows in collaborative settings](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+
+[For more complicated projects, consider using make and docker](http://www.jonzelner.net/statistics/make/docker/reproducibility/2016/05/31/reproducibility-pt-1/)
+
+
+## Feedback
+[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)
