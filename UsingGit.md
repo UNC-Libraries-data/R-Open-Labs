@@ -2,7 +2,7 @@
 
 At any time, you can download all materials and data for this semester's run of R Open Labs here:
 
-https://github.com/UNC-Libraries-data/R-Open-Labs/archive/master.zip
+[https://github.com/UNC-Libraries-data/R-Open-Labs/archive/master.zip](https://github.com/UNC-Libraries-data/R-Open-Labs/archive/master.zip)
 
 However, you can also keep up to date using Git.
 
@@ -21,11 +21,11 @@ operable program or batch file.` (PC)
 
 If you see one of these errors, you'll need to install Git:
 
-## <a href=https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>Install Git</a>
+## [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ### Windows Suggested Settings
 
-* Visit https://git-scm.com/ and download the latest version of Git for your OS.
+* Visit [https://git-scm.com/](https://git-scm.com/) and download the latest version of Git for your OS.
 
 * Choose a text editor.  If you're not sure what you want to use, pick the **Nano editor**
 
