@@ -172,7 +172,7 @@ max(airbnb_dc$price)
 
 ```
 
-R also has a built-in function to compute correlation coefficients. By default, it computes the Pearson correlation
+R also has a built-in function to compute correlation coefficients. This let's us explore the pairwise associations between continuous variables.
 
 ```{r correlation}
 
@@ -232,6 +232,50 @@ with(airbnb_dc, cor(review_scores_rating, reviews_per_month, use="pairwise.compl
 
 
 Complete-case analysis is OK for exploratory data analysis, but if your goal is statistical inference, you'll want to use a different method (e.g. multiple imputation using the mice library)
+
+## Airbnb Data Analysis 6: ggplot
+
+Last week, we introduced ggplot2 for statistical graphics. This library implements the grammar of graphics, which provides a structured, modular way to think about plots. The three most commonly altered components are:
+
+* aesthetics - the visual properties of objects on the plot, e.g x location, y location, color, size
+* geom - the geometric object used to represent your data, e.g. point, line, histogram
+* facets - let you create subplots for each level of a categorical variable
+
+Let's look at a few examples.
+We can look at a histogram of review scores. Here, the only aesthetic we need to set is the x location, and then we can request a histogram.
+
+```{r hist}
+ggplot(airbnb_dc, aes(x=review_scores_rating)) + geom_histogram()
+
+```
+
+To get a smoothed histogram (aka kernel density estimate), all we have to do is change to geom_density:
+
+```{r density}
+ggplot(airbnb_dc, aes(x=review_scores_rating)) + geom_density()
+
+```
+
+If we want to look at the distribution of reviews across different room types, we could add a group aesthetic for the room_type variable:
+
+```{r density2}
+
+ggplot(airbnb_dc, aes(x=review_scores_rating, color=room_type)) + geom_density()
+
+```
+
+Since, there a lot of overlap, we could use facets to create a subplot for each room_type:
+
+```{r density2}
+
+ggplot(airbnb_dc, aes(x=review_scores_rating, color=room_type)) + geom_density()
+
+```
+
+
+## Airbnb Data Analysis 7: Saving output
+
+
 
 ## Additional resources for reproducible workflow
 
