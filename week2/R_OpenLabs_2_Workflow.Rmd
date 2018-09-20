@@ -88,12 +88,12 @@ RStudio has a useful keyboard shortcut for **<-** (the assignment operator): Alt
 library(tidyverse)
 
 # Data Import ------------------------------------------------------
-airbnb_listings <- read_csv("data/listings.csv") #Since I'm using an RStudio project, I only have to specify the path relative to the top directory
+airbnb_dc <- read_csv("data/listings.csv") #Since I'm using an RStudio project, I only have to specify the path relative to the top directory
 
 ```
 
 ## Aside on coding conventions
-Something that I've glossed over is that you have options for how to name objects. For example, we called our imported data **airbnb_listings**, but we could have called it **airbnbListings**, or **airbnb.listings**
+Something that I've glossed over is that you have options for how to name objects. For example, we called our imported data **airbnb_dc**, but we could have called it **airbnbListings**, or **airbnb.listings**
 
 Having a consistent way you name objects and functions helps you remember what things are called. It's especially useful when you're working with others to agree upon a coding convention. There are many coding conventions you could choose. It doesn't particularly matter which one you choose, as long as you choose a convention and stick to it.
 
@@ -109,9 +109,9 @@ str() is a very general purpose function that will display the structure of an o
 
 ```{r useful}
 # Some useful functions  ----------------------------------------
-dim(airbnb_listings)
-head(airbnb_listings)
-str(airbnb_listings)
+dim(airbnb_dc)
+head(airbnb_dc)
+str(airbnb_dc)
 
 ```
 
@@ -120,18 +120,18 @@ We can use the table() function to view counts/frequencies of categorical variab
 
 ```{r tables}
 # Categorical Variables  ----------------------------------------
-table(airbnb_listings$property_type)
+table(airbnb_dc$property_type)
 ```
 
 As we saw in week 1, you can also next functions within each other. Here, let's generate a contingency table using table(), then sort it by count using sort().
 
 ```{r table2}
-sort(table(airbnb_listings$property_type), decreasing=TRUE)
+sort(table(airbnb_dc$property_type), decreasing=TRUE)
 ```
 That works, but it's a little hard to read. We could try breaking this into two steps and storing our intermediate output.
 
 ```{r table3}
-property_type_table <- table(airbnb_listings$property_type)
+property_type_table <- table(airbnb_dc$property_type)
 sort(property_type_table, decreasing = TRUE)
 ```
 
@@ -140,33 +140,98 @@ This works ok, but it does mean we're creating an additional object, property_ty
 Last week talked about different kinds of vectors. Recall, a vector is a column of data of a single type, and a data frame is a collection of vectors of the same length. Last week we introduced integer, numeric, character, and factor vectors. There's another commonly used vector type: logical. This is just a vector of TRUE or FALSE values. Suppose we want to know whether a listings price is greater than 500.
 
 ```{r logical}
-airbnb_listings$price > 500 #Note that since we're not assigning this vector to a variable, R displays it, but doesn't save it as an object in the environment.
+airbnb_dc$price > 500 #Note that since we're not assigning this vector to a variable, R displays it, but doesn't save it as an object in the environment.
 ```
 
 You can see other logical operators [here](https://www.statmethods.net/management/operators.html).
 
 We can feed this logical vector into the table() function to get a count of how many listings have prices above $500.
 ```{r table4}
-table(airbnb_listings$price > 500)
+table(airbnb_dc$price > 500)
 ```
 
 We can also use the table function to look at the joint counts of multiple categorical variables. For example, if we want to look at the how many properties have prices above $500 across different property types.
 
 ```{r table5}
-with(airbnb_listings, table(property_type, price > 500))
+with(airbnb_dc, table(property_type, price > 500))
 ```
 
 ## Airbnb Data Analysis 5: Exploring continuous data
+R has built-in functions to compute the mean, standard deviation, min, median, and max.
 
-```{r continuous}
+```{r continuous1}
 # Continuous Variables  ----------------------------------------
 
-cor(airbnb_listings$price, airbnb_listings$number_of_reviews)
+mean(airbnb_dc$price)
+sd(airbnb_dc$price)
+min(airbnb_dc$price)
 
-sum(is.na(airbnb_listings$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values
-colSums(is.na(airbnb_listings))
+median(airbnb_dc$price)
+
+max(airbnb_dc$price)
 
 ```
+
+R also has a built-in function to compute correlation coefficients. By default, it computes the Pearson correlation
+
+```{r correlation}
+
+with(airbnb_dc, cor(price, number_of_reviews))
+
+```
+
+## Missing Data
+
+There are some missing values in the review_scores_rating and reviews_per_month columns, even within the first six rows. We can check which values of review_scores_rating are NA with is.na()
+
+```{r missing}
+# Continuous Variables  ----------------------------------------
+
+
+sum(is.na(airbnb_dc$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values
+
+
+
+```
+
+We can check all of our columns using R's colSum to sum all of the columns at the same time.
+
+```{r missing data2}
+
+colSums(is.na(airbnb_dc))
+
+```
+
+Handling missing data is an advanced topic that is a bit beyond the scope of this lesson. There is no good way to handle missing data, there are only bad and less bad ways. 
+
+One of the bad ways to handle missing data is what's known as a complete case analysis. In this kind of analysis, you only keep observations (rows) where you have observed (non-missing) values for ALL columns. 
+
+R has built-in functions to facilitate this:
+* `complete.cases` returns a logical vector indicating whether or not an entire row of a dataset contains any missing values.  You can also use this function on a subset of columns to determine if only those columns are complete
+* `na.omit` returns a new dataframe with only the complete cases (as identified above)
+
+For most R functions, the default is to return NA is any of the values are NA:
+```{r mean}
+mean(airbnb_dc$review_scores_rating)
+with(airbnb_dc, cor(review_scores_rating, reviews_per_month))
+```
+
+Some functions, like the linear regression function lm(), perform a complete-case analysis:
+
+```{r lm}
+
+lm(review_scores_rating~price, data=airbnb_dc)
+```
+
+When a function complains about missing values and fails, there usually an argument that can be modified to change it to a complete-case analysis:
+
+```{r mean2}
+mean(airbnb_dc$review_scores_rating, na.rm=TRUE)
+with(airbnb_dc, cor(review_scores_rating, reviews_per_month, use="pairwise.complete.obs"))
+```
+
+
+Complete-case analysis is OK for exploratory data analysis, but if your goal is statistical inference, you'll want to use a different method (e.g. multiple imputation using the mice library)
 
 ## Additional resources for reproducible workflow
 
@@ -187,7 +252,7 @@ colSums(is.na(airbnb_listings))
 2. What is the most common and least common cancellation policy?
 3. What percent of Airbnb property types are houses? Hint: To find what percent of X is Y, use this formula: Y/X * 100
 4. How many listings get a review rating below 50?
-
+5. Try installing the visdat library, and explore different ways to visualize missing data.
 
 
 ## Feedback

@@ -1125,12 +1125,32 @@ sort(property_type_table, decreasing = TRUE)</code></pre>
 </div>
 <div id="airbnb-data-analysis-5-exploring-continuous-data" class="section level2">
 <h2>Airbnb Data Analysis 5: Exploring continuous data</h2>
+<p>R has built-in functions to compute the mean, standard deviation, min, median, and max.</p>
 <pre class="r"><code># Continuous Variables  ----------------------------------------
 
-cor(airbnb_listings$price, airbnb_listings$number_of_reviews)</code></pre>
+mean(airbnb_listings$price)</code></pre>
+<pre><code>## [1] 247.1451</code></pre>
+<pre class="r"><code>sd(airbnb_listings$price)</code></pre>
+<pre><code>## [1] 385.8856</code></pre>
+<pre class="r"><code>min(airbnb_listings$price)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>median(airbnb_listings$price)</code></pre>
+<pre><code>## [1] 125</code></pre>
+<pre class="r"><code>max(airbnb_listings$price)</code></pre>
+<pre><code>## [1] 6000</code></pre>
+<p>R also has a built-in function to compute correlation coefficients. By default, it computes the Pearson correlation</p>
+<pre class="r"><code>with(airbnb_listings, cor(price, number_of_reviews))</code></pre>
 <pre><code>## [1] -0.1560021</code></pre>
-<pre class="r"><code>sum(is.na(airbnb_listings$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values</code></pre>
+</div>
+<div id="missing-data" class="section level2">
+<h2>Missing Data</h2>
+<p>There are some missing values in the review_scores_rating and reviews_per_month columns, even within the first six rows. We can check which values of review_scores_rating are NA with is.na()</p>
+<pre class="r"><code># Continuous Variables  ----------------------------------------
+
+
+sum(is.na(airbnb_listings$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values</code></pre>
 <pre><code>## [1] 2207</code></pre>
+<p>We can check all of our columns using R’s colSum to sum all of the columns at the same time.</p>
 <pre class="r"><code>colSums(is.na(airbnb_listings))</code></pre>
 <pre><code>##                   id                 name        property_type 
 ##                    0                    5                    0 
@@ -1142,6 +1162,29 @@ cor(airbnb_listings$price, airbnb_listings$number_of_reviews)</code></pre>
 ##                    0                    0                 2207 
 ##  cancellation_policy    reviews_per_month 
 ##                    0                 2128</code></pre>
+<p>Handling missing data is an advanced topic that is a bit beyond the scope of this lesson. There is no good way to handle missing data, there are only bad and less bad ways.</p>
+<p>One of the bad ways to handle missing data is what’s known as a complete case analysis. In this kind of analysis, you only keep observations (rows) where you have observed (non-missing) values for ALL columns.</p>
+<p>R has built-in functions to facilitate this: * <code>complete.cases</code> returns a logical vector indicating whether or not an entire row of a dataset contains any missing values. You can also use this function on a subset of columns to determine if only those columns are complete * <code>na.omit</code> returns a new dataframe with only the complete cases (as identified above)</p>
+<p>For most R functions, the default is to return NA is any of the values are NA:</p>
+<pre class="r"><code>mean(airbnb_listings$review_scores_rating)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>with(airbnb_listings, cor(review_scores_rating, reviews_per_month))</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>Some functions, like the linear regression function lm(), perform a complete-case analysis:</p>
+<pre class="r"><code>lm(review_scores_rating~price, data=airbnb_listings)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = review_scores_rating ~ price, data = airbnb_listings)
+## 
+## Coefficients:
+## (Intercept)        price  
+##   94.230536     0.003191</code></pre>
+<p>When a function complains about missing values and fails, there usually an argument that can be modified to change it to a complete-case analysis:</p>
+<pre class="r"><code>mean(airbnb_listings$review_scores_rating, na.rm=TRUE)</code></pre>
+<pre><code>## [1] 94.72406</code></pre>
+<pre class="r"><code>with(airbnb_listings, cor(review_scores_rating, reviews_per_month, use=&quot;pairwise.complete.obs&quot;))</code></pre>
+<pre><code>## [1] 0.09933035</code></pre>
+<p>Complete-case analysis is OK for exploratory data analysis, but if your goal is statistical inference, you’ll want to use a different method (e.g. multiple imputation using the mice library)</p>
 </div>
 <div id="additional-resources-for-reproducible-workflow" class="section level2">
 <h2>Additional resources for reproducible workflow</h2>
