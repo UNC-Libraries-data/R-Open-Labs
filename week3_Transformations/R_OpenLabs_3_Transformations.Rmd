@@ -174,7 +174,7 @@ arrange(chilean, desc(points), price)
 
 &nbsp;
 
-## Selecting Data (select)
+## Selecting Data
 
 Most real world data sets we want to use in our research are going to be messy, and we'll need to go through a process of cleaning the data before we can start to explore and analyze it. The first steps in many data cleaning processes involve removing data that we don't need. 
 

@@ -361,8 +361,8 @@ reviews &lt;- read_csv(&quot;data/5k_wine_reviews.csv&quot;)</code></pre>
 ## #   winery &lt;chr&gt;</code></pre>
 <p> </p>
 </div>
-<div id="selecting-data-select" class="section level2">
-<h2>Selecting Data (select)</h2>
+<div id="selecting-data" class="section level2">
+<h2>Selecting Data</h2>
 <p>Most real world data sets we want to use in our research are going to be messy, and we’ll need to go through a process of cleaning the data before we can start to explore and analyze it. The first steps in many data cleaning processes involve removing data that we don’t need.</p>
 <p>Going back to our original reviews data frame, let’s imagine we are only interested in the country, province and variety of our wines. We could create a new object called “wine_types” using the <code>select()</code> function. We’ll also <strong>preview</strong> our new object by simply typing its name and running the script.</p>
 <pre class="r"><code>wine_types &lt;- select(reviews, country, province, variety)
@@ -610,8 +610,8 @@ summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))</code
 <li>What is the price and review score for the most expensive French wine?</li>
 <li>How many countries have wine that cost more than $500?</li>
 <li>To which country and province should you travel to find the cheapest Tempranillo?</li>
-<li>You found a website that lets you order any wine for a base shipping fee of $15! Find the total price for each wine that includes shipping.</li>
-<li>The following code produces errors. Rerwite it to correct them all:</li>
+<li>You found a website that lets you order any wine for a flat shipping fee of $15! Find the total price for each wine that includes shipping.</li>
+<li>The following code produces errors. Correct them all:</li>
 </ol>
 <pre class="r"><code>reviews %&gt;%
   select == (Title, province, country, price) %&gt;%
