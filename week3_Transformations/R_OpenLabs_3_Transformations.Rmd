@@ -218,18 +218,22 @@ select(reviews, title:winery)
 select(reviews, -c(title:winery))
 ```
 
+&nbsp;
+
 In both cases the `:` symbol means "through" and allows us to select a series of columns at once.
 
 &nbsp;
 
 ## Renaming Columns
 
-Renaming our columns is easy to do when we use the `rename` function. We need to provide the new name we want to use first, and then **assign** the old name to it.
+Renaming our columns is easy to do when we use the `rename()` function. We need to provide the new name we want to use first, and then **assign** the old name to it.
 
 ```{r rename 1}
 chilean <- rename(chilean, review_points = points)
 chilean
 ```
+
+&nbsp;
 
 Above, we've changed the name of our "points" column to "review_points".
 
@@ -312,6 +316,8 @@ chilean %>%
   summarise (max_price = max(USD, na.rm = TRUE)) %>%
   arrange(province, variety, desc(max_price))
 ```
+
+&nbsp;
 
 ## Exercises
 

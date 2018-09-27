@@ -452,12 +452,13 @@ select(reviews, -c(title:winery))</code></pre>
 ##  9 Germany  Savory dried thym… Shine            87    12 Rheinhe… &lt;NA&gt;    
 ## 10 France   This has great de… Les Natures      87    27 Alsace   Alsace  
 ## # ... with 4,990 more rows</code></pre>
+<p> </p>
 <p>In both cases the <code>:</code> symbol means “through” and allows us to select a series of columns at once.</p>
 <p> </p>
 </div>
 <div id="renaming-columns" class="section level2">
 <h2>Renaming Columns</h2>
-<p>Renaming our columns is easy to do when we use the <code>rename</code> function. We need to provide the new name we want to use first, and then <strong>assign</strong> the old name to it.</p>
+<p>Renaming our columns is easy to do when we use the <code>rename()</code> function. We need to provide the new name we want to use first, and then <strong>assign</strong> the old name to it.</p>
 <pre class="r"><code>chilean &lt;- rename(chilean, review_points = points)
 chilean</code></pre>
 <pre><code>## # A tibble: 154 x 8
@@ -474,6 +475,7 @@ chilean</code></pre>
 ##  9 Clean and hone… Natura                  87    11 Casabla… Emil… Chardo…
 ## 10 Rooty and leaf… Grey [Glaci…            87    20 Maipo V… Vent… Cabern…
 ## # ... with 144 more rows, and 1 more variable: winery &lt;chr&gt;</code></pre>
+<p> </p>
 <p>Above, we’ve changed the name of our “points” column to “review_points”.</p>
 <p> </p>
 </div>
@@ -602,6 +604,7 @@ summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))</code
 ##  9 Casablanca Valley Gewürztraminer                  15.
 ## 10 Casablanca Valley Merlot                          17.
 ## # ... with 68 more rows</code></pre>
+<p> </p>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
