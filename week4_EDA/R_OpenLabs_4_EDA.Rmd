@@ -323,7 +323,7 @@ library(GGally)
 
 We'll choose four or five variables to consider at a time with `select` to make our plots readable.
 
-```{r message=FALSE,fig.width=8, fig.height=8,warning=FALSE}
+```{r message=FALSE,fig.width=12, fig.height=8,warning=FALSE}
 listings %>% select(price,accommodates,review_scores_rating,room_type) %>% ggpairs() + theme_bw()
 ```
 
