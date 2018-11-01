@@ -1,0 +1,99 @@
+---
+title: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Open Labs
+## Reproducible Report with RMarkdown
+#### University of North Carolina at Chapel Hill
+#### Nuvan Rathnayaka
+#### Nov 1, 2018
+
+## Data and other downloads
+
+[Download RStudio Project](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_RMarkdown/download/brazil_ecommerce_project.zip)
+
+Also, make sure you have installed the GGally R library. If you haven't, you can do so using the code `install.packages("GGally")`
+
+Data derived from [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/olistbr/brazilian-ecommerce) provided on Kaggle.com under a [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) license.
+
+## Today
+This workshop covers topics from:
+
+[Chapter 27](https://r4ds.had.co.nz/r-markdown.html)
+
+
+## Motivation
+R Markdown provides a straightforward way to create reports that combine code and the output from that code with text commentary. This allows for the creation of automated, reproducible reports. R Markdown can knit together your analysis results and text and output it directly into HTML, PDF, or Word documents. In fact, we have been using R Markdown to generate the webpage for all of our R Open Labs workshops!
+
+Last week, Matt provided a great set of exercises exploring some Brazilian e-commerce data. Suppose you created an R Studio project and completed those exercises in an R script (available as zip file in the Download link at the top of this page). For this workshop, let's turn that R script into an HTML report using R Markdown.
+
+Before we continue, unzip the brazil_ecommerce_project.zip file, and open the project in RStudio.
+
+## R Markdown
+R Markdown has three components.
+
+1. An (optional) header in a language called YAML. This allows you to specify the type of output file and configure other options.
+2. R code chunks wrapped by ` ``` `
+3. Text mixed with simple formatting markup.
+
+To create a new R Markdown document (.Rmd), select File -> New File -> R Markdown.
+
+You will have the option to select the output: we’ll use the default HTML for this workshop.
+
+Give the document a title and enter your name as author: this will create the header for you at the top of your new .html page!
+
+RStudio will create a new R Markdown document filled with examples of code chunks and text.
+
+## Header
+![](figures/header.png)
+
+At the top of the page is the optional YAML header. This header is a powerful way to edit the formatting of your report (e.g. figure dimensions, presence of a table of contents, identifying the location of a bibliography file).
+
+## Code Chunks
+![](figures/code chunk.png)
+This is an R code chunk. Note that it is surrounded by ` ``` `. Inside the curly braces, it specifies that this code chunk will use R code, then it names this chunk "setup". Each code chunk in your document has to have a unique name. After the name, you specify options on whether you want the code or its results to be displayed in the final document. For this chunk, the `include=FALSE` options tells R Markdown that we want this code to run, but we do not want it to be displayed in the final HTML document. The R code inside the chunk `knitr::opts_chunk$set(echo = TRUE)` tells R Markdown to display the R code along with the results of the code in the HTML output for all code chunks below.
+
+## Formatted Text
+![](figures/text.png)
+
+This is plain text with simple formatting added. The `##` tells R Markdown that "R Markdown" is a section header. The ``**`` around "Knit" tells R Markdown to make that word **bold**.
+
+The RStudio team has helpfully condensed these code chunk and text formatting options into a [cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf).
+
+You can get pretty far with options in the R Markdown cheatsheet, but R Markdown is very powerful, flexible language that we do not have time to fully cover. More detailed references are:
+
+https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
+
+https://bookdown.org/yihui/rmarkdown
+
+
+## Generating the HTML document
+
+This is quite straightforward. Click the **Knit** button, and R Studio will generate an HTML report based on your R Markdown document.
+
+## Tables
+
+By default, R Markdown will display tables the way they appear in the R console. We can use `knitr::kable` function to get cleaner tables.
+
+```{r}
+knitr::kable(
+  mtcars[1:5, ], 
+  caption = "A knitr kable."
+)
+```
+
+
+## Exercises:
+
+1. Convert the `analysis.R` script into an R Markdown document that creates an HTML report.
+
+2. Find another project you have been working on using R. Tidy everything up into an RStudio project and generate an HTML report using R Markdown. Now, send the RStudio project to a friend (or us!), and ask them to knit that R Markdown document. The goal is to have packaged everything up neatly so that your friend can easily run your code and create exactly the same HTML document that you did.
+
+
+## Feedback
+[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)
