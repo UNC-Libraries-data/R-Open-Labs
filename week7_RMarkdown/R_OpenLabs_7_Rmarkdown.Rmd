@@ -30,7 +30,7 @@ This workshop covers topics from:
 ## Motivation
 R Markdown provides a straightforward way to create reports that combine code and the output from that code with text commentary. This allows for the creation of automated, reproducible reports. R Markdown can knit together your analysis results with text and output it directly into HTML, PDF, or Word documents. In fact, we have been using R Markdown to generate the webpage for all of our R Open Labs workshops!
 
-Last week, Matt provided [a great set of exercises exploring some Brazilian e-commerce data](https://unc-libraries-data.github.io/R-Open-Labs/week6_MergeReshape/R_OpenLabs_6_MergeReshape.html). Suppose you created an R Studio project and completed those exercises in an R script (available as zip file in the Download link at the top of this page). For this workshop, let's turn that R script into an HTML report using R Markdown.
+Last week, Matt provided [a great set of exercises exploring some Brazilian e-commerce data](https://unc-libraries-data.github.io/R-Open-Labs/week6_MergeReshape/R_OpenLabs_6_MergeReshape.html#Exercises). Suppose you created an R Studio project and completed those exercises in an R script (available as zip file in the Download link at the top of this page). For this workshop, let's turn that R script into an HTML report using R Markdown.
 
 Before we continue, unzip the brazil_ecommerce_project.zip file, and open the project in RStudio.
 
