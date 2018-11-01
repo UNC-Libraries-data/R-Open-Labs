@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Data and other downloads
 
-[Download RStudio Project](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_RMarkdown/download/brazil_ecommerce_project.zip)
+[Download Brazil e-commerce RStudio Project](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_RMarkdown/download/brazil_ecommerce_project.zip)
 
 Also, make sure you have installed the GGally R library. If you haven't, you can do so using the code `install.packages("GGally")`
 
@@ -28,9 +28,9 @@ This workshop covers topics from:
 
 
 ## Motivation
-R Markdown provides a straightforward way to create reports that combine code and the output from that code with text commentary. This allows for the creation of automated, reproducible reports. R Markdown can knit together your analysis results and text and output it directly into HTML, PDF, or Word documents. In fact, we have been using R Markdown to generate the webpage for all of our R Open Labs workshops!
+R Markdown provides a straightforward way to create reports that combine code and the output from that code with text commentary. This allows for the creation of automated, reproducible reports. R Markdown can knit together your analysis results with text and output it directly into HTML, PDF, or Word documents. In fact, we have been using R Markdown to generate the webpage for all of our R Open Labs workshops!
 
-Last week, Matt provided a great set of exercises exploring some Brazilian e-commerce data. Suppose you created an R Studio project and completed those exercises in an R script (available as zip file in the Download link at the top of this page). For this workshop, let's turn that R script into an HTML report using R Markdown.
+Last week, Matt provided [a great set of exercises exploring some Brazilian e-commerce data](https://unc-libraries-data.github.io/R-Open-Labs/week6_MergeReshape/R_OpenLabs_6_MergeReshape.html). Suppose you created an R Studio project and completed those exercises in an R script (available as zip file in the Download link at the top of this page). For this workshop, let's turn that R script into an HTML report using R Markdown.
 
 Before we continue, unzip the brazil_ecommerce_project.zip file, and open the project in RStudio.
 
@@ -72,10 +72,6 @@ https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf
 https://bookdown.org/yihui/rmarkdown
 
 
-## Generating the HTML document
-
-This is quite straightforward. Click the **Knit** button, and R Studio will generate an HTML report based on your R Markdown document.
-
 ## Tables
 
 By default, R Markdown will display tables the way they appear in the R console. We can use `knitr::kable` function to get cleaner tables.
@@ -86,6 +82,10 @@ knitr::kable(
   caption = "A knitr kable."
 )
 ```
+
+## Generating the HTML document
+
+This is quite straightforward. Click the **Knit** button, and R Studio will generate an HTML report based on your R Markdown document.
 
 
 ## Exercises:
