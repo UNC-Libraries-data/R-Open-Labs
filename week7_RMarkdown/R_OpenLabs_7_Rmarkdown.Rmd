@@ -52,11 +52,12 @@ RStudio will create a new R Markdown document filled with examples of code chunk
 ## Header
 ![](figures/header.png)
 
-At the top of the page is the optional YAML header. This header is a powerful way to edit the formatting of your report (e.g. figure dimensions, presence of a table of contents, identifying the location of a bibliography file).
+At the top of the page is the optional Yet Another Markup Language (YAML) header. This header is a powerful way to edit the formatting of your report (e.g. figure dimensions, presence of a table of contents, identifying the location of a bibliography file).
 
 ## Code Chunks
 ![](figures/code chunk.png)
-This is an R code chunk. Note that it is surrounded by ` ``` `. Inside the curly braces, it specifies that this code chunk will use R code, then it names this chunk "setup". Each code chunk in your document has to have a unique name. After the name, you specify options on whether you want the code or its results to be displayed in the final document. For this chunk, the `include=FALSE` options tells R Markdown that we want this code to run, but we do not want it to be displayed in the final HTML document. The R code inside the chunk `knitr::opts_chunk$set(echo = TRUE)` tells R Markdown to display the R code along with the results of the code in the HTML output for all code chunks below.
+
+R code chunks are surrounded by ` ``` `. Inside the curly braces, it specifies that this code chunk will use R code (other programming languages are supported), then it names this chunk "setup". Each code chunk in your document has to have a unique name. After the name, you specify options on whether you want the code or its results to be displayed in the final document. For this chunk, the `include=FALSE` options tells R Markdown that we want this code to run, but we do not want it to be displayed in the final HTML document. The R code inside the chunk `knitr::opts_chunk$set(echo = TRUE)` tells R Markdown to display the R code along with the results of the code in the HTML output for all code chunks below.
 
 ## Formatted Text
 ![](figures/text.png)
