@@ -48,16 +48,13 @@ library(tidyverse)
 # Data Import ------------------------------------------------------
 weather <- read_csv("data/austin_weather.csv")
 
-# Make a subset of the relevant columns for converting to Celcius
-tempC <- weather[2:7]
-
 #Convert temperature columns from Farenheight to Celcius
-tempC$TempHigh <- (weather$TempHigh - 32) * 5/9
-tempC$TempAvg <- (weather$TempAvg - 32) * 5/9
-tempC$TempLow <- (weather$TempLow - 32) * 5/9
-tempC$DewPointHigh <- (weather$TempHigh - 32) * 5/9
-tempC$DewPointAvg <- (weather$DewPointAvg - 32) * 5/9
-tempC$DewPointLow <- (weather$DewPointLow - 32) * 5/9
+weather$TempHigh <- (weather$TempHigh - 32) * 5/9
+weather$TempAvg <- (weather$TempAvg - 32) * 5/9
+weather$TempLow <- (weather$TempLow - 32) * 5/9
+weather$DewPointHigh <- (weather$TempHigh - 32) * 5/9
+weather$DewPointAvg <- (weather$DewPointAvg - 32) * 5/9
+weather$DewPointLow <- (weather$DewPointLow - 32) * 5/9
 ```
 
 Can you see the mistake I made above? I forgot to change the second reference to the `weather$DewPointHigh` column. It will end up having the wrong values if I run the code. Copying and pasting like this leaves our code very prone to human errors that can be difficult for us to notice. In the next example, I've written a function that can do the same work in a more efficient and less fallible way.
@@ -69,7 +66,7 @@ toCelcius <- function(x) {
 }
 
 # Convert relevant columns to Celcius
-tempC <- toCelcius(weather[2:7])
+weather[2:7] <- toCelcius(weather[2:7])
 ```
 
 Note that we can now use our `toCelcius` function to convert other values to Celcius - any value we can think of!

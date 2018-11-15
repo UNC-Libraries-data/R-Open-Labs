@@ -165,16 +165,13 @@ library(tidyverse)
 # Data Import ------------------------------------------------------
 weather &lt;- read_csv(&quot;data/austin_weather.csv&quot;)
 
-# Make a subset of the relevant columns for converting to Celcius
-tempC &lt;- weather[2:7]
-
 #Convert temperature columns from Farenheight to Celcius
-tempC$TempHigh &lt;- (weather$TempHigh - 32) * 5/9
-tempC$TempAvg &lt;- (weather$TempAvg - 32) * 5/9
-tempC$TempLow &lt;- (weather$TempLow - 32) * 5/9
-tempC$DewPointHigh &lt;- (weather$TempHigh - 32) * 5/9
-tempC$DewPointAvg &lt;- (weather$DewPointAvg - 32) * 5/9
-tempC$DewPointLow &lt;- (weather$DewPointLow - 32) * 5/9</code></pre>
+weather$TempHigh &lt;- (weather$TempHigh - 32) * 5/9
+weather$TempAvg &lt;- (weather$TempAvg - 32) * 5/9
+weather$TempLow &lt;- (weather$TempLow - 32) * 5/9
+weather$DewPointHigh &lt;- (weather$TempHigh - 32) * 5/9
+weather$DewPointAvg &lt;- (weather$DewPointAvg - 32) * 5/9
+weather$DewPointLow &lt;- (weather$DewPointLow - 32) * 5/9</code></pre>
 <p>Can you see the mistake I made above? I forgot to change the second reference to the <code>weather$DewPointHigh</code> column. It will end up having the wrong values if I run the code. Copying and pasting like this leaves our code very prone to human errors that can be difficult for us to notice. In the next example, I’ve written a function that can do the same work in a more efficient and less fallible way.</p>
 <pre class="r"><code># Function for Converting to Celcius
 toCelcius &lt;- function(x) {
@@ -182,7 +179,7 @@ toCelcius &lt;- function(x) {
 }
 
 # Convert relevant columns to Celcius
-tempC &lt;- toCelcius(weather[2:7])</code></pre>
+weather[2:7] &lt;- toCelcius(weather[2:7])</code></pre>
 <p>Note that we can now use our <code>toCelcius</code> function to convert other values to Celcius - any value we can think of!</p>
 <pre class="r"><code>toCelcius(350)</code></pre>
 <pre><code>## [1] 176.6667</code></pre>
@@ -231,23 +228,23 @@ toSeconds(2, 8, 36)</code></pre>
   select(TempHigh:DewPointLow) %&gt;%
   toCelcius() %&gt;%
   arrange(TempAvg)</code></pre>
-<pre><code>##       TempHigh    TempAvg    TempLow DewPointHigh DewPointAvg DewPointLow
-## 1     2.222222 -1.6666667 -5.5555556   -9.4444444 -13.3333333 -16.6666667
-## 2     0.000000 -1.6666667 -3.3333333   -8.3333333  -9.4444444 -10.5555556
-## 3     1.111111 -1.6666667 -5.0000000   -7.7777778  -9.4444444 -10.5555556
-## 4     2.222222 -1.1111111 -5.0000000   -5.0000000 -11.1111111 -15.0000000
-## 5     2.777778  0.0000000 -3.3333333   -7.7777778 -11.1111111 -12.2222222
-## 6     6.666667  0.0000000 -7.2222222  -10.5555556 -11.6666667 -14.4444444
-## 7     4.444444  0.5555556 -3.3333333   -5.5555556  -8.3333333 -12.2222222
-## 8     3.888889  0.5555556 -2.7777778   -7.2222222 -10.0000000 -13.8888889
-## 9     3.333333  1.1111111 -1.6666667   -1.6666667  -4.4444444  -8.3333333
-## 10    2.222222  1.1111111  0.0000000    1.1111111  -0.5555556  -7.2222222
-## 11    2.777778  1.1111111 -1.1111111    0.0000000  -1.6666667  -3.3333333
-## 12    2.777778  1.1111111 -1.1111111    1.1111111  -1.6666667  -3.3333333
-## 13    2.222222  1.1111111 -0.5555556   -1.1111111  -3.8888889  -7.2222222
-## 14    2.222222  1.1111111 -0.5555556    1.1111111  -0.5555556  -3.3333333
-## 15    7.222222  1.1111111 -5.0000000   -8.3333333 -11.1111111 -13.3333333
-## 16    8.888889  1.6666667 -5.5555556   -1.6666667 -11.6666667 -15.5555556
+<pre><code>##       TempHigh   TempAvg   TempLow DewPointHigh DewPointAvg DewPointLow
+## 1    -26.96845 -28.16872 -29.36900    -32.76025   -31.76955   -32.79835
+## 2    -27.65432 -28.16872 -28.68313    -33.14129   -30.56927   -30.91221
+## 3    -27.31139 -28.16872 -29.19753    -32.95077   -30.56927   -30.91221
+## 4    -26.96845 -27.99726 -29.19753    -32.76025   -31.08368   -32.28395
+## 5    -26.79698 -27.65432 -28.68313    -32.66499   -31.08368   -31.42661
+## 6    -25.59671 -27.65432 -29.88340    -31.99817   -31.25514   -32.11248
+## 7    -26.28258 -27.48285 -28.68313    -32.37921   -30.22634   -31.42661
+## 8    -26.45405 -27.48285 -28.51166    -32.47447   -30.74074   -31.94102
+## 9    -26.62551 -27.31139 -28.16872    -32.56973   -29.02606   -30.22634
+## 10   -26.96845 -27.31139 -27.65432    -32.76025   -27.82579   -29.88340
+## 11   -26.79698 -27.31139 -27.99726    -32.66499   -28.16872   -28.68313
+## 12   -26.79698 -27.31139 -27.99726    -32.66499   -28.16872   -28.68313
+## 13   -26.96845 -27.31139 -27.82579    -32.76025   -28.85460   -29.88340
+## 14   -26.96845 -27.31139 -27.82579    -32.76025   -27.82579   -28.68313
+## 15   -25.42524 -27.31139 -29.19753    -31.90291   -31.08368   -31.76955
+## 16   -24.91084 -27.13992 -29.36900    -31.61713   -31.25514   -32.45542
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 1303 rows ]</code></pre>
 <p>Notice that we don’t need to specify the <code>x</code> argument in our <code>toCelcius</code> function above because it is supplied by the return value of the the <code>select</code> function. Furthermore, we don’t need to specify the <code>data</code> argument in our arrange function because it is being supplied by the return value of <code>toCelcius</code>.</p>
 <p>Another context in which we may want to specify our return values is when we’re working with conditionals.</p>
