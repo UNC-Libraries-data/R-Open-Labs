@@ -133,7 +133,7 @@ The other panes provided in R Studio are provided to make some coding tasks easi
 
 ### Loading the tidyverse
 
-First, we need to load the tidyverse package. (Note, the terms package and library are interchangeable). You can install the library using the install.packages command or through the Packages tab on the lower left pane. Once you have it installed, you can load this library with the following code:
+First, we need to load the tidyverse package. (Note, the terms package and library are interchangeable). You can install the library using the install.packages command or through the Packages tab on the lower right pane. Once you have it installed, you can load this library with the following code:
 
 ```{r tidyverse}
 #install.packages("tidyverse")
