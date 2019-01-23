@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Data and other downloads
-[Airbnb listings from Washington DC ](http://guides.lib.unc.edu/ld.php?content_id=40263741)
+[Airbnb listings from Washington DC ](https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/data/listings.csv)
 
 ##Today
 
@@ -85,6 +85,10 @@ library(tidyverse)
 
 # Data Import ------------------------------------------------------
 airbnb_dc <- read_csv("data/listings.csv") #Since I'm using an RStudio project, I only have to specify the path relative to the top directory
+
+#If you have problems running the read_csv above, the following code should also work
+#(Download data directly from the internet)
+#airbnb_dc <- read_csv(url("https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/data/listings.csv"))
 
 ```
 

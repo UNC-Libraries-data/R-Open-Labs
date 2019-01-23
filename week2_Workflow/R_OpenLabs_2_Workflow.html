@@ -291,7 +291,7 @@ div.tocify {
 
 <div id="data-and-other-downloads" class="section level2">
 <h2>Data and other downloads</h2>
-<p><a href="http://guides.lib.unc.edu/ld.php?content_id=40263741">Airbnb listings from Washington DC</a></p>
+<p><a href="https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/data/listings.csv">Airbnb listings from Washington DC</a></p>
 </div>
 <div id="today" class="section level2">
 <h2>Today</h2>
@@ -388,6 +388,9 @@ airbnb_dc &lt;- read_csv(&quot;data/listings.csv&quot;) #Since I'm using an RStu
 ##   cancellation_policy = col_character(),
 ##   reviews_per_month = col_double()
 ## )</code></pre>
+<pre class="r"><code>#If you have problems running the read_csv above, the following code should also work
+#(Download data directly from the internet)
+#airbnb_dc &lt;- read_csv(url(&quot;https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/data/listings.csv&quot;))</code></pre>
 <div id="reminder-comments" class="section level3">
 <h3>Reminder: Comments</h3>
 <p>In R, the # symbol indicates the beginning of a comment. Everything to the right of that is ignored by R, so you can write plain text to document what you’re doing, organize your code, and explain any tricky or unusual steps.</p>
