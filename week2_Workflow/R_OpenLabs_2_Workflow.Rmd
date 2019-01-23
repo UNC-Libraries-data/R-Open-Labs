@@ -1,0 +1,386 @@
+---
+title: "R Open Labs: Workflows and Objects"
+author:
+- name: Matt Jansen, University of North Carolina at Chapel Hill
+date: January 24, 2019
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data and other downloads
+[Airbnb listings from Washington DC ](http://guides.lib.unc.edu/ld.php?content_id=40263741)
+
+##Today
+
+This introductory workshop aims to cover:
+
+* Reproducible workflow
+    + importing data
+    + scripts
+    + projects
+    + saving output
+* [R for Data Science Chapters 4,6,8](http://r4ds.had.co.nz/workflow-basics.html)
+
+## What is reproducibility?
+
+1. Scientific reproducibility - if you repeat my experiment, you will get the same results as me. This is beyond the scope of this workshop ([see here for an overview](https://en.wikipedia.org/wiki/Replication_crisis))
+
+2. Computational reproducibility - if I give you my data and code, you will get the same results as me. We'll focus on the basics of computational reproducibility today.
+
+### Why does computational reproducibility matter?
+
+1. Your most important collaborator is you six months from now.
+2. We want Science (with a capital S) to be self-correcting. Since you're human, you will make mistakes, so you want to make it as easy as possible for others to catch your errors (see [the Reinhart and Rogoff Excel error](https://theconversation.com/the-reinhart-rogoff-error-or-how-not-to-excel-at-economics-13646) and [the Guinea worm wars](https://www.cgdev.org/blog/mapping-worm-wars-what-public-should-take-away-scientific-debate-about-mass-deworming) for recent examples)
+
+### Your script is real, your environment is not
+
+For your results to be reproducible, **every** step you take to manipulate the data should be explicitly documented in an R script.
+
+This also means that you want to make sure that your results don't have hidden/implicit dependencies in **your** R environment. There are two steps you can to take to prevent this.
+
+1. Reconfigure RStudio not to save your workspace between sessions. (Tools > Global Options > General)
+![](figures/rstudio-workspace.png)
+
+2. Restart RStudio from scratch and rerun the current script often.
+    + Cmd/Ctrl + Shift + F10 to restart RStudio
+    + Cmd/Ctrl + Shift + S to rerun the current script
+
+**Note:** If you have learned R in the past, you may have been taught to use the expression `rm(list = ls())` to clear your R environment. [This will not actually return R to a blank slate!](https://community.rstudio.com/t/first-line-of-every-r-script/799/12) Although this code will delete objects in your R environment, it won't reset global settings that have been changed. It is always safer and more effective to restart RStudio.
+
+## 1: RStudio Projects
+
+You can use the R function `setwd()` to point to locations of data files, but this isn't ideal for reproducible research. When you switch between computers, it is likely that the **absolute** directory path will change, so you will have to modify the path for each computer. Users of your code will not have the same absolute directory path that you have, so they will have to modify the path in the `setwd()` function before they can use your code.
+
+RStudio Projects provide a way to bundle together data, code, and other files together so that you can refer to files with **relative** directory paths, which creates a much more portable structure that won't need to be modified between computers or users.
+
+### Configuration
+
+1. File > New Project > New Directory > New Project
+2. Create a new subdirectory inside this project to store the data
+3. Copy the Airbnb data (listings.csv) into this data directory
+4. Create a new R Script for the data analysis in this project.
+
+## 2: Import the data
+
+We'll begin by loading the tidyverse library. This library includes readr, which we will use to read in our data file (for more details on readr, see Chapter 11 of the text).
+
+RStudio has a useful keyboard shortcut for **<-** (the assignment operator): **Alt + -**, i.e. press the Alt key and the minus/hyphen key at the same time.
+
+```{r import}
+# Purpose: Exploratory data analysis of airbnb data
+# Author: Nuvan Rathnayaka
+# Date: September 2018
+
+# Setup -----------------------------------------------------------
+library(tidyverse)
+
+# Data Import ------------------------------------------------------
+airbnb_dc <- read_csv("data/listings.csv") #Since I'm using an RStudio project, I only have to specify the path relative to the top directory
+
+```
+
+### Reminder: Comments 
+
+In R, the # symbol indicates the beginning of a comment. Everything to the right of that is ignored by R, so you can write plain text to document what you're doing, organize your code, and explain any tricky or unusual steps.
+
+### Coding conventions
+
+Something that I've glossed over is that you have options for how to name objects. For example, we called our imported data **airbnb_dc**, but we could have called it **airbnbListings**, or **airbnb.listings**
+
+Having a consistent way you name objects and functions helps you remember what things are called. It's especially useful when you're working with others to agree upon a coding convention. It doesn't particularly matter which one you choose, as long as you choose a convention and **stick to it**.
+
+Example style guide: http://style.tidyverse.org/index.html
+
+## 3: Objects and classes
+
+R is an [**object-oriented programming language**](https://en.wikipedia.org/wiki/Object-oriented_programming). One way to understand how objects work in programming is to look at how objects work in real life.
+
+&nbsp; 
+![](figures/objects1.png)
+&nbsp; 
+
+We tend to group objects by their structure. For example, there are many objects we call cars, and they all tend to share similarities in structure - they have wheels, windows, doors, etc. An *individual* car such as *my* car or *your* car is an **instance** of this structure. Cars also have a set of **properties** such as make, model, year and color. Each individual car has some variation of these properties.
+
+Objects in R work in a similar way.
+
+&nbsp; 
+![](figures/objects2.png)
+&nbsp; 
+
+In the diagram above, we are looking at three common **data structures** often used in R: **vectors**, **matrices** and **data frames**. We can create individual objects from these data structures, and those objects have their own properties. The way R defines what properties a given object has is through it's **class**. You can think of a class as a contract between R and its users, defining the structure and properties of an object.  People who develop R libraries take advantage of this system to reliably customize the behavior of functions. 
+
+### Vectors
+
+Vectors are the most basic collection of items, often created with `c()`.  Depending on what you put into a vector, it also automatically decides a **type**.  The most common types are: numeric (integer or double), character, and logical.
+
+```{r}
+c(1,2,3,4) #Numeric (integer)
+c(1.4,2.7,3.2) #Numeric (double)
+c("cat","dog","fish") #Character
+c(TRUE,FALSE,TRUE) #Logical
+
+c("cat",1,FALSE) #Character - check other combinations yourself!
+```
+
+Vectors only have one dimension: length (accessible with the `length` function.)
+
+We'll learn more about another special case of vectors, "factors", as the semester goes on.
+
+### Matrices
+
+Matrices are two-dimensional generalizations of vectors.  The dimensions of a matrix are the number of rows and the number of columns (in that order).
+
+Like vectors, matrices have a single type, and we'll most commonly see numeric, character, and logical types.
+
+```{r}
+matrix(1:9,nrow=3,ncol=3)
+#1:9 is equivalent to c(1,2,3,4,5,6,7,8,9)
+```
+
+### Data.frames
+
+Like a matrix, the data.frame has rows and columns, but each *column* can have its own different data type.  This is the most common way to store datasets in R.
+
+For example, our `airbnb_dc` dataset has been read into a data.frame.  We can check its type with `class`.
+
+```{r}
+class(airbnb_dc)
+```
+
+We can see that `airbnb_dc` has multiple classes!  `"tbl_df"` and `"tbl"` indicate that this data.frame is also a ["tibble"](https://r4ds.had.co.nz/tibbles.html).
+
+One way to extract a single column from a dataframe uses the `$` operator with the column's name.
+
+```{r}
+class(airbnb_dc$property_type)
+```
+
+
+[Read more about data structures here](http://adv-r.had.co.nz/Data-structures.html)
+
+### Useful data.frame commands
+The `dim()` function will print the dimensions (rows x columns) of your data frame.
+
+`head()` will print the first few rows of your data frame.
+
+`str()` is a very general purpose function that will display the structure of an object. This is especially useful for debugging.
+
+```{r useful}
+# Some useful functions  ----------------------------------------
+dim(airbnb_dc)
+head(airbnb_dc)
+str(airbnb_dc)
+```
+
+
+
+## 4: Tables for categorical data
+We can use the `table()` function to view counts/frequencies of categorical variables.
+
+```{r tables}
+# Categorical Variables  ----------------------------------------
+table(airbnb_dc$property_type)
+```
+
+As we saw in week 1, you can also next functions within each other. Here, let's generate a contingency table using `table()`, then sort it by count using `sort()`.
+
+```{r table2}
+sort(table(airbnb_dc$property_type), decreasing=TRUE)
+```
+That works, but it's a little hard to read. We could try breaking this into two steps and storing our intermediate output.
+
+```{r table3}
+property_type_table <- table(airbnb_dc$property_type)
+sort(property_type_table, decreasing = TRUE)
+```
+
+This works ok, but it does mean we're creating an additional object, `property_type_table`, and we could end up with lots of objects that are trivially different from each other if we do this too often. In the next lesson, we'll introduce the pipe operator, which makes this kind of nested computation easier to read.
+
+Suppose we want to know whether a listings price is greater than 500.  We can create a logical type vector as follows (output suppressed for space):
+
+```{r logical, eval=FALSE}
+airbnb_dc$price > 500 #Note that since we're not assigning this vector to a variable, R displays it, but doesn't save it as an object in the environment.
+```
+
+You can see other logical operators [here](https://www.statmethods.net/management/operators.html).
+
+We can feed this logical vector into the `table()` function to get a count of how many listings have prices above $500.
+```{r table4}
+table(airbnb_dc$price > 500)
+```
+
+We can also use the table function to look at the joint counts of multiple categorical variables. For example, if we want to look at the how many properties have prices above $500 across different property types.
+
+```{r table5}
+with(airbnb_dc, table(property_type, price > 500))
+```
+
+## 5: Exploring continuous data
+R has built-in functions to compute the mean, standard deviation, min, median, and max.
+
+```{r continuous1}
+# Continuous Variables  ----------------------------------------
+
+mean(airbnb_dc$price)
+sd(airbnb_dc$price)
+min(airbnb_dc$price)
+
+median(airbnb_dc$price)
+
+max(airbnb_dc$price)
+
+```
+
+R also has a built-in function to compute correlation coefficients. This let's us explore the pairwise associations between continuous variables.
+
+```{r correlation}
+with(airbnb_dc, cor(price, number_of_reviews))
+```
+
+## 6: Missing data
+
+There are some missing values in the review_scores_rating and reviews_per_month columns, even within the first six rows. We can check which values of review_scores_rating are NA with `is.na()`
+
+```{r missing}
+# Continuous Variables  ----------------------------------------
+
+
+sum(is.na(airbnb_dc$review_scores_rating)) #summing a logical (TRUE/FALSE) vector counts the number of TRUE values
+```
+
+We can check all of our columns using R's `colSums` to sum all of the columns at the same time.
+
+```{r missing data2}
+
+colSums(is.na(airbnb_dc))
+
+```
+
+Handling missing data is an advanced topic that is a bit beyond the scope of this lesson. There is no good way to handle missing data, there are only bad and less bad ways. 
+
+One of the bad ways to handle missing data is what's known as a complete case analysis. In this kind of analysis, you only keep observations (rows) where you have observed (non-missing) values for ALL columns. 
+
+R has built-in functions to facilitate this:
+
+* `complete.cases` returns a logical vector indicating whether or not an entire row of a dataset contains any missing values.  You can also use this function on a subset of columns to determine if only those columns are complete
+
+* `na.omit` returns a new dataframe with only the complete cases (as identified above)
+
+For most R functions, the default is to return NA is any of the values are NA:
+```{r mean}
+mean(airbnb_dc$review_scores_rating)
+with(airbnb_dc, cor(review_scores_rating, reviews_per_month))
+```
+
+Some functions, like the linear regression function `lm()`, perform a complete-case analysis automatically:
+
+```{r lm}
+lm(review_scores_rating~price, data=airbnb_dc)
+```
+
+When a function complains about missing values and fails, there's usually an argument that can be modified to change it to a complete-case analysis:
+
+```{r mean2}
+mean(airbnb_dc$review_scores_rating, na.rm=TRUE)
+with(airbnb_dc, cor(review_scores_rating, reviews_per_month, use="pairwise.complete.obs"))
+```
+
+## 7: Saving output
+
+Suppose, we've done some computation, and we want to save our modified dataframe. We can use `write_csv()` to save our dataset as comma separated values file.
+
+```{r writing}
+
+airbnb_dc$price_gt_500 <- (airbnb_dc$price > 500)
+write_csv(airbnb_dc, "data/modified_airbnb.csv")
+```
+
+## 8: ggplot (time allowing)
+
+Last week, we introduced ggplot2 for statistical graphics. This library implements the grammar of graphics, which provides a structured, modular way to think about plots. The three most commonly altered components are:
+
+* aesthetics - the visual properties of objects on the plot, e.g x location, y location, color, size
+* geom - the geometric object used to represent your data, e.g. point, line, histogram
+* facets - let you create subplots for each level of a categorical variable
+
+Let's look at a few examples.
+We can look at a histogram of review scores. Here, the only aesthetic we need to set is the x location, and then we can request a histogram.
+
+```{r hist}
+ggplot(airbnb_dc, aes(x=review_scores_rating)) + geom_histogram()
+
+```
+
+To get a smoothed histogram (aka kernel density estimate), all we have to do is change to geom_density:
+
+```{r density}
+ggplot(airbnb_dc, aes(x=review_scores_rating)) + geom_density() 
+
+```
+
+If we want to look at the distribution of reviews across different room types, we could add a group aesthetic for the room_type variable:
+
+```{r density2}
+
+ggplot(airbnb_dc, aes(x=review_scores_rating, color=room_type)) + geom_density() + guides(color=guide_legend(title="Room Type")) + theme_bw()
+
+```
+
+Since, there a lot of overlap, we could use facets to create a subplot for each room_type:
+
+```{r density3}
+
+ggplot(airbnb_dc, aes(x=review_scores_rating, color=)) + geom_density() + facet_wrap(~ room_type) + xlab("Review Score Rating") + theme_bw()
+
+
+```
+
+So far, we've looked a single continuous variable (review_scores_rating) as it related to a categorical variables (room_type). If we want to look at how two continuous variables are related, we could create a scatterplot by specifiying x and y aesthetics and using geom_point()
+
+```{r scatter}
+ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
+  geom_point() + xlab("Review Scores Rating") + ylab("Number of Reviews") + theme_bw()
+```
+
+Again, we can use facets to look at how this varies across room_type:
+
+```{r scatter2}
+ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
+  geom_point() + xlab("Review Scores Rating") + ylab("Number of Reviews") + theme_bw() + facet_wrap(~ room_type)
+```
+
+## Additional resources
+
+[Why setwd() is bad practice](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
+
+[Concise guide to basic computational reproducibility](https://kbroman.org/steps2rr/)
+
+[Eight things you can do to make your open science more understandable](http://datacolada.org/69)
+
+[A detailed guide to reproducible workflows in collaborative settings](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+
+[For more complicated projects, consider using make and docker](http://www.jonzelner.net/statistics/make/docker/reproducibility/2016/05/31/reproducibility-pt-1/)
+
+
+## Exercises
+
+1. What are the different types of cancellation policies offered at Airbnb?
+2. What is the most common and least common cancellation policy?
+3. What percent of Airbnb property types are houses? Hint: To find what percent of X is Y, use this formula: Y/X * 100
+4. How many listings get a review rating below 50?
+5. Try generating a scatterplot of price against bedrooms. Now add an overlay of a loess line. Now try creating subplots for each of the property types.
+6. Try installing the visdat library, and explore different ways to visualize missing data.
+
+
+
+## Feedback
+[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)
