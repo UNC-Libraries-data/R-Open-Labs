@@ -65,9 +65,9 @@ RStudio Projects provide a way to bundle together data, code, and other files to
 ### Configuration
 
 1. File > New Project > New Directory > New Project
-2. Create a new subdirectory inside this project to store the data
+2. Create a new subdirectory called "data" inside this project to store the data.
 3. Copy the Airbnb data (listings.csv) into this data directory
-4. Create a new R Script for the data analysis in this project.
+4. Create a new R Script for the data analysis in this project. (File > New File > R Script)
 
 ## 2: Import the data
 
