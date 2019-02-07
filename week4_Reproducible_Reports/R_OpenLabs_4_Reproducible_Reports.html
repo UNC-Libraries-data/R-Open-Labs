@@ -584,22 +584,26 @@ consumption &lt;- mutate(consumption, amer_ital_ratio2 = `Total American Chese` 
 </div>
 <div id="bibliography" class="section level2">
 <h2>Bibliography</h2>
-<p>R Markdown also provides a nifty way to incorporate a bibliography and references. We’ll an example of this in the exercises, but here’s a brief summary of the steps required to use a BibTex bibliography.</p>
+<p>R Markdown also provides a nifty way to incorporate a bibliography and references. We’ll haven an example of this in the exercises, but here’s a brief summary of the steps required to use a BibTex bibliography.</p>
 <ol style="list-style-type: decimal">
 <li>Create a plain-text .bib file in the same directory as your .Rmd R Markdown document.</li>
-<li>Fill that .bib file with BibTex citations. The <a href="http://www.citationmachine.net/">Citation Machine</a> can generate the BibTex citations for you.</li>
+<li>Fill that .bib file with BibTex citations. The <a href="http://www.citationmachine.net/bibtex/cite-a-book">Citation Machine</a> can generate the BibTex citations for you.</li>
 <li>Make sure each citation has a unique citation-key, the first entry</li>
 <li>Add a bibliography field to the YAML header that tells R Markdown the name of your bibliography file, for example <code>bibliography: references.bib</code></li>
 <li>Add citations throughout the document using square brackets.</li>
 </ol>
 </div>
+<div id="review" class="section level2">
+<h2>Review</h2>
+<p>We have now covered R Studio projects and R Markdown. With these two tools, you have everything you need to create portable and reproducible reports. We’ve also introduced tidyverse tools for data import (readr), graphics (ggplot2), and data transformation (dplyr). These are foundational tools that you will need in every data analysis project.</p>
+</div>
 <div id="exercises" class="section level2">
 <h2>Exercises:</h2>
 <ol style="list-style-type: decimal">
-<li><p><a href="https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week4_Reproducible_Reports/download/brazil_ecommerce_project.zip">Download the cheese RStudio Project</a> file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.</p></li>
-<li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>setup</strong>. change <code>echo=FALSE</code> to <code>echo=TRUE</code>. Try knitting the document again. What changed?</p></li>
-<li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>import</strong>. change <code>message=FALSE</code> to <code>message=TRUE</code>. Try knitting the document again. What changed?</p></li>
-<li><p>Create another R Markdown document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom we learned in Week 3 to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
+<li><p><a href="https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week4_Reproducible_Reports/download/cheese.zip">Download the cheese RStudio Project</a> file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.</p></li>
+<li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>setup</strong>. change <code>echo=FALSE</code> to <code>echo=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
+<li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>import</strong>. change <code>message=FALSE</code> to <code>message=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
+<li><p>Create another R Markdown document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom <a href="https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
 <li><p>Once you have created an R Markdown report analyzing cheese production, send the entire R Project to a friend (or us!) and ask them to knit that .Rmd document. If they have RStudio and the tidyverse installed, they should be able to seamlessly generate the exact report you generated, without having to make any changes.</p></li>
 </ol>
 </div>
