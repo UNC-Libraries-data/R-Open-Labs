@@ -28,9 +28,7 @@ Missing data is an advanced topic, and this document does not provide a comprehe
 
 The `naniar` package provides lots of tools for understanding the nature of the missingness.
 
-```{r cars}
-library(naniar)
-library(Hmisc)
+```{r airq}
 data("airquality")
 vis_miss(airquality)
 ```
