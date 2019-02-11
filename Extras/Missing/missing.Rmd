@@ -1,8 +1,9 @@
 ---
-title: "Missing Data Tools"
-author: "Nuvan Rathnayaka"
-date: "2/7/2019"
-output: html_document
+title: "Extra - Missing Data Tools"
+output: 
+  html_document:
+    toc: true
+    theme: spacelab
 bibliography: missing.bib
 ---
 
@@ -10,6 +11,15 @@ bibliography: missing.bib
 knitr::opts_chunk$set(echo = TRUE, message=FALSE)
 library(tidyverse)
 
+```
+
+## Necessary Packages
+
+```{r}
+#install.packages("naniar")
+library(naniar)
+#install.packages("Hmisc")
+library(Hmisc)
 ```
 
 Missing data is an advanced topic, and this document does not provide a comprehensive treatment of how to handle missing data in statistical modeling. These are just two tools that I'm fond of. For this document, I'll be using the built-in `airquality` dataset. Before you proceed, make sure to install the `naniar` and `Hmisc` R packages.
