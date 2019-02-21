@@ -334,3 +334,8 @@ reviews %>%
   group_by (province) %>%
   Summarise (mean_price == mean(price))
 ```
+
+
+
+## Feedback
+[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)
