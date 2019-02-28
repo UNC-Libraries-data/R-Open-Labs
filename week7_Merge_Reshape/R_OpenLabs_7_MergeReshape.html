@@ -291,7 +291,7 @@ div.tocify {
 
 <div id="data-and-other-downloads" class="section level2">
 <h2>Data and other downloads</h2>
-<p><a href="https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_Merge_Reshape/data/brazilian-ecommerce-subset.zip">Download data</a></p>
+<p><a href="data/brazilian-ecommerce-subset.zip">Download data</a></p>
 <p>Data derived from <a href="https://www.kaggle.com/olistbr/brazilian-ecommerce">Brazilian E-Commerce Public Dataset by Olist</a> provided on Kaggle.com under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> license.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 </div>
@@ -332,10 +332,10 @@ a1 &lt;- data.frame(&quot;id&quot;=c(3,4),
                  &quot;other&quot;=c(&quot;c&quot;,&quot;d&quot;))
 bind_rows(a0,a1)</code></pre>
 <pre><code>##   id        val other
-## 1  1  1.6235537  &lt;NA&gt;
-## 2  2 -0.1520475  &lt;NA&gt;
-## 3  3  1.5429883     c
-## 4  4  0.1042799     d</code></pre>
+## 1  1  1.1784863  &lt;NA&gt;
+## 2  2 -0.5840002  &lt;NA&gt;
+## 3  3  0.3522726     c
+## 4  4 -1.3866206     d</code></pre>
 <p>When we refer to merging or joining, we usually do not mean appending or adding observations to a dataset. Instead, merging usuallly intends to add columns or variables to our dataframe. However, we usually cannot simply want to bind them together in their current order with <code>bind_rows</code>.</p>
 <pre class="r"><code>b0 &lt;- data.frame(&quot;name&quot;=c(&quot;John&quot;,&quot;Jane&quot;),
                  &quot;year&quot;=c(1993,1996))
@@ -623,7 +623,7 @@ ungathered %&gt;% select(&quot;Chapel Hill&quot;,&quot;Durham&quot;,&quot;Raleig
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises:</h2>
-<p>All of today’s exercises involve the datasets included in <a href="https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_Merge_Reshape/data/brazilian-ecommerce-subset.zip">brazilian-commerce-subset.zip.</a></p>
+<p>All of today’s exercises involve the datasets included in <a href="data/brazilian-ecommerce-subset.zip">brazilian-commerce-subset.zip.</a></p>
 <ol style="list-style-type: decimal">
 <li><p>Read olist_public_dataset_v2.csv into R. Explore the dataset. If necessary, refer to the metadata provided <a href="https://www.kaggle.com/olistbr/brazilian-ecommerce">here</a>.</p></li>
 <li><p>Read product_category_name_translation.csv into R. Merge this dataframe into olist_public_dataset_v2.csv using <code>product_category_name</code> as the key variable. Let’s explore which products are most frequently purchased together:</p></li>
