@@ -1,0 +1,237 @@
+---
+title: "R Open Labs: Scripting 1 - Functions and Conditionals"
+author:
+- name: Lorin Bruckner, University of North Carolina at Chapel Hill
+date: March 7, 2019
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data and other downloads
+[Weather in Austin, TX](data/austin_weather.csv)
+
+##Today
+
+This workshop aims to cover:
+
+* When you should write a function
+* Steps to writing a function
+* Naming conventions
+* Arguments
+* Returns
+* Conditionals
+* Environment
+
+
+* [R for Data Science Chapter 19](https://r4ds.had.co.nz/functions.html)
+
+&nbsp;
+
+## When you should write a function
+
+So far, you have been using functions that are either available in base R or written by third parties and distributed in packages that you have been loading into R. With so many functions available from so many different places, why would you ever need to write your own?
+
+**You should consider writing a function when you find yourself copying and pasting chunks of code over and over again.**
+
+Take a look at the example below. I have a dataset that includes temperatures for the city of Austin, TX over time. All of the temperatures are in Farenheight, and I want to change them to Celcius.
+
+```{r, message=FALSE, warning=FALSE}
+# Setup -----------------------------------------------------------
+library(tidyverse)
+
+# Data Import ------------------------------------------------------
+weather <- read_csv("data/austin_weather.csv")
+
+#Convert temperature columns from Farenheight to Celcius
+weather$TempHigh <- (weather$TempHigh - 32) * 5/9
+weather$TempAvg <- (weather$TempAvg - 32) * 5/9
+weather$TempLow <- (weather$TempLow - 32) * 5/9
+weather$DewPointHigh <- (weather$TempHigh - 32) * 5/9
+weather$DewPointAvg <- (weather$DewPointAvg - 32) * 5/9
+weather$DewPointLow <- (weather$DewPointLow - 32) * 5/9
+```
+
+Can you see the mistake I made above? I forgot to change the second reference to the `weather$DewPointHigh` column. It will end up having the wrong values if I run the code. Copying and pasting like this leaves our code very prone to human errors that can be difficult for us to notice. In the next example, I've written a function that can do the same work in a more efficient and less fallible way.
+
+```{r}
+# Function for Converting to Celcius
+toCelcius <- function(x) {
+  (x - 32) * 5/9
+}
+
+# Convert relevant columns to Celcius
+weather[2:7] <- toCelcius(weather[2:7])
+```
+
+Note that we can now use our `toCelcius` function to convert other values to Celcius - any value we can think of!
+
+```{r}
+toCelcius(350)
+```
+
+## Steps to writing a function
+
+1. Pick a name.
+2. List inputs, or **arguments**.
+3. Add code to the body of the function inside the curly brackets.
+
+Let's go over each of these steps in detail.
+
+## Naming conventions
+
+R doesn't (usually) care what your functions are called, but it's important to give them names that are meaningful to other people. It should be short and easy to write, but also descriptive enough to clearly evoke what the function does. That can be difficult!
+
+One of the more important things to remember is that your function name should not overriride functions that already exist in base R. You should *try* not to override names of functions in third party packages either, but it is impossible to know of every function that does or doesn't already exist. You can always try using the `?` character to see if a function already exists in base R.
+
+## Arguments
+
+Arguments supply important information our function needs in order to work. In the `toCelcius` function, we use an argument called `x` to represent any data that needs to be converted to Celcius. Many functions have an argument for the data that needs to be supplied, and many also include additional arguments that control specific details necessary to determine how the function should run.
+
+For example, the `log()` function uses argument `x` to reperesent the data it's computing, but also an argument called `base` which lets the function know what base to use for the logorithm (base 2, base 10, etc.)
+
+Likewise, the `mean()` function uses argument `x` for data as well as argument `na.rm` to specify how it should handle missing values.
+
+Let's make a function that counts the total number of seconds in any given combination of hours, minutes and seconds. Our function needs three arguments: one for hours, one for minutes and one for seconds.
+
+```{r}
+toSeconds <- function(h, m, s) {
+  (h * 3600) + (m * 60) + s
+}
+
+#Count the total number of seconds in 2 hours, 8 minutes and 36 seconds.
+toSeconds(h = 2, m = 8, s = 36)
+
+#Typing in the name of each argument is optional if we already know the order they are supposed to be in.
+toSeconds(2, 8, 36)
+```
+
+##Returns
+In R, the "return" value of a function is implicit, but we can include it if we want to. Below is an example of the `toSeconds` function with the return value explicitly written in.
+
+```{r}
+toSeconds <- function(h, m, s) {
+  total <- (h * 3600) + (m * 60) + s
+  return(total)
+}
+```
+
+Specifying the return value can be helpful if we are writing a very long and complicated function and we want it to be easy for someone else to read and understand. It's also important to think about our return values when we want to make our function pipeable.
+
+With pipes, we are often passing the return value of the first function to the first argument of the second function. Below, we'll use a pipe to pass the values from the `toCelcius` function we wrote earlier to the `arrange` function so we can order by the lowest average temperature in Celcius.
+
+```{r, warning=FALSE, message=FALSE, R.options=list(max.print=100)}
+weather %>%
+  select(TempHigh:DewPointLow) %>%
+  toCelcius() %>%
+  arrange(TempAvg)
+```
+
+Notice that we don't need to specify the `x` argument in our `toCelcius` function above because it is supplied by the return value of the the `select` function. Furthermore, we don't need to specify the `data` argument in our arrange function because it is being supplied by the return value of `toCelcius`.
+
+Another context in which we may want to specify our return values is when we're working with conditionals.
+
+##Conditionals
+Conditionals are often called "if/else statements" because they work like this:
+
+```{r, eval=FALSE}
+if (condition) {
+  # If the condition is TRUE, run the code the code that is written here.
+} else {
+  # If the condition is FALSE, run the code the code that is written here.
+}
+```
+
+Using explicit return statements are necessary when the return value is different depending on the condition. For example, let's write a function that returns the larger of two numbers:
+
+```{r}
+isBigger <- function(x, y) {
+  if (x > y) {
+    return(x)
+  } else {
+    return(y)
+  }
+}
+
+isBigger(11, 200)
+```
+
+But wait! What if both numbers are the same? Should we make our function respond to that? We can add more than two conditions using the following syntax:
+
+```{r}
+isBigger <- function(x, y) {
+  if (x > y) {
+    return(x)
+  } else if (x == y) {
+    return("They are equal.")
+  } else {
+    return(y)
+  }
+}
+
+isBigger(80, 80)
+```
+
+If you have a function that uses many different conditions, it can be cumbersome to read and write. Luckily, R provides us with a function called `switch` that we can use to make conditionals look better.
+
+```{r}
+doThis <- function(x, y, operation) {
+    switch(operation,
+     add = x + y,
+     subtract = x - y,
+     multiply = x * y,
+     divide = x / y
+   )
+ }
+
+doThis(120, 2, "divide")
+```
+
+##Environment
+What's wrong with the function below?
+
+```{r}
+getBirthYr <- function(age) {
+    crntYear - age
+}
+```
+
+That was a trick question! In many programming languages, the above function will ALWAYS produce an error because `crntYear` isn't defined inside the function. However, R differs from other programming languages in this respect.
+
+If an argument isn't defined inside the function, R will still look for it in the **environment** outside of the function. One good way to tell what's in the enviornment is to take a look at your "Environment" tab in R studio on the upper right. Any function in R will have access to values defined there.
+
+Below, we do NOT have `crntYear` defined either within our function our within our environment so we still get an error.
+
+```{r, error=TRUE}
+getBirthYr(21)
+```
+
+However, if we add `crntYear` to our environment, we can use the function.
+
+```{r}
+crntYear <- 2018
+
+getBirthYr(21)
+```
+
+## Exercises
+1. Take a look at the function below. What does it do? What would be a better name for it?
+```{r}
+f <- function(x, y) {
+  x[is.na(x)] <- y
+  return(x)
+}
+```
+2. What arguments does the `head` function take and how are they used?
+3. You want to write a function that calculates any given exponential. How many arguments do you need?
+4. Write the function described in #3.
+5. There are three columns in our `weather` dataset that indicate visibility in miles. Write a function to determine the equivalent visibility in kilometers.
+6. Write a function that accepts a latitude and longitude and returns which hemispheres those coordinates belong to. For example, inputs of 35.911434 and -79.048106 would return "north west". *HINT: You can use [logical operators](https://www.datamentor.io/r-programming/operator/#logical_operators) with conditionals.*
