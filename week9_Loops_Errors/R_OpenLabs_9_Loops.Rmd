@@ -1,0 +1,280 @@
+---
+title: "R Open Labs: Scripting 2 - Loops and Error Handling"
+author:
+- name: Lorin Bruckner, University of North Carolina at Chapel Hill
+date: March 21, 2019
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data and other downloads
+[Athletes in the 2016 Olympics](data/olympics_2016.csv)
+
+##Today
+
+This workshop aims to cover:
+
+* Getting started with loops
+* Output
+* While loops
+* Loops with conditionals and functions
+* Error handling
+
+* [R for Data Science Chapter 21](https://r4ds.had.co.nz/iteration.html)
+
+```{r, message=FALSE, warning=FALSE}
+# Setup -----------------------------------------------------------
+library(tidyverse)
+
+athletes <- read_csv("data/olympics_2016.csv")
+```
+
+&nbsp;
+
+## Getting Started With Loops
+
+In Scripting 1, we learned that we ought to avoid copying and pasting chunks of code over and over again, i.e., we should **reduce duplication**. Last week, we reduced duplication in our code by creating our own functions. This week, we'll learn another tool that helps avoid duplication: **iteration**, a.k.a., **loops**. Below is a very simple loop.
+
+```{r}
+for(number in 1:5){
+  print(number)
+}
+```
+
+The `for` function tells R this loop will iterate through each possible value supplied in the parentheses, known as a **sequence**. The sequence supplies what we are looping through. In this case, it's the vector 1:5, so the loop is going to iterate 5 times. Our sequence also has a variable called "number". In each iteration of the loop, "number" will be set to one of the values in the vector:
+
+* number = 1
+* number = 2
+* number = 3
+* etc.
+
+**"Number" is a completely arbitrary name.** The variable used in our sequence can be called anything we want. The examples below will all work the same.
+
+```{r}
+for(i in 1:5){
+  print(i)
+}
+
+for(x in 1:5){
+  print(x)
+}
+
+for(fobbywobble in 1:5){
+  print(fobbywobble)
+}
+
+```
+
+The code between the curly brackets, or the **body** of the loop, tells R what to do each time our sequence is iterated. The body can hold whatever kind of code we want. In the above case, we are only printing each value in the vector, but often we may want to execute many lines of code over many iterations. When that happens, we need to worry about efficiency. One way to be more efficient when writing loops is to assign an object to hold our output.
+
+## Output
+
+Before we start the loop, we should assign a sufficient space for the output by creating an output object. If we want to store our output in a vector, we can use the `vector` function to create one. `vector` takes two arguments: the type of the vector and the length. For more information on object classes and types, review [Week 2.3: Objects and classes](https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/R_OpenLabs_2_Workflow.html#3:_objects_and_classes).
+
+Below, we're creating an empty numeric vector called "output" with 5 columns. 
+
+```{r}
+output <- vector("numeric", 5)
+
+output
+```
+
+Now, each time we iterate through the loop, we can store the results in our output vector.
+
+```{r}
+for (i in 1:5){
+  output[i] <- i
+}
+
+output
+```
+
+Although this step may seem unnecessary with such a simple example, it is very important for efficiency when using loops with large amounts of data. If you neglect to create an output object and simply grow the output at each iteration, your loop will be very slow.
+
+If we are using loops to modify existing data, our output object already exists, so we don't need to create one. For this example, let's use our dataset of olympic athletes. We have a column for each athlete's height in centimeters. Let's convert the heights to inches using a loop. 
+
+In this case, our output object is the column `althletes$height`. Note that we can determine the length of the object by using the `length()` function.
+
+```{r}
+for (i in 1:length(athletes$height)) {
+  athletes$height[i] <- athletes$height[i] / 2.4
+}
+```
+
+## While Loops
+
+While loops are used when we only want to run a loop while a certain condition is met. Once the condition is no longer met, the loop stops immediately.
+
+```{r}
+i <- 1
+
+while(i < 6){
+  print(i)
+  i = i + 1
+}
+```
+
+This type of loop is not used very often in R, but it can be helpful in situations where we do not know how many times the loop should iterate. For example, we might use a while loop when random numbers or random sampling is involved, or when taking user input as part of an interactive application created in R Shiny.
+
+##Loops with Conditionals and Functions
+
+Loops and conditionals are a powerful combination that allow us to perfom many kinds of transformations. Let's say we want to see how many of our athletes are at, above or below the average for height in our dataset, and we want to store that information in a new column. First, we need to determine the average heights for both men and women in our dataset. 
+
+```{r}
+athletes %>%
+  group_by(sex) %>%
+  summarize(avg_height = mean(height, na.rm = TRUE))
+```
+
+Next, let's create a new column in our dataset to store the output. Since each column is itself a vector, we'll use the `vector` function to create a new one. It will be a character vector that's the same length as all the other columns in the dataset.
+
+```{r}
+athletes$height_class <- vector("character", length(athletes$ID))
+```
+
+Next, let's work on the conditional statements. We'll start out by focusing on only the first record in our dataset. We'll need to use nested conditionals in this case, because we're checking two different columns: sex and height.
+
+```{r}
+if (athletes$sex[1] == "F"){
+  
+  if (athletes$height[1] > 70.6) {
+    athletes$height_class[1] <- "above average"
+  } else if (athletes$height[1] == 70.6) {
+    athletes$height_class[1] <- "average"
+  } else {
+    athletes$height_class[1] <- "below average"
+  }
+  
+}else{
+  
+  if (athletes$height[1] > 75.6) {
+    athletes$height_class[1] <- "above average"
+  } else if (athletes$height[1] == 75.6) {
+    athletes$height_class[1] <- "average"
+  } else {
+    athletes$height_class[1] <- "below average"
+  }
+  
+}
+```
+
+When we run the code above, we see that it works correctly on our first record. Of course, we don't want to copy and paste the code over and over again for each record, which is why we'll use it in the body of a loop. But what if we want to use it on multiple datasets? What if we want to loop this code at some point in our script, but run it again without looping at another point? This code will be less bulky and more flexible if we turn it into a function.
+
+```{r}
+getHeightClass <- function(s, h, c) {
+  if (s == "F"){
+    
+    if (h > 70.6) {
+      c <- "above average"
+    } else if (h == 70.6) {
+      c <- "average"
+    } else {
+      c <- "below average"
+    }
+    
+  }else{
+    
+    if (h > 75.6) {
+      c <- "above average"
+    } else if (h == 75.6) {
+      c <- "average"
+    } else {
+      c <- "below average"
+    }
+    
+  }
+}
+```
+
+Now let's see if our function works on the second row.
+
+```{r}
+athletes$height_class[2] <- getHeightClass(athletes$sex[2], athletes$height[2], athletes$height_class[2])
+```
+
+Great! So we just need to loop through the dataset and apply the function to all of our records. In fact, we can use the same sequence from the loop we used to convert the height to inches! 
+
+```{r, error=TRUE}
+for (i in 1:length(athletes$height)) {
+  
+  athletes$height_class[i] <- getHeightClass(athletes$sex[i], athletes$height[i], athletes$height_class[i])
+
+  }
+```
+
+Uh oh! It looks like we've got an error. Unfortunately, we are missing height information for some of the athletes. Because it's not uncommon to encounter an error when iterating through loops, there are special functions in R for dealing with them.
+
+## Error handling
+There are multiple ways of dealing with errors in loops. One of the easier ways is to ignore them and continue moving through the loop. This is accomplished with the `try` function which simply wraps around the entire body of the loop. 
+
+By default, `try` will continue the loop even if there's an error, but will still show the error message. We can supress the error messages by using `silent = TRUE`.
+
+```{r}
+for (i in 1:length(athletes$height)) {
+  
+  try(athletes$height_class[i] <- getHeightClass(athletes$sex[i], athletes$height[i], athletes$height_class[i]), silent = TRUE)
+
+  }
+```
+
+That works for our purposes above, but there may be times when you want to handle errors differently. You may not only want to stop the loop, but also provide a specific error message. In that case, you can use the `tryCatch` function.
+
+Let's test this by creating a list of both numbers and characters.
+
+```{r}
+stuff <- list(12, 9, 2, "cat", 25, 10, "bird")
+```
+
+Now, we'll loop over the list and try to get the log of each item. When indexing lists, we need to use double square brackets.
+
+```{r, error=TRUE, eval=FALSE}
+for (i in 1:length(stuff)) {
+  try (print(log(stuff[[i]])))
+}
+```
+
+```{r, error=TRUE, echo=FALSE}
+for (i in 1:length(stuff)) {
+  tryCatch (print(log(stuff[[i]])),
+           
+           error = function(e){
+           message("", e)
+             
+         })
+}
+```
+
+Ok, let's change the error message to include both the index number of the item in the list that's giving us the error as well as the contents of that item.
+
+```{r}
+for (i in 1:length(stuff)) {
+  
+  tryCatch (print(log(stuff[[i]])),
+           
+           error = function(e){
+           message(paste("An error occurred for item", i, stuff[[i]],":\n"), e)
+             
+         })
+}
+```
+
+## Exercises
+
+1. Using a loop, convert the weight of all the athletes from kilograms to pounds.
+
+2. Write a loop that prints random numbers, but stops after printing a number greater than 1. *Hint: use `rnorm()`.*
+
+3. Create a new column in `athletes` called "under_21". Use a loop to add TRUE to a record if the athlete's age is less than 21 and FALSE if it isn't.
+
+4. Use `tryCatch` to loop through every column in the `athletes` dataset and print the maximum value for each numeric column. If a column is not numeric, print the error message "Column x is not numeric." where x is the column number. *Hint: don't forget to use `na.rm = TRUE`*
+
+5. Very often in R, we will want to apply a function to multiple parts of an object. While we can often accomplish this using a for loop, we can also use certain functions that will provide the same output with fewer lines of code. There are a family of `apply` functions in base R that focus on this, as well of a family of `map` functions included in the tidyverse package that do similar things. Read about the `apply` functions on the [DataCamp website](https://www.datacamp.com/community/tutorials/r-tutorial-apply-family). Then, read about the `map` functions in [R For Data Science Chapter 21.5](https://r4ds.had.co.nz/iteration.html#the-map-functions). Which ones would you prefer to use? Why?
