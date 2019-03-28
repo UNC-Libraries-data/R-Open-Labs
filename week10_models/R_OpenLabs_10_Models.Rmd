@@ -19,6 +19,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Data and other downloads
 
 None.
+```{r}
+#install.packages("gridExtra")
+library(gridExtra) #combining and organizing multiple ggplots
+```
 
 ##Today
 
@@ -52,7 +56,7 @@ A model is another tool to summarize the information in a dataset.  This often c
 
 For today we'll mainly consider "supervised models".  A supervised model aims to predict some target variable(s) and requires that we have observed these variables alongside the factors we want to use to predict it.  This target variable is sometimes called a "dependent" or "response" variable. Today's lesson will focus on a specific form of supervised model, the linear model, also known as ordinary least squares regression (OLS) or the general linear model (not to be confused with generalized linear models).
 
-Unsupervised models don't distinguish between response and predictor variables and instead look for patterns among variables more generally. Clustering is one of the most commonly used unsupervised learning methods.
+Unsupervised models don't distinguish between response and predictor variables and instead look for patterns among variables more generally. Clustering is one of the most commonly used unsupervised learning methods. We will not be covering unsupervised models today.
 
 
 ## Simple Linear Models with Plots
@@ -366,6 +370,36 @@ ggplot(sim_results) +
 The confidence level (say 95%) of a confidence interval does not apply to a particular confidence interval. Rather, it applies to the procedure. If you collect one sample of data, fit a model, and the look at the confidence interval, the true value is either inside that interval or it is not (unfortunately, we usually don't know whether the true value is inside the interval). However, if you repeat the study 1000 times and fit precisely the same model to each of those 1000 datasets, about 95% of the 1000 confidence intervals you estimate will contain the true value. 
 
 Of course, this is all assuming you are fitting the correct model, but that is a discussion beyond the scope of this workshop!
+
+## Reproducible simulations
+
+Much of our focus this semester has been on reproducible workflows and reproducible reports. How can we make a simulation study reproducible when it involves generating random numbers? The random number generators in R are actually pseudo-random number generators. They take a **seed** value and then generate a sequence of number that are randomly drawn from a given distribution, but if you use the same seed, the sequence of number will be exactly the same. If you run the following code, you should get the same five lines that are present on this webpage.
+
+
+```{r seed}
+set.seed(1234)
+nsims <- 5
+sample_size <- 8
+int <- vector("numeric", nsims)
+sl <- vector("numeric", nsims)
+for (i in 1:nsims){
+  x <- runif(sample_size, 0, 15)
+  y <- 3.4 * x + rnorm(sample_size, 0, 5)
+  moddf <- data.frame(x,y)
+
+  fit <- lm(y ~ x, data = moddf)
+  int[i] <- coef(fit)[1]
+  sl[i] <- coef(fit)[2]
+}
+
+sim_results <- data.frame(int, sl)
+
+ggplot(sim_results) +
+  geom_abline(intercept=int, slope=sl, alpha = 0.2) +
+  xlim(0, 15) +
+  ylim(0, 60)
+
+```
 
 ## Exercises
 
