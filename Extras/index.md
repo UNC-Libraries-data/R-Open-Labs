@@ -10,4 +10,4 @@
 
 * [Scatterplot Matrices With GGally](ggally/ggally.html)
 	
-	The GGally package provides a function for creating scatterplot matrices. A scatterplot matrix arranges multiple scatterplots on a grid so that they are easy to compare to one another.
+	The 'ggally' package provides a function for creating scatterplot matrices. A scatterplot matrix arranges multiple scatterplots on a grid so that they are easy to compare to one another.
