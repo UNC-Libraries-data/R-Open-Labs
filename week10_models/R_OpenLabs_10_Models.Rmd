@@ -83,8 +83,7 @@ One of the simplest ways to model data like this is with a line capturing the tr
   Given a new `x` value, we could predict the corresponding `y` by plugging it into this equation.  We can also get observations for the `x` values we have observed.
 
 We can plot some candidate line(s) with `geom_abline`:
-  
-  ```{r fig.width=4, fig.height=4}
+```{r fig.width=4, fig.height=4}
 ggplot(data=moddf,aes(x=x,y=y))+geom_point()+
   geom_abline(intercept=-1,slope=3.6,color="blue")+
   geom_abline(intercept=2,slope=3,color="orange")+
@@ -361,10 +360,9 @@ sim_results <- data.frame(index, lower, upper)
 
 ggplot(sim_results) +
   geom_segment(y = index, yend = index, x = lower, xend = upper) +
-  xlim(0, 5) +
-  ylim(0,101) + 
   geom_segment(y = -5, yend = 110, x = 3.4, xend = 3.4, color = "blue") +
-  ylim(0, 101)
+  xlim(0, 5) +
+  ylim(0,101)
 ```
 
 The confidence level (say 95%) of a confidence interval does not apply to a particular confidence interval. Rather, it applies to the procedure. If you collect one sample of data, fit a model, and the look at the confidence interval, the true value is either inside that interval or it is not (unfortunately, we usually don't know whether the true value is inside the interval). However, if you repeat the study 1000 times and fit precisely the same model to each of those 1000 datasets, about 95% of the 1000 confidence intervals you estimate will contain the true value. 
