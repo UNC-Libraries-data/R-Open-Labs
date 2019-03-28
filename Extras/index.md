@@ -4,6 +4,10 @@
 	
 	This extra demonstrates two useful tools for handling missing data in statistical models.
 
+* [Loops in Parallel](Parallel/foreach.html)
+
+	This extra shows you an easy way to split up your loops over multiple cores on your computer to run in "parallel" and speed up large or long-running loops.
+
 * [Regression Tables with Stargazer](Stargazer/Stargazer.html)
 	
 	The `stargazer` package makes it easy to create publication quality regression tables in html or LateX.
