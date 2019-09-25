@@ -488,7 +488,7 @@ myvec</code></pre>
 ##  $ listing_url           : chr  &quot;https://www.airbnb.com/rooms/3781&quot; &quot;https://www.airbnb.com/rooms/5506&quot; &quot;https://www.airbnb.com/rooms/6695&quot; &quot;https://www.airbnb.com/rooms/6976&quot; ...
 ##  $ neighbourhood         : chr  &quot;East Boston&quot; &quot;Roxbury&quot; &quot;Roxbury&quot; &quot;Roslindale&quot; ...
 ##  $ neighbourhood_cleansed: chr  &quot;East Boston&quot; &quot;Roxbury&quot; &quot;Roxbury&quot; &quot;Roslindale&quot; ...</code></pre>
-<p>R’s object-oriented design (which we introduced in <a href="https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/R_OpenLabs_2_Workflow.html#3:_objects_and_classes">Lesson 2 - Workflows</a>) allows this kind of behavior. We usually don’t need to concern ourselves with this, but it’s good to know enough about it that you can fruitfully search for answers.</p>
+<p>R’s object-oriented design (which we introduced in <a href="https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/R_OpenLabs_2_Workflow.html#3:_objects_and_classes">Lesson 2 - Workflows</a>) allows this kind of behavior. We usually don’t need to concern ourselves with this, but it’s good to know enough about it to search for answers when you run into problems.</p>
 <p>We’ll use <code>summary</code> with the 5th, 6th, and 12th columns.</p>
 <pre class="r"><code>summary(listings[,c(5,6,12)])</code></pre>
 <pre><code>##      city              state            accommodates  
