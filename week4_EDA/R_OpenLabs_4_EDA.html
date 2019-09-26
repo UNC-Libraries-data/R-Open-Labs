@@ -479,7 +479,7 @@ myvec</code></pre>
 ##   ..   calculated_host_listings_count = col_double(),
 ##   ..   reviews_per_month = col_double()
 ##   .. )</code></pre>
-<p>Huh. There’s some extra output that I didn’t expect <a href="https://www.google.com/search?q=spec_tbl_df">a little searching</a> takes us <a href="https://www.tidyverse.org/articles/2018/12/readr-1-3-1/">here</a>, where we learn that <code>spec_tbl_df</code> is a subclass of <code>tbl_df</code> that adds a <code>spec</code> attribute to keep information about the import process. Whenever we subset using the indexing operator [], R drops that information. So we can exactly recreate the results above like this:</p>
+<p>Huh. There’s some extra output that I didn’t expect. <a href="https://www.google.com/search?q=spec_tbl_df">A little searching</a> takes us <a href="https://www.tidyverse.org/articles/2018/12/readr-1-3-1/">here</a>, where we learn that <code>spec_tbl_df</code> is a subclass of <code>tbl_df</code> that adds a <code>spec</code> attribute to keep information about the import process. Whenever we subset using the indexing operator [], R drops that information. So we can exactly recreate the results above like this:</p>
 <pre class="r"><code>listings[] %&gt;%
   select(id, listing_url, neighbourhood, neighbourhood_cleansed) %&gt;%
   str()</code></pre>
