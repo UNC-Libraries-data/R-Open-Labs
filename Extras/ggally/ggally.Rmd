@@ -54,6 +54,16 @@ The first thing to notice is the names of our variables which are printed both h
 3. The third plot at the top is review score vs. price. The coefficient shown here is very close to 0.
 4. The fourth plot at the top is room type vs. price. The box plot shows that we have some outliers when it comes to prices for entire homes/apartments.
 
+## Adding color and other aesthetics
+
+Sometimes we may want to represent variables in other aesthetics than the X and Y axes.  We can use the `mapping` parameter for `ggpairs` to add color, size and other aesthetics using `aes` with the same syntax as in `ggplot2`.  Note that in this example, we use the `columns` parameter of `ggpairs` to serve the same role as our `select` function above.  Remember: there's usually more than one way to get the same results in R!
+
+```{r message=FALSE,fig.width=10, fig.height=8,warning=FALSE}
+listings %>% 
+  ggpairs(columns = c("price", "accommodates", "review_scores_rating"),
+          mapping = aes(color = room_type))
+```
+
 
 ## Resources
 
@@ -69,5 +79,7 @@ Create another scatterplot matrix with the Boston AirBnB dataset and GGally to a
 2. Do higher priced rooms get better cleanliness scores?
 3. Do higher priced rooms get more reviews per month?
 4. Which room type has the highest average number of reviews per month?
+
+Try adding at least one variable as a color or other aesthetic.
 
 
