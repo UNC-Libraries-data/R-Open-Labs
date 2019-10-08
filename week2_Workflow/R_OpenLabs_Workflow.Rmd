@@ -1,8 +1,7 @@
 ---
 title: "R Open Labs: Workflows and Objects"
 author:
-- name: Matt Jansen, University of North Carolina at Chapel Hill
-date: January 24, 2019
+- name: University of North Carolina at Chapel Hill
 output: 
   html_document:
     toc: true

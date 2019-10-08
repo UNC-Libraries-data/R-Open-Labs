@@ -1,8 +1,7 @@
 ---
 title: "R Open Labs: Scripting 2 - Loops and Error Handling"
 author:
-- name: Lorin Bruckner, University of North Carolina at Chapel Hill
-date: March 21, 2019
+- name: University of North Carolina at Chapel Hill
 output: 
   html_document:
     toc: true

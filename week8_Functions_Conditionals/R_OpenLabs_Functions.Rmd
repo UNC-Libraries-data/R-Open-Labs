@@ -1,8 +1,7 @@
 ---
 title: "R Open Labs: Scripting 1 - Functions and Conditionals"
 author:
-- name: Lorin Bruckner, University of North Carolina at Chapel Hill
-date: March 7, 2019
+- name: University of North Carolina at Chapel Hill
 output: 
   html_document:
     toc: true

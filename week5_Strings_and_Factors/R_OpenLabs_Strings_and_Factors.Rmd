@@ -1,8 +1,7 @@
 ---
 title: "R Open Labs: Strings and Factors"
 author:
-- name: Nuvan Rathnayaka, University of North Carolina at Chapel Hill
-date: February 21, 2019
+- name: University of North Carolina at Chapel Hill
 output: 
   html_document:
     toc: true

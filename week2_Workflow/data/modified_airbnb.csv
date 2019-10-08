@@ -38,7 +38,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 2808417,"Upscale 1 BR (Dupont, U & 14th St.)",Apartment,Entire home/apt,3,1,1,140,0,2,66,99,strict,1.79,FALSE
 17586779,Large Studio in Central Dupont Location,Apartment,Entire home/apt,2,1,0,95,15,1,5,90,flexible,2.78,FALSE
 7800582,Dupont #2 Condo. Prime Location,Apartment,Entire home/apt,2,1,1,132,15,3,31,98,strict,3.43,FALSE
-16143403,Huge Dupont apartment short walk from White House,Apartment,Entire home/apt,5,1,1,1e3,0,2,0,NA,strict,NA,TRUE
+16143403,Huge Dupont apartment short walk from White House,Apartment,Entire home/apt,5,1,1,1000,0,2,0,NA,strict,NA,TRUE
 16176174,B - Great room for business traveler - Heart of DC,House,Private room,1,1,1,120,50,1,0,NA,strict,NA,FALSE
 16627888,3 storey rowhome in perfect location!,House,Entire home/apt,6,2.5,3,160,0,1,0,NA,flexible,NA,FALSE
 10340334,U Street/Dupont/AdamsMo 1BR!,Apartment,Entire home/apt,2,1,1,150,0,2,1,100,flexible,0.09,FALSE
@@ -80,8 +80,8 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 8924942,Modern DuPont Garden Apartment #10,Apartment,Entire home/apt,2,1,1,109,0,1,109,94,strict,5.85,FALSE
 4538581,Room in beautiful Dupont apartment,Apartment,Private room,1,2,1,100,0,2,12,95,strict,0.4,FALSE
 9057655,Private room for sharing,Bed & Breakfast,Private room,1,1,1,90,0,1,48,96,strict,2.62,FALSE
-16236713,Historic U Street Row House,Apartment,Entire home/apt,6,2,2,1e3,0,3,0,NA,strict,NA,TRUE
-16335002,2 Bed Penthouse 14th/Logan Circle,House,Entire home/apt,6,2.5,2,2e3,0,3,0,NA,strict,NA,TRUE
+16236713,Historic U Street Row House,Apartment,Entire home/apt,6,2,2,1000,0,3,0,NA,strict,NA,TRUE
+16335002,2 Bed Penthouse 14th/Logan Circle,House,Entire home/apt,6,2.5,2,2000,0,3,0,NA,strict,NA,TRUE
 7783181,"Artist's Dupont Top Floor 1B, Best Location in DC!",Apartment,Entire home/apt,4,1,1,150,0,1,61,100,strict,3.55,FALSE
 2964999,"Dupont, Adams Morgan U Townhouse 1",Apartment,Private room,2,2.5,1,110,15,3,7,91,strict,0.27,FALSE
 9486714,Luxury 1 Bedroom Apt. Dupont Circle,Apartment,Entire home/apt,2,1,1,100,0,1,0,NA,flexible,NA,FALSE
@@ -123,7 +123,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7942513,Near metro. Near night life. 1 BR.,Apartment,Entire home/apt,2,1,2,99,0,1,0,NA,flexible,NA,FALSE
 16718716,"Luxury 2 BR Apartment in Washington, DC",Apartment,Entire home/apt,5,1,2,750,250,1,1,100,flexible,0.27,TRUE
 16427840,"Charming studio, best neighborhood in DC",Apartment,Entire home/apt,4,1,0,550,0,1,0,NA,flexible,NA,TRUE
-15870714,2BR Modern Apt Walking Distance from the Mall,Apartment,Entire home/apt,6,2,2,1e3,0,3,0,NA,strict,NA,TRUE
+15870714,2BR Modern Apt Walking Distance from the Mall,Apartment,Entire home/apt,6,2,2,1000,0,3,0,NA,strict,NA,TRUE
 1878529,Heart of Dupont Beautiful Studio,House,Entire home/apt,3,1,0,155,15,1,80,98,strict,3.18,FALSE
 13545005,Sharing a Cozy Condo in a beautiful neighborhood,Apartment,Shared room,1,1,1,45,0,1,59,91,strict,6.02,FALSE
 2436595,Dupont Studio - 2 blocks from the Metro,Apartment,Entire home/apt,2,1,0,165,0,3,14,94,strict,0.36,FALSE
@@ -227,10 +227,10 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16632519,Bedroom/Living Room in Charming 14th St Row House,House,Private room,2,1,1,450,0,2,0,NA,flexible,NA,FALSE
 8550376,Modern Studio in the Heart of the Nations Capital,Apartment,Entire home/apt,2,1,0,125,0,1,92,96,strict,4.88,FALSE
 14472670,6 Street Suites!!,Apartment,Entire home/apt,8,2.5,3,300,50,3,3,100,strict,0.39,FALSE
-18323131,Luxury 2 bdr apt in the Heart of DC,Apartment,Entire home/apt,4,2,3,1e3,0,1,0,NA,flexible,NA,TRUE
+18323131,Luxury 2 bdr apt in the Heart of DC,Apartment,Entire home/apt,4,2,3,1000,0,1,0,NA,flexible,NA,TRUE
 16102444,Quiet elegant townhome house,Apartment,Entire home/apt,3,2,3,883,0,1,0,NA,flexible,NA,TRUE
 16543515,Beautiful studio/1bedroom for Inauguration weekend,Apartment,Entire home/apt,3,1,0,400,0,4,0,NA,flexible,NA,FALSE
-16686705,Beautiful row-house for Womens' March Weekend,House,Entire home/apt,5,2.5,2,1e3,0,3,0,NA,flexible,NA,TRUE
+16686705,Beautiful row-house for Womens' March Weekend,House,Entire home/apt,5,2.5,2,1000,0,3,0,NA,flexible,NA,TRUE
 3799640,2BD Newly Renovated Shaw Gem,House,Entire home/apt,4,1.5,2,380,0,1,12,96,moderate,0.38,FALSE
 3874273,"Cardozo Guesthouse, Hingham Room",Other,Private room,2,0,1,110,0,2,7,94,strict,0.22,FALSE
 16352224,Luxury Penthouse 4bd/4ba Shaw/U St.,Apartment,Entire home/apt,12,4,4,3450,0,2,2,100,strict,0.43,TRUE
@@ -353,7 +353,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16362094,Lovely 3BR/3BA Ledroit Park/U Street-Shaw House,Condominium,Entire home/apt,6,3,2,450,0,3,3,100,flexible,0.83,FALSE
 6389428,Park View,House,Private room,2,1,1,109,40,2,38,99,moderate,1.58,FALSE
 16285463,"Stunning Condo, perfect location - 1 bdrm for rent",Apartment,Private room,1,2,2,150,0,21,0,NA,strict,NA,FALSE
-16154463,Inauguration Week - 14th Street Apartment,Apartment,Entire home/apt,3,1,1,1e3,0,2,0,NA,strict,NA,TRUE
+16154463,Inauguration Week - 14th Street Apartment,Apartment,Entire home/apt,3,1,1,1000,0,2,0,NA,strict,NA,TRUE
 9076691,Cozy 1 bedrm in Trendy U/14th street - Parking!,Townhouse,Entire home/apt,4,1,1,155,0,2,12,75,strict,5.29,FALSE
 4488560,Spacious top/3rd floor bedroom in Shaw/U St/Logan,House,Private room,2,1,1,84,0,1,2,100,moderate,0.07,FALSE
 16154541,Perfect for Inauguration-3BR House!,House,Entire home/apt,10,2.5,3,200,0,2,1,100,strict,0.19,FALSE
@@ -368,7 +368,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 12712570,Posada de Don Salomon 2,House,Private room,2,1,1,62,0,1,61,89,flexible,5.06,FALSE
 16415037,Modern Apt for Inauguration Weekend,Apartment,Entire home/apt,2,1,1,1200,0,2,0,NA,flexible,NA,TRUE
 16215602,1bedroom/1.5 bath in beautiful U St townhouse.,House,Private room,2,1.5,1,700,0,1,0,NA,flexible,NA,TRUE
-16037361,YOUR INAUGURATION HEADQUARTERS!!!!,Apartment,Entire home/apt,4,1,0,1e3,0,1,0,NA,strict,NA,TRUE
+16037361,YOUR INAUGURATION HEADQUARTERS!!!!,Apartment,Entire home/apt,4,1,0,1000,0,1,0,NA,strict,NA,TRUE
 2946998,Entire HOUSE in heart of DC!!,House,Entire home/apt,6,2.5,3,395,45,2,7,97,strict,0.26,FALSE
 9107343,Large 1BR w/Wash. Monument View,Apartment,Entire home/apt,3,1,1,195,15,4,25,100,moderate,1.46,FALSE
 16774766,"Large 2 bed, 2 bath U st/Shaw apartment",Apartment,Entire home/apt,2,2,2,225,0,2,2,100,moderate,0.91,FALSE
@@ -416,7 +416,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 18240442,Basement Apartment in Historic Le Droit Park,Apartment,Entire home/apt,4,1,2,200,0,2,0,NA,moderate,NA,FALSE
 3822015,Open Style Shared 3 Walls & Divider,House,Shared room,2,1,1,55,30,2,3,47,strict,0.12,FALSE
 7559554,Vibrant U St Rowhome Just Off Metro,House,Entire home/apt,5,2.5,2,253,20,2,13,100,strict,0.6,FALSE
-16406885,Charming U St 2BR- Walkable to Mall,Apartment,Entire home/apt,5,1,2,2e3,0,2,0,NA,flexible,NA,TRUE
+16406885,Charming U St 2BR- Walkable to Mall,Apartment,Entire home/apt,5,1,2,2000,0,2,0,NA,flexible,NA,TRUE
 15808888,New Apartment with Vistas of the DC Soul in Shaw,Apartment,Private room,2,1,1,80,25,1,38,98,flexible,6.1,FALSE
 17979497,Luxury Private Space in the Heart of DC,Condominium,Entire home/apt,2,1,1,99,0,1,4,100,moderate,4,FALSE
 16533794,Private Room and Bath in U. Street corridor,Condominium,Private room,2,1,1,200,0,1,4,100,moderate,1.09,FALSE
@@ -445,7 +445,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 9028780,Great Apt in Fabulous Shaw Location Near Metro,Apartment,Entire home/apt,2,1,1,99,20,3,31,98,moderate,1.9,FALSE
 11584546,LUXURY ONE BEDROOM IN BEST LOCATION,Apartment,Entire home/apt,4,1,1,179,0,2,10,90,strict,0.83,FALSE
 3588873,Inauguration: Cozy bedroom by metro,Condominium,Private room,2,1,1,500,50,3,14,99,moderate,0.42,FALSE
-16270065,Entire House Available for Inauguration Weekend,House,Entire home/apt,6,2,4,1e3,0,2,0,NA,flexible,NA,TRUE
+16270065,Entire House Available for Inauguration Weekend,House,Entire home/apt,6,2,4,1000,0,2,0,NA,flexible,NA,TRUE
 17384051,New Apt Nestled in Ledriot Park Steps to U Street!,Apartment,Entire home/apt,4,1,1,175,5,3,9,91,strict,4.15,FALSE
 16794058,Inauguration Weekend Bedroom off U Street,Condominium,Private room,3,1,1,400,0,2,0,NA,flexible,NA,FALSE
 5490041,Private Bed and Bath: U Street,Townhouse,Private room,2,1.5,1,125,0,2,65,98,strict,2.48,FALSE
@@ -525,9 +525,9 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15784234,Private bedroom in North End Shaw,Apartment,Private room,2,1,1,110,10,1,2,100,flexible,0.36,FALSE
 284165,Entire Two Floor Carriage House,Apartment,Entire home/apt,4,1,1,105,15,20,59,93,strict,0.91,FALSE
 626868,"Nice Apt, Good Loc., Close 2 Metro",Apartment,Entire home/apt,4,1,1,175,15,3,39,95,strict,0.71,FALSE
-16160575,Shaw neighborhood gem; hosts 6,Apartment,Entire home/apt,6,2,2,2e3,0,1,0,NA,flexible,NA,TRUE
+16160575,Shaw neighborhood gem; hosts 6,Apartment,Entire home/apt,6,2,2,2000,0,1,0,NA,flexible,NA,TRUE
 4197439,"Cardozo Guesthouse, Duxbury Room",Other,Private room,2,1,1,100,0,2,10,96,strict,0.37,FALSE
-16026199,PERFECT HOMEBASE FOR INAUGURATION EVENTS,House,Entire home/apt,5,2.5,2,2e3,0,2,0,NA,strict,NA,TRUE
+16026199,PERFECT HOMEBASE FOR INAUGURATION EVENTS,House,Entire home/apt,5,2.5,2,2000,0,2,0,NA,strict,NA,TRUE
 644835,Location!  2 Blocks to U St Metro,House,Private room,2,1,1,68,65,7,27,87,strict,0.53,FALSE
 16025898,Modern Luxury Studio on U street,Apartment,Entire home/apt,3,1,0,120,25,2,1,100,moderate,0.27,FALSE
 17743857,Modern apartment + parking in heart of 14th Street,Apartment,Entire home/apt,2,1,0,120,40,1,0,NA,flexible,NA,FALSE
@@ -535,7 +535,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11210507,Best location in DC!,Apartment,Entire home/apt,3,1,1,140,0,5,5,100,moderate,0.35,FALSE
 16846572,"Great room, awesome house + area!",House,Private room,2,1.5,1,70,0,1,4,95,flexible,1.17,FALSE
 18386659,Luxury Apartment in Ust Corridor,Apartment,Private room,1,1,1,60,0,2,0,NA,flexible,NA,FALSE
-16846559,INAUGURATION WEEKEND/MILLION WOMEN'S MARCH!!,Apartment,Entire home/apt,7,2,2,1e3,0,1,0,NA,flexible,NA,TRUE
+16846559,INAUGURATION WEEKEND/MILLION WOMEN'S MARCH!!,Apartment,Entire home/apt,7,2,2,1000,0,1,0,NA,flexible,NA,TRUE
 8949372,U St. /Dupont:Elegant/Hip Townhouse,Apartment,Entire home/apt,4,2,2,150,0,2,101,94,strict,5.36,FALSE
 16846459,1 Bedroom - 2 Bath Millennial Apartment,Apartment,Entire home/apt,4,2,1,250,0,1,0,NA,flexible,NA,FALSE
 16254073,Contempoary Townhouse in Historic Ledroit Park,House,Entire home/apt,5,1.5,3,400,0,2,1,100,moderate,0.28,FALSE
@@ -565,7 +565,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16577159,FlourishBnB SW Waterfront Private Guest Upstairs,Townhouse,Private room,1,1,1,59,10,3,3,93,flexible,0.82,FALSE
 15972085,Studio apartment & parking - great location,Apartment,Entire home/apt,3,1,0,350,0,3,0,NA,moderate,NA,FALSE
 13785631,"Cozy, Light-Filled Studio",Apartment,Entire home/apt,2,1,0,100,0,2,1,100,flexible,0.11,FALSE
-16534993,"Southwest Waterfront, DC - 3 br townhouse",Townhouse,Entire home/apt,9,2.5,3,2e3,0,3,0,NA,flexible,NA,TRUE
+16534993,"Southwest Waterfront, DC - 3 br townhouse",Townhouse,Entire home/apt,9,2.5,3,2000,0,3,0,NA,flexible,NA,TRUE
 16388935,"Artsy, High Rise in SW DC (shared)",Apartment,Shared room,2,1,1,95,0,1,4,95,moderate,1.35,FALSE
 16650330,Perfect pad for Innauguration!,Apartment,Entire home/apt,2,1,1,900,0,2,0,NA,flexible,NA,TRUE
 4811626,Waterfront Suite,Apartment,Entire home/apt,4,1,1,139,30,1,1,40,strict,0.05,FALSE
@@ -610,7 +610,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 13857349,"Cozy Studio, business trip, or night out",Apartment,Entire home/apt,2,1,0,107,75,1,4,87,strict,0.39,FALSE
 16708796,"Upscale, spacious apt walking distance to Inaug.",Apartment,Entire home/apt,4,1,2,850,0,2,0,NA,flexible,NA,TRUE
 13695833,Studio Apartment near Capitol,Apartment,Entire home/apt,2,1,0,129,0,2,7,97,flexible,1.91,FALSE
-16514478,Spacious DC Townhouse (~20 min walk to Capitol!),House,Entire home/apt,8,3.5,3,3e3,0,3,0,NA,flexible,NA,TRUE
+16514478,Spacious DC Townhouse (~20 min walk to Capitol!),House,Entire home/apt,8,3.5,3,3000,0,3,0,NA,flexible,NA,TRUE
 3931550,Stunning Modern DC Condo,Condominium,Entire home/apt,2,1,1,140,0,90,34,97,strict,1.08,FALSE
 16645801,Bright 1 BR in Great SW Location!,Apartment,Entire home/apt,4,1,1,600,25,2,0,NA,moderate,NA,TRUE
 6898124,Riverside Casa,Bed & Breakfast,Private room,2,1,1,110,0,1,20,98,flexible,1.01,FALSE
@@ -651,7 +651,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 18073917,Waterfront - Comfy beds & Simple Breakfast (L1),Apartment,Private room,4,1,1,69,20,1,0,NA,strict,NA,FALSE
 16766095,Luxury steps away from Cherry Blossoms & Museums!,Apartment,Entire home/apt,4,1,1,250,25,3,1,100,flexible,1,FALSE
 775298,Waterfront/Metro condo 1br on Potomac/Mall Washing,Apartment,Entire home/apt,4,1,1,112,40,3,10,91,flexible,0.41,FALSE
-16780821,Walking Distance to National Mall and Capitol,House,Entire home/apt,4,1,2,2e3,0,3,0,NA,flexible,NA,TRUE
+16780821,Walking Distance to National Mall and Capitol,House,Entire home/apt,4,1,2,2000,0,3,0,NA,flexible,NA,TRUE
 16602138,Eng Bsmnt 1br+lvrm sofabed SW DC,Apartment,Entire home/apt,3,1,1,180,0,4,11,98,flexible,4.85,FALSE
 713529,3. The perfect Baseball fans hangout,House,Private room,3,1.5,1,88,25,1,273,89,strict,5.2,FALSE
 3363806,Minutes from the Capitol!,House,Private room,3,1,1,300,0,1,1,100,strict,0.75,FALSE
@@ -682,7 +682,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16464353,Presidential Inauguration Rental Space,Apartment,Entire home/apt,3,1,1,215,50,1,1,100,flexible,0.27,FALSE
 9231869,"20 Min. Walk to Cherry Blossoms, Mall, and Capital",Apartment,Entire home/apt,5,1.5,2,145,0,2,7,100,flexible,0.61,FALSE
 17280888,"Cherry Blossom Room at Candlemore, SW Waterfront",House,Private room,4,1.5,1,89,30,1,18,82,strict,6.59,FALSE
-14855909,Private Room in SW Townhome,Townhouse,Private room,2,1,1,1e3,0,3,0,NA,strict,NA,TRUE
+14855909,Private Room in SW Townhome,Townhouse,Private room,2,1,1,1000,0,3,0,NA,strict,NA,TRUE
 16429629,"Cosy, Bright Downtown Studio for 2+",Apartment,Entire home/apt,3,1,1,125,25,7,1,100,moderate,0.27,FALSE
 16297231,Spacious 2BR apartment near National Mall,Apartment,Entire home/apt,5,2,2,1200,0,3,0,NA,moderate,NA,TRUE
 15379248,6 blocks to U.S. Capitol and National Mall!,Condominium,Entire home/apt,1,1,0,69,35,7,1,80,flexible,0.17,FALSE
@@ -710,7 +710,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16190668,"Inauguration Weekend 1 BR Clean, Elegant Condo",House,Entire home/apt,2,1,1,2499,0,2,0,NA,strict,NA,TRUE
 18189407,Condo blocks from Waterfront Metro,Condominium,Entire home/apt,4,1,1,130,50,2,2,100,strict,2,FALSE
 18614893,Spacious apt with upscale amenities,Apartment,Entire home/apt,2,1,1,150,150,2,0,NA,strict,NA,FALSE
-16189889,Entire cozy rowhome 4 Inauguration!,House,Entire home/apt,8,1.5,3,1e3,0,1,0,NA,flexible,NA,TRUE
+16189889,Entire cozy rowhome 4 Inauguration!,House,Entire home/apt,8,1.5,3,1000,0,1,0,NA,flexible,NA,TRUE
 3378797,SW DC Waterfront Steps to The Mall,Condominium,Entire home/apt,3,1,0,119,30,7,35,99,moderate,1.56,FALSE
 18549743,Cute City Respite Near National Mall,Townhouse,Entire home/apt,5,2,2,250,0,2,0,NA,flexible,NA,FALSE
 17402766,Sunny 1bed apartment in the heart of DC,Apartment,Entire home/apt,4,1,1,125,30,1,2,80,strict,1.09,FALSE
@@ -738,7 +738,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 13803815,Quiet Retreat,House,Entire home/apt,10,2.5,4,200,25,2,24,93,flexible,2.34,FALSE
 1025018,Cozy Classy Relaxing Bed Room,House,Private room,1,1,1,38,40,2,80,89,moderate,1.62,FALSE
 10560532,Brook land  one bedroom apartment,Apartment,Entire home/apt,2,1,1,150,0,1,1,100,flexible,0.07,FALSE
-9807973,Beautiful and Spacious in Brookland,House,Entire home/apt,10,3.5,4,1e3,0,2,0,NA,moderate,NA,TRUE
+9807973,Beautiful and Spacious in Brookland,House,Entire home/apt,10,3.5,4,1000,0,2,0,NA,moderate,NA,TRUE
 12790458,"Large Room, King Sized Bed, Near Metro!",House,Private room,2,1,1,50,10,3,1,80,strict,0.12,FALSE
 15609254,"DC 2BR House Cozy Brookland-CUA-Monroe-Wifi, Cable",Townhouse,Private room,6,1,1,48,20,1,4,100,strict,0.59,FALSE
 569952,Chic Metro Accessible Brookland Apt,Apartment,Entire home/apt,2,1,1,60,20,1,8,100,moderate,0.14,FALSE
@@ -937,7 +937,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16894063,Large private room in 3br/2.5ba DC row house,House,Private room,1,2.5,1,75,0,14,0,NA,flexible,NA,FALSE
 4704514,"Guest Room and office in Large, Lovely Rowhouse",House,Private room,2,1,1,65,25,1,9,96,moderate,0.3,FALSE
 16566555,"3 BR, 1.5 Bath on quiet NW street",House,Entire home/apt,8,1.5,3,700,0,2,0,NA,flexible,NA,TRUE
-8473006,"Petworth, NW D.C. Home",House,Entire home/apt,8,3,4,1e3,20,1,0,NA,flexible,NA,TRUE
+8473006,"Petworth, NW D.C. Home",House,Entire home/apt,8,3,4,1000,20,1,0,NA,flexible,NA,TRUE
 15092261,Spacious Open Row House in the City,House,Entire home/apt,8,1.5,3,250,50,2,6,100,moderate,1.64,FALSE
 16829032,Room in beautiful house,Apartment,Private room,2,1.5,NA,240,0,1,0,NA,flexible,NA,FALSE
 15716280,Guest Room with 100 Year Old Charm,Townhouse,Private room,2,1,1,60,15,3,11,100,moderate,2.77,FALSE
@@ -1027,7 +1027,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 14317852,Jazz and Sunlight in Congress Heights,Apartment,Entire home/apt,4,1,2,100,10,1,24,98,flexible,2.61,FALSE
 12314626,"1 BR 2 Bath Condo, near metro",Condominium,Entire home/apt,2,2,1,85,20,1,50,97,moderate,3.83,FALSE
 15981898,"Modern, single family detached home.",House,Entire home/apt,7,3.5,3,355,35,1,0,NA,flexible,NA,FALSE
-16078903,BEAUTIFUL AND CLEAN 3LEVEL HOUSE,House,Entire home/apt,3,3.5,2,1e3,0,1,0,NA,flexible,NA,TRUE
+16078903,BEAUTIFUL AND CLEAN 3LEVEL HOUSE,House,Entire home/apt,3,3.5,2,1000,0,1,0,NA,flexible,NA,TRUE
 15422186,"3 Bedroom home w/patio and balcony, Free Parking",House,Entire home/apt,6,2.5,3,265,0,2,3,87,moderate,1.91,FALSE
 8967874,Modern Master Suite w/ Private Bath,House,Private room,2,1,1,240,20,3,0,NA,flexible,NA,FALSE
 8506683,Modern Private Suite - Separate Entrance!,House,Private room,2,1,1,64,5,1,88,97,moderate,6.36,FALSE
@@ -1113,7 +1113,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16690902,Luxury Navy Yard apartment,Apartment,Entire home/apt,4,1,1,450,50,2,0,NA,flexible,NA,FALSE
 15968872,Capitol Hill/Navy Yard Apartment Two Bedroom,Apartment,Entire home/apt,4,1,2,500,0,1,0,NA,strict,NA,FALSE
 16425276,Luxury apartment with water view close to downtown,Apartment,Entire home/apt,4,1,1,500,0,2,0,NA,flexible,NA,FALSE
-16752592,The Inagural Oasis,Apartment,Entire home/apt,4,2,2,1e3,0,2,0,NA,flexible,NA,TRUE
+16752592,The Inagural Oasis,Apartment,Entire home/apt,4,2,2,1000,0,2,0,NA,flexible,NA,TRUE
 16098224,Luxury Loft Apartment in Navy Yard,Apartment,Entire home/apt,4,1,1,115,0,1,0,NA,strict,NA,FALSE
 17078393,Modern 2 Bedroom Apt With Stunning Views!,Apartment,Entire home/apt,5,2,2,399,0,30,0,NA,strict,NA,FALSE
 17075347,High-End 1 Bedroom Washington DC Apt,Apartment,Entire home/apt,3,1,1,289,0,30,0,NA,strict,NA,FALSE
@@ -1195,7 +1195,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16618063,Gorgeous 1 Bedroom Luxury Apartment in Heart of DC,Apartment,Entire home/apt,2,1,1,550,0,2,0,NA,flexible,NA,TRUE
 12784291,NA,Apartment,Entire home/apt,2,1,1,130,20,5,3,93,moderate,0.24,FALSE
 7474964,3 blocks to Convention Ctr DC,Apartment,Entire home/apt,2,1,1,200,0,1,1,100,flexible,0.05,FALSE
-16094050,The View,Apartment,Entire home/apt,4,1,2,2e3,0,3,0,NA,strict,NA,TRUE
+16094050,The View,Apartment,Entire home/apt,4,1,2,2000,0,3,0,NA,strict,NA,TRUE
 630973,[1739]Lux 2BR At 1301 Thomas Circle,Apartment,Entire home/apt,4,2,2,299,0,4,3,90,super_strict_30,0.06,FALSE
 940952,1BR Fully Furnished-Mt. Vernon Sq.,Apartment,Entire home/apt,2,1,1,239,0,5,0,NA,super_strict_30,NA,FALSE
 6370883,Gorgeous Luxury Apartment,Apartment,Entire home/apt,2,1,1,539,0,1,1,100,flexible,0.04,TRUE
@@ -1275,7 +1275,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15484762,"New, quiet, and downtown",Apartment,Private room,2,1,1,110,40,1,24,97,moderate,3.51,FALSE
 16664524,Downtown Apartment - Short Walk to National Mall!,Apartment,Entire home/apt,4,1,1,200,0,2,0,NA,moderate,NA,FALSE
 5392318,Modern 2BR/2BA - National Mall,Condominium,Entire home/apt,6,2,2,297,10,1,130,98,strict,4.99,FALSE
-16402698,3br apartment steps to the Convention Center!,Apartment,Entire home/apt,6,2,3,1e3,0,1,0,NA,moderate,NA,TRUE
+16402698,3br apartment steps to the Convention Center!,Apartment,Entire home/apt,6,2,3,1000,0,1,0,NA,moderate,NA,TRUE
 13388422,Ultra-Modern 1-Bedroom Washington DC Apt,Apartment,Entire home/apt,3,1,1,189,0,2,0,NA,strict,NA,FALSE
 16764000,Downtown DC apartment steps from the White House!,Apartment,Entire home/apt,4,1,0,800,50,1,0,NA,flexible,NA,TRUE
 16829602,Downtown DC Apartment (2 BD / 2 BA),Apartment,Entire home/apt,5,2,2,500,0,1,0,NA,flexible,NA,FALSE
@@ -1290,7 +1290,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 4772168,Private Room/Bath Near Convention,Apartment,Private room,2,1,1,120,0,1,1,60,moderate,0.08,FALSE
 28204,[1538] Lovely 5 Bed Single Family,House,Entire home/apt,12,2,5,580,25,3,12,82,super_strict_30,0.15,TRUE
 8410096,1BR Full Aparment in Logan Circle,Apartment,Entire home/apt,2,1,1,150,0,1,0,NA,moderate,NA,FALSE
-16505075,Ultimate contemporary 1 BR with awesome location,Apartment,Entire home/apt,2,1,1,2e3,0,2,0,NA,strict,NA,TRUE
+16505075,Ultimate contemporary 1 BR with awesome location,Apartment,Entire home/apt,2,1,1,2000,0,2,0,NA,strict,NA,TRUE
 18471241,Luxury Downtown DC Apartment,Apartment,Entire home/apt,4,1,1,150,0,1,2,100,moderate,2,FALSE
 11327856,Walk to Everything in DC!,Apartment,Entire home/apt,8,2,3,295,25,2,71,97,strict,4.99,FALSE
 842418,Luxury Penthouse Best neighborhood!,Apartment,Entire home/apt,5,1.5,1,175,0,4,8,86,strict,0.15,FALSE
@@ -1378,7 +1378,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16577306,2 blocks to White House in the heart of history!,Apartment,Entire home/apt,2,1,1,650,0,2,0,NA,flexible,NA,TRUE
 16544121,Downtown Luxury Condo For 3!,Apartment,Entire home/apt,3,1,1,300,0,1,1,100,flexible,0.47,FALSE
 16085382,Beautiful DC Townhouse in Great Location,Townhouse,Private room,2,1,1,900,0,1,0,NA,strict,NA,TRUE
-2158801,Madrigal Lofts,Apartment,Entire home/apt,3,1,1,1e3,0,2,0,NA,flexible,NA,TRUE
+2158801,Madrigal Lofts,Apartment,Entire home/apt,3,1,1,1000,0,2,0,NA,flexible,NA,TRUE
 5862599,2Bd Penthouse by Convention Center!,Apartment,Entire home/apt,6,2,2,295,0,1,165,96,strict,6.7,FALSE
 12382114,"Cozy, Downtown D.C Apartment",Apartment,Private room,2,2,1,100,0,1,3,100,flexible,2.65,FALSE
 16346440,Penthouse Apartment for Presidential Inauguration,Apartment,Entire home/apt,6,2,3,1200,0,2,0,NA,flexible,NA,TRUE
@@ -1393,7 +1393,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 10021714,Washington Furnished 2 Bedroom Apt.,Apartment,Entire home/apt,6,2,2,299,50,3,7,97,strict,0.46,FALSE
 15821649,"Clean, chic, and centrally located downtown apt",Apartment,Entire home/apt,3,1,0,235,0,2,5,100,strict,0.88,FALSE
 1403549,Private room in center of DC!,Apartment,Private room,2,1,1,150,0,1,4,85,flexible,0.18,FALSE
-16049905,One Mile From Capitol and Whitehouse,Condominium,Entire home/apt,2,1,1,2e3,0,3,0,NA,strict,NA,TRUE
+16049905,One Mile From Capitol and Whitehouse,Condominium,Entire home/apt,2,1,1,2000,0,3,0,NA,strict,NA,TRUE
 315140,Penn Quarter Studio Apartment,Apartment,Entire home/apt,2,1,1,149,150,5,6,96,strict,0.1,FALSE
 16721371,"Beautiful 1BR Apt in Penn Quarter, DC!",Apartment,Entire home/apt,3,1,1,514,0,3,0,NA,strict,NA,TRUE
 13001471,One Block from the White House-4,Apartment,Entire home/apt,2,1,1,499,0,2,0,NA,moderate,NA,FALSE
@@ -1440,7 +1440,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 18568199,Chinatown Luxury Apt in Heart of NW DC,Apartment,Entire home/apt,6,1.5,2,200,0,1,0,NA,flexible,NA,FALSE
 16241559,"2 Bedroom, 1 Bath Apartment Near U.S. Capitol",Apartment,Entire home/apt,3,1,2,600,0,2,0,NA,flexible,NA,TRUE
 16601883,Studio Apartment in the Heart of Downtown DC,Apartment,Entire home/apt,3,1,0,180,15,2,5,100,moderate,1.35,FALSE
-16631844,Luxury studio 3 Blocks from The White House,Apartment,Entire home/apt,2,1,0,1e3,0,1,0,NA,flexible,NA,TRUE
+16631844,Luxury studio 3 Blocks from The White House,Apartment,Entire home/apt,2,1,0,1000,0,1,0,NA,flexible,NA,TRUE
 1562024,Le Petit Coin de L'Enfant,Apartment,Entire home/apt,3,1,0,98,0,2,173,85,flexible,3.94,FALSE
 16340436,1BR in the heart of DC,Apartment,Entire home/apt,4,1,1,900,0,1,0,NA,moderate,NA,TRUE
 11228489,Washington 2 BR Apt Heart of City w/ FREE PARKING,Apartment,Entire home/apt,6,2,2,299,50,3,2,100,strict,0.14,FALSE
@@ -1521,12 +1521,12 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 10269384,Lux 2 Bedroom DC Apartment by Metro + Rooftop Pool,Apartment,Entire home/apt,5,2,2,199,0,3,1,60,strict,0.07,FALSE
 2372273,"Lux 2BR by Metro, 2 rooftop pools",Apartment,Entire home/apt,5,2,2,349,0,3,31,95,moderate,0.8,FALSE
 1519460,"All new 2017 Convention Center FUN, Tons of Room",Apartment,Entire home/apt,6,1,0,290,0,3,60,92,strict,1.35,FALSE
-16068448,"Inauguration weekend Condo, 10 min walk to Mall",Condominium,Entire home/apt,4,1.5,1,2e3,0,3,0,NA,flexible,NA,TRUE
+16068448,"Inauguration weekend Condo, 10 min walk to Mall",Condominium,Entire home/apt,4,1.5,1,2000,0,3,0,NA,flexible,NA,TRUE
 5353107,Celebrate AFRICAN AMERICAN MUSEUM PARTY W HOST!,Apartment,Private room,3,2,1,80,80,3,9,78,strict,0.4,FALSE
 5844616,Lux 2 Bedroom Apt w/wifi near Convention Center,Apartment,Entire home/apt,5,2,2,337,0,3,14,100,moderate,0.56,FALSE
 13315310,Modern High-Rise Apt in Middle of DC,Apartment,Entire home/apt,2,1,1,75,0,2,13,98,strict,1.2,FALSE
 14594577,Cousy studio in the heart of DC.New year's special,Apartment,Entire home/apt,2,1,1,104,0,1,1,100,moderate,0.14,FALSE
-16658930,Penthouse apartment near White House,Apartment,Entire home/apt,3,1,1,1e3,0,1,0,NA,flexible,NA,TRUE
+16658930,Penthouse apartment near White House,Apartment,Entire home/apt,3,1,1,1000,0,1,0,NA,flexible,NA,TRUE
 2371799,Lux 2 Bedroom near White House w/wifi,Apartment,Entire home/apt,5,2,2,312,0,3,14,96,moderate,0.36,FALSE
 10268820,Lux 1 Bedroom DC Apartment by Metro + Rooftop Pool,Apartment,Entire home/apt,3,1,1,169,0,3,1,100,strict,0.07,FALSE
 316796,DC Garden Flat 829,Apartment,Entire home/apt,4,1,1,215,0,1,37,94,strict,0.58,FALSE
@@ -1536,14 +1536,14 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7629135,HUGE In-law Suite,Apartment,Entire home/apt,4,1,1,120,0,1,216,99,flexible,10.19,FALSE
 16755267,Studio Apartment in the heart of Downtown DC,Apartment,Entire home/apt,2,1,0,180,0,2,8,98,flexible,2.16,FALSE
 10858952,Beautiful 1 bedroom apartment!,Apartment,Entire home/apt,2,1,1,269,0,1,1,100,flexible,0.09,FALSE
-16724420,Beautiful Loft 10 Minute Walk From Capitol,Loft,Entire home/apt,5,2,1,1e3,0,2,0,NA,flexible,NA,TRUE
+16724420,Beautiful Loft 10 Minute Walk From Capitol,Loft,Entire home/apt,5,2,1,1000,0,2,0,NA,flexible,NA,TRUE
 15019540,Lux 1 Bedroom Apt w/wifi near Convention Center,Apartment,Entire home/apt,3,1,1,272,0,3,0,NA,moderate,NA,FALSE
 8105357,2B/2B Modern Penthouse w Pvt Roof,Apartment,Entire home/apt,4,2,2,500,0,1,4,100,moderate,0.2,FALSE
 16427431,"Sleek, Accessible 1 bedroom - Walk to Inauguration",Apartment,Entire home/apt,2,1,1,500,0,1,0,NA,flexible,NA,FALSE
 16722338,"LUX 2BR Apt in Penn Quarter, DC",Apartment,Entire home/apt,5,2,2,299,0,3,0,NA,strict,NA,FALSE
 16722003,"Lux Furnished 1BR Apt in Penn Quarter, DC!",Apartment,Entire home/apt,3,1.5,1,219,0,3,0,NA,strict,NA,FALSE
 11315228,"Huge 1BR/1BA in Luxury Apt, Walk to everything DC!",Apartment,Private room,2,1,1,110,0,2,45,97,moderate,3.05,FALSE
-16402080,Inauguration Weekend: 2 Bed/1 Bath Near Capitol,Apartment,Entire home/apt,4,1,2,1e3,0,2,1,100,flexible,0.27,TRUE
+16402080,Inauguration Weekend: 2 Bed/1 Bath Near Capitol,Apartment,Entire home/apt,4,1,2,1000,0,2,1,100,flexible,0.27,TRUE
 16721859,"Deluxe 1BR Apartment in Penn Quarter, DC!",Apartment,Entire home/apt,3,1,1,219,0,3,0,NA,strict,NA,FALSE
 16525202,"1 BR, 1 BA, LR suite on entire 3rd floor row house",House,Private room,2,1,1,189,0,2,7,100,flexible,1.91,FALSE
 11282225,"Cozy DC condo, close to everything",Condominium,Private room,1,1,1,62,0,1,3,87,flexible,0.21,FALSE
@@ -1571,7 +1571,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15802719,Vibrant NoMA Apartment,Apartment,Entire home/apt,3,1,1,200,0,2,7,89,moderate,1.91,FALSE
 6953706,Luxury Furnished 1-Bedroom Newseum Apartment!,Apartment,Entire home/apt,3,1,1,169,0,2,0,NA,strict,NA,FALSE
 6953508,Furnished 1-Bedroom Newseum Apartment!,Apartment,Entire home/apt,3,1,1,169,0,3,1,80,strict,0.06,FALSE
-16423443,"Cozy, modern space close to everything",Apartment,Entire home/apt,4,1,1,1e3,0,2,0,NA,strict,NA,TRUE
+16423443,"Cozy, modern space close to everything",Apartment,Entire home/apt,4,1,1,1000,0,2,0,NA,strict,NA,TRUE
 8755610,Luxury loft in amazing location!,Apartment,Entire home/apt,11,2,3,320,25,1,110,88,strict,5.91,FALSE
 11314089,"Comfy Studio Apt, PERFECT location",Apartment,Entire home/apt,2,1,0,150,15,1,5,90,moderate,0.36,FALSE
 16720677,"Luxury 1 Bed Apt in Penn Quarter, DC!",Apartment,Entire home/apt,3,1,1,199,0,3,0,NA,strict,NA,FALSE
@@ -1586,7 +1586,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11476703,Fantastic National Mall Location-s2,Apartment,Entire home/apt,2,1,0,229,0,2,1,100,moderate,0.07,FALSE
 15522419,"Modern, Chic, Great Location",Apartment,Entire home/apt,5,2,2,298,0,1,27,97,flexible,8.53,FALSE
 16323876,Inauguration DC's Best Location,Apartment,Entire home/apt,2,1,1,1100,0,4,0,NA,flexible,NA,TRUE
-16061725,Inauguration Special. Super close to Capitol.,Apartment,Entire home/apt,6,2,3,2e3,0,3,0,NA,flexible,NA,TRUE
+16061725,Inauguration Special. Super close to Capitol.,Apartment,Entire home/apt,6,2,3,2000,0,3,0,NA,flexible,NA,TRUE
 15176927,"Ultra LUX 1BR Apt in Penn Quarter, DC",Apartment,Entire home/apt,3,1,1,571,0,2,0,NA,strict,NA,TRUE
 11343020,DC High Life! Modern & Eclectic 2Bd,Apartment,Entire home/apt,6,2,2,345,50,1,86,100,strict,5.99,FALSE
 8760863,Amazing Condo & Central DC Access,Condominium,Entire home/apt,3,2,2,135,50,180,5,90,moderate,0.31,FALSE
@@ -1603,7 +1603,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 4885834,Sunny Attic w/Private Bath Downtown,Townhouse,Private room,2,1,1,92,7,3,78,96,strict,3.05,FALSE
 16157905,Cozy 1B in Downtown DC,Apartment,Entire home/apt,3,1,1,400,0,2,0,NA,flexible,NA,FALSE
 13308300,"Shared Bedroom, Close to the U.S. Capitol",Apartment,Shared room,1,1,1,35,0,2,19,98,moderate,1.79,FALSE
-16189905,Spacious Chinatown Apt Minutes From Inauguration,Apartment,Entire home/apt,4,2,2,2e3,0,2,0,NA,flexible,NA,TRUE
+16189905,Spacious Chinatown Apt Minutes From Inauguration,Apartment,Entire home/apt,4,2,2,2000,0,2,0,NA,flexible,NA,TRUE
 13994381,1 bedroom suite in downtown DC,Apartment,Entire home/apt,3,1,1,200,0,1,41,95,moderate,4.86,FALSE
 18188653,"Luxury 1-Bedroom, Heart of Chinatown/Penn Quarter",Apartment,Entire home/apt,3,1,1,175,0,3,1,100,moderate,1,FALSE
 2707225,One Block from the White House-1,Apartment,Entire home/apt,3,1,1,259,0,2,14,91,moderate,0.41,FALSE
@@ -1671,7 +1671,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11241307,Hello Yellow!,Apartment,Entire home/apt,2,1,0,108,0,1,114,95,strict,7.69,FALSE
 9373642,Free for Refugees & Bernie Sanders,Apartment,Entire home/apt,2,1,0,10,0,1,5,100,moderate,0.3,FALSE
 16354262,Comfortable studio in the heart of Foggy Bottom,Condominium,Entire home/apt,2,1,0,600,0,2,0,NA,flexible,NA,TRUE
-16617091,"Studio, Sleeps 5, for inauguration",Apartment,Entire home/apt,5,1,0,1e3,0,2,0,NA,flexible,NA,TRUE
+16617091,"Studio, Sleeps 5, for inauguration",Apartment,Entire home/apt,5,1,0,1000,0,2,0,NA,flexible,NA,TRUE
 18649210,Luxury DC 1 Bedroom Apartment Near The White House,Apartment,Entire home/apt,3,1,1,133,0,6,0,NA,strict,NA,FALSE
 14258587,Luxury Condo in Heart of Downtown DC,Condominium,Entire home/apt,4,1,0,99,0,1,11,98,strict,1.17,FALSE
 5003334,Beautiful Apartment in Foggy Bottom,Apartment,Entire home/apt,4,1,1,99,0,30,39,94,moderate,1.41,FALSE
@@ -1808,7 +1808,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17744570,Penthouse at Washington Circle,Apartment,Entire home/apt,4,1,1,129,25,1,15,96,strict,8.82,FALSE
 1065411,[1686-2W] Lux 2 Bedroom- Residences On The Avenue,Apartment,Entire home/apt,4,2,2,329,0,3,6,100,super_strict_30,0.23,FALSE
 704025,[1765] 1 BR - Minutes from GWU,Apartment,Entire home/apt,3,1,1,289,0,4,1,40,super_strict_30,0.08,FALSE
-15802307,Large Studio in the Heart of D.C.,Condominium,Entire home/apt,4,1,0,1e3,0,2,0,NA,flexible,NA,TRUE
+15802307,Large Studio in the Heart of D.C.,Condominium,Entire home/apt,4,1,0,1000,0,2,0,NA,flexible,NA,TRUE
 16760306,Washington Circle Charmer,Apartment,Private room,3,1,1,400,100,1,0,NA,flexible,NA,FALSE
 7978419,Super Central Furnished Junior 1BR,Condominium,Entire home/apt,2,1,1,125,0,2,0,NA,strict,NA,FALSE
 16793888,Spacious Studio Mere Steps from the White House!,Apartment,Entire home/apt,2,1,0,450,0,2,0,NA,flexible,NA,FALSE
@@ -1972,7 +1972,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 925327,"Modern, Sunny Studio Apt Downtown",Apartment,Entire home/apt,2,1,1,135,0,2,17,99,strict,0.34,FALSE
 1135268,Beautiful apt. in historic rowhouse,Apartment,Entire home/apt,2,2,1,170,0,2,15,97,strict,0.32,FALSE
 17447403,Charming rowhouse apartment in hip Shaw,Apartment,Entire home/apt,4,1,1,165,0,2,10,100,moderate,5.26,FALSE
-16424027,Townhouse in the heart of Shaw - Sleeps 4-6 ppl,House,Entire home/apt,4,2,2,1e3,0,1,0,NA,strict,NA,TRUE
+16424027,Townhouse in the heart of Shaw - Sleeps 4-6 ppl,House,Entire home/apt,4,2,2,1000,0,1,0,NA,strict,NA,TRUE
 15888375,Logan Circle Condo,Apartment,Entire home/apt,5,2,2,725,0,2,0,NA,strict,NA,TRUE
 18449225,Private Room + Bathroom in Upscale Modern 2bd/2br,Apartment,Private room,2,1,1,150,50,1,0,NA,flexible,NA,FALSE
 6673960,Entire 1BR Apt W/ Modern Amenities,Apartment,Entire home/apt,2,1,1,99,0,4,2,100,flexible,0.09,FALSE
@@ -2010,7 +2010,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 8166186,Serene and Central,Apartment,Entire home/apt,3,1,1,250,0,2,0,NA,flexible,NA,FALSE
 14426998,4 bedroom sleep 12 near the convention center,Apartment,Entire home/apt,12,3,4,495,50,4,4,100,flexible,0.56,FALSE
 93551,Upscale Master Close to Everything,House,Private room,2,1,1,87,20,5,73,94,moderate,0.99,FALSE
-16532102,Entire House at Centrally-located Logan Circle!,House,Entire home/apt,8,2,4,4e3,0,3,0,NA,moderate,NA,TRUE
+16532102,Entire House at Centrally-located Logan Circle!,House,Entire home/apt,8,2,4,4000,0,3,0,NA,moderate,NA,TRUE
 290001,Cozy Rowhouse Near Logan Circle,House,Entire home/apt,4,1,2,165,0,2,82,96,strict,1.31,FALSE
 2752580,"Chester A Arthur B&B, Highland Room",Bed & Breakfast,Private room,4,1,1,195,25,2,1,100,strict,0.04,FALSE
 8093838,Great location +Parking/backyard,Apartment,Entire home/apt,4,1,1,105,20,3,7,94,flexible,0.56,FALSE
@@ -2076,9 +2076,9 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 8760362,Sunny Bedroom in Safe & Central Neighborhood,Apartment,Private room,2,1,1,108,0,2,6,100,flexible,0.36,FALSE
 8302218,Furnished 2-Bedroom Washington DC Apartment!,Apartment,Entire home/apt,5,2,2,199,0,3,1,100,strict,0.15,FALSE
 4846107,Unique 2 bedroom Apt. Mt.Vernon Sq. / Chinatown,Apartment,Entire home/apt,4,1.5,2,100,0,1,8,93,flexible,0.28,FALSE
-15806228,"Spacious, Light-Filled Home Near White House",House,Entire home/apt,13,2,4,3e3,0,3,0,NA,strict,NA,TRUE
+15806228,"Spacious, Light-Filled Home Near White House",House,Entire home/apt,13,2,4,3000,0,3,0,NA,strict,NA,TRUE
 18395036,Private Room on Own Floor in Castle,House,Private room,2,1,1,100,0,1,0,NA,flexible,NA,FALSE
-16461814,Enjoy the Inauguration in DC's Shaw neighborhood!,House,Entire home/apt,8,1.5,3,1e3,0,1,0,NA,flexible,NA,TRUE
+16461814,Enjoy the Inauguration in DC's Shaw neighborhood!,House,Entire home/apt,8,1.5,3,1000,0,1,0,NA,flexible,NA,TRUE
 12202079,Charming Victorian near Downtown,House,Private room,2,1.5,1,80,0,3,83,100,moderate,6.3,FALSE
 9548311,Blue Bugle - Shaw,House,Entire home/apt,7,2.5,3,242,20,1,56,93,strict,3.24,FALSE
 16135005,Cozy private room in a row house,House,Private room,2,1.5,1,80,0,2,4,95,moderate,1.08,FALSE
@@ -2146,7 +2146,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11758140,Washington 3BR Apt Center of City,Apartment,Entire home/apt,8,2,3,399,50,3,3,93,strict,0.24,FALSE
 11922733,Beautiful new Logan circle condo,Condominium,Entire home/apt,3,2,2,185,0,3,5,100,moderate,0.41,FALSE
 18541897,B. MODERN UPSCALE SHARED PLACE IN CENTER OF DC!,Apartment,Shared room,2,1,1,39,39,1,0,NA,strict,NA,FALSE
-15953340,Upscale one bedroom Apt / Great Location,Apartment,Entire home/apt,4,1,1,1e3,0,3,0,NA,strict,NA,TRUE
+15953340,Upscale one bedroom Apt / Great Location,Apartment,Entire home/apt,4,1,1,1000,0,3,0,NA,strict,NA,TRUE
 7761251,La Peetch - A modern D.C. Apartment,Apartment,Entire home/apt,3,1,1,150,25,3,5,96,strict,0.24,FALSE
 14544404,Modern 1bd apt in Logan Circle area,Apartment,Entire home/apt,2,1,1,150,0,1,8,100,moderate,2.14,FALSE
 14184210,Urban Oasis in the Heart of DC *Logan Circle*,Apartment,Entire home/apt,3,1,1,175,0,5,2,100,strict,0.27,FALSE
@@ -2230,7 +2230,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11758424,Washington Apt Center of City-3BR,Apartment,Entire home/apt,8,2,3,399,50,3,0,NA,strict,NA,FALSE
 8284881,Large br/bath close to everything!,House,Private room,2,1,1,80,25,2,25,95,strict,1.25,FALSE
 5990979,"Dupont Circle, 14th ST Unbeatable!",House,Entire home/apt,9,2.5,3,600,5,3,53,97,strict,2.15,TRUE
-16661573,Inaguration Palace,House,Entire home/apt,16,2,6,5e3,0,1,0,NA,flexible,NA,TRUE
+16661573,Inaguration Palace,House,Entire home/apt,16,2,6,5000,0,1,0,NA,flexible,NA,TRUE
 15755611,Sunny room in DC's best spot- Dupont/Logan Circle!,Apartment,Private room,2,1,1,79,0,2,11,98,flexible,4.85,FALSE
 18540749,A. MODERN UPSCALE SHARED PLACE IN CENTER OF DC!,Apartment,Shared room,2,1,1,40,40,1,0,NA,strict,NA,FALSE
 14837181,Lovely Studio in Logan/ Dupont!,Apartment,Entire home/apt,2,1,0,88,0,1,7,100,strict,1,FALSE
@@ -2300,7 +2300,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16016075,"In the heart of DC, blocks from the White House!",Apartment,Entire home/apt,3,1,1,415,0,3,1,100,flexible,0.27,FALSE
 16470182,Apartment in the Heart of Downtown,Apartment,Entire home/apt,2,1,1,80,0,3,24,98,moderate,5.58,FALSE
 9457818,Room in spacious house with roof,House,Private room,2,1,1,80,0,1,1,100,flexible,0.06,FALSE
-16518506,Relaxing Apt 2BR in Logan Circle DC,Apartment,Entire home/apt,5,1,2,1e3,0,2,0,NA,flexible,NA,TRUE
+16518506,Relaxing Apt 2BR in Logan Circle DC,Apartment,Entire home/apt,5,1,2,1000,0,2,0,NA,flexible,NA,TRUE
 16337846,Charming Historic Townhouse in Logan Circle,Apartment,Entire home/apt,5,1,2,1200,0,1,0,NA,flexible,NA,TRUE
 14206217,Cozy one-bedroom with great yard,Apartment,Entire home/apt,2,1,1,102,0,3,10,100,strict,1.23,FALSE
 18041540,GORGEOUS Perfectly Located 2 BR 3 BED Row Home,Townhouse,Entire home/apt,6,2,2,191,40,2,9,96,strict,8.44,FALSE
@@ -2328,7 +2328,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17972689,Walking Distance to All DC Has to Offer,Apartment,Private room,2,1,1,110,0,3,0,NA,strict,NA,FALSE
 1883590,Walk everywhere from here,Apartment,Entire home/apt,5,1,1,117,0,30,11,90,strict,0.27,FALSE
 13548986,Available July 4th Wknd! Modern 1BR in Luxury Bldg,Apartment,Entire home/apt,2,1,1,169,0,2,0,NA,flexible,NA,FALSE
-16314039,New Classic Logan Circle Row House,House,Entire home/apt,8,2,3,2e3,0,1,0,NA,flexible,NA,TRUE
+16314039,New Classic Logan Circle Row House,House,Entire home/apt,8,2,3,2000,0,1,0,NA,flexible,NA,TRUE
 16464173,2BR/2B Condo .25 mile to Shaw Metro (Green Line),Condominium,Entire home/apt,4,2,2,867,0,1,0,NA,flexible,NA,TRUE
 6135500,"Modern luxury in Shaw, short walk 2 metro/conv cen",Apartment,Entire home/apt,4,1,1,125,15,1,151,96,strict,6.09,FALSE
 17632784,Great Space in New DC #2,House,Private room,1,1,1,65,0,4,3,73,strict,2.43,FALSE
@@ -2351,7 +2351,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16757501,Private Bed/bath for Inauguration,House,Private room,2,1,2,300,0,1,0,NA,flexible,NA,FALSE
 16038784,"Beautiful, Modern 1 BD/1BA in Logan Circle",Apartment,Entire home/apt,2,1,1,151,0,2,1,100,strict,0.18,FALSE
 18331461,Sunny & Central Logan/Shaw Apt.,Apartment,Private room,2,1,1,109,0,1,2,100,flexible,2,FALSE
-16791288,4-BR house walking distance from the White House,House,Entire home/apt,10,2,4,1e3,25,2,0,NA,moderate,NA,TRUE
+16791288,4-BR house walking distance from the White House,House,Entire home/apt,10,2,4,1000,25,2,0,NA,moderate,NA,TRUE
 14692312,2BR House @PRIME Location w/PARKING!,Townhouse,Entire home/apt,6,1,2,199,0,1,22,65,strict,2.55,FALSE
 13278515,"Luxury, sunny, 1bd/1ba close to everything",Apartment,Entire home/apt,4,1,1,199,20,1,29,92,strict,2.86,FALSE
 14692091,4BR House in HOTTEST AREA WITH PARKING!,Townhouse,Entire home/apt,8,2,4,299,0,1,22,77,strict,2.64,FALSE
@@ -2384,7 +2384,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16230083,Charming Private Guest Room+Bath,House,Private room,2,1.5,1,95,25,2,29,96,moderate,6.21,FALSE
 17573208,Charming light-filled apartment in heart of Shaw,Apartment,Entire home/apt,4,1,1,199,0,2,2,100,strict,1.11,FALSE
 12035085,Spacious Duplex in Dupont/Logan,Apartment,Private room,2,1.5,1,145,50,2,26,95,strict,1.9,FALSE
-16031980,Cozy Condo For Inauguration,Condominium,Entire home/apt,2,1,1,1e3,0,3,0,NA,flexible,NA,TRUE
+16031980,Cozy Condo For Inauguration,Condominium,Entire home/apt,2,1,1,1000,0,3,0,NA,flexible,NA,TRUE
 13017191,Beautiful Studio in the Heart of Logan Circle,Apartment,Entire home/apt,2,1,0,150,0,3,0,NA,flexible,NA,FALSE
 9478214,Fashionable Logan Circle Rowhouse w/Parking,House,Entire home/apt,6,2.5,3,299,0,2,31,98,moderate,5.6,FALSE
 11542455,"Huge, Chic, Luxury 2bed+Yard, close to NAT'L MALL!",Townhouse,Entire home/apt,5,1.5,2,429,35,2,0,NA,strict,NA,FALSE
@@ -2560,7 +2560,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16770224,Inaguration Weekend: Georgetown Basement Apartment,House,Entire home/apt,4,1,2,600,0,3,0,NA,flexible,NA,TRUE
 15295591,Inauguration - Entire Home in DC,Townhouse,Entire home/apt,4,2.5,2,1950,0,1,0,NA,strict,NA,TRUE
 14739627,Sun-filled Georgetown Studio,Apartment,Entire home/apt,2,1,0,101,0,2,4,95,strict,0.51,FALSE
-16541090,Beautiful Townhouse close to Georgetown w/ parking,Townhouse,Entire home/apt,6,3,3,1e3,0,1,0,NA,flexible,NA,TRUE
+16541090,Beautiful Townhouse close to Georgetown w/ parking,Townhouse,Entire home/apt,6,3,3,1000,0,1,0,NA,flexible,NA,TRUE
 2285431,Beautiful Sunny Bedroom Suite w/ Adjoining Balcony,Bed & Breakfast,Private room,2,1,1,100,0,2,2,90,flexible,1.71,FALSE
 16274018,Inauguration Weekend Special: family-size house,House,Entire home/apt,11,2.5,5,2500,0,3,0,NA,flexible,NA,TRUE
 12854024,Newly renovated basement apartment,Apartment,Entire home/apt,3,1,1,119,0,1,13,95,moderate,1.09,FALSE
@@ -2573,9 +2573,9 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17356049,Cozy quiet studio near Georgetown,Condominium,Entire home/apt,2,1,0,65,0,2,3,100,strict,1.2,FALSE
 55733,Bird's Nest - Bus to Nat'l Mall,Apartment,Entire home/apt,4,1,NA,129,5,2,91,95,strict,1.15,FALSE
 9489305,"COOL, QUIET with A FRIENDLY FACE",House,Private room,2,1,1,145,55,2,7,91,strict,0.39,FALSE
-16237783,The Palisades in Northwest DC,House,Entire home/apt,8,4.5,4,1e3,0,3,0,NA,flexible,NA,TRUE
+16237783,The Palisades in Northwest DC,House,Entire home/apt,8,4.5,4,1000,0,3,0,NA,flexible,NA,TRUE
 9715796,"Beautiful Georgetown, DC Apartment",Apartment,Entire home/apt,2,1,1,70,0,1,0,NA,moderate,NA,FALSE
-15941087,Mid Century Modern for Entertaining,House,Entire home/apt,5,2.5,2,2e3,0,2,0,NA,strict,NA,TRUE
+15941087,Mid Century Modern for Entertaining,House,Entire home/apt,5,2.5,2,2000,0,2,0,NA,strict,NA,TRUE
 11375514,Beautiful Home - Great NW N'borhood,House,Entire home/apt,5,3.5,4,200,0,14,0,NA,strict,NA,FALSE
 3095593,Skylit loft + 1BA & sweet location!,House,Private room,2,1,1,55,10,2,66,97,flexible,1.83,FALSE
 15285217,Hidden Gem in City Treehouse,House,Private room,2,1,1,100,0,1,3,93,flexible,0.43,FALSE
@@ -2588,10 +2588,10 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 140335,The Bird House - Bus to Mall/Downt,Apartment,Entire home/apt,4,1,NA,119,10,2,45,97,strict,0.67,FALSE
 16259766,Master bedroom w/ Private bathroom,House,Private room,2,1,1,500,0,2,0,NA,strict,NA,FALSE
 2650125,Contemporary House  - Walking Distance to AU,House,Entire home/apt,8,4.5,4,485,25,2,10,100,strict,0.29,FALSE
-16769736,Gorgeous Georgian embassy-like home in DC,House,Entire home/apt,8,5.5,4,5e3,0,3,0,NA,moderate,NA,TRUE
+16769736,Gorgeous Georgian embassy-like home in DC,House,Entire home/apt,8,5.5,4,5000,0,3,0,NA,moderate,NA,TRUE
 15604857,"Upscale Whole Unit, Private Entrance, Free Parking",Guesthouse,Entire home/apt,2,1,1,95,20,3,8,95,moderate,1.25,FALSE
 16717511,1 Bedroom in Beautiful Georgetown Home,House,Private room,2,1,1,41,0,3,1,20,flexible,0.29,FALSE
-16321650,Georgetown Inauguration Weekend Rowhouse!,House,Entire home/apt,8,2.5,3,1e3,0,2,0,NA,strict,NA,TRUE
+16321650,Georgetown Inauguration Weekend Rowhouse!,House,Entire home/apt,8,2.5,3,1000,0,2,0,NA,strict,NA,TRUE
 15985843,Beautiful Georgetown row house close to it all!,House,Entire home/apt,8,3,3,1200,0,3,0,NA,strict,NA,TRUE
 16617254,A quiet escape in Inauguration Central,House,Private room,2,1,1,150,0,3,1,100,flexible,0.28,FALSE
 17763777,"Your Finest ""DC Cottage"" Experience in Georgetown",House,Entire home/apt,5,2,4,150,0,2,10,100,moderate,6.12,FALSE
@@ -2651,7 +2651,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 766006,Large Private Room in Beautiful DC Townhouse,House,Private room,2,2.5,2,90,10,2,93,94,strict,2.05,FALSE
 16527890,DC-insider's Spacious and Trendy Private 1BR/1BA,Apartment,Private room,3,1,1,59,5,1,19,96,moderate,5,FALSE
 11640293,"Spacious,Sunny and Family Friendly",Townhouse,Entire home/apt,12,3.5,4,320,20,2,25,94,strict,1.76,FALSE
-16495786,Charming Rowhouse on H Street,House,Entire home/apt,6,1.5,2,1e3,0,2,0,NA,moderate,NA,TRUE
+16495786,Charming Rowhouse on H Street,House,Entire home/apt,6,1.5,2,1000,0,2,0,NA,moderate,NA,TRUE
 14824958,Large Bright room fridge&microwave & private bath,House,Private room,2,1,1,70,10,1,9,87,strict,1.17,FALSE
 16135826,DC Luxury Apt-Overnight guest to share apt with,Apartment,Private room,1,1,1,980,0,1,0,NA,strict,NA,TRUE
 14261875,Cozy Efficiency with Character,Apartment,Entire home/apt,2,1,0,77,0,1,69,83,strict,7.42,FALSE
@@ -2674,7 +2674,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 9592239,Happy Row House Atlas District DC,House,Entire home/apt,3,1,2,250,0,1,0,NA,flexible,NA,FALSE
 8905937,Unit 1 - A,Apartment,Private room,2,1,1,49,40,1,40,83,moderate,2.16,FALSE
 16705650,Private Room in Cozy Capitol Home,House,Private room,2,1,1,555,0,1,0,NA,flexible,NA,TRUE
-16475856,Downtown DC 2 BR - 2.5 Bath Home Near Capital Hill,House,Entire home/apt,4,2.5,2,2e3,0,2,0,NA,flexible,NA,TRUE
+16475856,Downtown DC 2 BR - 2.5 Bath Home Near Capital Hill,House,Entire home/apt,4,2.5,2,2000,0,2,0,NA,flexible,NA,TRUE
 18180500,1br English Basement in the H street corridor,Apartment,Entire home/apt,4,1,1,80,0,4,1,100,flexible,1,FALSE
 14773215,The GREY House near H St/Union Station 3BEDS/1.5BA,Townhouse,Entire home/apt,8,1.5,3,200,50,1,55,99,moderate,6.5,FALSE
 16149896,"House away from Home Trinidad, DC",House,Entire home/apt,5,2.5,3,300,0,1,12,93,flexible,2.75,FALSE
@@ -2784,7 +2784,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16417381,Delightful duplex near H Street NE,Apartment,Entire home/apt,5,1,2,95,0,1,4,80,strict,1.46,FALSE
 16077352,One bedroom in Georgetown,House,Private room,3,1.5,1,125,50,2,14,99,moderate,6.56,FALSE
 16396372,Rarely Available 1 Bedroom Heart of Georgetown,Apartment,Private room,2,1,1,57,0,27,0,NA,flexible,NA,FALSE
-16416330,Luxury Condo in the Heart of Georgetown,Condominium,Entire home/apt,3,1,1,1e3,0,2,0,NA,flexible,NA,TRUE
+16416330,Luxury Condo in the Heart of Georgetown,Condominium,Entire home/apt,3,1,1,1000,0,2,0,NA,flexible,NA,TRUE
 16202179,The Georgetown House Lock #5,Boutique hotel,Private room,2,1,1,135,0,3,2,90,flexible,0.46,FALSE
 15583746,Delightful Georgetown Rowhome w/Patio! Sleeps 6,Townhouse,Entire home/apt,6,1.5,2,278,20,2,21,95,moderate,3.5,FALSE
 7513344,Steps from the Waterfront Park,Townhouse,Private room,2,1,1,115,0,2,91,100,flexible,4.17,FALSE
@@ -2919,7 +2919,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 18636166,A room in Georgetown area,Townhouse,Private room,1,1.5,1,40,0,3,0,NA,flexible,NA,FALSE
 12672335,"Gorgeous light 3br, 2ba on Park",House,Entire home/apt,6,2,3,325,100,2,26,93,flexible,2.33,FALSE
 15914991,Modern Gorgeous Georgetown House with Garage,House,Entire home/apt,4,3,2,315,25,2,20,98,strict,3.59,FALSE
-16242411,Burleith Row House,House,Entire home/apt,8,2,4,2e3,0,2,0,NA,flexible,NA,TRUE
+16242411,Burleith Row House,House,Entire home/apt,8,2,4,2000,0,2,0,NA,flexible,NA,TRUE
 15718041,1 Bedroom Oasis Steps From Georgetown Hospital,House,Entire home/apt,4,1,1,99,0,1,13,91,strict,2.17,FALSE
 4936102,Georgetown Elegance -  3BR 3.5BA,House,Entire home/apt,6,3.5,3,739,0,4,4,95,strict,0.18,TRUE
 13751305,Georgetown Townhouse Full of Natural Light,House,Entire home/apt,3,1.5,2,259,0,4,0,NA,flexible,NA,FALSE
@@ -2967,7 +2967,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 12135609,"Artistic, Elegant and Light Filled!",House,Private room,2,1,1,105,0,2,42,95,flexible,3.16,FALSE
 2241084,Charming house in Georgetown-near Dupont Metro,House,Entire home/apt,4,1.5,2,200,30,2,31,97,strict,3.12,FALSE
 274737,Georgetown Federal Townhouse,House,Private room,1,1,1,125,0,2,17,99,strict,0.27,FALSE
-16756677,Georgetown Pied a terre,Apartment,Entire home/apt,2,1,0,1e3,0,2,0,NA,flexible,NA,TRUE
+16756677,Georgetown Pied a terre,Apartment,Entire home/apt,2,1,0,1000,0,2,0,NA,flexible,NA,TRUE
 16560155,Lovely & Bright Georgetown English Basement,Townhouse,Private room,2,1,1,250,0,2,1,100,flexible,0.27,FALSE
 15969292,Room in old-style townhouse in historic Georgetown,Townhouse,Private room,2,2.5,1,67,20,1,14,99,flexible,2.4,FALSE
 16584742,Georgetown Townhouse Inauguration,Apartment,Entire home/apt,2,1,2,800,50,2,0,NA,strict,NA,TRUE
@@ -2984,11 +2984,11 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 4924193,Georgetown Townhouse - Garden Suite,House,Private room,2,1,1,90,20,5,2,100,strict,1.25,FALSE
 6199172,Perfect Georgetown Apartment,Apartment,Entire home/apt,2,1,0,85,0,2,27,94,moderate,1.82,FALSE
 14950152,Chic 1 Bedroom Georgetown Row House,House,Entire home/apt,2,1.5,1,125,0,2,11,96,moderate,1.67,FALSE
-16225583,Beautiful DC Home near Georgetown Univ,House,Entire home/apt,7,2,3,3e3,0,3,0,NA,flexible,NA,TRUE
+16225583,Beautiful DC Home near Georgetown Univ,House,Entire home/apt,7,2,3,3000,0,3,0,NA,flexible,NA,TRUE
 11899979,Georgetown Rowhouse - 5 Beds and Garden Patio!,House,Entire home/apt,10,2,3,220,10,1,96,96,strict,7.01,FALSE
 13473544,Quiet studio in the heart of DC,Apartment,Entire home/apt,3,1,1,74,20,3,8,93,moderate,0.76,FALSE
 5903980,Georgetown Apt 1/2 Block from M St!,Apartment,Entire home/apt,2,1,1,180,0,3,56,99,flexible,2.4,FALSE
-16321524,"Historic Georgetown Home, near everything",House,Entire home/apt,6,2.5,2,2e3,0,3,0,NA,flexible,NA,TRUE
+16321524,"Historic Georgetown Home, near everything",House,Entire home/apt,6,2.5,2,2000,0,3,0,NA,flexible,NA,TRUE
 7801335,#1.Georgetown Condo. Prime Location,Apartment,Entire home/apt,2,1,0,95,0,3,58,95,strict,3.13,FALSE
 2984386,2 BD Row House in Georgetown,House,Entire home/apt,4,1.5,2,300,0,12,4,100,flexible,0.19,FALSE
 13405717,Unbeatable location in Georgetown/Dupont Circle,Condominium,Entire home/apt,3,1,1,170,0,1,1,NA,flexible,0.09,FALSE
@@ -3216,7 +3216,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 12865283,Charming row house apartment near everything,Apartment,Entire home/apt,4,1,1,105,10,1,61,98,flexible,9.63,FALSE
 8408941,Dupont Circle quiet side-street apt,Apartment,Entire home/apt,4,1,1,135,20,4,2,100,moderate,0.11,FALSE
 4902779,Spacious 1 bedroom in Dupont Circle,Apartment,Private room,1,1,1,95,20,7,1,80,moderate,0.05,FALSE
-16240547,Modern & Sharp Adams Morgan 1BR,Apartment,Entire home/apt,3,1,1,1e3,0,3,0,NA,strict,NA,TRUE
+16240547,Modern & Sharp Adams Morgan 1BR,Apartment,Entire home/apt,3,1,1,1000,0,3,0,NA,strict,NA,TRUE
 11948037,1 BR - Prime Location,Apartment,Entire home/apt,3,1,1,250,25,2,0,NA,moderate,NA,FALSE
 16568426,Beautiful Dupont Circle Apartment,Apartment,Entire home/apt,2,1,0,69,0,1,35,89,moderate,7.89,FALSE
 3236561,Best Dupont Apt-1 BR - Perfect location near Metro,Apartment,Entire home/apt,2,1,1,149,0,2,116,98,strict,5.03,FALSE
@@ -3251,14 +3251,14 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 3861766,Patio with Wonderful Apartment!,Apartment,Entire home/apt,2,1,1,145,25,4,92,99,strict,2.79,FALSE
 8187172,Cozy apartment @ great location/renovated building,Apartment,Entire home/apt,4,1,1,99,0,7,0,NA,strict,NA,FALSE
 15953471,Beautiful 1BR apt in the heart of Nation's Capitol,Apartment,Entire home/apt,4,1,1,200,0,2,5,100,strict,1.36,FALSE
-16477855,3BR near Dupont/Admo/14th - WALK TO WHITE HOUSE!,House,Entire home/apt,8,2.5,3,1e3,0,2,0,NA,flexible,NA,TRUE
+16477855,3BR near Dupont/Admo/14th - WALK TO WHITE HOUSE!,House,Entire home/apt,8,2.5,3,1000,0,2,0,NA,flexible,NA,TRUE
 16969476,Entire House - 2014 15th St. - Dupont/U Street!,House,Entire home/apt,6,2.5,3,415,45,2,8,98,strict,3.53,FALSE
 10577886,Corporate or Leisure Studio #414,Apartment,Entire home/apt,2,1,0,115,0,1,85,97,strict,5.36,FALSE
 18313133,The Anna Maria Residences 301,Condominium,Entire home/apt,2,1,0,189,0,3,0,NA,moderate,NA,FALSE
 16350541,Mayflower Hotel,Timeshare,Private room,4,1,1,500,0,4,0,NA,flexible,NA,FALSE
 11169819,Charming Apartment in DuPont,Apartment,Entire home/apt,2,2,1,145,10,4,22,96,moderate,1.57,FALSE
 684324,Best of DC in Dupont Circle/U St,Apartment,Entire home/apt,4,2,2,325,0,1,92,98,strict,1.84,FALSE
-16806661,Dupont Circle row house,House,Entire home/apt,5,2.5,2,1e3,0,2,0,NA,flexible,NA,TRUE
+16806661,Dupont Circle row house,House,Entire home/apt,5,2.5,2,1000,0,2,0,NA,flexible,NA,TRUE
 4060155,Historic DC Rowhouse Suite w Bath,House,Private room,2,1,1,107,5,1,16,98,flexible,0.51,FALSE
 15988145,Cozy 1 Bed Apt for Women's March,Apartment,Entire home/apt,3,1,1,200,0,1,1,NA,moderate,0.18,FALSE
 16741892,Central location! Comfortable and charming,Townhouse,Private room,2,1,1,350,8,1,2,100,moderate,0.87,FALSE
@@ -3314,7 +3314,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7730327,Chic Modern Row House Apt in Dupont,Apartment,Entire home/apt,3,1,1,150,50,2,15,95,strict,0.79,FALSE
 8646530,Dupont #3 Condo. Prime Location,Apartment,Entire home/apt,2,1,1,132,15,3,21,96,strict,1.76,FALSE
 12644984,Hip nest | Heart of Dupont | DC's highest roof top,Apartment,Entire home/apt,4,1,0,219,0,1,40,97,strict,3.21,FALSE
-16740002,Spacious 1st Floor Apt in Historic DuPont Circle,Apartment,Entire home/apt,4,1,1,2e3,0,1,0,NA,flexible,NA,TRUE
+16740002,Spacious 1st Floor Apt in Historic DuPont Circle,Apartment,Entire home/apt,4,1,1,2000,0,1,0,NA,flexible,NA,TRUE
 16164802,Your Perfect Inauguration Apartment,Apartment,Private room,2,1,1,1100,0,1,0,NA,flexible,NA,TRUE
 11791996,Spacious Studio in Downtown DC,Apartment,Entire home/apt,2,1,0,85,0,2,10,88,moderate,0.72,FALSE
 16674057,Beautiful Two Bedroom Adams Morgan Apartment,Apartment,Entire home/apt,6,1,2,575,0,1,0,NA,flexible,NA,TRUE
@@ -3371,7 +3371,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7758808,Clean & Comfortable Petworth Home!,House,Shared room,2,1,1,45,39,1,3,93,flexible,0.24,FALSE
 16047690,3 Bedroom End Unit Row Home,Townhouse,Entire home/apt,8,2.5,3,2400,0,3,0,NA,flexible,NA,TRUE
 15064630,Full house in Petworth,House,Entire home/apt,6,2,2,150,0,2,3,90,strict,0.4,FALSE
-16309703,Crestwood Castle,House,Entire home/apt,8,2.5,4,2e3,0,3,0,NA,strict,NA,TRUE
+16309703,Crestwood Castle,House,Entire home/apt,8,2.5,4,2000,0,3,0,NA,strict,NA,TRUE
 2187594,1 BR Corporate/Vacation Apartment,Apartment,Entire home/apt,2,1,1,85,25,7,57,99,strict,1.59,FALSE
 18309484,Brand New Renovated Basement/10 mins from Metro,Apartment,Entire home/apt,4,1,2,74,20,2,0,NA,moderate,NA,FALSE
 16197002,Perfectly Located GORGEOUS 4 BR. Home + Parking!!,House,Entire home/apt,10,3.5,4,117,50,2,21,98,strict,4.23,FALSE
@@ -3391,7 +3391,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 18321278,Beautifully Washingtonian condo/10mins to metro,Condominium,Entire home/apt,4,1,1,120,0,2,0,NA,strict,NA,FALSE
 12973803,Well priced private room in Dc,Apartment,Private room,2,1,1,44,7,1,50,96,moderate,4.85,FALSE
 16337294,Clean and Modern English Basement,House,Entire home/apt,4,1,1,300,0,3,1,100,strict,0.27,FALSE
-15940945,"Beautiful town home in Petworth, DC",House,Entire home/apt,10,1.5,4,2e3,0,4,0,NA,flexible,NA,TRUE
+15940945,"Beautiful town home in Petworth, DC",House,Entire home/apt,10,1.5,4,2000,0,4,0,NA,flexible,NA,TRUE
 11159822,Master bedr in historic DC rowhouse,House,Private room,2,1,1,65,0,1,0,NA,strict,NA,FALSE
 16209025,Clean + Cozy One Bedroom in 16th Street Heights #4,House,Private room,2,2,1,40,10,2,0,NA,flexible,NA,FALSE
 7132234,Entire Lower Level of Bungalow!,Bungalow,Entire home/apt,3,1,1,70,10,5,37,98,strict,1.7,FALSE
@@ -3418,7 +3418,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15780784,"Global luxury, DC apartment (you + up to three)!",Apartment,Entire home/apt,4,1,2,450,20,3,1,40,moderate,0.73,FALSE
 7031631,2 Bedroom Condo in Columbia Heights,Apartment,Entire home/apt,4,1,2,100,20,2,10,91,moderate,0.44,FALSE
 3099304,Large Bedroom in Beautiful Rowhouse w/Parking,House,Entire home/apt,3,1.5,1,80,20,2,6,100,strict,0.18,FALSE
-15942737,Live like a DCist!,House,Entire home/apt,9,3.5,4,1e3,100,2,0,NA,strict,NA,TRUE
+15942737,Live like a DCist!,House,Entire home/apt,9,3.5,4,1000,100,2,0,NA,strict,NA,TRUE
 7359527,Mini-Apt in Rustic Rowhouse - Metro/Bus to Sites,House,Private room,5,1.5,1,104,25,2,41,92,strict,1.88,FALSE
 16040704,Basement Apartment in 16th ST Heights,Apartment,Entire home/apt,4,1,1,100,30,1,21,97,moderate,5.63,FALSE
 12173928,Basement studio w/ private Parking,House,Entire home/apt,3,1,1,78,0,2,35,82,strict,4.32,FALSE
@@ -3534,7 +3534,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 13100693,Quiet private bedroom in cozy NW DC,Apartment,Private room,2,1,1,60,0,1,1,60,flexible,0.09,FALSE
 18001409,Studio For You,Apartment,Entire home/apt,1,1,0,95,0,1,1,100,flexible,0.94,FALSE
 6965353,Ideal green oasis for your family,Apartment,Entire home/apt,4,1,2,145,40,2,66,99,flexible,3.34,FALSE
-8483630,3883 Connecticut Ave apt 316,Apartment,Entire home/apt,4,1,1,1e3,0,2,0,NA,flexible,NA,TRUE
+8483630,3883 Connecticut Ave apt 316,Apartment,Entire home/apt,4,1,1,1000,0,2,0,NA,flexible,NA,TRUE
 18008121,Beautiful Large Van Ness Studio,Apartment,Entire home/apt,2,1,0,65,0,2,4,100,flexible,3.33,FALSE
 12559067,"Sunny Private Apt, Balcony & View!",Apartment,Entire home/apt,4,1,1,100,0,2,0,NA,strict,NA,FALSE
 16845006,Park Van Ness,Apartment,Entire home/apt,3,1,1,200,0,2,2,100,flexible,1.5,FALSE
@@ -3554,7 +3554,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 13928199,Regal home in exclusive neighborhood,House,Entire home/apt,7,3.5,4,590,0,5,0,NA,strict,NA,TRUE
 13637287,"Private, Cool & Sunny Room w/ Gym & Metro Access!",Apartment,Private room,2,1,1,60,10,1,1,NA,flexible,0.1,FALSE
 17239723,Great Apartment on Connecticut Ave,Apartment,Entire home/apt,4,1,1,68,6,1,3,73,moderate,1.25,FALSE
-16235283,Urban elegance in DC's Forest Hills neighborhood,House,Entire home/apt,8,4.5,4,1e3,0,2,0,NA,moderate,NA,TRUE
+16235283,Urban elegance in DC's Forest Hills neighborhood,House,Entire home/apt,8,4.5,4,1000,0,2,0,NA,moderate,NA,TRUE
 16749538,One block from the Metro - cozy apartment,Apartment,Entire home/apt,3,1,1,310,0,2,0,NA,flexible,NA,FALSE
 9314718,Lovely house in N Cleveland Park,House,Entire home/apt,5,2,2,179,30,30,1,80,moderate,0.14,FALSE
 16034328,"Cozy Apartment Close to Metro, Bars and the Zoo",Apartment,Entire home/apt,3,1,1,400,0,3,0,NA,strict,NA,FALSE
@@ -3581,7 +3581,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 8218782,Spacious Eng basemnt apt near Metro,House,Entire home/apt,3,1,1,125,10,2,26,98,moderate,2.23,FALSE
 17588463,Cute little Studio in NW Washington,Apartment,Entire home/apt,2,1,1,99,0,1,5,95,flexible,2.34,FALSE
 7856309,"Charming 1BR, 5 min walk to metro",Apartment,Entire home/apt,2,1,1,127,0,2,5,100,strict,0.28,FALSE
-16766936,Cozy location 4 miles from the WH,Apartment,Private room,2,1,1,1e3,0,5,0,NA,flexible,NA,TRUE
+16766936,Cozy location 4 miles from the WH,Apartment,Private room,2,1,1,1000,0,5,0,NA,flexible,NA,TRUE
 16439232,Private room in Van Ness near metro/bus,Condominium,Private room,2,1,1,250,0,1,0,NA,flexible,NA,FALSE
 18632394,Bright bedroom in the heart of DC!,Apartment,Private room,2,1,1,100,0,1,0,NA,flexible,NA,FALSE
 14767042,Newly renovated apt in NW DC. Perfect location,Apartment,Shared room,2,1,1,58,0,1,1,NA,moderate,0.12,FALSE
@@ -3606,7 +3606,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 14385288,BEAUTIFUL Apartment in Vann Ness,Apartment,Entire home/apt,4,1,1,170,0,1,7,97,moderate,0.98,FALSE
 15820718,BR-Q w/shared bath in 100+ yr old gem in AU Park,House,Private room,2,1,1,125,0,2,2,100,flexible,2,FALSE
 15963915,"Luxury bedroom with a terrace, 7 min from Metro",House,Private room,2,1,1,100,0,1,11,98,strict,2.41,FALSE
-9562060,Quiet basement/garden Tenley metro,House,Private room,4,1,1,1e3,0,2,0,NA,strict,NA,TRUE
+9562060,Quiet basement/garden Tenley metro,House,Private room,4,1,1,1000,0,2,0,NA,strict,NA,TRUE
 15820983,BR-T w/shared Bath in 100+ yr old gem in AU Park,House,Private room,1,1,1,60,0,2,1,100,flexible,0.38,FALSE
 15641954,Charming and Private Friendship Heights Apartment,Apartment,Entire home/apt,5,1,2,119,10,3,19,100,strict,3.18,FALSE
 14982432,Family-friendly 4 Bdrm home with yard by metro,House,Entire home/apt,6,2,4,150,0,3,2,100,strict,2,FALSE
@@ -3615,7 +3615,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17759582,Charming Light-Filled AU Park Home,House,Entire home/apt,5,2.5,3,300,0,7,0,NA,moderate,NA,FALSE
 12804379,"Gorgeous spaceous home in DC, close to metro",House,Entire home/apt,8,3,4,400,0,5,1,100,strict,0.11,FALSE
 886415,Tenleytown/AU Park Home,House,Entire home/apt,6,2.5,4,400,0,1,3,100,moderate,0.14,FALSE
-16752007,Charming Colonial close to metro,House,Entire home/apt,6,2,3,1e3,0,1,0,NA,flexible,NA,TRUE
+16752007,Charming Colonial close to metro,House,Entire home/apt,6,2,3,1000,0,1,0,NA,flexible,NA,TRUE
 13748557,Large Family Home in AU Park CLOSE TO METRO,House,Entire home/apt,6,3.5,4,150,0,3,6,100,strict,0.63,FALSE
 15790449,BR-G w/shared Bath in 100+ yr old gem in AU Park,House,Private room,2,1,1,125,0,2,2,100,flexible,2,FALSE
 7733964,English basement with full kitchen.,Apartment,Entire home/apt,2,1,1,99,6,1,40,90,strict,2.63,FALSE
@@ -3810,7 +3810,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 8421131,"Parking, Metro, WiFi, Walmart +More",House,Entire home/apt,8,2,3,225,0,2,24,98,moderate,1.23,FALSE
 6748247,DC Weekdays Listing,Apartment,Private room,1,1,1,95,0,1,0,NA,flexible,NA,FALSE
 12709271,Quaint Takoma Bungalow.,House,Private room,1,1,1,37,15,2,3,100,flexible,0.32,FALSE
-16215109,"Spacious 4BR/3BA townhouse  in hip Petworth, DC",Townhouse,Entire home/apt,8,3,4,3e3,0,3,0,NA,flexible,NA,TRUE
+16215109,"Spacious 4BR/3BA townhouse  in hip Petworth, DC",Townhouse,Entire home/apt,8,3,4,3000,0,3,0,NA,flexible,NA,TRUE
 16509164,Petworth Studio,Apartment,Entire home/apt,2,1,0,150,0,2,0,NA,flexible,NA,FALSE
 8117850,Respite in the City,House,Private room,2,1,1,35,0,1,25,100,strict,1.23,FALSE
 873182,Spacious English Basement Apt w/ Natural Sunlight!,Apartment,Entire home/apt,3,1,1,96,25,2,4,93,strict,0.52,FALSE
@@ -3885,7 +3885,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 10060867,Remodeled 3BR Washington DC House,House,Entire home/apt,6,2.5,3,235,0,3,4,70,strict,0.33,FALSE
 18618055,Comfortable Bedroom near Downtown Silver Spring,Apartment,Private room,1,1,1,50,0,2,0,NA,flexible,NA,FALSE
 15337391,Near 16th St X Bus-DC-AFI Dtown Silver Spring/NIH,Apartment,Entire home/apt,2,1,1,80,50,29,1,NA,moderate,0.17,FALSE
-16485949,Beautiful sun-filled apt in great location in DC!,Apartment,Entire home/apt,4,2,2,1e3,0,3,0,NA,flexible,NA,TRUE
+16485949,Beautiful sun-filled apt in great location in DC!,Apartment,Entire home/apt,4,2,2,1000,0,3,0,NA,flexible,NA,TRUE
 6762627,Private Room in NW DC,House,Private room,2,1,1,45,35,1,28,100,flexible,2.09,FALSE
 3318417,Quiet Elegance in Northwest DC,House,Private room,2,1,1,85,0,1,41,99,flexible,1.17,FALSE
 14447126,Rock Creek Park hideaway,Apartment,Entire home/apt,5,1,2,125,0,2,21,92,flexible,2.54,FALSE
@@ -4008,7 +4008,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16289650,Your new DC home!,House,Private room,2,2,1,95,0,1,0,NA,flexible,NA,FALSE
 252300,"Private Bath, Metro, Capitol@3miles",Condominium,Private room,2,1,1,90,25,5,6,93,moderate,0.18,FALSE
 8383378,Inauguration! Yellow row house family-friendly,House,Entire home/apt,6,1.5,3,117,50,1,1,80,strict,0.05,FALSE
-16837914,2017 Inauguration Hidden Gem!,Loft,Entire home/apt,6,2,2,1e3,0,2,0,NA,flexible,NA,TRUE
+16837914,2017 Inauguration Hidden Gem!,Loft,Entire home/apt,6,2,2,1000,0,2,0,NA,flexible,NA,TRUE
 2322258,"Clean, new townhouse near metro :)",Townhouse,Private room,2,1,1,80,0,3,11,96,strict,0.82,FALSE
 305783,Hb baño privado 3mi Capitol y metro,Condominium,Private room,2,2,1,90,25,5,1,80,moderate,0.02,FALSE
 12123419,Spacious Condo near Metro w/Parking,Condominium,Private room,2,1.5,1,95,0,1,5,88,flexible,0.38,FALSE
@@ -4175,11 +4175,11 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 13182016,"NOMA 1 Bedroom, Apartment with Full Kitchen",Apartment,Entire home/apt,3,1,1,125,0,3,7,94,moderate,0.64,FALSE
 8758519,Cozy getaway in Noma,Apartment,Entire home/apt,3,1,1,300,0,1,0,NA,flexible,NA,FALSE
 16463505,Beautiful 2BR (w/ prvt backporch!) in Capitol Hill,House,Entire home/apt,6,1,2,950,0,3,0,NA,flexible,NA,TRUE
-16364273,"Three bedroom, 2.5 bath condo with all amenities.",Apartment,Entire home/apt,6,2.5,3,2e3,0,3,0,NA,flexible,NA,TRUE
+16364273,"Three bedroom, 2.5 bath condo with all amenities.",Apartment,Entire home/apt,6,2.5,3,2000,0,3,0,NA,flexible,NA,TRUE
 16555136,Beautiful 4 BR 2 BA House near Capitol,House,Entire home/apt,8,2,4,1200,0,3,0,NA,flexible,NA,TRUE
-16243967,LUXURY INAUGURATION RENTAL Capitol Hill Victorian,House,Entire home/apt,10,3.5,3,6e3,0,3,0,NA,strict,NA,TRUE
+16243967,LUXURY INAUGURATION RENTAL Capitol Hill Victorian,House,Entire home/apt,10,3.5,3,6000,0,3,0,NA,strict,NA,TRUE
 16441591,1 Bedroom 1-1/2 bathroom apartment on H Street,Apartment,Entire home/apt,4,1.5,1,700,50,2,0,NA,flexible,NA,TRUE
-16148756,Inaugural Weekend Capitol Hill home,House,Entire home/apt,6,3.5,3,2e3,0,3,0,NA,strict,NA,TRUE
+16148756,Inaugural Weekend Capitol Hill home,House,Entire home/apt,6,3.5,3,2000,0,3,0,NA,strict,NA,TRUE
 16707096,"PARKING! Capitol Hill Bedroom, 1 mile from Capitol",House,Private room,2,1,1,550,0,1,0,NA,flexible,NA,TRUE
 9759707,2 Bed/2 Bath Apt near Union Station,Apartment,Entire home/apt,4,2,2,120,50,2,0,NA,moderate,NA,FALSE
 16839227,Charming H Street Rowhouse,House,Entire home/apt,4,1,2,100,0,2,7,97,flexible,2.19,FALSE
@@ -4194,7 +4194,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15663247,Charming Exposed Brick Row Home on H Street NE,House,Private room,2,1.5,1,60,0,1,5,100,flexible,0.84,FALSE
 4516558,Cozy Bedroom near H ST Night Life,House,Private room,2,1,1,40,0,2,2,100,flexible,0.18,FALSE
 15270228,Eco-Friendly Capitol Hill Row House - Metro Room,House,Private room,2,1,1,70,10,2,37,100,moderate,5.87,FALSE
-16155048,Modern & convenient 2BR+ Apt - 1 mile from Capitol,Apartment,Entire home/apt,6,1,2,2e3,0,2,0,NA,moderate,NA,TRUE
+16155048,Modern & convenient 2BR+ Apt - 1 mile from Capitol,Apartment,Entire home/apt,6,1,2,2000,0,2,0,NA,moderate,NA,TRUE
 12386834,Let There Be Light Carriage House,Apartment,Entire home/apt,4,1,2,185,50,3,49,100,strict,3.95,FALSE
 10257241,DC UNDERGROUND,Apartment,Private room,2,1,2,600,0,1,0,NA,flexible,NA,TRUE
 6231539,Walk To Union Station,House,Private room,2,1,1,105,0,1,9,100,strict,0.68,FALSE
@@ -4208,7 +4208,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16616711,"2 Bed, 2.5 Bath, Newly Renovated Cap Hill House!",House,Entire home/apt,6,2.5,2,1111,0,3,0,NA,flexible,NA,TRUE
 16846167,Sunny private bedroom near Union Market,House,Private room,1,1,1,95,25,1,6,100,moderate,3,FALSE
 14781723,Location Location! Walk to Capitol/Nat Mall/metro.,Apartment,Entire home/apt,4,1,1,150,0,1,8,100,strict,1.11,FALSE
-16368228,Private 2 Bed/2 Bath Apartment close to Capitol,Apartment,Entire home/apt,5,2,2,1e3,0,1,0,NA,flexible,NA,TRUE
+16368228,Private 2 Bed/2 Bath Apartment close to Capitol,Apartment,Entire home/apt,5,2,2,1000,0,1,0,NA,flexible,NA,TRUE
 18517686,Peaceful Private Room H Street near Union Station,House,Private room,2,1,1,45,0,1,1,100,moderate,1,FALSE
 2723491,Walkout Basement Apartment,House,Entire home/apt,2,1,1,77,20,3,39,93,moderate,1.47,FALSE
 11964219,Cozy Capitol Hill Apartment,House,Private room,1,1.5,1,100,0,1,0,NA,flexible,NA,FALSE
@@ -4283,7 +4283,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11126763,Capitol Hill - Modern 2-BD Apt,Apartment,Entire home/apt,6,1,2,199,10,2,83,98,moderate,5.8,FALSE
 1388439,Comfortable apt with parking!,Apartment,Entire home/apt,4,1,1,130,25,1,71,95,moderate,3.44,FALSE
 16462028,"Perfect Capitol Hill HQ, 2 Blocks From the Dome",House,Entire home/apt,8,2.5,3,340,0,2,11,95,strict,2.97,FALSE
-16756920,Classic Row House Minutes From Inauguration,House,Entire home/apt,8,3,3,2e3,0,2,0,NA,flexible,NA,TRUE
+16756920,Classic Row House Minutes From Inauguration,House,Entire home/apt,8,3,3,2000,0,2,0,NA,flexible,NA,TRUE
 14299472,Capitol Hill Healthy Business Traveler's Retreat,Townhouse,Entire home/apt,2,1,1,100,0,1,51,100,strict,6.43,FALSE
 12202521,Sunny Historic row home on Capitol Hill,House,Entire home/apt,8,2,2,271,12,2,9,98,strict,0.75,FALSE
 5163125,Studio Hideaway beside U.S. Senate.,Apartment,Entire home/apt,2,1,0,150,0,2,47,92,strict,1.77,FALSE
@@ -4304,7 +4304,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11673335,Room in Kingman Park,House,Private room,2,1,1,45,20,3,9,93,flexible,0.66,FALSE
 8403475,Capitol Hill cool,Apartment,Private room,2,1,1,75,0,2,1,100,flexible,0.05,FALSE
 9484866,H St rowhouse,House,Private room,2,1,1,75,0,1,66,94,flexible,4.16,FALSE
-9157408,Inauguration!Capitol Hill location!,Townhouse,Entire home/apt,7,1.5,3,1e3,20,2,3,70,strict,0.17,TRUE
+9157408,Inauguration!Capitol Hill location!,Townhouse,Entire home/apt,7,1.5,3,1000,20,2,3,70,strict,0.17,TRUE
 13941732,Capital Retreat - New 1 Bedroom Apartment,Apartment,Entire home/apt,4,1,1,150,25,3,7,97,moderate,0.91,FALSE
 16497778,"Capitol Hill Townhouse, PERFECT for Inauguration!!",Townhouse,Private room,2,1,1,400,0,4,0,NA,strict,NA,FALSE
 17480877,3 Bedroom Townhome Perfect for Young Families,House,Entire home/apt,6,1.5,3,250,0,2,1,100,moderate,0.54,FALSE
@@ -4321,7 +4321,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16400983,Inauguration weekend 2 bedroom apt,Apartment,Entire home/apt,5,1,2,1500,0,3,0,NA,flexible,NA,TRUE
 4475295,Charming Home in Historic Cap. Hill,House,Entire home/apt,4,1,2,350,15,1,9,93,strict,0.3,FALSE
 5030765,Capitol Hill 2BD-Cari's in the City,Apartment,Entire home/apt,5,2,2,300,25,2,27,98,moderate,1.04,FALSE
-11125769,Historic Capitol Hill House with Parking,House,Entire home/apt,8,2.5,2,1e3,0,2,1,100,flexible,0.27,TRUE
+11125769,Historic Capitol Hill House with Parking,House,Entire home/apt,8,2.5,2,1000,0,2,1,100,flexible,0.27,TRUE
 4277425,Guest Quarters on Capitol Hill,Apartment,Entire home/apt,4,1,1,195,25,3,4,95,strict,0.13,FALSE
 16598282,Best Location - Near Capitol Hill / Eastern Market,Apartment,Entire home/apt,6,1.5,2,250,0,5,0,NA,strict,NA,FALSE
 15615256,Bright Condo near vibrant H Street & Capitol Hill,Condominium,Entire home/apt,2,1,1,70,50,2,0,NA,flexible,NA,FALSE
@@ -4435,7 +4435,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16252653,Union Station/Capitol Hill One Bedroom,Apartment,Entire home/apt,4,1,1,84,0,4,1,100,flexible,1,FALSE
 16612688,The Loft - A hidden gem on Capitol Hill,Loft,Entire home/apt,6,1,0,950,0,2,0,NA,flexible,NA,TRUE
 16252226,Our RowHome on H Street... A haven in the District,House,Entire home/apt,4,1,2,114,0,1,2,100,flexible,0.73,FALSE
-16121077,Luxurios new condo in unbeatable location,Condominium,Entire home/apt,6,1,2,1e3,0,2,0,NA,strict,NA,TRUE
+16121077,Luxurios new condo in unbeatable location,Condominium,Entire home/apt,6,1,2,1000,0,2,0,NA,strict,NA,TRUE
 16710786,Renovated Row House in NE DC,House,Shared room,3,1,1,125,0,1,4,100,flexible,1.08,FALSE
 8846542,Capitol Hill Townhome - Paris Bdrm,Townhouse,Private room,2,1,1,80,0,2,27,98,strict,1.9,FALSE
 10550511,Beautiful townhouse on Capitol Hill,House,Entire home/apt,6,2.5,3,395,0,3,12,100,strict,0.89,FALSE
@@ -4553,7 +4553,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16824881,"Parking Pass- H St. NE, 1.5 miles from Capitol",Apartment,Entire home/apt,3,1,1,375,0,1,0,NA,flexible,NA,FALSE
 15654101,Newly Built 2-Lvl Carriage House-1 blk to H Street,House,Entire home/apt,6,2,2,225,0,3,29,97,moderate,7.84,FALSE
 9461997,"Sunny Suite, Private Bath",Condominium,Private room,2,1,1,70,15,1,151,97,strict,8.39,FALSE
-16441766,Spacious rowhouse in H St Corridor,House,Private room,8,2.5,3,2e3,0,1,0,NA,flexible,NA,TRUE
+16441766,Spacious rowhouse in H St Corridor,House,Private room,8,2.5,3,2000,0,1,0,NA,flexible,NA,TRUE
 2875616,Private Apartment at NoMa metro + Free parking,House,Entire home/apt,3,1,1,119,0,2,135,98,flexible,4.71,FALSE
 1401064,Capitol Hill-Private Parking-Sleeps 8,House,Entire home/apt,8,2.5,3,325,0,3,80,96,strict,1.82,FALSE
 16702501,Cozy 2 bedroom duplex apartment near Union Station,Apartment,Entire home/apt,4,1,2,400,0,2,0,NA,moderate,NA,FALSE
@@ -4625,7 +4625,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 9329121,4th & C Charming corner rental 3 blocks to Capitol,Apartment,Entire home/apt,4,1,2,125,45,1,20,96,strict,1.2,FALSE
 16242339,Gorgeous 1 bdrm less than a mile from US Capitol!,Apartment,Entire home/apt,5,1,1,500,0,2,1,100,strict,0.27,FALSE
 15568495,Charming Rowhouse Near Union Station & H Street,House,Entire home/apt,4,1,2,130,15,1,43,99,moderate,6.65,FALSE
-16275037,Historic Capitol Hill Home,House,Entire home/apt,8,1.5,3,1e3,0,1,0,NA,moderate,NA,TRUE
+16275037,Historic Capitol Hill Home,House,Entire home/apt,8,1.5,3,1000,0,1,0,NA,moderate,NA,TRUE
 16635429,Quaint Capitol Hill Condo,Apartment,Entire home/apt,3,1,1,750,0,2,0,NA,flexible,NA,TRUE
 6573484,Comfy Studio Apt. on the Hill.,Apartment,Entire home/apt,4,1,0,115,0,2,31,97,moderate,1.36,FALSE
 18222319,Private Room in NOMA,Apartment,Private room,2,1,1,80,0,1,1,100,flexible,1,FALSE
@@ -4648,7 +4648,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17222351,Capitol Hill Fully Furnished 2BR Apartment,Apartment,Entire home/apt,5,2,2,249,0,3,0,NA,strict,NA,FALSE
 10604048,KING Bed Walk to Metro Free Prkg,Apartment,Entire home/apt,4,1,1,140,0,2,0,NA,flexible,NA,FALSE
 11814174,Private Suite blocks to NOMA metro,Condominium,Private room,2,1,1,90,0,1,46,99,moderate,3.84,FALSE
-16769241,2 bedrm house w/i walking distance to inauguration,House,Entire home/apt,5,1.5,2,1e3,0,1,0,NA,flexible,NA,TRUE
+16769241,2 bedrm house w/i walking distance to inauguration,House,Entire home/apt,5,1.5,2,1000,0,1,0,NA,flexible,NA,TRUE
 16663764,Stay in the Historic Heart of the Nation's Capitol,House,Entire home/apt,6,1,2,200,0,3,15,100,moderate,4.13,FALSE
 9225346,The Barbara of Capitol Hill,Apartment,Entire home/apt,4,1,2,130,0,2,61,96,strict,3.33,FALSE
 15189027,Spacious Private 1 Bedroom Property,Apartment,Entire home/apt,5,1,1,98,20,1,0,NA,flexible,NA,FALSE
@@ -4772,7 +4772,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16685731,3bdrm Townhouse Two Blocks from Capitol Building,Townhouse,Entire home/apt,8,2.5,3,1250,25,2,0,NA,strict,NA,TRUE
 14162540,Luxury Condo Adjacent to Capitol & Supreme Court,Condominium,Entire home/apt,2,1,1,174,0,2,14,99,strict,1.75,FALSE
 18389460,Full Apt in the H St neighborhood,Apartment,Entire home/apt,2,1,1,80,0,2,0,NA,flexible,NA,FALSE
-16488882,"Huge 4BR, short walk to Nat'l Mall, Union Station",House,Entire home/apt,14,3.5,4,2e3,25,1,0,NA,flexible,NA,TRUE
+16488882,"Huge 4BR, short walk to Nat'l Mall, Union Station",House,Entire home/apt,14,3.5,4,2000,25,1,0,NA,flexible,NA,TRUE
 2343987,Bedroom in Capitol Hill row-house,House,Private room,2,1.5,1,50,25,2,216,94,flexible,5.53,FALSE
 7772529,Light Filled Home on the Hill,House,Entire home/apt,6,2,3,400,0,2,5,96,moderate,0.25,FALSE
 15803162,Walking Distance to Capitol; Townhouse,House,Entire home/apt,5,1.5,2,900,0,3,1,100,strict,0.28,TRUE
@@ -4803,7 +4803,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11408835,Atlas District Hideaway,House,Private room,2,2.5,1,507,0,1,0,NA,flexible,NA,TRUE
 16487874,Capitol Hill Comfort Close to the Capitol!,House,Entire home/apt,8,2.5,3,1250,0,1,0,NA,strict,NA,TRUE
 16322835,Cap Hill Townhouse - walk to history,House,Entire home/apt,6,2.5,3,2500,0,3,0,NA,flexible,NA,TRUE
-16158966,Luxurious Rental Near US Capitol for Inauguration,House,Entire home/apt,4,2.5,2,3e3,0,3,0,NA,strict,NA,TRUE
+16158966,Luxurious Rental Near US Capitol for Inauguration,House,Entire home/apt,4,2.5,2,3000,0,3,0,NA,strict,NA,TRUE
 9277671,Capitol Hill Home-Cari's in the City,House,Entire home/apt,9,4.5,5,650,0,4,0,NA,strict,NA,TRUE
 15831131,Charming Exposed Brick Row Home on H St NE,House,Private room,1,1.5,1,40,0,1,3,100,flexible,0.51,FALSE
 13996084,The Modern Turret in Old City,Condominium,Entire home/apt,2,1.5,1,120,0,2,11,100,moderate,1.36,FALSE
@@ -4916,7 +4916,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16157469,"High-end, designer finishes, 1 br/1 ba in Dupont",Apartment,Entire home/apt,2,1,1,160,0,30,0,NA,strict,NA,FALSE
 15964061,Beautiful bedroom with a private bathroom & patio,Apartment,Private room,2,1,1,95,0,3,1,100,strict,0.28,FALSE
 1806966,Large Studio in Adams Morgan,Apartment,Entire home/apt,2,1,0,150,0,1,4,90,flexible,0.6,FALSE
-16619804,Large 1BD beautiful apt in Kalorama,Apartment,Entire home/apt,3,1,1,1e3,0,1,0,NA,moderate,NA,TRUE
+16619804,Large 1BD beautiful apt in Kalorama,Apartment,Entire home/apt,3,1,1,1000,0,1,0,NA,moderate,NA,TRUE
 18293162,Adams Morgan studio,Condominium,Entire home/apt,2,1,0,175,0,1,0,NA,flexible,NA,FALSE
 16071149,Spacious 2 bedroom in heart of DC,Apartment,Entire home/apt,5,2.5,2,137,0,2,1,100,flexible,0.19,FALSE
 4523554,Beautiful Rowhouse w Backyard-Walk to White House!,House,Entire home/apt,5,1.5,2,1500,0,2,0,NA,flexible,NA,TRUE
@@ -4924,9 +4924,9 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17721267,Conveniently Located 1BR,Apartment,Entire home/apt,3,2.5,1,160,0,3,0,NA,flexible,NA,FALSE
 16809762,Inauguration Apartments for Rent,Apartment,Entire home/apt,2,1,0,500,0,1,0,NA,flexible,NA,FALSE
 15630258,Cozy Studio in central AdMo/DuPont,Apartment,Entire home/apt,2,1,0,70,0,28,8,97,moderate,1.28,FALSE
-16069436,Beautiful Adams Morgan Rowhouse,Apartment,Entire home/apt,8,1,2,1e3,0,1,0,NA,strict,NA,TRUE
+16069436,Beautiful Adams Morgan Rowhouse,Apartment,Entire home/apt,8,1,2,1000,0,1,0,NA,strict,NA,TRUE
 12984553,Lovely Apt Near Metro & Restaurants,Apartment,Entire home/apt,4,2,1,190,25,30,2,100,moderate,0.2,FALSE
-16620516,Large Woodley Row Home - Near Downtown (& metro)!,House,Entire home/apt,12,2.5,5,2e3,0,2,0,NA,flexible,NA,TRUE
+16620516,Large Woodley Row Home - Near Downtown (& metro)!,House,Entire home/apt,12,2.5,5,2000,0,2,0,NA,flexible,NA,TRUE
 15099004,"Modern, Sun-drenched 1BR in Adams Morgan",Apartment,Entire home/apt,2,1,1,220,0,2,7,100,flexible,0.92,FALSE
 9430567,5 Bedrooms sleep 12 in Adams Morgan,House,Entire home/apt,12,2.5,5,500,50,4,4,95,strict,0.3,FALSE
 11386890,Cozy & Chic 1 BR in Adams Morgan,Apartment,Entire home/apt,3,1,1,90,30,2,17,94,moderate,1.19,FALSE
@@ -5297,7 +5297,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 18271688,Single guest room with private bath,Apartment,Private room,1,1,1,120,0,1,0,NA,flexible,NA,FALSE
 12623839,Row home room in Washington,House,Private room,1,1,1,57,25,1,20,98,strict,1.61,FALSE
 15342600,Spacious Private Bed & Bath in Beautiful Townhouse,Townhouse,Private room,1,1.5,1,90,0,7,6,100,strict,1.08,FALSE
-16016079,Bedroom w/Shared Bath for Inauguration Day,Apartment,Private room,2,1,1,1e3,0,1,0,NA,flexible,NA,TRUE
+16016079,Bedroom w/Shared Bath for Inauguration Day,Apartment,Private room,2,1,1,1000,0,1,0,NA,flexible,NA,TRUE
 13094802,Beautiful Bright Midcentury Music Flat,Apartment,Private room,2,1,1,95,0,3,16,96,flexible,1.39,FALSE
 8905219,"Safe & Sound in Bloomingdale, NW",House,Private room,2,1,1,40,20,1,141,86,strict,7.47,FALSE
 15419891,Private/Cozy Bdrm - Minutes to Everywhere in DC,Townhouse,Private room,3,1,1,75,25,2,24,95,strict,3.46,FALSE
@@ -5327,7 +5327,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16396521,Modern Bloomingdale Retreat,House,Entire home/apt,12,3.5,5,575,20,1,19,92,strict,4.96,TRUE
 9090360,Beautiful 1 BD on historic DC st!,Apartment,Entire home/apt,4,1,1,99,10,2,38,95,moderate,2.14,FALSE
 5475287,"Cute, Cozy and Close to Downtown DC",Apartment,Entire home/apt,4,1,1,100,25,1,8,89,moderate,0.31,FALSE
-8285534,Perfect Apartment for Papal Visit!,Apartment,Entire home/apt,8,2,2,2e3,0,1,0,NA,flexible,NA,TRUE
+8285534,Perfect Apartment for Papal Visit!,Apartment,Entire home/apt,8,2,2,2000,0,1,0,NA,flexible,NA,TRUE
 5361229,"Bright Apartment, Trendy Brookland",Apartment,Entire home/apt,4,1,1,85,25,1,4,100,moderate,0.17,FALSE
 16663340,Convenient Apartment Close to Capitol,Apartment,Entire home/apt,4,1,1,600,0,2,0,NA,flexible,NA,TRUE
 3155265,Charming Carriage House w/ Deck,House,Entire home/apt,3,1,1,122,0,2,194,89,strict,6.33,FALSE
@@ -5382,7 +5382,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 18450142,3 Bedroom U-Street Cozy House For Summer Sublease,House,Entire home/apt,6,2.5,3,130,0,20,0,NA,strict,NA,FALSE
 1186117,Private Junior Suite,Bed & Breakfast,Private room,2,2,1,175,0,2,11,88,strict,0.23,FALSE
 427825,Bloomingdale Victorian Row-house,Apartment,Entire home/apt,2,1,2,149,150,3,7,86,flexible,0.13,FALSE
-11700050,Renovated Townhouse,House,Private room,2,1,1,1e3,0,1,0,NA,flexible,NA,TRUE
+11700050,Renovated Townhouse,House,Private room,2,1,1,1000,0,1,0,NA,flexible,NA,TRUE
 16943020,Huge 1BR in historic 3BR Eckington rowhouse.,House,Private room,2,1.5,1,65,20,3,4,95,moderate,1.52,FALSE
 16438966,Private room in beautiful mid-century rowhome,House,Private room,2,1,1,69,25,2,15,97,strict,4.02,FALSE
 198685,Large room in central location,House,Private room,2,1.5,1,65,20,1,95,94,strict,1.37,FALSE
@@ -5422,7 +5422,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15410428,NEW MODERN3bd/ba!GARDEN&ROOFTOP&PRK,Castle,Entire home/apt,14,3,3,199,0,2,16,99,strict,6.58,FALSE
 15377706,Modern 1BD Near Metro & Convention,Apartment,Entire home/apt,4,1,1,99,25,1,23,97,strict,3.19,FALSE
 16164463,Cozy walkable Washington home,House,Entire home/apt,8,2.5,3,200,15,1,1,80,strict,0.27,FALSE
-16427233,Nice house with parking close to metro,House,Entire home/apt,5,2,1,2e3,0,2,0,NA,strict,NA,TRUE
+16427233,Nice house with parking close to metro,House,Entire home/apt,5,2,1,2000,0,2,0,NA,strict,NA,TRUE
 9447647,Beautiful 1Br (900sqf) Bloomingdale,Apartment,Entire home/apt,4,1,1,81,10,2,28,96,strict,1.58,FALSE
 17794780,Charming Row Home in Vibrant Shaw Neighborhood,House,Entire home/apt,4,1,2,140,0,1,0,NA,flexible,NA,FALSE
 8497939,Monroe street market apartment,Apartment,Entire home/apt,4,1,1,500,0,1,0,NA,flexible,NA,FALSE
@@ -5488,7 +5488,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7952701,‘Suite Situation’ in Downtown DC,Apartment,Entire home/apt,3,1,1,120,35,2,89,99,strict,4.26,FALSE
 4545040,English Basement in Eckington,Apartment,Entire home/apt,3,1,1,75,0,2,5,96,flexible,0.17,FALSE
 15620627,Charming Bloomingdale Apt. w/ Off-Street Parking,Apartment,Entire home/apt,4,1,1,109,0,1,58,100,flexible,8.83,FALSE
-15006184,Truly unique row house in historic Bloomingdale,House,Private room,2,2.5,4,1e3,0,1,0,NA,flexible,NA,TRUE
+15006184,Truly unique row house in historic Bloomingdale,House,Private room,2,2.5,4,1000,0,1,0,NA,flexible,NA,TRUE
 10836969,Cozy room in Bloomingdale rowhouse!,Townhouse,Private room,1,1,1,30,0,1,0,NA,flexible,NA,FALSE
 14606231,Private 1 bedroom apt new Queen bed,Apartment,Entire home/apt,2,1,1,88,0,1,26,90,strict,3.11,FALSE
 18407399,Tasteful and endearing with single twin mattress.,House,Private room,1,1,1,40,20,3,0,NA,strict,NA,FALSE
@@ -5558,7 +5558,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 6289049,Graduation Weekend Basement Apt,House,Private room,2,1,1,128,0,1,1,100,flexible,0.04,FALSE
 12252686,TWO BLOCKS TO NoMa METRO-BUNKS,Apartment,Shared room,4,2,1,49,39,1,38,95,flexible,2.86,FALSE
 10351722,Happy heart space,Apartment,Private room,2,1,1,65,10,1,0,NA,moderate,NA,FALSE
-16219662,3 bed room 2.5 bath Entire House,House,Entire home/apt,6,2.5,3,2e3,0,3,0,NA,flexible,NA,TRUE
+16219662,3 bed room 2.5 bath Entire House,House,Entire home/apt,6,2.5,3,2000,0,3,0,NA,flexible,NA,TRUE
 16380837,Gorgeous Modern 2 BR Row Home in Prime Location,House,Entire home/apt,8,2,2,99,50,1,17,94,strict,3.81,FALSE
 3568159,Spacious Bedroom and Bathroom,Apartment,Private room,2,1,1,99,20,1,110,97,moderate,3.24,FALSE
 13332942,Gorgeous DC Flat near Restaurants and Sights,Apartment,Entire home/apt,4,1,1,105,0,2,36,87,flexible,3.42,FALSE
@@ -5731,7 +5731,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 8268358,Spacious 1-bedroom near Brookland/Catholic U,Apartment,Entire home/apt,5,1,1,695,0,2,0,NA,flexible,NA,TRUE
 4884217,"What the French, Toast?",Apartment,Entire home/apt,2,1,1,85,0,1,148,99,moderate,5.55,FALSE
 667954,Neat small private bedroom in a strategic location,Apartment,Private room,1,1,1,55,20,2,379,96,moderate,6.66,FALSE
-16002608,Entire home 1.5 miles from Union Station,House,Entire home/apt,4,1.5,2,1e3,0,2,0,NA,flexible,NA,TRUE
+16002608,Entire home 1.5 miles from Union Station,House,Entire home/apt,4,1.5,2,1000,0,2,0,NA,flexible,NA,TRUE
 12168587,Center of The Washington DC-BUNKS,Apartment,Shared room,4,2,1,10,49,1,41,96,flexible,3.55,FALSE
 11610161,Brand New DC Flat+parking,Apartment,Entire home/apt,4,1,1,120,0,1,30,84,strict,2.12,FALSE
 8169513,Cozy furnished Room in heart of DC,Apartment,Private room,2,1,1,56,0,1,45,85,flexible,2.42,FALSE
@@ -5741,8 +5741,8 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 311306,WANT A LONGER  STAY RENTAL IN DC?,Apartment,Private room,4,1,1,95,35,3,56,88,strict,0.91,FALSE
 4204367,The best room for a solo traveller!,Townhouse,Private room,1,1.5,1,80,0,2,43,90,strict,1.37,FALSE
 566968,"DC History, Privacy & a Unique Room",House,Private room,3,1,1,58,35,3,65,83,strict,1.2,FALSE
-16721710,Awesome Location to Enjoy Washington D.C.!!!!,Apartment,Private room,4,1,2,1e3,50,2,0,NA,flexible,NA,TRUE
-16133043,"Monument rooftop views, prime location, +2 parking",House,Entire home/apt,5,2.5,2,1e3,0,3,0,NA,strict,NA,TRUE
+16721710,Awesome Location to Enjoy Washington D.C.!!!!,Apartment,Private room,4,1,2,1000,50,2,0,NA,flexible,NA,TRUE
+16133043,"Monument rooftop views, prime location, +2 parking",House,Entire home/apt,5,2.5,2,1000,0,3,0,NA,strict,NA,TRUE
 11873129,CLEAN AND COMFY BUNKS - In the middle of The DC,Apartment,Shared room,4,2,1,41,49,1,54,98,flexible,3.9,FALSE
 15903564,Sunny & Cozy 1 BR in DC close to all you need!,Apartment,Entire home/apt,2,1,1,200,75,2,0,NA,flexible,NA,FALSE
 2730283,Lovely Suite in LeDroit Park,House,Private room,2,1.5,1,89,0,1,182,98,strict,4.86,FALSE
@@ -5755,7 +5755,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 14163003,"Converted Living Room, Bloomingdale",Apartment,Shared room,1,1,1,30,10,1,15,88,flexible,2.32,FALSE
 12034600,Bloomingdale/Shaw -- 2 BR Family-friendly,Apartment,Entire home/apt,4,1,2,149,30,3,49,99,flexible,3.95,FALSE
 2939650,Large Private Room Near RIA Metro,Apartment,Private room,2,1,1,60,0,2,63,92,moderate,4.78,FALSE
-16425397,Beautiful family friendly rowhouse in NE DC,House,Entire home/apt,7,1.5,2,1e3,0,2,0,NA,flexible,NA,TRUE
+16425397,Beautiful family friendly rowhouse in NE DC,House,Entire home/apt,7,1.5,2,1000,0,2,0,NA,flexible,NA,TRUE
 16489163,Sunny bedroom near NoMa metro,House,Private room,2,1.5,1,85,0,1,22,99,flexible,5.08,FALSE
 825969,3 BR/2.5BA House near US Capitol,House,Entire home/apt,8,3,3,500,33,2,9,93,moderate,0.46,FALSE
 14588284,Relaxing Private Room in City Condo,House,Private room,4,1,1,65,25,1,11,100,flexible,1.53,FALSE
@@ -5768,11 +5768,11 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16193498,English Basement with Private Entrance & Parking,Apartment,Entire home/apt,3,1,0,80,0,1,38,92,flexible,12.95,FALSE
 10393497,FREE Parking @ Park Place,Loft,Entire home/apt,4,1,1,99,20,2,12,85,moderate,1.04,FALSE
 9464877,Beautiful 1-bedroom in heart of DC!,Apartment,Entire home/apt,3,1,1,108,25,3,55,96,moderate,3.35,FALSE
-16260977,Beautiful renovated row-home +parking near Capitol,House,Entire home/apt,8,3.5,3,2e3,0,2,0,NA,moderate,NA,TRUE
+16260977,Beautiful renovated row-home +parking near Capitol,House,Entire home/apt,8,3.5,3,2000,0,2,0,NA,moderate,NA,TRUE
 11607812,Stunning DC Flat-walk to shops,Apartment,Entire home/apt,4,1,1,130,0,2,38,89,moderate,2.64,FALSE
 3643257,"Cozy bedroom in Eckington, a great location",Apartment,Private room,2,1,1,65,5,2,81,98,flexible,2.42,FALSE
 16488275,Mid-Century Masterpiece - Sleeps 6!,House,Entire home/apt,6,2.5,3,249,15,3,7,100,strict,2.63,FALSE
-8131716,Pope Visit 2015...seconds away!,Apartment,Entire home/apt,3,1,1,1e3,100,1,0,NA,strict,NA,TRUE
+8131716,Pope Visit 2015...seconds away!,Apartment,Entire home/apt,3,1,1,1000,100,1,0,NA,strict,NA,TRUE
 13210656,PVT Bed + PVT Bath Close to Metro in Historic DC!,House,Private room,2,1,1,75,5,7,20,97,strict,1.86,FALSE
 4887569,Sunny Quiet Travelers Wellbeing Rest Stop +Parking,Apartment,Entire home/apt,4,1,1,83,50,3,5,92,strict,3.19,FALSE
 16749374,Large and bright bedroom in D.C.,House,Private room,2,1,1,40,19,3,1,100,moderate,0.37,FALSE
@@ -6052,7 +6052,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 12137477,"Large, central, private room (5)",House,Private room,1,1,1,69,20,2,9,98,flexible,0.68,FALSE
 16987131,Newly renovated 1 BR  apt Mt. Pleasant,Apartment,Entire home/apt,2,1,1,75,0,7,1,100,strict,0.71,FALSE
 17380471,Wonderful 1BR English Basement - close to downtown,Apartment,Entire home/apt,3,1,1,77,10,1,26,91,moderate,10.26,FALSE
-16463121,Bright spacious 4BR house w parking in Mt Pleasant,House,Entire home/apt,8,3.5,4,1e3,0,3,0,NA,flexible,NA,TRUE
+16463121,Bright spacious 4BR house w parking in Mt Pleasant,House,Entire home/apt,8,3.5,4,1000,0,3,0,NA,flexible,NA,TRUE
 13744,"Heart of the City -HalfBlock to METRO, Restaurants",Apartment,Entire home/apt,4,1,1,125,0,4,9,93,strict,0.1,FALSE
 10729015,Spacious room with private bathroom and balcony,Apartment,Private room,2,1.5,1,70,50,2,0,NA,moderate,NA,FALSE
 276193,Central spot (3) - near metro & bus,House,Private room,1,3,1,65,20,2,44,95,moderate,2.72,FALSE
@@ -6135,7 +6135,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 11922587,Sunny Bedroom in Charming Rowhouse,Apartment,Private room,1,1,1,65,0,2,1,100,flexible,0.07,FALSE
 15887544,"Great condo to crash for inauguration, 5+ ppl",Condominium,Entire home/apt,7,1,2,750,30,1,0,NA,flexible,NA,TRUE
 8088797,Cozy studio next to the park!,Apartment,Entire home/apt,1,1,0,75,0,4,1,60,flexible,0.05,FALSE
-16379166,Spacious light-filled condo in Columbia Heights,Condominium,Entire home/apt,3,1,1,1e3,0,3,0,NA,flexible,NA,TRUE
+16379166,Spacious light-filled condo in Columbia Heights,Condominium,Entire home/apt,3,1,1,1000,0,3,0,NA,flexible,NA,TRUE
 16674406,Bright & Charming Room in Columbia Heights Apt.,Apartment,Private room,2,1,1,50,0,2,2,100,moderate,0.54,FALSE
 11300444,Luxury Brownstone in CoHi - 6 BR. Great for Groups,House,Entire home/apt,16,3.5,6,208,20,1,71,98,strict,4.93,FALSE
 1273717,DC House opposite park,House,Entire home/apt,4,1.5,2,225,100,2,7,93,flexible,0.15,FALSE
@@ -6165,7 +6165,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16219235,Inaugural Weekend -- Beautiful 2-br Townhouse,Townhouse,Entire home/apt,4,2,2,600,0,2,0,NA,moderate,NA,TRUE
 16612691,DC Apt Availble,Apartment,Entire home/apt,3,1,1,300,0,5,0,NA,flexible,NA,FALSE
 16514576,Cozy studio next to Rock Creek Park,Apartment,Entire home/apt,4,1,0,78,30,2,5,100,strict,1.36,FALSE
-16053784,Columbia Heights House for Inaugration/March on DC,House,Entire home/apt,8,3.5,4,2e3,0,2,0,NA,flexible,NA,TRUE
+16053784,Columbia Heights House for Inaugration/March on DC,House,Entire home/apt,8,3.5,4,2000,0,2,0,NA,flexible,NA,TRUE
 5127184,Spacious Bright 2BR in Mt Pleasant,Apartment,Entire home/apt,6,1,2,148,15,1,148,95,strict,5.44,FALSE
 14319360,Sunny Apartment in A Great Neighborhood!,Apartment,Entire home/apt,4,1,1,90,0,2,4,100,flexible,0.6,FALSE
 16908067,Fairmont Guest Suite,Apartment,Entire home/apt,4,1,1,98,25,1,5,100,flexible,5,FALSE
@@ -6236,7 +6236,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7694188,Beautiful 1BR on Tree-Lined Street,Apartment,Entire home/apt,5,1,1,119,0,1,106,97,flexible,4.96,FALSE
 13462577,"Sunny, peaceful garden apartment in a row house",Apartment,Entire home/apt,2,1,1,109,0,5,3,100,moderate,0.28,FALSE
 16542704,Basement apartment with king bed; Petworth,House,Entire home/apt,4,1,0,85,10,1,12,97,flexible,6.43,FALSE
-8311492,Walking distance from Pope visit,House,Entire home/apt,6,2,3,2e3,0,1,0,NA,flexible,NA,TRUE
+8311492,Walking distance from Pope visit,House,Entire home/apt,6,2,3,2000,0,1,0,NA,flexible,NA,TRUE
 3827715,Urban Treehouse,Apartment,Entire home/apt,4,1,1,106,10,3,50,98,moderate,1.55,FALSE
 26409,Mt. Pleasant Shabby Chic BnB # 3  Close-in DC!,Bed & Breakfast,Private room,2,2.5,1,95,0,2,239,92,strict,2.8,FALSE
 15558473,The Cozy Hideaway 2 Bedroom Apt,Apartment,Entire home/apt,6,1,2,169,15,1,19,99,strict,2.92,FALSE
@@ -6297,7 +6297,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7921362,Newly Renovated Columbia HeightsPad,Condominium,Entire home/apt,4,1,1,142,0,2,15,91,flexible,0.77,FALSE
 16047780,Spacious 1 BR rowhouse in unbeatable location,Condominium,Entire home/apt,4,1,1,74,0,1,1,NA,flexible,0.25,FALSE
 14768793,Bed & Bath with private entrance & terrace,Condominium,Private room,2,1,1,82,0,1,43,92,moderate,5.33,FALSE
-16442358,"Large House in safe, relaxed Mount Pleasant",House,Entire home/apt,10,2.5,5,2e3,0,2,0,NA,flexible,NA,TRUE
+16442358,"Large House in safe, relaxed Mount Pleasant",House,Entire home/apt,10,2.5,5,2000,0,2,0,NA,flexible,NA,TRUE
 4634946,Cozy or King BR in a grand victorian,House,Private room,4,1.5,1,85,40,1,146,96,moderate,5.01,FALSE
 15357866,Spacious Basement Apartment in Columbia Heights,Apartment,Entire home/apt,2,1,1,100,0,1,1,NA,flexible,0.14,FALSE
 3757962,Penthouse w Balcony - Great locale!,Apartment,Entire home/apt,3,2,2,99,0,2,7,94,moderate,0.21,FALSE
@@ -6511,7 +6511,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7413888,Cozy room with parking,House,Private room,2,1,1,65,0,1,1,80,flexible,0.05,FALSE
 15376447,Comfy English Basement by U-Street,House,Entire home/apt,2,1,1,90,10,2,23,87,flexible,3.38,FALSE
 10788926,Cozy chic apartment in lovely Mt. Pleasant,Apartment,Entire home/apt,5,2,2,195,0,2,7,100,strict,0.91,FALSE
-16031775,"Modern, Spacious 4 Bedroom in DC",Apartment,Entire home/apt,8,3,4,1e3,0,1,0,NA,strict,NA,TRUE
+16031775,"Modern, Spacious 4 Bedroom in DC",Apartment,Entire home/apt,8,3,4,1000,0,1,0,NA,strict,NA,TRUE
 5969134,Red-door Rowhouse,House,Entire home/apt,4,1,3,250,0,5,0,NA,strict,NA,FALSE
 13005087,3BD 2.5BR  metro access st parking,House,Entire home/apt,8,2.5,3,268,25,1,56,95,strict,4.75,FALSE
 1549929,[PC214] Luxury 2 Bedroom at View 14,Apartment,Entire home/apt,4,2,2,258,0,7,1,100,super_strict_30,0.04,FALSE
@@ -6527,7 +6527,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16647602,"Convenient, Beautiful 1BR w/ Metro Access",Apartment,Entire home/apt,4,1,1,400,0,1,0,NA,flexible,NA,FALSE
 13279607,Simple & Modern 1BR with Outdoor Patio,Apartment,Entire home/apt,2,1,1,150,0,2,0,NA,flexible,NA,FALSE
 5774184,Beautiful apartment close to metro,Apartment,Entire home/apt,2,1,0,110,0,180,20,97,moderate,0.85,FALSE
-13245086,Automobile Parking Place in Mt. Pleasant,Other,Entire home/apt,2,0,0,1e3,0,1,0,NA,flexible,NA,TRUE
+13245086,Automobile Parking Place in Mt. Pleasant,Other,Entire home/apt,2,0,0,1000,0,1,0,NA,flexible,NA,TRUE
 16095824,Large Bedroom in Grand Historic Corner Rowhouse,House,Private room,2,1.5,1,150,0,2,1,100,strict,0.83,FALSE
 16718340,Mount Pleasant Home,House,Entire home/apt,4,2.5,2,650,0,2,0,NA,moderate,NA,TRUE
 11770336,Best Location in Columbia Heights!,Apartment,Entire home/apt,4,1,1,149,10,1,22,99,moderate,2.66,FALSE
@@ -6832,7 +6832,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15341744,Sunny private cozy room in Glover Park!,House,Private room,1,1,1,51,0,2,25,99,moderate,4.03,FALSE
 16557948,DC visit - Upper Georgetown Apt,Apartment,Entire home/apt,2,1,1,250,0,1,4,80,flexible,1.48,FALSE
 7509652,Glover Park Large One Bedroom,Apartment,Entire home/apt,2,1,1,67,0,2,0,NA,flexible,NA,FALSE
-16253753,Large Condo with private rooftop with great views,Condominium,Entire home/apt,6,2.5,2,1e3,0,3,0,NA,flexible,NA,TRUE
+16253753,Large Condo with private rooftop with great views,Condominium,Entire home/apt,6,2.5,2,1000,0,3,0,NA,flexible,NA,TRUE
 16864817,DC: Inauguration/Women's March,Apartment,Entire home/apt,3,1,1,400,0,1,0,NA,flexible,NA,FALSE
 16211949,Newly Renovated Glover Park House W/ Beautiful Kit,House,Entire home/apt,6,2,3,423,0,3,0,NA,flexible,NA,FALSE
 16335113,"Sunny, Quiet, Clean 2BR Apartment Cleveland Park",Apartment,Entire home/apt,3,1.5,2,150,0,2,3,100,moderate,0.82,FALSE
@@ -6842,7 +6842,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 8540466,Spacious Private Flat/Apartment w/ Secured Parking,Apartment,Entire home/apt,5,2,2,375,75,2,7,94,strict,0.42,FALSE
 11785,Sanctuary near Cathedral,Apartment,Entire home/apt,6,1,1,125,35,1,285,92,strict,3.19,FALSE
 2847596,English basem 1BR near DC Cathedral,Apartment,Entire home/apt,2,1,1,125,0,2,0,NA,flexible,NA,FALSE
-16796787,"unfurnished townhouse, Inaug/Women's March Wknd",Townhouse,Entire home/apt,8,3.5,4,1e3,0,2,0,NA,flexible,NA,TRUE
+16796787,"unfurnished townhouse, Inaug/Women's March Wknd",Townhouse,Entire home/apt,8,3.5,4,1000,0,2,0,NA,flexible,NA,TRUE
 2551645,Glover Park Rowhouse,House,Entire home/apt,4,2.5,2,400,0,1,11,98,flexible,0.29,FALSE
 16318643,Glover Park / Georgetown House,House,Entire home/apt,5,2.5,3,1099,0,3,0,NA,strict,NA,TRUE
 15999394,Townhouse /Glover Park /9-11 sleeps/parking/garden,Townhouse,Entire home/apt,9,2,5,680,0,3,0,NA,strict,NA,TRUE
@@ -6999,7 +6999,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 763569,Romantic Studio in Perfect Location,Apartment,Entire home/apt,2,1,1,99,0,7,9,95,strict,0.19,FALSE
 14059157,Cozy semi basement studio,Apartment,Entire home/apt,2,1,0,115,15,2,6,100,moderate,0.78,FALSE
 15968686,"Cozy NW studio, easy access to downtown",Apartment,Entire home/apt,2,1,0,450,0,3,0,NA,flexible,NA,FALSE
-16689655,5BR/2BA house great for Inauguration/Women's March,House,Entire home/apt,14,2,5,1e3,0,2,0,NA,flexible,NA,TRUE
+16689655,5BR/2BA house great for Inauguration/Women's March,House,Entire home/apt,14,2,5,1000,0,2,0,NA,flexible,NA,TRUE
 16686484,"Large, Bright & Clean; Steps from Nat'l Cathedral",House,Private room,3,1,0,135,35,2,0,NA,flexible,NA,FALSE
 16724489,Cleveland Park (Red Line Metro) - 1br,Apartment,Entire home/apt,2,1,1,250,25,2,0,NA,flexible,NA,FALSE
 8327542,Studio apartment near metro,Apartment,Entire home/apt,1,1,0,54,0,1,1,100,flexible,0.05,FALSE
@@ -7034,7 +7034,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17526235,Newly Renovated 2 Bdr Apartment - Woodley Park,Apartment,Entire home/apt,4,1,2,175,0,2,15,100,flexible,7.26,FALSE
 18476523,Beautiful apartment steps from the National Zoo,Apartment,Entire home/apt,2,1,1,85,0,2,0,NA,flexible,NA,FALSE
 11495115,Macanudo HOMEY,Apartment,Entire home/apt,4,2,2,108,0,4,11,98,strict,0.78,FALSE
-16739161,"Beautiful, single family house in the heart of DC",House,Entire home/apt,4,1,2,1e3,0,2,0,NA,flexible,NA,TRUE
+16739161,"Beautiful, single family house in the heart of DC",House,Entire home/apt,4,1,2,1000,0,2,0,NA,flexible,NA,TRUE
 4156199,Full 1BR - Windows on Wisconsin Ave,Apartment,Entire home/apt,2,1,1,125,0,2,12,92,flexible,0.38,FALSE
 10316077,Cozy DC House near Zoo & Metro,House,Private room,2,1,1,69,25,1,46,97,moderate,3.09,FALSE
 9199748,Nice and comfy apt in Nat. Cathedra,Apartment,Entire home/apt,3,1,1,120,10,10,1,100,moderate,0.05,FALSE
@@ -7056,7 +7056,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 9750676,Beautiful apartment in Cleveland Park,Apartment,Entire home/apt,5,1,1,350,10,1,0,NA,flexible,NA,FALSE
 13878076,Luxury air mattress in Cleveland Park studio,Apartment,Shared room,2,1,1,50,0,1,1,100,moderate,0.12,FALSE
 14368568,Room/Private Bath - Great upscale NW DC Location!,House,Private room,2,1,1,96,45,1,16,97,flexible,1.94,FALSE
-16791874,Kennedy Warren Apartments in Woodley Park,Apartment,Entire home/apt,4,1.5,2,1e3,0,3,0,NA,flexible,NA,TRUE
+16791874,Kennedy Warren Apartments in Woodley Park,Apartment,Entire home/apt,4,1.5,2,1000,0,3,0,NA,flexible,NA,TRUE
 2537740,"Close to metro, closer to hot tub",Apartment,Entire home/apt,6,1,1,150,25,2,130,94,flexible,3.55,FALSE
 16556579,Bright top-floor condo in Woodley Park,Apartment,Entire home/apt,4,1,1,350,0,3,0,NA,flexible,NA,FALSE
 8568527,A Perfect location in Washington DC,Apartment,Entire home/apt,2,1,0,100,50,1,90,95,moderate,4.62,FALSE
@@ -7135,7 +7135,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 14065304,Red Door Townhouse,House,Entire home/apt,4,2,3,220,25,3,5,100,strict,1.36,FALSE
 79610,Capitol Hill Location with Parking,Apartment,Entire home/apt,2,1,1,128,0,1,88,96,flexible,1.31,FALSE
 16192035,Southern Feel on the Hill,House,Entire home/apt,8,2,3,995,0,3,0,NA,strict,NA,TRUE
-16613859,"Contemporary Luxury Condo, walk to metro",Apartment,Entire home/apt,7,2,2,1e3,0,2,1,100,moderate,0.83,TRUE
+16613859,"Contemporary Luxury Condo, walk to metro",Apartment,Entire home/apt,7,2,2,1000,0,2,1,100,moderate,0.83,TRUE
 16360281,Beautiful Pet-Friendly Capitol Hill House,Townhouse,Entire home/apt,5,1.5,2,950,0,2,0,NA,flexible,NA,TRUE
 15955991,"Modern, beautiful Capitol Hill home",House,Entire home/apt,5,2,2,700,0,2,1,100,strict,0.27,TRUE
 6044794,"Capitol Hill 2BR, Close to Metro",House,Entire home/apt,5,1.5,2,199,0,4,6,100,strict,0.27,FALSE
@@ -7152,7 +7152,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15175135,"Lovely, Convenient, Capitol Hill",Apartment,Entire home/apt,4,1,1,150,0,1,2,100,flexible,0.26,FALSE
 18189814,Family-friendly digs on the Hill!,Townhouse,Entire home/apt,6,2.5,2,140,10,7,0,NA,strict,NA,FALSE
 16751215,WOMEN'S MARCH Row House on Capitol Hill - Sleeps 6,Townhouse,Entire home/apt,6,1.5,2,1250,0,3,0,NA,flexible,NA,TRUE
-16228804,3 BR Townhouse Walking Distance To Inauguration!,Townhouse,Entire home/apt,10,1.5,3,1e3,0,2,0,NA,moderate,NA,TRUE
+16228804,3 BR Townhouse Walking Distance To Inauguration!,Townhouse,Entire home/apt,10,1.5,3,1000,0,2,0,NA,moderate,NA,TRUE
 1075426,Home In The Shadow of The Capitol,House,Entire home/apt,6,2,3,239,50,1,8,84,strict,0.18,FALSE
 16674152,Light-filled 1 BR apartment on Capitol Hill,Apartment,Entire home/apt,4,1,2,800,0,1,0,NA,flexible,NA,TRUE
 13072071,Capitol Hill-Historic Eastern Market,House,Entire home/apt,1,2.5,1,69,0,2,0,NA,flexible,NA,FALSE
@@ -7185,10 +7185,10 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16585008,"Capitol Hill,6 block from Capitol,Metro block away",House,Entire home/apt,8,2,3,850,0,2,0,NA,flexible,NA,TRUE
 13078902,"Apt 3A Block to Capitol, great spot, great place",Apartment,Entire home/apt,3,1,0,165,35,1,0,NA,strict,NA,FALSE
 15995281,2BR Condo in Heart of Capitol Hill,Condominium,Entire home/apt,4,2,2,550,0,2,1,100,strict,0.27,TRUE
-16585195,Cozy & Modern 3BR with View of Monuments,House,Entire home/apt,8,2.5,3,2e3,0,1,1,100,moderate,0.28,TRUE
+16585195,Cozy & Modern 3BR with View of Monuments,House,Entire home/apt,8,2.5,3,2000,0,1,1,100,moderate,0.28,TRUE
 9114159,Charming 1 Bedroom - Next to Metro,Apartment,Entire home/apt,5,1,1,103,10,1,74,96,strict,4.37,FALSE
 12784285,Capitol Hill Studio on the Park!,Apartment,Entire home/apt,2,1,0,119,0,2,40,97,moderate,3.42,FALSE
-16192278,Private Capitol Hill Home Perfect for Inauguration,House,Entire home/apt,4,1.5,2,2e3,300,4,0,NA,strict,NA,TRUE
+16192278,Private Capitol Hill Home Perfect for Inauguration,House,Entire home/apt,4,1.5,2,2000,300,4,0,NA,strict,NA,TRUE
 8098656,Stylish HGTV Capitol Hill Row House,House,Entire home/apt,6,3.5,3,350,0,4,0,NA,flexible,NA,FALSE
 3806145,Great location-- historic rowhouse!,Apartment,Entire home/apt,3,1,2,130,0,2,21,98,flexible,1.39,FALSE
 9825788,Comfortable House on Capitol Hill,House,Entire home/apt,2,2.5,2,80,0,7,1,60,moderate,0.07,FALSE
@@ -7233,7 +7233,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 7678383,Lincoln Park Carriage House,House,Entire home/apt,6,2.5,3,400,0,2,2,90,flexible,0.15,FALSE
 4499968,Eastern Market Studio on the Hill,Apartment,Entire home/apt,3,1,0,175,25,3,1,80,strict,0.04,FALSE
 15673900,Beautifully Renovated Townhouse in Capitol Hill,Townhouse,Entire home/apt,4,1.5,2,275,0,2,1,100,flexible,0.27,FALSE
-16689720,Perfect Inauguration Location,Apartment,Entire home/apt,4,1,1,1e3,0,3,0,NA,flexible,NA,TRUE
+16689720,Perfect Inauguration Location,Apartment,Entire home/apt,4,1,1,1000,0,3,0,NA,flexible,NA,TRUE
 16329617,"Capitol Hill Room, Comfortable Stay",House,Private room,2,1,1,90,15,1,3,100,flexible,0.81,FALSE
 16041824,Prime Location Inauguration! Capitol Hill Rowhouse,House,Entire home/apt,10,3,3,862,0,1,2,100,strict,0.45,TRUE
 10038536,Awesome modern house on Capitol Hil,House,Entire home/apt,6,3.5,3,299,0,3,58,100,moderate,3.73,FALSE
@@ -7242,7 +7242,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16101136,Bedroom in Historic Capitol Hill Home,House,Private room,1,1,1,115,30,5,0,NA,strict,NA,FALSE
 11809415,Prime Loc. Quiet 1 bdrm priv bath,House,Private room,1,1,1,85,0,3,10,96,moderate,0.86,FALSE
 15970166,Capitol Hill parking and outdoor area,Apartment,Entire home/apt,4,1,1,200,0,2,1,100,moderate,0.27,FALSE
-16363642,"Capitol Hill, Two Blocks from U.S. Capitol",Apartment,Entire home/apt,4,1,1,1e3,0,2,0,NA,flexible,NA,TRUE
+16363642,"Capitol Hill, Two Blocks from U.S. Capitol",Apartment,Entire home/apt,4,1,1,1000,0,2,0,NA,flexible,NA,TRUE
 8695964,Brumidi B&B - Master Suite,Bed & Breakfast,Private room,2,1,1,210,0,2,6,90,strict,0.43,FALSE
 16724221,Affordable Cap. Hill Apt.,Apartment,Entire home/apt,6,1,2,69,0,1,0,NA,strict,NA,FALSE
 16462566,Beautiful apartment off historic East Capitol St.,Apartment,Entire home/apt,5,1,1,109,0,2,2,100,strict,0.44,FALSE
@@ -7252,7 +7252,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16069192,Fantastic Location - Beautiful 3 BR/2 BA Home,Townhouse,Entire home/apt,6,2,3,300,30,2,11,100,strict,3,FALSE
 12563328,Entire Capitol Hill Apartment.,Apartment,Entire home/apt,3,1,1,100,0,1,8,100,flexible,0.63,FALSE
 15807401,Gorgeous Capitol Hill Apt w/Parking,Apartment,Entire home/apt,2,1,1,115,15,1,54,98,strict,8.66,FALSE
-865732,Gorgeous Inauguration Rental,House,Entire home/apt,6,NA,3,2e3,0,4,0,NA,strict,NA,TRUE
+865732,Gorgeous Inauguration Rental,House,Entire home/apt,6,NA,3,2000,0,4,0,NA,strict,NA,TRUE
 16659987,Wonderful 2Bedroom Rowhouse close to Inauguration,House,Entire home/apt,6,1.5,2,1350,0,2,0,NA,flexible,NA,TRUE
 16602007,Couch on Capitol Hill,House,Shared room,1,1,1,60,25,1,3,93,flexible,1.14,FALSE
 11712092,Perfect location family-friendly Capitol Hill Home,House,Entire home/apt,6,2,3,300,15,1,54,92,strict,4.29,FALSE
@@ -7284,7 +7284,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 246413,CapitolHil Bedrm + private sideroom,House,Private room,3,1,1,75,15,1,248,97,strict,3.99,FALSE
 4342809,Room with en suite in beautiful DC,House,Private room,2,1,1,90,0,1,20,96,flexible,0.66,FALSE
 18007140,1 Bedroom in Historic Capitol Hill Row House,House,Private room,2,1,1,135,0,2,4,100,moderate,4,FALSE
-16598388,"Capitol Hill home steps from metro/grocery, bars!",House,Entire home/apt,10,2.5,2,2e3,0,10,0,NA,strict,NA,TRUE
+16598388,"Capitol Hill home steps from metro/grocery, bars!",House,Entire home/apt,10,2.5,2,2000,0,10,0,NA,strict,NA,TRUE
 542144,Spacious and sunny 1BR apartment by Eastern Market,Apartment,Entire home/apt,2,1,1,161,0,2,10,100,strict,0.23,FALSE
 837148,Lovely Capitol Hill 1BR Apartment,Apartment,Entire home/apt,5,1,1,145,20,3,94,97,strict,1.79,FALSE
 11093759,Loft Carriage House on the Capitol!,Apartment,Entire home/apt,8,1,2,295,5,3,47,93,strict,3.12,FALSE
@@ -7357,7 +7357,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 15985071,Cozy English Bsmt near Metro and Eastern Market,Apartment,Entire home/apt,4,1,1,98,0,1,29,99,strict,5.47,FALSE
 1582862,English Basement in Capitol Hill DC,Apartment,Entire home/apt,4,1,1,145,10,3,70,97,strict,1.58,FALSE
 14576717,Charming Apartment in Capitol Hill,Apartment,Entire home/apt,4,1,2,165,25,5,13,98,moderate,1.74,FALSE
-16477504,Large Home on Capitol Hill,House,Entire home/apt,10,3.5,4,3e3,0,1,0,NA,flexible,NA,TRUE
+16477504,Large Home on Capitol Hill,House,Entire home/apt,10,3.5,4,3000,0,1,0,NA,flexible,NA,TRUE
 16477900,Cozy Home in Capitol Hill,House,Entire home/apt,6,2.5,3,1500,0,2,0,NA,strict,NA,TRUE
 16443343,Cozy 3BD Row House near Capitol Hill,House,Entire home/apt,4,1.5,3,600,0,1,0,NA,flexible,NA,TRUE
 4484805,Cozy room on Capital Hill,House,Private room,1,1,1,85,29,1,58,97,strict,1.91,FALSE
@@ -7495,7 +7495,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16179637,Private Row-Home Blocks from the Capitol.,Apartment,Entire home/apt,5,1.5,2,500,0,1,0,NA,flexible,NA,FALSE
 17840858,"Beautiful, close-in, light-filled Capitol Hill apt",House,Entire home/apt,2,1,0,150,0,1,12,100,flexible,9,FALSE
 14212111,Perfectly Located Studio on Capitol Hill,Apartment,Entire home/apt,3,1,0,90,0,2,7,100,strict,0.76,FALSE
-16440243,"Beautiful Capitol Hill home, walk to inauguration",House,Entire home/apt,8,3.5,4,5e3,0,1,0,NA,flexible,NA,TRUE
+16440243,"Beautiful Capitol Hill home, walk to inauguration",House,Entire home/apt,8,3.5,4,5000,0,1,0,NA,flexible,NA,TRUE
 6019861,Quaint One Bedroom Apartment in Capitol Hill,Apartment,Entire home/apt,4,1,1,157,0,1,12,97,strict,8.78,FALSE
 16964336,Capitol Hill Carriage House,House,Entire home/apt,6,1.5,2,200,0,2,1,100,flexible,0.57,FALSE
 876290,"Capitol Hill Victorian, large brdm",House,Private room,2,1,1,95,0,1,175,97,strict,3.54,FALSE
@@ -7552,7 +7552,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16766623,Brand New Apt-Pennsylvania Avenue-In Capitol Hill!,Apartment,Entire home/apt,4,1,1,130,0,2,18,91,flexible,5.19,FALSE
 15324810,Charming Studio in Capitol Hill!,Apartment,Entire home/apt,2,1,0,180,0,1,6,100,flexible,0.87,FALSE
 16600552,Capitol Hill Inauguration Rental,House,Entire home/apt,5,1.5,2,750,0,3,0,NA,moderate,NA,TRUE
-16332673,Sun-drenched home steps to Capitol,House,Entire home/apt,8,1.5,3,2e3,0,2,0,NA,flexible,NA,TRUE
+16332673,Sun-drenched home steps to Capitol,House,Entire home/apt,8,1.5,3,2000,0,2,0,NA,flexible,NA,TRUE
 16687656,Beautiful Capitol Hill Home - 1 BR,Apartment,Private room,2,1,1,150,0,2,2,100,moderate,2,FALSE
 5164213,Charming 1-br apartment - walk to the Capitol,Apartment,Entire home/apt,3,1,1,70,10,2,5,80,strict,0.19,FALSE
 14470283,Cozy 2-Story Capitol Hill Condo,Condominium,Shared room,2,1,1,50,15,1,4,100,flexible,0.5,FALSE
@@ -7572,7 +7572,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 4375603,Eastern Market Retreat,Apartment,Entire home/apt,2,1,0,115,20,2,62,96,strict,2.06,FALSE
 5850173,A Capitol Hill Sweet Spot,Apartment,Entire home/apt,2,1,1,150,0,7,1,100,flexible,0.05,FALSE
 5393414,English Basement on Capitol Hill,House,Entire home/apt,4,1,1,160,25,2,74,96,moderate,2.81,FALSE
-16042165,"3br; Walk to Capitol, near Metro, & w/ parking!",House,Entire home/apt,8,2.5,3,3e3,0,3,0,NA,moderate,NA,TRUE
+16042165,"3br; Walk to Capitol, near Metro, & w/ parking!",House,Entire home/apt,8,2.5,3,3000,0,3,0,NA,moderate,NA,TRUE
 9717797,"Capitol Hill private room, 1 block to everything!",House,Private room,2,1.5,1,70,0,3,48,99,strict,3.1,FALSE
 5718723,"Bright historic Capitol Hill home, family-friendly",House,Entire home/apt,6,2.5,3,350,25,2,3,100,strict,0.13,FALSE
 9028271,Hill Flats DC 2 - WALK EVERYWHERE!,Apartment,Entire home/apt,5,1,1,170,25,2,7,86,strict,0.39,FALSE
@@ -7649,7 +7649,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 6072414,"Gorgeous, historic house blocks from Capitol/Metro",House,Entire home/apt,16,4.5,5,395,50,3,5,100,strict,0.24,FALSE
 9611367,Sunny room in the heart of DC,House,Private room,2,1.5,1,75,15,2,9,93,strict,0.64,FALSE
 16557150,Great house for inauguration weekend near Capitol,House,Entire home/apt,8,2.5,3,800,0,2,1,100,flexible,0.27,TRUE
-16427050,Great Location for the Inauguration!,House,Entire home/apt,8,2.5,3,2e3,0,3,0,NA,flexible,NA,TRUE
+16427050,Great Location for the Inauguration!,House,Entire home/apt,8,2.5,3,2000,0,3,0,NA,flexible,NA,TRUE
 4106108,Ideal location +stay in a landmark!,House,Entire home/apt,4,1.5,2,249,25,4,62,100,strict,1.96,FALSE
 18471909,"Best location! Cozy, comfy Capitol Hill apartment",Apartment,Entire home/apt,3,1,0,150,25,1,0,NA,moderate,NA,FALSE
 3876473,Modern Lincoln Park Studio,Apartment,Entire home/apt,3,1,0,83,10,1,143,94,moderate,4.38,FALSE
@@ -7744,7 +7744,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 16781086,Cozy One Bedroom Apartment on Capitol Hill,Apartment,Entire home/apt,4,1,1,589,0,1,0,NA,flexible,NA,TRUE
 9113304,"Walk to Metro, Restaurants & US Cap",Townhouse,Entire home/apt,6,2,3,239,0,3,48,98,strict,2.68,FALSE
 14388916,Capitol Hill Master Suite-Great Location,House,Private room,2,1,1,75,0,1,12,93,moderate,1.65,FALSE
-16780932,Capitol Hill rowhouse steps from Inauguration,House,Entire home/apt,10,3.5,5,1e3,0,3,0,NA,flexible,NA,TRUE
+16780932,Capitol Hill rowhouse steps from Inauguration,House,Entire home/apt,10,3.5,5,1000,0,3,0,NA,flexible,NA,TRUE
 14552591,"Capitol Hill East Flat, Steps to Metro",Apartment,Entire home/apt,4,1,1,99,10,1,25,100,moderate,4.52,FALSE
 13110758,Fantastic + Fun In Capitol Hill!,Townhouse,Shared room,3,1,1,60,20,1,36,97,moderate,3.22,FALSE
 9014652,Cozy Capitol Hill Studio Retreat,Apartment,Entire home/apt,2,1,0,110,0,2,129,98,moderate,6.94,FALSE
@@ -7755,7 +7755,7 @@ id,name,property_type,room_type,accommodates,bathrooms,bedrooms,price,extra_peop
 17238802,Conchita's Room,House,Private room,2,1,1,85,0,1,1,100,flexible,1,FALSE
 16812781,Basement Apartment with parking,Apartment,Entire home/apt,2,1,1,100,0,3,4,100,flexible,2.03,FALSE
 10387799,Charming Capitol Hill Apt. in Victorian Row house,Apartment,Entire home/apt,5,1,1,52,25,2,9,100,moderate,0.59,FALSE
-15073524,"Fab house on Capitol Hill, walk to inauguration",Townhouse,Entire home/apt,6,2.5,3,1e3,250,3,0,NA,strict,NA,TRUE
+15073524,"Fab house on Capitol Hill, walk to inauguration",Townhouse,Entire home/apt,6,2.5,3,1000,250,3,0,NA,strict,NA,TRUE
 10453124,Capitol Hill Apartment with Parking,Apartment,Entire home/apt,2,1,1,109,0,2,11,100,moderate,0.96,FALSE
 1573399,"a Capitol Place, Apt. on the Hill",Apartment,Entire home/apt,6,1,2,195,0,3,46,91,strict,1.08,FALSE
 15734466,Historic & Charming 2-Bedroom w/parking,Apartment,Entire home/apt,5,1,2,155,20,1,18,96,strict,3.02,FALSE
