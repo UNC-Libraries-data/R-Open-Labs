@@ -23,7 +23,7 @@ library(tidyverse)
 Cleaned data courtesy of the [Tidy Tuesday project](https://github.com/rfordatascience/tidytuesday)
 
 
-##Today
+## Today
 
 This workshop aims to cover:
 
@@ -78,9 +78,12 @@ RStudio will create a new R Markdown document filled with examples of code chunk
 ## Header
 ![](figures/header.png)
 At the top of the page is the optional Yet Another Markup Language (YAML) header. This header is a powerful way to edit the formatting of your report (e.g. figure dimensions, presence of a table of contents, identifying the location of a bibliography file).
+
 ## Code Chunks
 ![](figures/code chunk.png)
-R code chunks are surrounded by ` ``` `. Inside the curly braces, it specifies that this code chunk will use R code (other programming languages are supported), then it names this chunk "setup". Each code chunk in your document has to have a unique name. After the name, you specify options on whether you want the code or its results to be displayed in the final document. For this chunk, the `include=FALSE` options tells R Markdown that we want this code to run, but we do not want it to be displayed in the final HTML document. The R code inside the chunk `knitr::opts_chunk$set(echo = TRUE)` tells R Markdown to display the R code along with the results of the code in the HTML output for all code chunks below.
+R code chunks are surrounded by ` ``` `. Inside the curly braces, it specifies that this code chunk will use R code (other programming languages are supported), then it names this chunk "setup".  Names are optional.
+
+After the name, you specify options on whether you want the code or its results to be displayed in the final document. For this chunk, the `include=FALSE` options tells R Markdown that we want this code to run, but we do not want it to be displayed in the final HTML document. The R code inside the chunk `knitr::opts_chunk$set(echo = TRUE)` tells R Markdown to display the R code along with the results of the code in the HTML output for **all** code chunks below.
 
 ## Formatted Text
 ![](figures/text.png)
@@ -98,7 +101,7 @@ https://bookdown.org/yihui/rmarkdown
 
 ## Generating the HTML document
 
-This is quite straightforward. Click the **Knit** button, and R Studio will generate an HTML report based on your R Markdown document.
+Click the **Knit** button, and R Studio will generate an HTML report based on your R Markdown document.
 
 Let's try creating an R Markdown document to explore the US cheese consumption data and review what we learned in weeks 1-3.
 
@@ -109,18 +112,17 @@ consumption <- read_csv("data/clean_cheese.csv")
 
 ## Useful functions for exploring dataframes
 
+Include one of the following in your document.  We've used `eval = FALSE` here to prevent this code chunk from running!
 
-
-```{r misc}
+```{r misc, eval=FALSE}
 head(consumption)
 tail(consumption)
 summary(consumption)
-
 ```
 
-## Tables and knitr::kable
+## Tables and `knitr::kable`
 
-By default, R Markdown will display tables the way they appear in the R console. We can use knitr::kable function to get cleaner tables.
+By default, R Markdown will display tables the way they appear in the R console. We can use `knitr::kable function` to get cleaner tables.
 
 ```{r kable}
 knitr::kable(head(consumption), caption = "The first six rows of the cheese consumption data")
@@ -130,9 +132,9 @@ knitr::kable(head(consumption), caption = "The first six rows of the cheese cons
 ## Adding a new variable
 We've covered two ways to add a new variable to a dataframe.
 
-**Note:** R allows non-standard variable names that include spaces, parentheses, and other special characters. The way to refer to variable names that contain wonky symbols is to use the backtick symbol ` ` `, found at the top left of your keyboard below the tilde ` ~ `.
+**Note:** R allows non-standard variable names that include spaces, parentheses, and other special characters. The way to refer to variable names that contain wonky symbols is to use the backtick symbol `` ` ``, found at the top left of your keyboard with the tilde ` ~ `.
 
-The base R way covered in lesson 1 using the $ operator and with() function
+The base R way covered in lesson 1 using the `$` operator and `with()` function
 
 ```{r ratio1, error=TRUE}
 #Base R way, covered in lesson 1
@@ -145,7 +147,7 @@ Oops. Better check the variable names.
 consumption$amer_ital_ratio1 <- with(consumption, `Total American Chese` / `Total Italian Cheese`)
 ```
 
-The tidyverse way covered in lesson 3 using the mutate() function
+The tidyverse way covered in lesson 3 using the `mutate()` function
 
 ```{r ratio3}
 #Tidyverse way, covered in lesson 3
