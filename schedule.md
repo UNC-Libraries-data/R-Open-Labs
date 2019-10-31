@@ -7,7 +7,7 @@
 |5|October 3|Strings and Factors|Lorin||
 |6|October 10|Merge and Reshaping|Matt||
 | |October 17|FALL BREAK|||
-|7|October 24|Reproducible Reports|Nuvan||
+|7|October 24|Reproducible Reports|~~Nuvan~~ Matt||
 |8|October 31|Functions and Conditionals|Lorin||
-|9|November 7|Loops and Error Handling|Matt||
+|9|November 7|Loops and Error Handling|~~Matt~~ Nuvan||
 |10|November 14|Models|Matt||
