@@ -1,0 +1,179 @@
+---
+title: "Extra - Predictive Modeling with `caret`"
+output: 
+  html_document:
+    toc: false
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Necessary Packages
+
+You may need to install `caret` with `install.packages("caret")` before running the next block.
+
+```{r warning=FALSE, message=FALSE}
+library(caret)
+```
+
+## What's predictive modeling?
+
+Predictive modeling, as the name implies, is mainly concerned with making good predictions without worrying about making inferences about how a population works (as in causal analysis).  Remember that "correlation does not imply causation", but correlation can help us make useful predictions.
+
+## `caret` Classification and Regression Training
+
+The `caret` package provides a uniform interface for fitting 237 different models.
+
+We'll use the built-in dataset `Sacramento`, containing data on 932 home sales in Sacramento, CA over a five-day period.
+
+```{r}
+data(Sacramento)
+str(Sacramento)
+```
+
+First we'll split our dataset into two parts:
+
+* A `training` dataset we'll use to **fit** our models.
+* A `testing` dataset we'll set aside for comparison after fitting the models.  This helps avoid *overfitting* the `training` set by examining how it fits unseen data.
+
+```{r}
+set.seed(12345)
+train.select <- createDataPartition(Sacramento$type, p = .8, list = FALSE)
+training <- Sacramento[ train.select,]
+testing  <- Sacramento[-train.select,]
+```
+
+Many of the more complicated models we can fit with `caret` need to determine optimal settings for various "tuning" parameters.
+
+We can use Repeated k-fold Cross Validation (among other methods) to determine the best values for the tuning parameters within default ranges.  In practice you may want to supply your own grid of possible tuning parameter values.  [Read more here](http://topepo.github.io/caret/model-training-and-tuning.html#basic-parameter-tuning).
+
+```{r}
+fitControl <- trainControl(## 5-fold Cross Validation
+                           method = "repeatedcv",
+                           number = 5,
+                           ## repeated ten times
+                           repeats = 10)
+```
+
+The `train` function is used to fit models.  The [full list of models is available here](http://topepo.github.io/caret/available-models.html).  You can get more informtation about a model and its tuning parameters with `getModelInfo(<model name>)`.
+
+We'll fit several example models all attempting to predict home price from all of the other variables except zip code and city (these have many unique values and complicate the models).
+
+```{r results="hide", warning=FALSE,message=FALSE}
+#Ordinary Least Squares
+set.seed(8947) # ensures paired resampling later
+lmfit <- train(price ~ .-zip-city, data = training, 
+                 method = "lm",
+                 trControl = fitControl)
+#Robust Linear Model
+set.seed(8947) # ensures paired resampling later
+robustfit <- train(price ~ .-zip-city, data = training, 
+                 method = "rlm", 
+                 trControl = fitControl,
+                 verbose = FALSE)
+#Random Forests
+set.seed(8947) # ensures paired resampling later
+rffit <- train(price ~ .-zip-city, data = training, 
+                 method = "ranger", 
+                 trControl = fitControl,
+                 verbose = FALSE)
+#XGBoost (a refinement of Random Forests) - this is the slowest model!
+set.seed(8947) # ensures paired resampling later
+xgbfit <- train(price ~ .-zip-city, data = training,
+                 method = "xgbTree",
+                 trControl = fitControl,
+                 verbose = FALSE)
+#Support Vector Machine with Linear Kernel
+set.seed(8947) # ensures paired resampling later
+svmfit <- train(price ~ .-zip-city, data = training, 
+                 method = "svmLinear", 
+                 trControl = fitControl,
+                 verbose = FALSE)
+```
+
+**Notes**
+
+* `caret` is just a wrapper for fitting models - it does not include functions to fit many of these models.  When fitting a model you may see the following message:
+```
+1 package is needed for this model and is not installed. (<package-name>). Would you like to try to install it now?
+1: yes
+2: no
+```
+Press 1 and hit enter to install the package and fit the model.  Packages needed are listed in the [Available models list](http://topepo.github.io/caret/available-models.html).
+
+We've intentionally made sure a few things are consistent across our models to make comparisons easier:
+
+* Each model has the same response variable, `price`.
+
+To ensure we can compare between models with [*resampling*](https://en.wikipedia.org/wiki/Resampling_(statistics)):
+
+* Each model is fit using the same `trControl=fitControl` setting.
+* Each model has the seed set in the same way before each `train` call.  
+    + I've used `set.seed(8947)`; the number `8947` is unimportant, it just needs to be consistent.
+
+
+### Resampling
+
+The `resamples` function considers the models against datasets simulated by sampling from the training set with replacement.  You may be familiar with the related concept of "bootstrapping".
+
+`caret` gives us three different indices to compare these models:
+
+* Mean Absolute Error (MAE)
+* Root Mean Squared Error (RMSE)
+* R Squared ([See note on calculation here](https://topepo.github.io/caret/measuring-performance.html#reg))
+
+These track how well the model fits the data in different ways.  Without getting into the details of how they're calculated, we'll  use the rules of thumb that:
+
+* **Lower** Errors (MAE and RMSE) are better
+* **Higher** R-squared values are better
+
+Note: `caret` provides different metrics (Kappa and accuracy) for classification (i.e. categorical outcomes) tasks.
+
+```{r}
+results <- resamples(list("OLS"=lmfit,"Random.Forest"=rffit,
+                          "Robust.LM"=robustfit,"SVM"=svmfit,
+                          "xgbTree"=xgbfit))
+summary(results)
+```
+
+We can also present these results in graphical form:
+
+```{r, fig.height=4, fig.width=12}
+bwplot(results,scales=list(relation="free"))
+```
+
+Remember that these results are across a number of resamples, hence the boxplots and not a single value per model!
+
+The random forest and xgbTree seem to be doing well here, but it's not clear that one is clearly outperforming the other.
+
+### Out of Sample Performance
+
+Let's revisit our `testing` data.  
+
+We can use our models to generate predictions with `predict`, then compare their performance with `postResample`.
+
+```{r}
+lm.test <- predict(lmfit,testing)
+robust.test <- predict(robustfit,testing)
+rf.test <- predict(rffit,testing)
+xgb.test <- predict(xgbfit,testing)
+svm.test <- predict(svmfit,testing)
+train.results <- rbind(
+  "LM"=postResample(pred=lm.test,obs=testing$price),
+  "Robust"=postResample(pred=robust.test,obs=testing$price),
+  "Random Forest"=postResample(pred=rf.test,obs=testing$price),
+  "SVM"=postResample(pred=svm.test,obs=testing$price),
+  "xgbTree"=postResample(pred=xgb.test,obs=testing$price)
+)
+print(train.results)
+```
+
+Which model seems to do best?
+
+## Learn more
+
+* [Documentation](http://topepo.github.io/caret/index.html)
+* [Applied Predictive Modeling](https://search.lib.unc.edu/search?R=UNCb7414199)
+
