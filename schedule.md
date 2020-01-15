@@ -18,8 +18,8 @@
 
 |Week|Date|Topic|Instructor|Notes|
 |-|-|-|-|-|
-|1|January 23|Introduction|||
-|2|January 30|Workflows||Matt Out|
+|1|January 23|Introduction|Matt||
+|2|January 30|Workflows|Lorin|Matt Out|
 |3|February 6|Data Transformations|||
 |4|February 13|Exploratory Data Analysis|||
 |5|February 20|Strings and Factors|||
