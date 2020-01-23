@@ -225,7 +225,7 @@ Let's figure out why this works using R's help system:
 
 Here we know that `as.Date` is a function, so we'll use a single question mark.
 
-```{r help1}
+```{r help1, eval=FALSE}
 
 ?as.Date
 #equivalent to help("as.Date")
@@ -234,7 +234,7 @@ Here we know that `as.Date` is a function, so we'll use a single question mark.
 
 So `as.Date()` is a function that can take a character representation of a date and convert it into a Date object (or vice versa).
 
-```{r help2}
+```{r help2, eval=FALSE}
 ?with
 ```
 
@@ -246,7 +246,7 @@ airquality$Date2 <- as.Date(paste(airquality$Year, airquality$Month, airquality$
 
 We can check the dataframe viewer to see that the results are indentical or we can use the `all.equal()` function.
 
-```{r help3}
+```{r help3, eval=FALSE}
 ?paste
 ```
 
