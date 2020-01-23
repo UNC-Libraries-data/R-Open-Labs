@@ -17,13 +17,13 @@ output:
 ```
 
 
-##What's an Open Lab?
+## What's an Open Lab?
 
 Open labs are (mostly) unstructured workshops designed to help you learn R. Each week brief (30-45 minutes) instruction will be provided, followed by time to practice, work together or alone on learning other topics or your own projects, ask questions and get help. Participants can join the lab any time during the session, and are welcome to work on unrelated projects.
 
 The Open Labs model was established by our colleagues at Columbia University, and we've adapted it to UNC. Our goal is to connect researchers and foster a community for R users on campus.
 
-###Why R?
+### Why R?
 
 R is widely used in statistics and has become quite popular in the biomedical and social sciences over the last decade. R can be used as either a programming language (like Python or Java) or as a standard statistical package (like Stata, SAS, or SPSS).
 
@@ -47,7 +47,7 @@ Disadvantages
     + No commercial hotline for help
     + Support and libraries from other users varies by popularity of method/area of study.
 
-###Learning objectives for the semester
+### Learning objectives for the semester
 
 R is a big tent that supports a variety of programming styles and tasks, so we can't possibly cover all of it. We will focus instruction on using R for analyzing data. If you are interested in software development in R, you can use the unstructured time for help with that. We'll also provide links to some great online resources for software development in R.
 
@@ -71,7 +71,7 @@ This introductory workshop aims to:
     + Data types
 * [R for Data Science Chapters 1-3](http://r4ds.had.co.nz/introduction.html)
 
-###Installation
+### Installation
 
 1) Download R at https://cran.r-project.org/
 
@@ -86,7 +86,7 @@ This introductory workshop aims to:
 3) Download R Studio at https://www.rstudio.com/products/rstudio/download/#download
 
 
-###R Studio orientation
+### R Studio orientation
 
 ![](figures/rstudio.png)
 
@@ -134,7 +134,7 @@ The other panes provided in R Studio are provided to make some coding tasks easi
 
 First, we need to load the tidyverse package. (Note, the terms package and library are interchangeable). You can install the library using the install.packages command or through the Packages tab on the lower right pane. Once you have it installed, you can load this library with the following code:
 
-```{r tidyverse}
+```{r tidyverse, warning=FALSE}
 #install.packages("tidyverse")
 library(tidyverse)
 ```
