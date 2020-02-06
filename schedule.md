@@ -22,8 +22,8 @@
 |2|January 30|Workflows|Lorin|Matt Out|
 |3|February 6|Data Transformations|Nuvan||
 |4|February 13|Exploratory Data Analysis|Matt||
-|5|February 20|Strings and Factors|Lorin||
-|6|February 27|Merge and Reshaping|Nuvan||
+|5|February 20|Strings and Factors|Nuvan||
+|6|February 27|Merge and Reshaping|Lorin||
 |7|March 5|Reproducible Reports|Matt||
 | |March 12|SPRING BREAK|||
 |8|March 19|Functions and Conditionals|Lorin||
