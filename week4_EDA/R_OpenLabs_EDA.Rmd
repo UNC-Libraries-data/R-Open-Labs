@@ -115,7 +115,7 @@ We can use `str` and `summary` to learn more about each of these 36 variables. W
 str(listings[,1:4])
 ```
 
-The equivalent way to do this using dplyr and the %>% we learned last week would be:
+The equivalent way to do this using dplyr and the `%>%` we learned last week would be:
 
 ```{r}
 listings %>%

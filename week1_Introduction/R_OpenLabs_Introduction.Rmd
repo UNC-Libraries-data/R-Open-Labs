@@ -75,6 +75,8 @@ This introductory workshop aims to:
 
 1) Download R at https://cran.r-project.org/
 
+- For macOS, make sure to install **XQuartz** as well: https://www.xquartz.org/ 
+
 
 2) If possible, install the additional R developer tools. This can help in the future because some libraries require these. If your computer is not updated to the latest version of your operating system, this can get a little hairy, so don't worry if you can't get this done today.
 
