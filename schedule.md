@@ -29,3 +29,15 @@
 |8|March 19|Functions and Conditionals|Lorin||
 |9|March 26|Loops and Error Handling|Nuvan||
 |10|April 2|Models|Matt||
+
+## Extras:
+* Shiny
+* Penalized Regression (glment)
+* Bayes (brms, rstan)
+* Mixed Effects
+* Bootstrapping, Permutation Tests (rsample)
+* Networks (igraph)
+* GIS
+* caret / parsnip / tidymodels
+* Automation with R Markdown
+* "Fun" packages
