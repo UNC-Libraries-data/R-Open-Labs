@@ -97,7 +97,7 @@ Once we have matching key variable(s) in our datasets, we can join our datasets 
 
 ### Types of Joins
 
-We need several different types of joins to cover the different ways to deal with datasets covering different sets of observations.
+We need several different types of joins to facillitate the different ways datasets are organized.
 
 <center>
 | Want to keep | Function|
@@ -120,6 +120,7 @@ We can apply each to updated `b0` and `b1` datasets:
 ```{r}
 b0 <- data.frame("name"=c("John","Jane","Jack"),
                  "year"=c(1993,1993,1985))
+
 b1 <- data.frame("person"=c("Jane","John","Jill"),
                  "ct"=c(6,3,9))
 print(b0)
