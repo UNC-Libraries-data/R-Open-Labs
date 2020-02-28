@@ -40,12 +40,12 @@ This workshop covers topics from:
     + `inner_join`
     + "Outer Joins" - `full_join`,`left_join`,`right_join`
 * Reshaping data
-    + `gather`
-    + `spread`
+    + `pivot_longer`
+    + `pivot_wider`
 
 ## Motivation
 
-So far, we've usually worked with a single dataset each week.  This week, we'll work with methods to combine multiple datasets or create reshaped datasets.  In both cases, we may need to merge or reshape our datasets in many different ways through the course of an analysis.
+Most weeks so far, we've usually worked with a single dataset.  This week, we'll work with methods to combine multiple datasets or create reshaped datasets.  During a project, we may need to merge or reshape our datasets in many different ways through the course of analysis.
 
 When using data about the same observational units collected by different sources, we often need to combine separate datasets before analysis.  For example, we might create a dataset about all of the countries of the world with data from the UN, the World Bank, and the World Health Organization. Sometimes we will need to *merge* or *join* these datasets into a single dataframe for analysis.  In other cases, we may simply need to add observations to an existing dataset (e.g. if each country is published separately in the same format.)
 
@@ -55,24 +55,28 @@ In other cases, we might need to reshape data we already have to make it more ap
 
 #### Appending
 
-We can add rows in `dplyr` with `bind_rows`:
+Sometimes we'll have two datasets with similar columns that we need to combine. Essentially, we are stacking the rows of those datasets on top of each other. We can add rows in `dplyr` with `bind_rows`:
 
 ```{r}
 a0 <- data.frame("id"=c(1,2),
                  "val"=rnorm(2,0,1))
+
 a1 <- data.frame("id"=c(3,4),
                  "val"=rnorm(2,0,1),
                  "other"=c("c","d"))
+
 bind_rows(a0,a1)
 ```
 
-When we refer to merging or joining, we usually do not mean appending or adding observations to a dataset. Instead, merging usuallly intends to add columns or variables to our dataframe.  However, we usually cannot simply want to bind them together in their current order with `bind_rows`.
+When we refer to merging or joining, we usually do not mean appending or adding observations to a dataset in this way. Instead, merging usuallly intends to add columns or variables to our dataframe.  Using `bind_rows` in this context is unhelpful.
 
 ```{r}
 b0 <- data.frame("name"=c("John","Jane"),
                  "year"=c(1993,1996))
+
 b1 <- data.frame("name"=c("Jane","John"),
                  "ct"=c(6,3))
+
 bind_cols(b0,b1)
 ```
 
@@ -82,7 +86,7 @@ Instead, we want to add columns while making sure certain identifying variables,
 
 #### Keys
 
-To properly line up observations between two datasets, we need a common variable (or group of variables) that uniquely identifies an observation in at least one of the datasets, in the same way across both datasets.  This variable is usually called a "key".  In our example above, `b0` and `b1`.
+To properly line up observations between two datasets, we need a common variable (or group of variables) that uniquely identifies an observation in at least one of the datasets, and identifies it in the same way across both datasets.  This variable is usually called a "key".  In our example above, `b0` and `b1` have the key "name".
 
 ```{r}
 print(b0)
