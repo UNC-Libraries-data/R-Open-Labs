@@ -15,6 +15,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+&nbsp;
+
 ## Data and other downloads
 
 [Download data](data/brazilian-ecommerce-subset.zip)
@@ -27,6 +29,7 @@ Data derived from [Brazilian E-Commerce Public Dataset by Olist](https://www.kag
 library(tidyverse)
 ```
 
+&nbsp;
 
 ## Today
 This workshop covers topics from:
@@ -43,46 +46,77 @@ This workshop covers topics from:
     + `pivot_longer`
     + `pivot_wider`
 
+&nbsp;
+
 ## Motivation
 
-Most weeks so far, we've usually worked with a single dataset.  This week, we'll work with methods to combine multiple datasets or create reshaped datasets.  During a project, we may need to merge or reshape our datasets in many different ways through the course of analysis.
+In most of our lessons so far, we've typically focused on a single dataset.  This week, we'll cover different methods for combining multiple datasets and transforming the shape of our data.
 
-When using data about the same observational units collected by different sources, we often need to combine separate datasets before analysis.  For example, we might create a dataset about all of the countries of the world with data from the UN, the World Bank, and the World Health Organization. Sometimes we will need to *merge* or *join* these datasets into a single dataframe for analysis.  In other cases, we may simply need to add observations to an existing dataset (e.g. if each country is published separately in the same format.)
+When using data that includes similar observational units collected by different sources, we will often find ourselves with multiple datasets that need to be combined before we can begin analysis. For example, if we wanted to gather various pieces of information for all of the countries in the world, we'd need to **merge** or **join** multiple datasets coming from the UN, the World Bank, the World Health Organization, etc. Or, we may simply need to add observations to an existing dataset (e.g. if we have multiple datasets coming from the World Bank, but each dataset only covers a single year.)
 
 In other cases, we might need to reshape data we already have to make it more appropriate for other software, for analysis, or easier to use within R.  If you're planning to export data from R to another software package, you may need a particular format.  For example, mapping software like ArcGIS needs each row of a dataset to represent a geographic location.  
 
+&nbsp;
+
 ## Merging / Joining Dataframes
+
+&nbsp;
 
 #### Appending
 
-Sometimes we'll have two datasets with similar columns that we need to combine. Essentially, we are stacking the rows of those datasets on top of each other. We can add rows in `dplyr` with `bind_rows`:
+Sometimes we'll have two datasets with similar columns that we need to combine. Essentially, we are stacking the rows of those datasets on top of each other. We can combine rows in `dplyr` with `bind_rows`:
 
+&nbsp;
+
+**Dataset 1**
 ```{r}
-a0 <- data.frame("id"=c(1,2),
-                 "val"=rnorm(2,0,1))
+a0 <- data.frame("StudentID"=c(1,2),
+                 "GPA_change"=rnorm(2,0,1))
 
-a1 <- data.frame("id"=c(3,4),
-                 "val"=rnorm(2,0,1),
-                 "other"=c("c","d"))
+print(a0)
+```
 
+&nbsp;
+
+**Dataset 2**
+```{r}
+a1 <- data.frame("StudentID"=c(3,4),
+                 "GPA_change"=rnorm(2,0,1),
+                 "Semester"=c("Spring","Fall"))
+
+print(a1)
+```
+
+&nbsp;
+
+**Datasets combined**
+```{r}
 bind_rows(a0,a1)
 ```
 
-When we refer to merging or joining, we usually do not mean appending or adding observations to a dataset in this way. Instead, merging usuallly intends to add columns or variables to our dataframe.  Using `bind_rows` in this context is unhelpful.
+&nbsp;
+
+When we refer to **merging** or **joining**, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe.  Using `bind_rows` in this context is unhelpful and results in mismatched records.
 
 ```{r}
-b0 <- data.frame("name"=c("John","Jane"),
+b0 <- data.frame("name"=c("Marcos","Crystal"),
                  "year"=c(1993,1996))
 
-b1 <- data.frame("name"=c("Jane","John"),
-                 "ct"=c(6,3))
+b1 <- data.frame("name"=c("Crystal","Marcos"),
+                 "project_num"=c(6,3))
 
 bind_cols(b0,b1)
 ```
 
-Instead, we want to add columns while making sure certain identifying variables, often called *keys* (e.g. `name` and `name1` above) line up to make sure each row represents information about a single observational unit.
+&nbsp;
+
+Instead, we want to add columns while making sure certain identifying variables, often called **keys** (e.g. `name` and `name1` above) line up correctly. That way, each row represents information about a single observational unit.
+
+&nbsp;
 
 ### Merging
+
+&nbsp;
 
 #### Keys
 
@@ -93,41 +127,59 @@ print(b0)
 print(b1)
 ```
 
+&nbsp;
+
 Once we have matching key variable(s) in our datasets, we can join our datasets into consistent observations.  There are two major categories of joins - "Inner Joins" and "Outer Joins".
+
+&nbsp;
 
 ### Types of Joins
 
 We need several different types of joins to facillitate the different ways datasets are organized.
 
-<center>
-| Want to keep | Function|
-|--------------------------------------------|-------|
-|**Inner Joins**| |
-|Only the rows in both datasets |`inner_join()`|
-|**Outer Joins**| |
-|All of the rows |`full_join()`|
-|All of the rows in the first (left) dataset, only the matches from the second (right dataset) |`left_join()`|
-|All of the rows in the second (left) dataset, only the matches from the first (right dataset) |`right_join()`|
-</center>
+| Join Type | Want to keep | Function |
+|-----------|---------------------------------|-------|
+| **Inner Join** | Only the rows in both datasets |`inner_join()`|
+| **Outer Join** | All of the rows |`full_join()`|
+| **Outer Join** | All of the rows in the first (left) dataset, only the matches from the second (right dataset) |`left_join()`|
+| **Outer Join** | All of the rows in the second (left) dataset, only the matches from the first (right dataset) |`right_join()`|
 
-The join types can be represented as Venn Diagrams:
+&nbsp;
+
+The join types can be represented as Venn Diagrams. The lighter parts of the circles represent unmatched records we are leaving out of the join, while the darker parts represent both matched and unmached records we are keeping in the join.
 
 ![](https://r4ds.had.co.nz/diagrams/join-venn.png)
  <center>*Join Types from R for Data Science 13.4.3*</center> 
 
-We can apply each to updated `b0` and `b1` datasets:
+&nbsp;
+
+Take a look at these two datasets:
 
 ```{r}
-b0 <- data.frame("name"=c("John","Jane","Jack"),
-                 "year"=c(1993,1993,1985))
+b0 <- data.frame("name"=c("Marcos","Crystal","Devin","Lilly"),
+                 "year"=c(1993,1996,1985,2001))
 
-b1 <- data.frame("person"=c("Jane","John","Jill"),
-                 "ct"=c(6,3,9))
+b1 <- data.frame("person"=c("Marcos","Crystal","Devin","Tamera"),
+                 "project_num"=c(6,3,9,8))
+```
+
+```{r}
 print(b0)
+```
+
+```{r}
 print(b1)
 ```
 
+&nbsp;
+
+Now, let's merge them using each of the different join types.
+
+&nbsp;
+
 #### Inner Join
+
+&nbsp;
 
 ##### `inner_join`
 
@@ -135,7 +187,11 @@ print(b1)
 inner_join(b0,b1,by=c("name"="person"))
 ```
 
+&nbsp;
+
 #### Outer Joins
+
+&nbsp;
 
 ##### `full_join`
 
@@ -143,11 +199,15 @@ inner_join(b0,b1,by=c("name"="person"))
 full_join(b0,b1,by=c("name"="person"))
 ```
 
+&nbsp;
+
 ##### `left_join`
 
 ```{r warning=FALSE}
 left_join(b0,b1,by=c("name"="person"))
 ```
+
+&nbsp;
 
 ##### `right_join`
 
@@ -155,26 +215,36 @@ left_join(b0,b1,by=c("name"="person"))
 right_join(b0,b1,by=c("name"="person"))
 ```
 
+&nbsp;
+
+*Note: All of these join functions come from the `dplyr` package, so we can use them with pipes ( %>% ).*
+
+&nbsp;
+
 ### Extensions
 
-Note: All of these join functions come from the `dplyr` package, so we can use them with pipes ( %>% ).
+&nbsp;
 
 #### Multiple Keys
 
-In some cases, we may need multiple keys to uniquely identify an observation:
+In some cases, we may need multiple keys to uniquely identify an observation. For example, our datasets below have two different observations for each person, so we need to join them by both name and year.
 
 ```{r}
-multi0 <- data.frame("name"=c("Jane","John","John","Jane"),
+multi0 <- data.frame("name"=c("Tamera","Zakir","Zakir","Tamera"),
                      "year"=c(1990,1990,1991,1991),
                      "state"=c("NC","VA","VA","NY"))
-multi1 <- data.frame("person"=c("Jane","John","Jane","John"),
+
+multi1 <- data.frame("person"=c("Tamera","Zakir","Zakir","Tamera"),
                      "year"=c(1990,1990,1991,1991),
-                     "ct"=c(6,3,9,8))
+                     "project_num"=c(6,3,9,8))
 
 multijoined <- inner_join(multi0,multi1,
                           by=c("name"="person","year"="year"))
+
+multijoined
 ```
 
+&nbsp;
 
 #### Many-to-one and One-to-many Joins
 
@@ -183,59 +253,89 @@ If we only specify enough key variables to uniquely identify observations in one
 ```{r}
 statedata <- data.frame("state"=c("NC","VA","NY"),
                         "region"=c("Southeast","Southeast","Northeast"))
+
 inner_join(statedata,multijoined,by=c("state"="state"))
 ```
 
-Note: We can equivalently omit `by=c("state"="state")` since the key variables have the same name here.
+*Note: We can equivalently omit `by=c("state"="state")` since the key variables have the same name here.*
+
+&nbsp;
 
 ## Reshaping with `tidyr`
 
-Once we have a single dataset, we may still need to change its shape.  This process can be particularly confusing since the names for the steps and goals of this process have changed many times in recent years (e.g. "reshape wide", "reshape long", "melt", "cast", "wide data", "long data", "tidy data", "gather", "spread").  We'll stick to the `tidyverse` terminology and avoid "wide" and "long", and focus on operations instead.
+Once we have a single dataset, we may still need to change its shape. When we talk about the **shape** of a dataset, we are often referring to whether it is wide or long.
 
-**Note**: Hadley Wickham's [Tidy Data](http://vita.had.co.nz/papers/tidy-data.html) provides more discussion of what "Tidy Data" entails and why it's useful in data analysis.
+&nbsp;
+
+* **Wide dataset** - typically includes more columns and fewer rows with a single row for each key
+* **Long dataset** - typically includes fewer columns and more rows with multiple rows for each key
+
+&nbsp;
+
+The many functions used in R for changing a datasets' shape have varied over the years along with the terminology (e.g. "reshape", "melt", "cast", "tidy", "gather", "spread", "pivot", etc.) We will now be working with the [new reshaping functions recommended by tidyverse](https://tidyr.tidyverse.org/articles/pivot.html), `pivot_longer()` and `pivot_wider()`.
+
+*Hadley Wickham's [Tidy Data](http://vita.had.co.nz/papers/tidy-data.html) provides more discussion of what "Tidy Data" entails and why it's useful in data analysis.*
+
+&nbsp;
 
 #### Use Case: Making `ggplot` easier
 
-Why reshape when we have perfectly good data?  Sometimes R's own functions are more convenient with reshaped data.
+Why reshape when we have perfectly good data? Sometimes R's own functions are more convenient with reshaped data. Consider the dataset below in which we've generated random numbers for columns A and B.
 
 ```{r}
 set.seed(123)
-df0 <- data.frame(year=c(2000,2001,2002),a=runif(3,0,20),b=runif(3,0,20))
+
+df0 <- data.frame(year=c(2000,2001,2002), 
+                  A=runif(3,0,20), 
+                  B=runif(3,0,20))
+
 print(df0)
 ```
 
-We can use `ggplot2` to generate a line plot for our two data columns, `a` and `b`:
+&nbsp;
+
+Now we want to create a line plot in which each column has its own line. Because our dataset is **wide**, we'll need to add each line to the plot separately and individually.
 
 ```{r}
-ggplot(data=df0,aes(x=year))+
-  geom_line(aes(y=a),color="red")+
-  geom_line(aes(y=b),color="blue")+theme_bw()
+ggplot(data=df0,aes(x=year)) +
+  geom_line(aes(y=A),color="red") +
+  geom_line(aes(y=B),color="blue") + 
+  theme_bw()
 ```
 
-However if we had the data available in a longer format, we could plot them with less code.
+However, if we were using a **long** dataset, we could create the plot with less code. Note how our dataset below has a single column for categories A and B.
 
 ```{r}
 df1 <- data.frame(year=c(df0$year,df0$year),
-                  v=c("a","a","a","b","b","b"),
-                  value=c(df0$a,df0$b))
+                  category=c("A","A","A","B","B","B"),
+                  value=c(df0$A,df0$B))
 print(df1)
 ```
 
+&nbsp;
+
+And for our plot, we only need to add a single `geom_line` while using the category column for our `color` aesthetic. 
+
 ```{r}
-ggplot(data=df1,aes(x=year,y=value,color=v))+geom_line()+theme_bw()
+ggplot(data=df1,aes(x=year,y=value,color=category))+
+  geom_line()+
+  theme_bw()
 ```
 
-We can move back and forth between `df0` and `df1` formats with `tidyr`'s `gather` and `spread` functions.
+This may not seem like much of a big deal for this particular plot, but what if we were trying to plot hundreds of lines? 
 
-### `gather`
+We can move back and forth between the long shape used by `df1` and the wide shape used by `df0` with `tidyr`'s `pivot_longer` and `pivot_wider` functions.
 
-First, let's create a small example dataset.
+&nbsp;
+
+### `pivot_longer`
+
+First, let's create a small example dataset with four columns of randomly generated numbers.
 
 ```{r}
-library(tidyr) #install if necessary
 set.seed(123)
 raw <- data.frame(
-  city=c("Raleigh","Durham","Chapel Hill"),
+  City=c("Raleigh","Durham","Chapel Hill"),
   x2000=rnorm(3,0,1),
   x2001=rnorm(3,0,1),
   x2002=rnorm(3,0,1),
@@ -244,75 +344,84 @@ raw <- data.frame(
 print(raw)
 ```
 
-x2000 through x2003 represent something measured in 2000 to 2003, since R data.frames cannot have labels that start with numbers.
+*x2000 through x2003 represent something measured in 2000 to 2003, since R data.frames cannot have labels that start with numbers.*
 
-It might be useful to have the year stored as a column instead of as column names.  We can use the `gather` function to do this.
+&nbsp;
 
-`gather` takes four main arguments:
+In the dataset above, we have information stored in separate columns for each year, but it might be more useful to store the year number itself in its own column.  We can use the `pivot_longer` function to do this.
 
-1. data: this **must** be a data frame.
-2. key: the **name** of a new column, whose values will be the **names of the columns** we're gathering.
-3. value: the **name** of another new column, whose values will be the **values from the columns** we're gathering.
-4. columns: the list of columns to gather.  This can be specified in two different ways:
-    + a vector of column names
-    + a minus sign before a column name or vector of column names to **not** gather
-    
-The output of gather will generally be taller or longer than input dataset.  Sometimes this is called "long data" or "long format", but that can be misleading because there are usually varying degrees of longness or wideness for a dataset.
+&nbsp;
+
+`pivot_longer` takes four main arguments:
+
+1. data: this must be a **data frame**.
+2. cols: a **list of column names** that we want to pivot into a single column.
+3. names_to: the **name** of the new column that will contain the names of the columns we are pivoting.
+4. values_to: the **name** of another new column that will contain values of the columns we are pivoting.
+
+&nbsp;
+
+We can also use various other arguments with `pivot_longer` that allow us to do a number of handy things. For example, the `names_prefix` argument lets us remove the "x" in front of our year names. Run `?pivot_longer` in your console for a full list of arguments that can be used.
 
 ```{r warning=FALSE}
-gathered <- raw %>% 
-  gather(key="year",value="value",-city) %>% 
-  mutate(year=str_replace(year,"x","")) 
-print(gathered)
+longpivot <- raw %>% 
+  pivot_longer(cols = starts_with("x"), names_to = "Year", values_to = "Value", names_prefix = "x")
+
+print(longpivot)
 ```
 
-It's often useful to think about how transformations like gather change the effective observational unit of the dataset.  Assuming rows contain observations, this dataset started with city-level observations.  The transformed data frame `gathered` now observes one city in a given year in each row.
+&nbsp;
 
-tidyr functions can take column names with or without quotes (see city in the first line above).  See the alternative below.
+It's often useful to think about how transformations like `pivot_longer` change the effective observational unit of the dataset.  This dataset started with city-level observations in which each row was represented by a unique city name. The transformed data frame `longpivot` now observes one city in a given year in each row, so we now have multiple rows for the same city.
 
-```{r}
-gathered <- raw %>% 
-  gather(key=year,value=value,c(x2000,x2001,x2002,x2003)) %>% 
-  mutate(year=str_replace(year,"x","")) 
-print(gathered)
-```
+&nbsp;
 
-### `spread`
+### `pivot_wider`
 
-We can reverse this transformation with `spread`.  This time we'll create a separate column for each city.
+We can reverse our previous transformation with `pivot_wider`.  This time, we'll create a separate column for each city.
 
-`spread` takes three essential arguments:
+&nbsp;
+
+`pivot_wider` takes three essential arguments:
 
 1. data
-2. key: the **column** whose values we'll use to create new columns.
-3. value: another **column** whose values will be rearranged into the new columns based on the values in the key column.
+2. names_from: the **column** whose values we'll use to create new column names.
+3. values_from: another **column** whose values we'll use to fill the new columns.
+
+&nbsp;
 
 ```{r}
-ungathered <- gathered %>% spread(key=city,value=value)
-print(ungathered)
+widepivot <- longpivot %>% pivot_wider(names_from = City, values_from = Value)
+
+print(widepivot)
 ```
 
-This might be a useful step to determine which cities are most closely correlated as part of an Exploratory Data Analysis.
+&nbsp;
 
-```{r message=FALSE}
+Why would we want each city to have its own column? Well, it might be a useful step to determine which cities are most closely correlated as part of an Exploratory Data Analysis process. For example, we can now easily use this dataset with `ggally` to create a plot matrix.
+
+```{r message=FALSE, warning=FALSE}
 library(GGally)
-ungathered %>% select("Chapel Hill","Durham","Raleigh") %>% ggpairs()
+widepivot %>% select("Chapel Hill","Durham","Raleigh") %>% ggpairs()
 ```
+
+&nbsp;
 
 ## Exercises:
 
-All of today's exercises involve the datasets included in [brazilian-commerce-subset.zip.](data/brazilian-ecommerce-subset.zip)
+All of today's exercises involve the datasets included in [brazilian-commerce-subset.zip](data/brazilian-ecommerce-subset.zip).
 
 1. Read olist_public_dataset_v2.csv into R. Explore the dataset. If necessary, refer to the metadata provided [here](https://www.kaggle.com/olistbr/brazilian-ecommerce).
 
 2. Read product_category_name_translation.csv into R.  Merge this dataframe into olist_public_dataset_v2.csv using `product_category_name` as the key variable.
+
 Let's explore which products are most frequently purchased together:
 
 3. Use `group_by` and `summarize` to find the total `order_items_qty` for each `product_category_name_english` in each `customer state`. [Review](https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html)
 
-4. Use `spread` to create a new dataframe with a row for each `customer_state` and a column for each `product_category_name_english`.  Name this dataframe `products`.
+4. Use `pivot_wider` to create a new dataframe with a row for each `customer_state` and a column for each `product_category_name_english`.  Name this dataframe `products`.
 
-5. Run these two lines of code (make sure your dataframe from step 4 is called `products`!):
+5. Run the two lines of code below (make sure your dataframe from step 4 is called `products`!)
 
 ```
 products <- ungroup(products) #remove grouping 
@@ -323,7 +432,7 @@ products[is.na(products)] <- 0 #replace missing data with zeroes
 
 7. Repeat problems 3-6 with `order_products_value` (i.e. the amount spent vs the quantity purchased).  Do you see different patterns?  Explore other product categories.
 
-8. Use `gather` and then `spread` to convert your `products` dataframe to one where each row is a different `product_category_name_english` and each column represents a different `customer_state`.  
+8. Use `pivot_longer` and then `pivot_wider` to convert your `products` dataframe to one where each row is a different `product_category_name_english` and each column represents a different `customer_state`.  
 
 9. Choose 5 states. Which of these states have the most similar patterns of spending (as measured by correlation)?
 
