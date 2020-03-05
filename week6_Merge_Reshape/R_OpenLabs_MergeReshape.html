@@ -268,9 +268,9 @@ div.tocify {
                  &quot;GPA_change&quot;=rnorm(2,0,1))
 
 print(a0)</code></pre>
-<pre><code>##   StudentID GPA_change
-## 1         1  0.8656794
-## 2         2 -0.7648511</code></pre>
+<pre><code>##   StudentID   GPA_change
+## 1         1 -1.615815864
+## 2         2 -0.008573925</code></pre>
 <p> </p>
 <p><strong>Dataset 2</strong></p>
 <pre class="r"><code>a1 &lt;- data.frame(&quot;StudentID&quot;=c(3,4),
@@ -279,18 +279,18 @@ print(a0)</code></pre>
 
 print(a1)</code></pre>
 <pre><code>##   StudentID GPA_change Semester
-## 1         3 -0.8228563   Spring
-## 2         4 -1.4530962     Fall</code></pre>
+## 1         3 -0.8189597   Spring
+## 2         4 -2.3242078     Fall</code></pre>
 <p> </p>
 <p><strong>Datasets combined</strong></p>
 <pre class="r"><code>bind_rows(a0,a1)</code></pre>
-<pre><code>##   StudentID GPA_change Semester
-## 1         1  0.8656794     &lt;NA&gt;
-## 2         2 -0.7648511     &lt;NA&gt;
-## 3         3 -0.8228563   Spring
-## 4         4 -1.4530962     Fall</code></pre>
+<pre><code>##   StudentID   GPA_change Semester
+## 1         1 -1.615815864     &lt;NA&gt;
+## 2         2 -0.008573925     &lt;NA&gt;
+## 3         3 -0.818959740   Spring
+## 4         4 -2.324207818     Fall</code></pre>
 <p> </p>
-<p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. Using <code>bind_rows</code> in this context is unhelpful and results in mismatched records.</p>
+<p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a <code>bind_cols</code> function, but in the context below, using <code>bind_cols</code> is unhelpful and results in mismatched records.</p>
 <pre class="r"><code>b0 &lt;- data.frame(&quot;name&quot;=c(&quot;Marcos&quot;,&quot;Crystal&quot;),
                  &quot;year&quot;=c(1993,1996))
 
@@ -489,8 +489,8 @@ inner_join(statedata,multijoined,by=c(&quot;state&quot;=&quot;state&quot;))</cod
 <p>Once we have a single dataset, we may still need to change its shape. When we talk about the <strong>shape</strong> of a dataset, we are often referring to whether it is wide or long.</p>
 <p> </p>
 <ul>
-<li><strong>Wide dataset</strong> - typically includes more columns and fewer rows with a single row for each key</li>
-<li><strong>Long dataset</strong> - typically includes fewer columns and more rows with multiple rows for each key</li>
+<li><strong>Wide dataset</strong> - typically includes more columns and fewer rows with a single row for each observation</li>
+<li><strong>Long dataset</strong> - typically includes fewer columns and more rows with multiple rows for each observation</li>
 </ul>
 <p> </p>
 <p>The many functions used in R for changing a datasets’ shape have varied over the years along with the terminology (e.g. “reshape”, “melt”, “cast”, “tidy”, “gather”, “spread”, “pivot”, etc.) We will now be working with the <a href="https://tidyr.tidyverse.org/articles/pivot.html">new reshaping functions recommended by tidyverse</a>, <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>

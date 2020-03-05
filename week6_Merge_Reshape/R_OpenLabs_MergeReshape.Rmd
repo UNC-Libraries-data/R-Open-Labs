@@ -96,7 +96,7 @@ bind_rows(a0,a1)
 
 &nbsp;
 
-When we refer to **merging** or **joining**, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe.  Using `bind_rows` in this context is unhelpful and results in mismatched records.
+When we refer to **merging** or **joining**, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a `bind_cols` function, but in the context below, using `bind_cols` is unhelpful and results in mismatched records.
 
 ```{r}
 b0 <- data.frame("name"=c("Marcos","Crystal"),
@@ -267,8 +267,8 @@ Once we have a single dataset, we may still need to change its shape. When we ta
 
 &nbsp;
 
-* **Wide dataset** - typically includes more columns and fewer rows with a single row for each key
-* **Long dataset** - typically includes fewer columns and more rows with multiple rows for each key
+* **Wide dataset** - typically includes more columns and fewer rows with a single row for each observation
+* **Long dataset** - typically includes fewer columns and more rows with multiple rows for each observation
 
 &nbsp;
 
