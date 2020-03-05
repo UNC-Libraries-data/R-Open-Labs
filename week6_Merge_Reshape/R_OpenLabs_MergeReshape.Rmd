@@ -148,7 +148,7 @@ We need several different types of joins to facillitate the different ways datas
 
 The join types can be represented as Venn Diagrams. The lighter parts of the circles represent unmatched records we are leaving out of the join, while the darker parts represent both matched and unmached records we are keeping in the join.
 
-![](https://r4ds.had.co.nz/diagrams/join-venn.png)
+![](join-venn-dark.png)
  <center>*Join Types from R for Data Science 13.4.3*</center> 
 
 &nbsp;
