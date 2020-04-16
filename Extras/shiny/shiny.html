@@ -559,7 +559,7 @@ pal &lt;- colorNumeric(palette = &quot;YlOrRd&quot;, domain = countries$avgRatin
 <p>The leaflet function, <code>colorNumeric()</code>, allows us to create a color palette based on a list of numeric values, or “domain”. The domain in this case will be our avgRating column. Note that we’re creating an object called “pal”. What type of object is it?</p>
 <pre class="r"><code>class(pal)</code></pre>
 <pre><code>## [1] &quot;function&quot;</code></pre>
-<p>Strangely enough, it’s a function! <code>colorNumeric()</code> creates a color palette function we can later use on our map. Also note: I’ve chosen the “Yellow-Orange-Red” color scale for this map. Other options are shown below.</p>
+<p>Strangely enough, it’s a function! <code>colorNumeric()</code> creates a color palette function we can later use on our map. Also note: I’ve chosen the “Yellow-Orange-Red” color scale for this map. Other options are shown <a href="https://rdrr.io/cran/RColorBrewer/man/ColorBrewer.html">here</a>.</p>
 <p>Next, let’s tackle the roll over labels.</p>
 <pre class="r"><code>#Create label text for map
 map_labels &lt;- paste(&quot;Ramen from&quot;,
@@ -653,7 +653,7 @@ output$map &lt;- renderLeaflet({
 </div>
 <div id="create-a-table" class="section level2">
 <h2>Create a Table</h2>
-<p>Shiny typically has a nice format for displaying tables, but the <code>DT</code> package adds extra functionality such as filtering, pagination, sorting and more.</p>
+<p>Shiny typically has a nice format for displaying tables, but the <code>DT</code> package adds extra functionality such as filtering, pagination, sorting and more. We’ll use <code>DT</code> to make those additional features available to our users.</p>
 <p>By now you should know the routine: first, we need to create a spot for our table in the UI.</p>
 <pre class="r"><code># Bar Chart
 plotOutput(&quot;brandBar&quot;),

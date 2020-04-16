@@ -463,7 +463,7 @@ The leaflet function, `colorNumeric()`, allows us to create a color palette base
 class(pal)
 ```
 
-Strangely enough, it's a function! `colorNumeric()` creates a color palette function we can later use on our map. Also note: I've chosen the "Yellow-Orange-Red" color scale for this map. Other options are shown below.
+Strangely enough, it's a function! `colorNumeric()` creates a color palette function we can later use on our map. Also note: I've chosen the "Yellow-Orange-Red" color scale for this map. Other options are shown [here](https://rdrr.io/cran/RColorBrewer/man/ColorBrewer.html).
 
 Next, let's tackle the roll over labels.
 
