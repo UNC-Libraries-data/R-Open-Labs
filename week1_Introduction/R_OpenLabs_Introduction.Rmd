@@ -33,7 +33,6 @@ Advantages
 
 * Free!
 * Portable (Windows, macOS, Linux)
-* [Flexible publication quality graphics](http://www.ggplot2-exts.org/gallery/)
 * [Interactive visualization](https://shiny.rstudio.com/gallery/)
 * [Reproducible reports](https://rmarkdown.rstudio.com/gallery.html)
 * Active user base
