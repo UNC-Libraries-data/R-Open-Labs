@@ -1,5 +1,5 @@
 ---
-title: "R Open Labs: Introduction"
+title: "beginR: Introduction"
 author:
 - name: University of North Carolina at Chapel Hill
 output: 
@@ -17,11 +17,11 @@ output:
 ```
 
 
-## What's an Open Lab?
+<!-- ## What's an Open Lab? -->
 
-Open labs are (mostly) unstructured workshops designed to help you learn R. Each week brief (30-45 minutes) instruction will be provided, followed by time to practice, work together or alone on learning other topics or your own projects, ask questions and get help. Participants can join the lab any time during the session, and are welcome to work on unrelated projects.
+<!-- Open labs are (mostly) unstructured workshops designed to help you learn R. Each week brief (30-45 minutes) instruction will be provided, followed by time to practice, work together or alone on learning other topics or your own projects, ask questions and get help. Participants can join the lab any time during the session, and are welcome to work on unrelated projects. -->
 
-The Open Labs model was established by our colleagues at Columbia University, and we've adapted it to UNC. Our goal is to connect researchers and foster a community for R users on campus.
+<!-- The Open Labs model was established by our colleagues at Columbia University, and we've adapted it to UNC. Our goal is to connect researchers and foster a community for R users on campus. -->
 
 ### Why R?
 
@@ -54,7 +54,7 @@ We are going to focus on the [Tidyverse](https://www.tidyverse.org/) family of R
 
 This workshop **does not** aim to give a comprehensive introduction to all aspects of R.
 
-If you don't have any R experience, don't worry!  The Open Labs can provide support and a community to help you learn, **but** you may need to work outside the Open Labs to learn some of the basics.  
+<!-- If you don't have any R experience, don't worry!  The Open Labs can provide support and a community to help you learn, **but** you may need to work outside the Open Labs to learn some of the basics.   -->
 
 We also hope to empower you to become a self-sufficient R user, so we'll be showing you examples of how to troubleshoot and debug R code.  Those of us who have used R regularly for years still troubleshoot, refer to documentation, and google error codes all the time!
 
@@ -74,8 +74,14 @@ This introductory workshop aims to:
 
 1) Download R at https://cran.r-project.org/
 
-- For macOS, make sure to install **XQuartz** as well: https://www.xquartz.org/ 
-
+- For all macOS users:
+  - **Check your version number** and make sure to download the correct version of R/RStudio
+  - Install **XQuartz**: https://www.xquartz.org/
+- For macOS **10.13 and higher**, install:
+  - **XCode**: https://apps.apple.com/us/app/xcode/id497799835
+  - **gfortran**: https://github.com/fxcoudert/gfortran-for-macOS/releases
+- For **earlier versions** of macOS: 
+  - install **clang** and **gfortran** compatible with your version here: https://cran.r-project.org/bin/macosx/tools/
 
 2) If possible, install the additional R developer tools. This can help in the future because some libraries require these. If your computer is not updated to the latest version of your operating system, this can get a little hairy, so don't worry if you can't get this done today.
 
@@ -380,4 +386,4 @@ https://github.com/ujjwalkarn/DataScienceR
 
 
 ## Feedback
-[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)
+You'll receieve an automated email with feedback information after the workshop!
