@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Data and other downloads
 [Airbnb listings from Washington DC ](https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/data/listings.csv)
 
-##Today
+## Today
 
 This introductory workshop aims to cover:
 
