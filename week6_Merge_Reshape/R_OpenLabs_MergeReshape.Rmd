@@ -435,6 +435,3 @@ products[is.na(products)] <- 0 #replace missing data with zeroes
 8. Use `pivot_longer` and then `pivot_wider` to convert your `products` dataframe to one where each row is a different `product_category_name_english` and each column represents a different `customer_state`.  
 
 9. Choose 5 states. Which of these states have the most similar patterns of spending (as measured by correlation)?
-
-## Feedback
-[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)

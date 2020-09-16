@@ -284,5 +284,3 @@ diamonds <- diamonds
 10. [Read about the GIA diamond clarity grading scale here](https://en.wikipedia.org/wiki/Diamond_clarity#Clarity_grading). Alter the factor levels in the diamonds dataset to reflect the category names in the GIA scale (Flawless, Internally Flawless, etc.)
 
 
-## Feedback
-[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -91,8 +91,6 @@ overflow: auto;
 margin-left: 2%;
 position: fixed;
 border: 1px solid #ccc;
-webkit-border-radius: 6px;
-moz-border-radius: 6px;
 border-radius: 6px;
 }
 
@@ -120,9 +118,14 @@ font-size: 12px;
 .tocify-subheader .tocify-subheader {
 text-indent: 30px;
 }
-
 .tocify-subheader .tocify-subheader .tocify-subheader {
 text-indent: 40px;
+}
+.tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader {
+text-indent: 50px;
+}
+.tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader .tocify-subheader {
+text-indent: 60px;
 }
 
 .tocify .tocify-item > a, .tocify .nav-list .nav-header {
@@ -526,13 +529,13 @@ float: none;
 
           item.append($("<a/>", {
 
-            "text": self.text()
+            "html": self.html()
 
           }));
 
         } else {
 
-          item.text(self.text());
+          item.html(self.html());
 
         }
 
@@ -1349,9 +1352,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -1365,7 +1366,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -1382,8 +1382,6 @@ summary {
 </style>
 
 
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -1429,6 +1427,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -1441,48 +1440,9 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = false;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -1496,6 +1456,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -1531,8 +1497,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -1541,6 +1505,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -1559,7 +1533,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">R Open Labs: Data Transformations</h1>
-<h4 class="author"><em>University of North Carolina at Chapel Hill</em></h4>
+<h4 class="author">University of North Carolina at Chapel Hill</h4>
 
 </div>
 
@@ -1614,14 +1588,6 @@ div.tocify {
 
 # Setup -----------------------------------------------------------
 library(tidyverse)</code></pre>
-<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;tibble&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;stringr&#39; was built under R version 3.5.2</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 3.5.2</code></pre>
 <p> </p>
 </div>
 <div id="importing-data" class="section level2">
@@ -1638,20 +1604,19 @@ reviews &lt;- read_csv(&quot;data/5k_wine_reviews.csv&quot;)</code></pre>
 <p>We have a fairly big data set. What if we want to focus on certain records? For example, let’s say I’m only interested in Chilean wine. I can use the <code>filter()</code> function to only look at wines with “Chile” as their country of origin.</p>
 <pre class="r"><code>filter(reviews, country == &quot;Chile&quot;)</code></pre>
 <pre><code>## # A tibble: 194 x 10
-##    country description designation points price province region_1 title
-##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
-##  1 Chile   White flow~ Estate          86    15 Colchag~ &lt;NA&gt;     Esta~
-##  2 Chile   A berry ar~ &lt;NA&gt;            86     9 Maule V~ &lt;NA&gt;     Sund~
-##  3 Chile   This is mu~ Gran Reser~     85    22 Colchag~ &lt;NA&gt;     Casa~
-##  4 Chile   Lightly he~ Reserve         85    13 Maipo V~ &lt;NA&gt;     Tres~
-##  5 Chile   Caramelize~ Special Re~     86    12 Rapel V~ &lt;NA&gt;     Ares~
-##  6 Chile   A bright n~ Single Vin~     87    18 Leyda V~ &lt;NA&gt;     Leyd~
-##  7 Chile   This blend~ Condesa Re~     91    29 Aconcag~ &lt;NA&gt;     Cond~
-##  8 Chile   Dry, briar~ 20 Barrels      91    32 Maipo V~ &lt;NA&gt;     Cono~
-##  9 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~
-## 10 Chile   Haven&#39;t se~ Unusual Ca~     88    50 Maipo V~ &lt;NA&gt;     Terr~
-## # ... with 184 more rows, and 2 more variables: variety &lt;chr&gt;,
-## #   winery &lt;chr&gt;</code></pre>
+##    country description designation points price province region_1 title variety
+##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  
+##  1 Chile   White flow~ Estate          86    15 Colchag~ &lt;NA&gt;     Esta~ Viogni~
+##  2 Chile   A berry ar~ &lt;NA&gt;            86     9 Maule V~ &lt;NA&gt;     Sund~ Merlot 
+##  3 Chile   This is mu~ Gran Reser~     85    22 Colchag~ &lt;NA&gt;     Casa~ Petit ~
+##  4 Chile   Lightly he~ Reserve         85    13 Maipo V~ &lt;NA&gt;     Tres~ Pinot ~
+##  5 Chile   Caramelize~ Special Re~     86    12 Rapel V~ &lt;NA&gt;     Ares~ Carmen~
+##  6 Chile   A bright n~ Single Vin~     87    18 Leyda V~ &lt;NA&gt;     Leyd~ Chardo~
+##  7 Chile   This blend~ Condesa Re~     91    29 Aconcag~ &lt;NA&gt;     Cond~ Red Bl~
+##  8 Chile   Dry, briar~ 20 Barrels      91    32 Maipo V~ &lt;NA&gt;     Cono~ Cabern~
+##  9 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~ Cabern~
+## 10 Chile   Haven&#39;t se~ Unusual Ca~     88    50 Maipo V~ &lt;NA&gt;     Terr~ Red Bl~
+## # ... with 184 more rows, and 1 more variable: winery &lt;chr&gt;</code></pre>
 <p> </p>
 <p>When we use the <code>filter</code> function on our reviews object, it desplays the results in our <strong>Console</strong> tab. However, these results have not been saved, only displayed. If we want to save our results so we can perform additional transformations on them later, we need to <strong>assign</strong> them to a new data frame. Here, we’ll name the data frame “chilean”.</p>
 <pre class="r"><code>chilean &lt;- filter(reviews, country == &quot;Chile&quot;)</code></pre>
@@ -1736,56 +1701,53 @@ reviews &lt;- read_csv(&quot;data/5k_wine_reviews.csv&quot;)</code></pre>
 <p>First, I want to know which wines in my Chilean data set get the highest number of review points. The <code>arrange()</code> function allows us to reorder our data by a particular variable. Below, we’ll reorder by points.</p>
 <pre class="r"><code>arrange(chilean, points)</code></pre>
 <pre><code>## # A tibble: 154 x 10
-##    country description designation points price province region_1 title
-##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
-##  1 Chile   Aromas of ~ Gran Reser~     80    19 Leyda V~ &lt;NA&gt;     Viña~
-##  2 Chile   Fluffy, sw~ Reserve         80    15 Maule V~ &lt;NA&gt;     Cuev~
-##  3 Chile   Jumpy on t~ Grand Rese~     81    20 Rapel V~ &lt;NA&gt;     Pura~
-##  4 Chile   Crisp but ~ &lt;NA&gt;            81    14 Maipo V~ &lt;NA&gt;     Cous~
-##  5 Chile   Flat aroma~ Reserva Ca~     81    12 Maule V~ &lt;NA&gt;     Ovej~
-##  6 Chile   Funky and ~ &lt;NA&gt;            81    10 Central~ &lt;NA&gt;     Arau~
-##  7 Chile   Rubbery, m~ &lt;NA&gt;            81    10 Cachapo~ &lt;NA&gt;     Corn~
-##  8 Chile   This is ed~ Albamar         81    13 Casabla~ &lt;NA&gt;     Will~
-##  9 Chile   Smells veg~ Selección       82    15 Maipo V~ &lt;NA&gt;     Viña~
-## 10 Chile   Smells per~ Hacienda A~     82    13 Central~ &lt;NA&gt;     Fran~
-## # ... with 144 more rows, and 2 more variables: variety &lt;chr&gt;,
-## #   winery &lt;chr&gt;</code></pre>
+##    country description designation points price province region_1 title variety
+##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  
+##  1 Chile   Aromas of ~ Gran Reser~     80    19 Leyda V~ &lt;NA&gt;     Viña~ Chardo~
+##  2 Chile   Fluffy, sw~ Reserve         80    15 Maule V~ &lt;NA&gt;     Cuev~ Chardo~
+##  3 Chile   Jumpy on t~ Grand Rese~     81    20 Rapel V~ &lt;NA&gt;     Pura~ Pinot ~
+##  4 Chile   Crisp but ~ &lt;NA&gt;            81    14 Maipo V~ &lt;NA&gt;     Cous~ Sauvig~
+##  5 Chile   Flat aroma~ Reserva Ca~     81    12 Maule V~ &lt;NA&gt;     Ovej~ Rosé   
+##  6 Chile   Funky and ~ &lt;NA&gt;            81    10 Central~ &lt;NA&gt;     Arau~ Carmen~
+##  7 Chile   Rubbery, m~ &lt;NA&gt;            81    10 Cachapo~ &lt;NA&gt;     Corn~ Cabern~
+##  8 Chile   This is ed~ Albamar         81    13 Casabla~ &lt;NA&gt;     Will~ Pinot ~
+##  9 Chile   Smells veg~ Selección       82    15 Maipo V~ &lt;NA&gt;     Viña~ Sauvig~
+## 10 Chile   Smells per~ Hacienda A~     82    13 Central~ &lt;NA&gt;     Fran~ Pinot ~
+## # ... with 144 more rows, and 1 more variable: winery &lt;chr&gt;</code></pre>
 <p> </p>
 <p>Well, that sort of worked. My wines are reordered by points, but in ascending order. To reorder them in descending order, we need to use another function <strong>inside</strong> the arrange function. As you learned last week, this is called a <strong>nested function</strong>.</p>
 <pre class="r"><code>arrange(chilean, desc(points))</code></pre>
 <pre><code>## # A tibble: 154 x 10
-##    country description designation points price province region_1 title
-##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
-##  1 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~
-##  2 Chile   Composed b~ Gran Reser~     90    15 Colchag~ &lt;NA&gt;     Carm~
-##  3 Chile   Over the p~ 1865 Singl~     90    19 Leyda V~ &lt;NA&gt;     San ~
-##  4 Chile   Toasty and~ Gran Reser~     89    18 Maipo V~ &lt;NA&gt;     Tara~
-##  5 Chile   This dry-f~ Mariposa E~     89    20 Loncomi~ &lt;NA&gt;     Gill~
-##  6 Chile   Composed a~ Envero Gra~     88    15 Colchag~ &lt;NA&gt;     Apal~
-##  7 Chile   Bisquertt ~ Casa La Jo~     88    11 Colchag~ &lt;NA&gt;     Viña~
-##  8 Chile   Aromas of ~ Reserva de~     88    10 Maipo V~ &lt;NA&gt;     De M~
-##  9 Chile   At first t~ Estate Bot~     88    12 Rapel V~ &lt;NA&gt;     Lapo~
-## 10 Chile   With its h~ Estate Gro~     88    15 Maipo V~ &lt;NA&gt;     Carm~
-## # ... with 144 more rows, and 2 more variables: variety &lt;chr&gt;,
-## #   winery &lt;chr&gt;</code></pre>
+##    country description designation points price province region_1 title variety
+##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  
+##  1 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~ Cabern~
+##  2 Chile   Composed b~ Gran Reser~     90    15 Colchag~ &lt;NA&gt;     Carm~ Carmen~
+##  3 Chile   Over the p~ 1865 Singl~     90    19 Leyda V~ &lt;NA&gt;     San ~ Sauvig~
+##  4 Chile   Toasty and~ Gran Reser~     89    18 Maipo V~ &lt;NA&gt;     Tara~ Carmen~
+##  5 Chile   This dry-f~ Mariposa E~     89    20 Loncomi~ &lt;NA&gt;     Gill~ Syrah-~
+##  6 Chile   Composed a~ Envero Gra~     88    15 Colchag~ &lt;NA&gt;     Apal~ Carmen~
+##  7 Chile   Bisquertt ~ Casa La Jo~     88    11 Colchag~ &lt;NA&gt;     Viña~ Merlot 
+##  8 Chile   Aromas of ~ Reserva de~     88    10 Maipo V~ &lt;NA&gt;     De M~ Carmen~
+##  9 Chile   At first t~ Estate Bot~     88    12 Rapel V~ &lt;NA&gt;     Lapo~ Merlot 
+## 10 Chile   With its h~ Estate Gro~     88    15 Maipo V~ &lt;NA&gt;     Carm~ Cabern~
+## # ... with 144 more rows, and 1 more variable: winery &lt;chr&gt;</code></pre>
 <p> </p>
 <p>Now we can see which wines have the highest number of points. But what if we want to reorder by <strong>multiple</strong> variables? For example, many wines with the same number of points have different prices. What if we wanted to reorder those wines by price as well, so we can see which wines have the highest reviews with the lowest prices? The <code>arrange()</code> function allows us to add multiple variables simply by using commas.</p>
 <pre class="r"><code>arrange(chilean, desc(points), price)</code></pre>
 <pre><code>## # A tibble: 154 x 10
-##    country description designation points price province region_1 title
-##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
-##  1 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~
-##  2 Chile   Composed b~ Gran Reser~     90    15 Colchag~ &lt;NA&gt;     Carm~
-##  3 Chile   Over the p~ 1865 Singl~     90    19 Leyda V~ &lt;NA&gt;     San ~
-##  4 Chile   Toasty and~ Gran Reser~     89    18 Maipo V~ &lt;NA&gt;     Tara~
-##  5 Chile   This dry-f~ Mariposa E~     89    20 Loncomi~ &lt;NA&gt;     Gill~
-##  6 Chile   Aromas of ~ Reserva de~     88    10 Maipo V~ &lt;NA&gt;     De M~
-##  7 Chile   Dark berry~ &lt;NA&gt;            88    10 Central~ &lt;NA&gt;     Másc~
-##  8 Chile   Bisquertt ~ Casa La Jo~     88    11 Colchag~ &lt;NA&gt;     Viña~
-##  9 Chile   At first t~ Estate Bot~     88    12 Rapel V~ &lt;NA&gt;     Lapo~
-## 10 Chile   Right off ~ Reserve         88    12 Maipo V~ &lt;NA&gt;     Casa~
-## # ... with 144 more rows, and 2 more variables: variety &lt;chr&gt;,
-## #   winery &lt;chr&gt;</code></pre>
+##    country description designation points price province region_1 title variety
+##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  
+##  1 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~ Cabern~
+##  2 Chile   Composed b~ Gran Reser~     90    15 Colchag~ &lt;NA&gt;     Carm~ Carmen~
+##  3 Chile   Over the p~ 1865 Singl~     90    19 Leyda V~ &lt;NA&gt;     San ~ Sauvig~
+##  4 Chile   Toasty and~ Gran Reser~     89    18 Maipo V~ &lt;NA&gt;     Tara~ Carmen~
+##  5 Chile   This dry-f~ Mariposa E~     89    20 Loncomi~ &lt;NA&gt;     Gill~ Syrah-~
+##  6 Chile   Aromas of ~ Reserva de~     88    10 Maipo V~ &lt;NA&gt;     De M~ Carmen~
+##  7 Chile   Dark berry~ &lt;NA&gt;            88    10 Central~ &lt;NA&gt;     Másc~ Cabern~
+##  8 Chile   Bisquertt ~ Casa La Jo~     88    11 Colchag~ &lt;NA&gt;     Viña~ Merlot 
+##  9 Chile   At first t~ Estate Bot~     88    12 Rapel V~ &lt;NA&gt;     Lapo~ Merlot 
+## 10 Chile   Right off ~ Reserve         88    12 Maipo V~ &lt;NA&gt;     Casa~ Cabern~
+## # ... with 144 more rows, and 1 more variable: winery &lt;chr&gt;</code></pre>
 <p> </p>
 </div>
 <div id="selecting-data-select" class="section level2">
@@ -1812,37 +1774,36 @@ wine_types</code></pre>
 <p>But what if we have a lot of columns in our dataset and only need to remove one or two? Look at our chilean data frame again.</p>
 <pre class="r"><code>chilean</code></pre>
 <pre><code>## # A tibble: 154 x 10
-##    country description designation points price province region_1 title
-##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
-##  1 Chile   White flow~ Estate          86    15 Colchag~ &lt;NA&gt;     Esta~
-##  2 Chile   A berry ar~ &lt;NA&gt;            86     9 Maule V~ &lt;NA&gt;     Sund~
-##  3 Chile   Lightly he~ Reserve         85    13 Maipo V~ &lt;NA&gt;     Tres~
-##  4 Chile   Caramelize~ Special Re~     86    12 Rapel V~ &lt;NA&gt;     Ares~
-##  5 Chile   A bright n~ Single Vin~     87    18 Leyda V~ &lt;NA&gt;     Leyd~
-##  6 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~
-##  7 Chile   Composed a~ Envero Gra~     88    15 Colchag~ &lt;NA&gt;     Apal~
-##  8 Chile   Bisquertt ~ Casa La Jo~     88    11 Colchag~ &lt;NA&gt;     Viña~
-##  9 Chile   Clean and ~ Natura          87    11 Casabla~ &lt;NA&gt;     Emil~
-## 10 Chile   Rooty and ~ Grey [Glac~     87    20 Maipo V~ &lt;NA&gt;     Vent~
-## # ... with 144 more rows, and 2 more variables: variety &lt;chr&gt;,
-## #   winery &lt;chr&gt;</code></pre>
+##    country description designation points price province region_1 title variety
+##    &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  
+##  1 Chile   White flow~ Estate          86    15 Colchag~ &lt;NA&gt;     Esta~ Viogni~
+##  2 Chile   A berry ar~ &lt;NA&gt;            86     9 Maule V~ &lt;NA&gt;     Sund~ Merlot 
+##  3 Chile   Lightly he~ Reserve         85    13 Maipo V~ &lt;NA&gt;     Tres~ Pinot ~
+##  4 Chile   Caramelize~ Special Re~     86    12 Rapel V~ &lt;NA&gt;     Ares~ Carmen~
+##  5 Chile   A bright n~ Single Vin~     87    18 Leyda V~ &lt;NA&gt;     Leyd~ Chardo~
+##  6 Chile   Dry, spicy~ The 7th Ge~     91    20 Loncomi~ &lt;NA&gt;     G7 2~ Cabern~
+##  7 Chile   Composed a~ Envero Gra~     88    15 Colchag~ &lt;NA&gt;     Apal~ Carmen~
+##  8 Chile   Bisquertt ~ Casa La Jo~     88    11 Colchag~ &lt;NA&gt;     Viña~ Merlot 
+##  9 Chile   Clean and ~ Natura          87    11 Casabla~ &lt;NA&gt;     Emil~ Chardo~
+## 10 Chile   Rooty and ~ Grey [Glac~     87    20 Maipo V~ &lt;NA&gt;     Vent~ Cabern~
+## # ... with 144 more rows, and 1 more variable: winery &lt;chr&gt;</code></pre>
 <p> </p>
 <p>You’ll notice it has two columns which are no longer useful for us. The “country” column is the same for every row, and the “region_1” column is missing data in every row. Let’s remove those columns using <code>select()</code>. This time, we’ll use another nested function.</p>
 <pre class="r"><code>chilean &lt;- select(chilean, -c(country, region_1))
 chilean</code></pre>
 <pre><code>## # A tibble: 154 x 8
-##    description   designation   points price province title   variety winery
-##    &lt;chr&gt;         &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; 
-##  1 White flower~ Estate            86    15 Colchag~ Estamp~ Viogni~ Estam~
-##  2 A berry arom~ &lt;NA&gt;              86     9 Maule V~ Sundan~ Merlot  Sunda~
-##  3 Lightly herb~ Reserve           85    13 Maipo V~ Tres P~ Pinot ~ Tres ~
-##  4 Caramelized ~ Special Rele~     86    12 Rapel V~ Aresti~ Carmen~ Aresti
-##  5 A bright nos~ Single Viney~     87    18 Leyda V~ Leyda ~ Chardo~ Leyda 
-##  6 Dry, spicy a~ The 7th Gene~     91    20 Loncomi~ G7 201~ Cabern~ G7    
-##  7 Composed and~ Envero Gran ~     88    15 Colchag~ Apalta~ Carmen~ Apalt~
-##  8 Bisquertt us~ Casa La Joya~     88    11 Colchag~ Viña B~ Merlot  Viña ~
-##  9 Clean and ho~ Natura            87    11 Casabla~ Emilia~ Chardo~ Emili~
-## 10 Rooty and le~ Grey [Glacie~     87    20 Maipo V~ Ventis~ Cabern~ Venti~
+##    description     designation   points price province  title     variety winery
+##    &lt;chr&gt;           &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt; 
+##  1 White flower, ~ Estate            86    15 Colchagu~ Estampa ~ Viogni~ Estam~
+##  2 A berry aroma ~ &lt;NA&gt;              86     9 Maule Va~ Sundance~ Merlot  Sunda~
+##  3 Lightly herbal~ Reserve           85    13 Maipo Va~ Tres Pal~ Pinot ~ Tres ~
+##  4 Caramelized oa~ Special Rele~     86    12 Rapel Va~ Aresti 2~ Carmen~ Aresti
+##  5 A bright nose ~ Single Viney~     87    18 Leyda Va~ Leyda 20~ Chardo~ Leyda 
+##  6 Dry, spicy aro~ The 7th Gene~     91    20 Loncomil~ G7 2012 ~ Cabern~ G7    
+##  7 Composed and s~ Envero Gran ~     88    15 Colchagu~ Apaltagu~ Carmen~ Apalt~
+##  8 Bisquertt usua~ Casa La Joya~     88    11 Colchagu~ Viña Bis~ Merlot  Viña ~
+##  9 Clean and hone~ Natura            87    11 Casablan~ Emiliana~ Chardo~ Emili~
+## 10 Rooty and leaf~ Grey [Glacie~     87    20 Maipo Va~ Ventisqu~ Cabern~ Venti~
 ## # ... with 144 more rows</code></pre>
 <p> </p>
 <p>We use the <code>c()</code> function to combine elements and the <code>-</code> sign to indicate that we want those elements to be removed.</p>
@@ -1850,34 +1811,34 @@ chilean</code></pre>
 <pre class="r"><code># Keep columns &quot;title&quot; through &quot;winery&quot;
 select(reviews, title:winery)</code></pre>
 <pre><code>## # A tibble: 5,000 x 3
-##    title                                        variety       winery       
-##    &lt;chr&gt;                                        &lt;chr&gt;         &lt;chr&gt;        
-##  1 Nicosia 2013 Vulkà Bianco  (Etna)            White Blend   Nicosia      
-##  2 Quinta dos Avidagos 2011 Avidagos Red (Dour~ Portuguese R~ Quinta dos A~
-##  3 Rainstorm 2013 Pinot Gris (Willamette Valle~ Pinot Gris    Rainstorm    
-##  4 St. Julian 2013 Reserve Late Harvest Riesli~ Riesling      St. Julian   
-##  5 Sweet Cheeks 2012 Vintner&#39;s Reserve Wild Ch~ Pinot Noir    Sweet Cheeks 
-##  6 Tandem 2011 Ars In Vitro Tempranillo-Merlot~ Tempranillo-~ Tandem       
-##  7 Terre di Giurfo 2013 Belsito Frappato (Vitt~ Frappato      Terre di Giu~
-##  8 Trimbach 2012 Gewurztraminer (Alsace)        Gewürztramin~ Trimbach     
-##  9 Heinz Eifel 2013 Shine Gewürztraminer (Rhei~ Gewürztramin~ Heinz Eifel  
-## 10 Jean-Baptiste Adam 2012 Les Natures Pinot G~ Pinot Gris    Jean-Baptist~
+##    title                                            variety        winery       
+##    &lt;chr&gt;                                            &lt;chr&gt;          &lt;chr&gt;        
+##  1 Nicosia 2013 Vulkà Bianco  (Etna)                White Blend    Nicosia      
+##  2 Quinta dos Avidagos 2011 Avidagos Red (Douro)    Portuguese Red Quinta dos A~
+##  3 Rainstorm 2013 Pinot Gris (Willamette Valley)    Pinot Gris     Rainstorm    
+##  4 St. Julian 2013 Reserve Late Harvest Riesling (~ Riesling       St. Julian   
+##  5 Sweet Cheeks 2012 Vintner&#39;s Reserve Wild Child ~ Pinot Noir     Sweet Cheeks 
+##  6 Tandem 2011 Ars In Vitro Tempranillo-Merlot (Na~ Tempranillo-M~ Tandem       
+##  7 Terre di Giurfo 2013 Belsito Frappato (Vittoria) Frappato       Terre di Giu~
+##  8 Trimbach 2012 Gewurztraminer (Alsace)            Gewürztraminer Trimbach     
+##  9 Heinz Eifel 2013 Shine Gewürztraminer (Rheinhes~ Gewürztraminer Heinz Eifel  
+## 10 Jean-Baptiste Adam 2012 Les Natures Pinot Gris ~ Pinot Gris     Jean-Baptist~
 ## # ... with 4,990 more rows</code></pre>
 <pre class="r"><code># Remove columns &quot;title&quot; through &quot;winery&quot;
 select(reviews, -c(title:winery))</code></pre>
 <pre><code>## # A tibble: 5,000 x 7
-##    country  description       designation   points price province region_1 
-##    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    
-##  1 Italy    Aromas include t~ Vulkà Bianco      87    NA Sicily ~ Etna     
-##  2 Portugal This is ripe and~ Avidagos          87    15 Douro    &lt;NA&gt;     
-##  3 US       Tart and snappy,~ &lt;NA&gt;              87    14 Oregon   Willamet~
-##  4 US       Pineapple rind, ~ Reserve Late~     87    13 Michigan Lake Mic~
-##  5 US       Much like the re~ Vintner&#39;s Re~     87    65 Oregon   Willamet~
-##  6 Spain    Blackberry and r~ Ars In Vitro      87    15 Norther~ Navarra  
-##  7 Italy    Here&#39;s a bright,~ Belsito           87    16 Sicily ~ Vittoria 
-##  8 France   This dry and res~ &lt;NA&gt;              87    24 Alsace   Alsace   
-##  9 Germany  Savory dried thy~ Shine             87    12 Rheinhe~ &lt;NA&gt;     
-## 10 France   This has great d~ Les Natures       87    27 Alsace   Alsace   
+##    country  description          designation    points price province  region_1 
+##    &lt;chr&gt;    &lt;chr&gt;                &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    
+##  1 Italy    Aromas include trop~ Vulkà Bianco       87    NA Sicily &amp;~ Etna     
+##  2 Portugal This is ripe and fr~ Avidagos           87    15 Douro     &lt;NA&gt;     
+##  3 US       Tart and snappy, th~ &lt;NA&gt;               87    14 Oregon    Willamet~
+##  4 US       Pineapple rind, lem~ Reserve Late ~     87    13 Michigan  Lake Mic~
+##  5 US       Much like the regul~ Vintner&#39;s Res~     87    65 Oregon    Willamet~
+##  6 Spain    Blackberry and rasp~ Ars In Vitro       87    15 Northern~ Navarra  
+##  7 Italy    Here&#39;s a bright, in~ Belsito            87    16 Sicily &amp;~ Vittoria 
+##  8 France   This dry and restra~ &lt;NA&gt;               87    24 Alsace    Alsace   
+##  9 Germany  Savory dried thyme ~ Shine              87    12 Rheinhes~ &lt;NA&gt;     
+## 10 France   This has great dept~ Les Natures        87    27 Alsace    Alsace   
 ## # ... with 4,990 more rows</code></pre>
 <p>In both cases the <code>:</code> symbol means “through” and allows us to select a series of columns at once.</p>
 <p> </p>
@@ -1888,19 +1849,19 @@ select(reviews, -c(title:winery))</code></pre>
 <pre class="r"><code>chilean &lt;- rename(chilean, review_points = points)
 chilean</code></pre>
 <pre><code>## # A tibble: 154 x 8
-##    description designation review_points price province title variety
-##    &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  
-##  1 White flow~ Estate                 86    15 Colchag~ Esta~ Viogni~
-##  2 A berry ar~ &lt;NA&gt;                   86     9 Maule V~ Sund~ Merlot 
-##  3 Lightly he~ Reserve                85    13 Maipo V~ Tres~ Pinot ~
-##  4 Caramelize~ Special Re~            86    12 Rapel V~ Ares~ Carmen~
-##  5 A bright n~ Single Vin~            87    18 Leyda V~ Leyd~ Chardo~
-##  6 Dry, spicy~ The 7th Ge~            91    20 Loncomi~ G7 2~ Cabern~
-##  7 Composed a~ Envero Gra~            88    15 Colchag~ Apal~ Carmen~
-##  8 Bisquertt ~ Casa La Jo~            88    11 Colchag~ Viña~ Merlot 
-##  9 Clean and ~ Natura                 87    11 Casabla~ Emil~ Chardo~
-## 10 Rooty and ~ Grey [Glac~            87    20 Maipo V~ Vent~ Cabern~
-## # ... with 144 more rows, and 1 more variable: winery &lt;chr&gt;</code></pre>
+##    description   designation  review_points price province title  variety winery
+##    &lt;chr&gt;         &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; 
+##  1 White flower~ Estate                  86    15 Colchag~ Estam~ Viogni~ Estam~
+##  2 A berry arom~ &lt;NA&gt;                    86     9 Maule V~ Sunda~ Merlot  Sunda~
+##  3 Lightly herb~ Reserve                 85    13 Maipo V~ Tres ~ Pinot ~ Tres ~
+##  4 Caramelized ~ Special Rel~            86    12 Rapel V~ Arest~ Carmen~ Aresti
+##  5 A bright nos~ Single Vine~            87    18 Leyda V~ Leyda~ Chardo~ Leyda 
+##  6 Dry, spicy a~ The 7th Gen~            91    20 Loncomi~ G7 20~ Cabern~ G7    
+##  7 Composed and~ Envero Gran~            88    15 Colchag~ Apalt~ Carmen~ Apalt~
+##  8 Bisquertt us~ Casa La Joy~            88    11 Colchag~ Viña ~ Merlot  Viña ~
+##  9 Clean and ho~ Natura                  87    11 Casabla~ Emili~ Chardo~ Emili~
+## 10 Rooty and le~ Grey [Glaci~            87    20 Maipo V~ Venti~ Cabern~ Venti~
+## # ... with 144 more rows</code></pre>
 <p>Above, we’ve changed the name of our “points” column to “review_points”.</p>
 <p> </p>
 </div>
@@ -1949,6 +1910,7 @@ chilean</code></pre>
 <p>A more informative approach might be to look at the mean number of points by province. To do that, we first need to create a new object using the <code>group_by()</code> function.</p>
 <pre class="r"><code>by_prov &lt;- group_by(chilean, province)
 summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 20 x 2
 ##    province          mean_review_points
 ##    &lt;chr&gt;                          &lt;dbl&gt;
@@ -1983,6 +1945,7 @@ summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))</code
   group_by(province) %&gt;%
   summarise (mean_review_points = mean(review_points, na.rm = TRUE)) %&gt;%
   arrange(desc(mean_review_points))</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 20 x 2
 ##    province          mean_review_points
 ##    &lt;chr&gt;                          &lt;dbl&gt;
@@ -2013,6 +1976,7 @@ summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))</code
   group_by(province, variety) %&gt;%
   summarise (max_price = max(USD, na.rm = TRUE)) %&gt;%
   arrange(province, variety, desc(max_price))</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;province&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 78 x 3
 ## # Groups:   province [20]
 ##    province          variety                   max_price
@@ -2045,10 +2009,6 @@ summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))</code
   group_by (province) %&gt;%
   Summarise (mean_price == mean(price))</code></pre>
 </div>
-<div id="feedback" class="section level2">
-<h2>Feedback</h2>
-<p><a href="https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx">Let us know what you think of this lesson!</a></p>
-</div>
 
 
 
@@ -2068,6 +2028,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

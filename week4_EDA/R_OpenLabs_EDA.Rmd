@@ -403,6 +403,3 @@ ggplot(data=listings,aes(x=price,color=room_type))+
 
 4. Load the built-in dataset `msleep` with `data(msleep)`.  Use `?msleep` to learn more about the variables included.  Come up with a hypothesis or expectation you have about the data and check it with one of the methods used above.
 
-
-## Feedback
-[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)

@@ -383,7 +383,3 @@ ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
 5. Try generating a scatterplot of price against bedrooms. Now add an overlay of a loess line. Now try creating subplots for each of the property types.
 6. Try installing the visdat library, and explore different ways to visualize missing data.
 
-
-
-## Feedback
-[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)

@@ -64,7 +64,7 @@ For these plots, we'll use `moddf` provided via the code below.  The `url` funct
 We'll look at the code to generate `moddf` at the end of this section.
 
 ```{r message=FALSE}
-moddf <- read_csv(url("https://github.com/UNC-Libraries-data/R-Open-Labs-ARCHIVE/raw/master/fall_2018/week8_Models/moddf.csv"))
+moddf <- read_csv(url("https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week10_models/moddf.csv"))
 head(moddf)
 ```
 
@@ -407,6 +407,3 @@ ggplot(sim_results) +
 
 4. Use your intial `lm` fit to create a [stargazer table](https://unc-libraries-data.github.io/R-Open-Labs/Extras/Stargazer/Stargazer.html) output.  Embed in an R Markdown document or output html.  Use `?stargazer` to learn about and then change one or more default settings.
 
-
-## Feedback
-[Let us know what you think of this lesson!](https://unc.az1.qualtrics.com/jfe/form/SV_8e1zRY2rlFUYBMx)
