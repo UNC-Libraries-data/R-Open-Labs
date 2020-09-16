@@ -1,0 +1,169 @@
+---
+title: "Exercise Solutions: Workflows and Objects"
+author:
+- name: University of North Carolina at Chapel Hill
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+**Download Data** <br>
+[Airbnb listings from Washington DC ](https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/data/listings.csv)
+<br><br>
+
+```{r, message=FALSE}
+# Load the tidyverse package.
+library(tidyverse) 
+
+# Read in the data and store it as a data frame object called "airbnb".
+airbnb <- read_csv("data/listings.csv")
+
+```
+
+## 1. What are the different types of cancellation policies offered at Airbnb?
+
+**Answer**<br>
+flexible, moderate, strict and super strict
+
+`cancellation_policy` is the name of a column in the Airbnb data set, and it is a categorical variable. The `table` function allows us to view all of the categories within a categorical variable.
+
+```{r, message=FALSE}
+
+# The dollar sign is used to reference the column name within the airbnb dataset.
+table(airbnb$cancellation_policy)
+
+```
+
+## 2. What is the most common and least common cancellation policy?
+
+**Answer**<br>
+most common: flexible <br>
+least common: super strict
+
+Nest the `table` function inside of a `sort` function to sort our categories by size. If we set the `decreasing` argument to `TRUE`, it will sort the categories from largest to smallest.
+
+```{r, message=FALSE}
+
+sort(table(airbnb$cancellation_policy), decreasing = TRUE)
+
+```
+
+## 3. What percent of Airbnb property types are houses? Hint: To find what percent of X is Y, use this formula: Y/X * 100
+
+**Answer**<br>
+31.84%
+
+Use the `table` function to find out how many property types are houses.
+
+```{r, message=FALSE}
+
+table(airbnb$property_type)
+
+```
+
+There are 2,480 houses. Now we need to know the total number of properties overall. Each property has its own row in the airbnb data set, so we can use the `dim` function to see how many rows are in the data set. 
+
+```{r, message=FALSE}
+
+dim(airbnb)
+
+```
+The first number it give us is the number of rows and the second number it give us is the number of columns. Now we know that we have 2,480 houses out of 7,788 properties total, so we just need to use our formula to find the percentage.
+
+```{r, message=FALSE}
+
+(2480 / 7788) * 100
+
+```
+
+## 4. How many listings get a review rating below 50?
+
+**Answer**<br>
+16
+
+`review_scores_rating` is a column within the airbnb data set. So, if we run `airbnb$review_scores_rating < 50`, R will give us a long list that reads "TRUE" or "FALSE" for each property depending on whether it received a rating less than 50. However, we don't want to manually count each "TRUE" or "FALSE". Instead, we need to use the `table` function to see the total numbers for each.
+
+```{r, message=FALSE}
+
+table(airbnb$review_scores_rating < 50)
+
+```
+
+
+## 5. Try generating a scatterplot of price against bedrooms. Now add an overlay of a loess line. Now try creating subplots for each of the property types.
+
+**Answer**
+
+Create a scatterplot with price on the x axis and bedrooms on the y axis.
+```{r, message=FALSE, warning=FALSE}
+
+ggplot(airbnb, aes(x = price, y = bedrooms)) +
+  geom_point()
+
+```
+
+Use `geom_smooth()` to add a loess Line over the scatterplot.
+```{r, message=FALSE, warning=FALSE}
+
+ggplot(airbnb, aes(x = price, y = bedrooms)) +
+  geom_point() +
+  geom_smooth()
+
+```
+
+Use `facet_wrap` to generate subplots for each property type.
+```{r, message=FALSE, warning=FALSE}
+
+ggplot(airbnb, aes(x = price, y = bedrooms)) +
+  geom_point() +
+  geom_smooth() + 
+  facet_wrap(~ property_type)
+
+```
+
+## 6. Try installing the visdat library, and explore different ways to visualize missing data.
+
+**Answer**
+
+Install the visdat library. You will only have to do this once.
+```{r, eval = FALSE}
+
+install.packages("visdat")
+
+```
+
+Load the visdat library. You will have to do this each time you open a new session in R and want to use the package.
+```{r}
+
+library(visdat)
+
+```
+
+Use `?` to read the documentation on the package you just installed. There will be a list of links for each of the main functions. Click on each link and read about each function.
+
+```{r}
+
+?visdat
+
+```
+
+Use `vis_miss` to visualize missing data in the airbnb data set. `sort_miss` will sort the columns in order of most to least missingness.
+
+```{r}
+
+vis_miss(airbnb, sort_miss = TRUE)
+
+```
+
+
+
