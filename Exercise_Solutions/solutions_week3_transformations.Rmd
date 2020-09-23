@@ -1,0 +1,138 @@
+---
+title: "Exercise Solutions: Data Transformations"
+author:
+- name: University of North Carolina at Chapel Hill
+output: 
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: false
+    theme: spacelab
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+**Download Data** <br>
+[Five Thousand Wine Reviews](https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/data/5k_wine_reviews.csv)
+<br><br>
+
+```{r download, message=FALSE}
+# Load the tidyverse package.
+library(tidyverse) 
+
+# Read in the data and store it as a data frame object called "review".
+reviews <- read_csv("data/5k_wine_reviews.csv")
+
+```
+
+## 1. What is the price and review score for the most expensive French wine?
+
+**Answer**<br>
+The most expensive French wine in this data set is the 2009 Château Margaux, which costs $1900 and has a score of 98 points.
+
+```{r one, message=FALSE}
+
+# slice() is a dplyr convenience function that extracts a particular row
+reviews %>%
+  filter(country == "France") %>%
+  arrange(desc(price)) %>%
+  select(title, price, points) %>%
+  slice(1)
+
+```
+
+
+## 2. How many countries have wine that cost more than $500?
+
+**Answer**<br>
+
+There are two countries that have wine that costs more than $500.
+
+```{r two, message=FALSE}
+
+# If we want the names of the countries, we can use unique(), a base R function
+reviews %>%
+  filter(price  > 500) %>%
+  select(country) %>%
+  unique()
+
+# If we just want the count, we can use n_distinct(), a dplyr helper function that
+# is a shortcut for length(unique(x))
+reviews %>%
+  filter(price  > 500) %>%
+  select(country) %>%
+  n_distinct()
+
+
+
+```
+
+
+
+## 3. To which country and province should you travel to find the cheapest Tempranillo?
+
+**Answer**<br>
+
+The cheapest Temperanillo can be found in the Mendoza Province of Argentina.
+
+```{r three, message=FALSE}
+
+# If we want the names of the countries, we can use unique(), a base R function
+reviews %>%
+  filter(variety == "Tempranillo") %>%
+  arrange(price) %>%
+  select(country, province, price) %>%
+  slice(1)
+
+```
+
+
+## 4. You found a website that lets you order any wine for a flat shipping fee of $15! Find the total price for each wine that includes shipping.
+
+**Answer**<br>
+There are many ways to do this (as always in R), here's one way to accomplish this using the mutate() function.
+
+
+```{r four, message=FALSE}
+
+reviews <- reviews %>%
+  mutate(total_price = price + 15)
+
+```
+
+
+## 5. The following code produces errors. Correct them all:
+
+```{r errors, eval=FALSE}
+
+reviews %>%
+  # Title should be lowercase to match column name in dataframe
+  # The == is for testing logical equality, should not go between function name and parentheses
+  select == (Title, province, country, price) %>% 
+  # The = is for assignment. This should be == to see if country is Germany
+  # Germany should be in quotes since it is a character string
+  # The pipe symbol is missing the closing %
+  filter (country = Germany) %> 
+  group_by (province) %>%
+  # Summarise should be lower case
+  Summarise (mean_price == mean(price))
+
+```
+
+**Answer**<br>
+In addition to the errors pointed out below, there's also a [coding style](https://style.tidyverse.org/syntax.html#spacing) difference here with respect to the spacing between function names and `()`. The spaces after function names isn't necessarily wrong, but it is often frowned upon as a matter of style.
+
+
+```{r, message=FALSE}
+reviews %>%
+  select(title, province, country, price) %>%
+  filter(country == "Germany") %>%
+  group_by(province) %>%
+  summarise(mean_price = mean(price))
+
+```
