@@ -1,5 +1,5 @@
 ---
-title: "Exercise Solutions: EDA"
+title: "Exercise Solutions: Strings and Factors"
 author:
 - name: University of North Carolina at Chapel Hill
 output: 
