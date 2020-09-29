@@ -1,0 +1,129 @@
+---
+title: "Exercise Solutions: EDA"
+author:
+- name: University of North Carolina at Chapel Hill
+output: 
+  html_document:
+    theme: spacelab
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+**Download Data** <br>
+[Boston AirBnB Data](data/Boston_listings.csv)
+<br><br>
+
+```{r download, message=FALSE}
+# Load the tidyverse package.
+library(tidyverse) 
+
+# Read in the data and store it as a data frame object called "listings".
+listings <- read_csv("data/Boston_listings.csv")
+
+```
+
+
+### 1. Make a scatterplot of review_scores_rating vs reviews_per_month.  Add a best fit linear regression line with `geom_smooth` (check the help with `?geom_smooth`, or refer back to [week one](https://unc-libraries-data.github.io/R-Open-Labs/week1_Introduction/R_OpenLabs_1_Introduction.html))
+
+**Answer**
+
+Just the scatterplot:
+```{r fig.width=5, fig.height=3}
+ggplot(listings, aes(x=review_scores_rating, y=reviews_per_month)) + 
+  geom_point()
+```
+
+Scatterplot with linear regression line:
+```{r fig.width=5, fig.height=3}
+ggplot(listings, aes(x=review_scores_rating, y=reviews_per_month)) + 
+  geom_point() + 
+  geom_smooth(method="lm")
+```
+
+
+### 2. Which neighborhoods have the highest median price?  Which neighborhoods have the highest variance or largest IQR?  Hint: Use `neighbourhood_cleansed` for neighborhoods.
+
+**Answer:**  
+Downtown has the highest median price.
+```{r fig.width=6}
+ggplot(listings,aes(x=reorder(neighbourhood_cleansed, price, FUN = median),
+                    y=price)) +
+  geom_boxplot() + coord_flip()
+```
+
+The Leather District has the highest variance and IQR
+```{r fig.width=6}
+#Variance
+ggplot(listings,aes(x=reorder(neighbourhood_cleansed, price, FUN = var),
+                    y=price)) +
+  geom_boxplot() + coord_flip()+
+  ggtitle("Variance ordered")
+
+#IQR
+ggplot(listings,aes(x=reorder(neighbourhood_cleansed, price, FUN = IQR),
+                    y=price)) +
+  geom_boxplot() + coord_flip()+
+  ggtitle("IQR ordered")
+```
+
+### 3. Load the built-in dataset `mpg` with `data(mpg)`.  Use `?mpg` to learn more about the variables included.  Come up with a hypothesis or expectation you have about the data and check it with one of the methods used above. 
+
+**Answer:**  
+There are many possible solutions here!  Let's look at some basic information:
+
+```{r}
+data(mpg)
+#?mpg
+table(mpg$class)
+table(mpg$year)
+```
+
+Hypothesis:
+The proportion of compact cars increases over the two time periods.  Let's test it with a plot:
+
+```{r fig.width=6}
+ggplot(mpg,aes(x=as.factor(year),fill=class)) + geom_bar()
+```
+
+This might be a little clearer with some of our tools from week 3:
+
+```{r fig.width=6}
+mpg %>% filter(class == "compact") %>% 
+  ggplot(aes(x=as.factor(year),fill=class)) + geom_bar()
+```
+
+
+### 4. Load the built-in dataset `msleep` with `data(msleep)`.  Use `?msleep` to learn more about the variables included.  Come up with a hypothesis or expectation you have about the data and check it with one of the methods used above.
+
+**Answer:**  
+There are many possible solutions here!  Let's look at some basic information:
+
+```{r}
+data(msleep)
+#?msleep
+summary(msleep$brainwt)
+summary(msleep$sleep_rem)
+```
+ 
+Hypothesis:
+Animals with larger brains experience more REM sleep.
+
+```{r fig.width=6}
+ggplot(data=msleep, aes(x=brainwt, y=sleep_rem))+
+  geom_point()
+```
+
+There doesn't seem to be too much to this hypothesis!  What if we normalize both variables - considering instead the ratio of brain weight to body weight and REM sleep to total sleep?
+
+```{r fig.width=6}
+ggplot(data=msleep, aes(x=brainwt/bodywt, y=sleep_rem/sleep_total))+
+  geom_point()+
+  geom_smooth(method="lm")
+```
+
+It looks like there may be a slight downward trend here, but we don't have strong evidence.  Sometimes EDA doesn't lead us to strong conclusions!

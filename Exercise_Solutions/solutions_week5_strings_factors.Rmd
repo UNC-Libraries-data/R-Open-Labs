@@ -1,0 +1,160 @@
+---
+title: "Exercise Solutions: EDA"
+author:
+- name: University of North Carolina at Chapel Hill
+output: 
+  html_document:
+    theme: spacelab
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+**Download Data** <br>
+[New York Business Inspections](data/inspections10k.csv)
+<br><br>
+
+```{r download, message=FALSE}
+# Load the tidyverse package.
+library(tidyverse) 
+
+# Read in the data and store it as a data frame object called "insp".
+insp <- read_csv("data/inspections10k.csv")
+```
+
+
+### 1. Create a new column called "Address" that includes the street address, city, state and zip.
+
+**Answer:**  
+```{r}
+insp$StreetAddress <- str_c(insp$BuildingNumber, insp$Street, sep=" ")
+insp$Address <- str_c(insp$StreetAddress, insp$City,insp$State,insp$Zip, sep=" ")
+head(insp$Address)
+```
+
+
+### 2. How many business names have the word "NY" in them? *HINT: The `sum()` function will work here.*
+
+**Answer:**  
+```{r}
+sum(str_detect(insp$BusinessName, "NY"), na.rm=TRUE)
+```
+
+
+### 3. Find all business names that end with INC, LLC, or CORP. *HINT: remember the symbol we use for "or".*
+
+**Answer:**  
+* `$` matches the end of the string, so "INC$" matches "EVERGREEN FARM MARKET INC" but not "MSA 22 INCORPORATED" which contains "INC" in the wrong place!
+* Remember that `|` means "or" within our patterns.  So, `(INC$)|(LLC$)|(CORP$)` matches any string containing ending with any of the three patterns.
+* Note that this also won't match entries ending with "INC." instead of "INC".
+```{r}
+insp[str_detect(insp$BusinessName, "(INC$)|(LLC$)|(CORP$)"), "BusinessName"]
+```
+
+
+
+### 4. Notice that there are multiple types of Record IDs, such as ENFO, CMPL, UNIT, DCA, etc. Create a new data frame called "enfo" that includes ONLY records with ENFO IDs. *HINT: You will need to use both `filter()` and `str_detect()` to accomplish this.*
+
+**Answer:**  
+```{r}
+enfo <- insp %>%
+  filter(str_detect(insp$RecordID, "ENFO") == TRUE)
+```
+
+
+### 5. In your enfo dataset, remove the "-ENFO" portion from each ID. Note that the IDs are variable in length.
+
+**Answer:**  
+```{r}
+enfo$RecordID <- str_sub(enfo$RecordID, 1, str_length(enfo$RecordID)-5)
+```
+
+Let's re-define `enfo` to reset `RecordID` and unpack this with an example!
+
+```{r}
+test <- "6874-2016-ENFO"
+head(t(tibble(test, str_length(test), (str_length(test)-5),
+            str_sub(test, 1, str_length(test)-5), str_sub(test, str_length(test)-5, str_length(test))))) #note: t() transposes or flips the dataframe around for better readability here
+```
+
+*Note:*  
+We can also use negative numbers to count backwards from the end of the string!  However, because the numbering is inclusive (i.e. a range of 1-3 includes 1,2,3 instead of just 2 or 1,2), we have to increase the number by one to get 
+```{r}
+str_sub(test, 1, str_length(test)-5)
+str_sub(test, 1, -6)
+```
+
+
+### 6. R comes pre-loaded with a dataset called "diamonds". Store a copy of the dataset in your Global Environment with the following code:
+
+```{r, message=FALSE}
+diamonds <- diamonds
+```
+
+### 7. What class of object are the "cut", "color" and "clarity" columns?
+
+**Answer:**  
+All three objects are ordered factors.
+```{r}
+diamonds %>% select(cut,color,clarity) %>% str()
+```
+
+
+### 8. What happens when you use the `min()` function on the the cut column? What happens when you use the `min()` function on the factor in your "insp_sm" dataset?
+
+**Answer:**  
+```{r}
+min(diamonds$cut)
+```
+
+
+Recall the `insp_sm` dataset from the lesson:
+```{r error=TRUE}
+insp_sm <- insp %>%
+    filter(InspectionResult == "Pass" | 
+          InspectionResult == "Warning" | 
+          InspectionResult == "Violation Issued" | 
+          InspectionResult == "Fail")
+insp_sm$InspectionResult <- factor(insp_sm$InspectionResult, 
+                                   levels = c("Pass", "Warning", "Violation Issued", "Fail"))
+insp_sm$InspectionResult <- fct_recode(insp_sm$InspectionResult, "Fine" = "Violation Issued")
+insp_sm$InspectionResult <- fct_collapse(insp_sm$InspectionResult, 
+                                         "Good" = "Pass",
+                                         "Bad" = c("Warning", "Fine", "Fail"))
+min(insp_sm$InspectionResult)
+```
+
+Callling `min` here gives an error!  We can evaluate `min` on `cut` because it's *ordered*.
+
+```{r}
+class(diamonds$cut)
+class(insp_sm$InspectionResult)
+```
+
+
+### 9. How can you create an ordered factor? Use the `?` function to read the documentation on factors.
+
+**Answer:**  
+```{r}
+#?factor
+insp_sm$InspectionResult <- factor(insp_sm$InspectionResult, levels = c("Bad", "Good"), ordered=TRUE)
+min(insp_sm$InspectionResult)
+```
+
+
+### 10. [Read about the GIA diamond clarity grading scale here](https://en.wikipedia.org/wiki/Diamond_clarity#Clarity_grading). Alter the factor levels in the diamonds dataset to reflect the category names in the GIA scale (Flawless, Internally Flawless, etc.)
+
+**Answer:**  
+```{r}
+diamonds$clarity <- fct_collapse(diamonds$clarity,
+                                 "Included" = "I1",
+                                 "Slightly Included" = c("SI1", "SI2"),
+                                 "Very Slightly Included" = c("VS1", "VS2"),
+                                 "Very Very Slightly Included" = c("VVS1","VVS2"),
+                                 "Internally Flawless" = "IF")
+```
+
