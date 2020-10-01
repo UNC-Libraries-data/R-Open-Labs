@@ -1,0 +1,67 @@
+---
+title: "Exercise Solutions: Models"
+author:
+- name: University of North Carolina at Chapel Hill
+output: 
+  html_document:
+    theme: spacelab
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Setup
+
+```{r download, message=FALSE}
+# Load the tidyverse package.
+library(tidyverse) 
+```
+
+### 1. Explore the datasets included with the built-in `datasets` package by running `data(package="datasets")`.  You can get more information about any given dataset with `?<dataset name>`.  Choose a dataset with at least a few numeric variables.
+
+**Answer:**  
+```{r}
+#data(package="datasets")
+?swiss
+```
+
+
+### 2. Use `str`, `head`, `summary` and any of our EDA techniques to explore the dataset.  Pick a continuous outcome variable of interest and choose some predictors.
+
+**Answer:**  
+```{r}
+str(swiss)
+head(swiss)
+summary(swiss)
+```
+
+
+```{r}
+library(GGally)
+ggpairs(swiss)
+```
+
+Let's use `Fertility` as our outcome variable and use the other 5 variables as predictors.
+
+### 3. Fit an `lm` with your selected variables.
+
+**Answer:**  
+```{r}
+swiss_lm <- lm(data=swiss, Fertility ~ Agriculture + Examination + Education + Catholic + Infant.Mortality)
+#or we could use the . shortcut for all of the other variables:
+#swiss_lm <- lm(data=swiss, Fertility~.)
+summary(swiss_lm)
+```
+
+
+### 4. Use your intial `lm` fit to create a [stargazer table](https://unc-libraries-data.github.io/R-Open-Labs/Extras/Stargazer/Stargazer.html) output.  Embed in an R Markdown document or output html.  Use `?stargazer` to learn about and then change one or more default settings.
+
+**Answer:**  
+Remember to include `{r results="asis"}` as your header in R Markdown.
+```{r results="asis"}
+library(stargazer)
+stargazer(swiss_lm, type="html", title="Swiss Fertility Model", style ="ajps")
+```
+

@@ -25,7 +25,7 @@ library(tidyverse)
 ```
 
 
-1. Read olist_public_dataset_v2.csv into R. Explore the dataset. If necessary, refer to the metadata provided [here](https://www.kaggle.com/olistbr/brazilian-ecommerce).
+### 1. Read olist_public_dataset_v2.csv into R. Explore the dataset. If necessary, refer to the metadata provided [here](https://www.kaggle.com/olistbr/brazilian-ecommerce).
 
 **Answer:**  
 ```{r}
@@ -34,7 +34,7 @@ summary(data)
 ```
 
 
-2. Read product_category_name_translation.csv into R.  Merge this dataframe into olist_public_dataset_v2.csv using `product_category_name` as the key variable.
+### 2. Read product_category_name_translation.csv into R.  Merge this dataframe into olist_public_dataset_v2.csv using `product_category_name` as the key variable.
 
 **Answer:**  
 ```{r}
@@ -46,7 +46,9 @@ data_tr <- left_join(data, trans, by=c("product_category_name"="product_category
 
 Let's explore which products are most frequently purchased together:
 
-3. Use `group_by` and `summarize` to find the total `order_items_qty` for each `product_category_name_english` in each `customer state`. [Review](https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html)
+### 3. Use `group_by` and `summarize` to find the total `order_items_qty` for each `product_category_name_english` in each `customer state`.
+
+[Review](https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html)
 
 **Answer:**  
 ```{r}
@@ -55,7 +57,7 @@ products_long <- data_tr %>% group_by(product_category_name_english, customer_st
 ```
 
 
-4. Use `pivot_wider` to create a new dataframe with a row for each `customer_state` and a column for each `product_category_name_english`.  Name this dataframe `products`.
+### 4. Use `pivot_wider` to create a new dataframe with a row for each `customer_state` and a column for each `product_category_name_english`.  Name this dataframe `products`.
 
 **Answer:**  
 ```{r}
@@ -63,7 +65,7 @@ products <- pivot_wider(products_long, id=customer_state, names_from=product_cat
 ```
 
 
-5. Run the two lines of code below (make sure your dataframe from step 4 is called `products`!)
+### 5. Run the two lines of code below (make sure your dataframe from step 4 is called `products`!)
 
 ```
 products <- ungroup(products) #remove grouping 
@@ -76,7 +78,7 @@ products[is.na(products)] <- 0 #replace missing data with zeroes
 ```
 
 
-6. Use `ggpairs` or other Exploratory Data Analysis techniques to look for relationships between purchases of `small_appliances`,`consoles_games`,`air_conditioning`, and `construction_tools_safety`. (Remember to run `library(GGally)` before using `ggpairs`).
+### 6. Use `ggpairs` or other Exploratory Data Analysis techniques to look for relationships between purchases of `small_appliances`,`consoles_games`,`air_conditioning`, and `construction_tools_safety`. (Remember to run `library(GGally)` before using `ggpairs`).
 
 **Answer:**  
 ```{r fig.width=6, fig.height=6}
@@ -87,7 +89,7 @@ products %>% select(small_appliances, consoles_games, air_conditioning, construc
 
 Unsurpsisingly, there is a positive relationship between each pair of variables.  This probably represents the underlying influence of popluation - states with larger populations probably order more of everything!
 
-7. Repeat problems 3-6 with `order_products_value` (i.e. the amount spent vs the quantity purchased).  Do you see different patterns?  Explore other product categories.
+### 7. Repeat problems 3-6 with `order_products_value` (i.e. the amount spent vs the quantity purchased).  Do you see different patterns?  Explore other product categories.
 
 **Answer:**  
 ```{r}
@@ -104,7 +106,7 @@ prod_value %>% select(small_appliances, consoles_games, air_conditioning, constr
 ```
 We see similar, if a bit weaker, relationships.
 
-8. Use `pivot_longer` and then `pivot_wider` to convert your `products` dataframe to one where each row is a different `product_category_name_english` and each column represents a different `customer_state`.  
+### 8. Use `pivot_longer` and then `pivot_wider` to convert your `products` dataframe to one where each row is a different `product_category_name_english` and each column represents a different `customer_state`.  
 
 **Answer:**  
 ```{r}
@@ -113,7 +115,7 @@ prod_by_state <- products %>% pivot_longer(cols=-customer_state) %>%
 ```
 
 
-9. Choose 5 states. Which of these states have the most similar patterns of spending (as measured by correlation)?
+### 9. Choose 5 states. Which of these states have the most similar patterns of spending (as measured by correlation)?
 
 **Answer:**  
 ```{r}
