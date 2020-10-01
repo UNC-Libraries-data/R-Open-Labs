@@ -207,7 +207,7 @@ We have now covered R Studio projects and R Markdown. With these two tools, you 
 
 ## Exercises:
 
-1. [Download the cheese RStudio Project](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week4_Reproducible_Reports/download/cheese.zip) file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.
+1. [Download the cheese RStudio Project](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_Reproducible_Reports/download/cheese.zip) file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.
 
 2. In the cheeseConsumption.Rmd file, find the code chunk named **setup**. change `echo=FALSE` to `echo=TRUE`. Try knitting the document again. What changed? Did this affect the whole document?
 
