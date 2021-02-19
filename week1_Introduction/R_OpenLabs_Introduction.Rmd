@@ -11,6 +11,12 @@ output:
     theme: spacelab
 ---
 
+```{css, echo=F}
+table td, table th, table tr { border: 1px black solid !important; color: black !important; } 
+table td, table tr {text-align:left !important; font-size:14px; vertical-align:top !important;}
+table th {text-align:center !important; font-size:15px; }
+```
+
 ```{r echo=FALSE}
 # Developed by Nuvan Rathnayaka (Fall 2018)
 # Updated by Matt Jansen (Spring 2019)
@@ -72,26 +78,56 @@ This introductory workshop aims to:
 
 ### Installation
 
-1) Download R at https://cran.r-project.org/
+<table>
+<tr>
+<th> <h3>Mac Installation</h3> </th>
+<th> <h3>PC Installation</h3> </th>
+</tr>
+<tr><td>
+<strong>Check your version number</strong> and make sure to download the correct version of R/RStudio.
 
-- For all macOS users:
-  - **Check your version number** and make sure to download the correct version of R/RStudio
-  - Install **XQuartz**: https://www.xquartz.org/
-- For macOS **10.13 and higher**, install:
-  - **XCode**: https://apps.apple.com/us/app/xcode/id497799835
-  - **gfortran**: https://github.com/fxcoudert/gfortran-for-macOS/releases
-- For **earlier versions** of macOS: 
-  - install **clang** and **gfortran** compatible with your version here: https://cran.r-project.org/bin/macosx/tools/
+Download R from <a href=https://cran.r-project.org/bin/macosx/>https://cran.r-project.org/bin/macosx/</a>
+<ul>
+<li>Choose the .pkg link (e.g. R-4.0.3.pkg as of this writing)</li>
+</ul>  
+</td>
+<td>
+Download R from <a href=https://cran.r-project.org/bin/windows/base/>https://cran.r-project.org/bin/windows/base/</a>
+ 
+</td>
+</tr>
+<tr><td>
+Download R Studio at <a href=https://www.rstudio.com/products/rstudio/download/#download>https://www.rstudio.com/products/rstudio/download/#download</a>
+</td>
+<td>
+Download R Studio at <a href=https://www.rstudio.com/products/rstudio/download/#download>https://www.rstudio.com/products/rstudio/download/#download</a>
+</td></tr>
+<tr><td>
+<strong>If possible: </strong>
+<ul>
+<li>Install XQuartz: <a href=https://www.xquartz.org/>https://www.xquartz.org/</a></li>
+<li>For macOS <strong>10.13 and higher</strong>, install:
+<ul>
+<li>XCode: <a href=https://apps.apple.com/us/app/xcode/id497799835>https://apps.apple.com/us/app/xcode/id497799835</a></li>
+<li>gfortran: <a href=https://github.com/fxcoudert/gfortran-for-macOS/releases>https://github.com/fxcoudert/gfortran-for-macOS/releases</a></li>
+</ul>
+<li>For <strong>earlier versions</strong> of macOS:</li>
+<ul>
+<li>install **clang** and **gfortran** compatible with your version here: <a href=https://cran.r-project.org/bin/macosx/tools/>https://cran.r-project.org/bin/macosx/tools/</a></li>
+</ul>
+</ul>
+</li>
 
-2) If possible, install the additional R developer tools. This can help in the future because some libraries require these. If your computer is not updated to the latest version of your operating system, this can get a little hairy, so don't worry if you can't get this done today.
+</td>
+<td>
+<strong>If possible: </strong>
+<ul>
+<li>Install <a href=https://cran.r-project.org/bin/windows/Rtools/>https://cran.r-project.org/bin/windows/Rtools/</a></li>
 
-- For Windows: https://cran.r-project.org/bin/windows/Rtools/
-
-- For macOS: https://cran.r-project.org/bin/macosx/tools/
-
-
-3) Download R Studio at https://www.rstudio.com/products/rstudio/download/#download
-
+<li>Follow instructions for "Putting Rtools on the PATH" if you're comfortable; otherwise, return to this after today's workshop!</li>
+</ul>
+</td></tr>
+</table>
 
 ### R Studio orientation
 
