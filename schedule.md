@@ -1,3 +1,5 @@
+<!--
+
 ## Fall 2019
 
 |Week|Date|Topic|Instructor|Notes|
@@ -31,7 +33,7 @@
 |8|April 2|Functions and Conditionals|Lorin||
 |9|April 9|Loops and Error Handling|Nuvan||
 |10|April 16|Models|Matt||
-
+-->
 ## Extras:
 * Shiny
 * Penalized Regression (glment)
