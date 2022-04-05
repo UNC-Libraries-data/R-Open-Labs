@@ -140,9 +140,9 @@ We need several different types of joins to facillitate the different ways datas
 | Join Type | Want to keep | Function |
 |-----------|---------------------------------|-------|
 | **Inner Join** | Only the rows in both datasets |`inner_join()`|
-| **Outer Join** | All of the rows |`full_join()`|
-| **Outer Join** | All of the rows in the first (left) dataset, only the matches from the second (right dataset) |`left_join()`|
-| **Outer Join** | All of the rows in the second (left) dataset, only the matches from the first (right dataset) |`right_join()`|
+| **Full (Outer) Join** | All of the rows |`full_join()`|
+| **Left (Outer) Join** | All of the rows in the first (left) dataset, only the matches from the second (right dataset) |`left_join()`|
+| **Right (Outer) Join** | All of the rows in the second (left) dataset, only the matches from the first (right dataset) |`right_join()`|
 
 &nbsp;
 
