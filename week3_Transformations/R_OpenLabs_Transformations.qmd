@@ -1,0 +1,269 @@
+---
+title: "beginR: Data Transformations"
+format: 
+  html:
+    theme: spacelab
+    toc: true
+    toc-location: left
+    page-layout: article
+---
+
+### Data and other downloads
+
+[Five Thousand Wine Reviews](data/5k_wine_reviews.csv)
+
+## Today
+
+This workshop aims to cover:
+
+-   Review of Previous Topics
+    -   Starting a New Project
+    -   Loading the tidyverse
+    -   Importing Data
+-   Data Transformations
+    -   Filtering Data
+    -   Relational and Assignemnt Operators
+    -   Reordering Data (arrange)
+    -   Selecting Data
+    -   Renaming Columns
+    -   Adding new Variables (mutate)
+    -   Summerising Data
+-   [R for Data Science Chapter 5](http://r4ds.had.co.nz/transform.html)
+
+### Start a New Project in R
+
+It is best practice to set up a new directory each time we start a new project in R. To do so, complete the following steps:
+
+1.  Go to **File \> New Project \> New Directory \> New Project**.
+2.  Type in a name for your directory and click **Browse**. Be sure to pick a place for your directory that you will be able to **find later**.
+3.  Go to **Finder** on Mac or **File Explorer** on PC and find the directory you just created.
+4.  Inside your project directory, create a new folder called **data**.
+5.  Download or copy the **data file** (5k_wine_reviews.csv) into the data folder.
+6.  Go to **File \> Save As** to give your R script a name and save it in your project directory.
+
+### Loading the tidyverse
+
+The first few lines of our R script are made up of comments to document the script's purpose, creator and date. Next, we use the `library()` function to load any packages that our script will need to run. In this workshop, we are using the **tidyverse** package for all of our projects.
+
+```{r message=FALSE}
+# Purpose: Transforming Wine Review Data
+# Author: Nuvan Rathnayaka
+# Date: January 2019
+
+# Setup -----------------------------------------------------------
+library(tidyverse)
+```
+
+### Importing Data
+
+We use the `read_csv()` function to import our data.
+
+```{r message=FALSE}
+# Data Import ------------------------------------------------------
+reviews <- read_csv("data/5k_wine_reviews.csv")
+```
+
+When we use `read_csv()`, our data is stored as a type of object in R called a **data frame**. One of the nice things about data frames is that we can see a visual representation of them using R Studio. Take a look at your **Environment tab** in the upper right and click on the **reviews** object you just created.
+
+![](figures/environment.png){width="800"}
+
+The data will be represented as a table in a new tab.
+
+![](figures/visual.png)
+
+### Filtering
+
+We have a fairly big data set. What if we want to focus on certain records? For example, let's say I'm only interested in Chilean wine. I can use the `filter()` function to only look at wines with "Chile" as their country of origin.
+
+```{r}
+filter(reviews, country == "Chile")
+```
+
+When we use the `filter` function on our reviews object, it desplays the results in our **Console** tab. However, these results have not been saved, only displayed. If we want to save our results so we can perform additional transformations on them later, we need to **assign** them to a new data frame. Here, we'll name the data frame "chilean".
+
+```{r}
+chilean <- filter(reviews, country == "Chile")
+```
+
+Let's say I also don't have a lot of money to spend on wine, so I need to limit my data set to wines that cost \$20 or less. We should edit our filter to include a condition on price.
+
+```{r}
+chilean <- filter(reviews, country == "Chile", price <= 20)
+```
+
+Note that this time we are assigining the results to the **same** object we used before. This allows us to replace our previous data for that object with new data. Now, if we click on the "chilean" data frame in our Environment tab, we can see our data set has been limited only to wines from Chile that are \$20 or less.
+
+### Relational and Assignment Operators
+
+Our filter uses some symbols you may not be familiar with, such as `==` and `<=`. These are called **relational operators**. We use a relational operator to **check** the relationship between the two **operands** on either side of it.
+
+| Operator | Relationship Check                                                  |
+|:-----------:|-----------------------------------------------------------|
+|   `>`    | Is the left operand **greater than** the right operand?             |
+|   `<`    | Is the left operand **less than** the right operand?                |
+|   `>=`   | Is the left operand **greater than or equal to** the right operand? |
+|   `<=`   | Is the left operand **less than or equal to** the right operand?    |
+|   `==`   | Is the left operand **equal** to the right operand?                 |
+|   `!=`   | Is the left operand **not equal** to the right operand?             |
+
+Above, you'll notice that we use `==` to **check** if something is equal. This is different from **defining** something as equal. To **set or assign** a value, we use either `=` or `<-` instead of `==`. For example:
+
+|                  Use                  | Meaning                                                                                   |
+|:-------------------------------------:|---------------------------------|
+| `filter(reviews, country == "Chile")` | **Check** each review to see if the country is equal to "Chile"                           |
+|              `age = 52`               | **Assign** the value 52 to a variable called "age"                                        |
+|       `data <- survey_results`        | **Assign** the contents of the object called "survey_results" to an object called "data". |
+
+### Reordering Data (arrange)
+
+Let's arrange the rows of our data frame in a way that's more informative. This time, we'll just take a look at the results in our console rather than assigning them to an object.
+
+First, I want to know which wines in my Chilean data set get the highest number of review points. The `arrange()` function allows us to reorder our data by a particular variable. Below, we'll reorder by points.
+
+```{r}
+arrange(chilean, points)
+```
+
+Well, that sort of worked. My wines are reordered by points, but in ascending order. To reorder them in descending order, we need to use another function inside the arrange function. As you learned last week, this is called a nested function.
+
+```{r}
+arrange(chilean, desc(points))
+```
+
+Now we can see which wines have the highest number of points. But what if we want to reorder by **multiple** variables? For example, many wines with the same number of points have different prices. What if we wanted to reorder those wines by price as well, so we can see which wines have the highest reviews with the lowest prices? The `arrange()` function allows us to add multiple variables simply by using commas.
+
+```{r}
+arrange(chilean, desc(points), price)
+```
+
+### Selecting Data (select)
+
+Most real world data sets we want to use in our research are going to be messy, and we'll need to go through a process of cleaning the data before we can start to explore and analyze it. The first steps in many data cleaning processes involve removing data that we don't need.
+
+Going back to our original reviews data frame, let's imagine we are only interested in the country, province and variety of our wines. We could create a new object called "wine_types" using the `select()` function. We'll also **preview** our new object by simply typing its name and running the script.
+
+```{r}
+wine_types <- select(reviews, country, province, variety)
+wine_types
+```
+
+But what if we have a lot of columns in our dataset and only need to remove one or two? Look at our chilean data frame again.
+
+```{r}
+chilean
+```
+
+You'll notice it has two columns which are no longer useful for us. The "country" column is the same for every row, and the "region_1" column is missing data in every row. Let's remove those columns using `select()`. This time, we'll use another nested function.
+
+```{r}
+chilean <- select(chilean, -c(country, region_1))
+
+chilean
+```
+
+We use the c() function to combine elements and the - sign to indicate that we want those elements to be removed.
+
+Sometimes, we'll need to keep or remove a series of columns that are directly adjacent to each other in the data frame. In those circumstances, we can use the following syntax:
+
+```{r}
+# Keep columns "title" through "winery"
+select(reviews, title:winery)
+```
+
+```{r}
+# Remove columns "title" through "winery"
+select(reviews, -c(title:winery))
+```
+
+In both cases the `:` symbol means "through" and allows us to select a series of columns at once.
+
+### Renaming Columns
+
+Renaming our columns is easy to do when we use the `rename` function. We need to provide the new name we want to use first, and then **assign** the old name to it.
+
+```{r}
+chilean <- rename(chilean, review_points = points)
+chilean
+```
+
+Above, we've changed the name of our "points" column to "review_points".
+
+### Adding New Variables
+
+My chilean data set has prices listed in USD, but suppose I also needed to know how many Euros each wine costs. Currently, the exchange rate is 0.85 Euros for every 1 USD. So, I just need to multiply the price column by 0.85, but how can I store the results of my currency conversion in a new column? The `mutate()` function makes that possible.
+
+```{r}
+chilean <- mutate(chilean, EUR = price * 0.85)
+```
+
+Now I'm going to make several more changes to my data set.
+
+```{r}
+# Rename the "price" column to "USD"
+chilean <- rename(chilean, USD = price)
+
+# Reorder the columns so that "USD" and "EUR" are adjacent
+chilean <- select(chilean, description:review_points, USD, EUR, province:winery)
+
+#Preview the results
+chilean
+```
+
+Did I mention you can use `select()` to reorder columns as well? You can!
+
+### Summarising Data
+
+Now that we've done some cleaning of our data set, we can start to explore it a bit by taking a look at basic summary statistics with the `summarise()` function. One thing we need to remember when using `summarise()` is that missing data can cause a problem, so in many cases we will need to tell R to ignore rows with missing data using the `na.rm` parameter.
+
+Let's take a look at the mean review points for all of our Chilean wines. We'll assign our result to a column named "mean_review_points".
+
+```{r}
+summarise(chilean, mean_review_points = mean(review_points, na.rm = TRUE))
+```
+
+A more informative approach might be to look at the mean number of points by province. To do that, we first need to create a new object using the group_by() function.
+
+```{r}
+by_prov <- group_by(chilean, province)
+summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))
+```
+
+Now we want to arrange the results from highest to lowest review points, but that would require us creating **another** object to use `arrange()` on. Instead of creating many different objects that we don't necessarily need to keep around, let's use pipes.
+
+### Piping
+
+Pipes use the `%>%` symbol to connect multiple functions without creating multiple objects. To use `group_by()`, `summarise()` and `arrange()` on our data all at once, we use the pipe like so:
+
+```{r}
+chilean %>%
+  group_by(province) %>%
+  summarise(mean_review_points = mean(review_points, na.rm = TRUE)) %>%
+  arrange(desc(mean_review_points))
+```
+
+Not only do the pipes prevent us from having to create lots of objects, they also allow us to arrange the code in a way that is easier to read. Notice that we also only needed to name our object once, at the beginning of the sequence, for it to be used in every function onward.
+
+Let's try another sequence of functions using the pipe to answer the following question: What is the highest price for each variety of wine in each province?
+
+```{r}
+chilean %>%
+  group_by(province, variety) %>%
+  summarise(max_price = max(USD, na.rm = TRUE)) %>%
+  arrange(province, variety, desc(max_price))
+```
+
+### Exercises
+
+Concerning our original "reviews" data set, use the functions we learned this week to answer the following questions:
+
+1.  What is the price and review score for the most expensive French wine?
+2.  How many countries have wine that cost more than \$500?
+3.  To which country and province should you travel to find the cheapest Tempranillo?
+4.  You found a website that lets you order any wine for a flat shipping fee of \$15! Find the total price for each wine that includes shipping.
+5.  The following code produces errors. Correct them all:
+
+reviews %\>%\
+select == (Title, province, country, price) %\>%\
+filter (country = Germany) %\>\
+group_by (province) %\>%\
+Summarise (mean_price == mean(price))
