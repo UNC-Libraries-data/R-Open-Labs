@@ -98,7 +98,7 @@ Note that this time we are assigining the results to the **same** object we used
 Our filter uses some symbols you may not be familiar with, such as `==` and `<=`. These are called **relational operators**. We use a relational operator to **check** the relationship between the two **operands** on either side of it.
 
 | Operator | Relationship Check                                                  |
-|:------------------:|------------------------------------------------------------------------------------------|
+|:--------------:|--------------------------------------------------------|
 |   `>`    | Is the left operand **greater than** the right operand?             |
 |   `<`    | Is the left operand **less than** the right operand?                |
 |   `>=`   | Is the left operand **greater than or equal to** the right operand? |
@@ -109,7 +109,7 @@ Our filter uses some symbols you may not be familiar with, such as `==` and `<=`
 Above, you'll notice that we use `==` to **check** if something is equal. This is different from **defining** something as equal. To **set or assign** a value, we use either `=` or `<-` instead of `==`. For example:
 
 |                  Use                  | Meaning                                                                                   |
-|:--------------------------------------------------------:|-------------------------------------------------------------------------------------------------|
+|:-------------------------:|---------------------------------------------|
 | `filter(reviews, country == "Chile")` | **Check** each review to see if the country is equal to "Chile"                           |
 |              `age = 52`               | **Assign** the value 52 to a variable called "age"                                        |
 |       `data <- survey_results`        | **Assign** the contents of the object called "survey_results" to an object called "data". |
@@ -240,6 +240,10 @@ chilean %>%
   summarise(mean_review_points = mean(review_points, na.rm = TRUE)) %>%
   arrange(desc(mean_review_points))
 ```
+
+**Shortcut for %\>%:\
+**CMD + SHIFT + m (Mac)**\
+**CTRL + SHIFT + m (PC)
 
 Not only do the pipes prevent us from having to create lots of objects, they also allow us to arrange the code in a way that is easier to read. Notice that we also only needed to name our object once, at the beginning of the sequence, for it to be used in every function onward.
 
