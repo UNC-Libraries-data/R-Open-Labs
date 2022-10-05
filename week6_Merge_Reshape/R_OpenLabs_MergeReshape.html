@@ -161,8 +161,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Reshaping data
 <ul>
-<li><p><code>pivot_longer</code></p></li>
-<li><p><code>pivot_wider</code></p></li>
+<li><code>pivot_longer</code></li>
+<li><code>pivot_wider</code></li>
 </ul></li>
 </ul>
 <div class="cell">
@@ -187,9 +187,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID  GPA_change
-1         1 -0.08632046
-2         2 -0.20375738</code></pre>
+<pre><code>  StudentID GPA_change
+1         1   1.535525
+2         2  -1.284444</code></pre>
 </div>
 </div>
 <p><strong>Dataset 2</strong></p>
@@ -200,20 +200,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID  GPA_change Semester
-1         3 -0.28178958   Spring
-2         4 -0.02546988     Fall</code></pre>
+<pre><code>  StudentID GPA_change Semester
+1         3   0.247410   Spring
+2         4   1.380659     Fall</code></pre>
 </div>
 </div>
 <p><strong>Datasets combined</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(a0,a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID  GPA_change Semester
-1         1 -0.08632046     &lt;NA&gt;
-2         2 -0.20375738     &lt;NA&gt;
-3         3 -0.28178958   Spring
-4         4 -0.02546988     Fall</code></pre>
+<pre><code>  StudentID GPA_change Semester
+1         1   1.535525     &lt;NA&gt;
+2         2  -1.284444     &lt;NA&gt;
+3         3   0.247410   Spring
+4         4   1.380659     Fall</code></pre>
 </div>
 </div>
 <p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a bind_cols function, but in the context below, using bind_cols is unhelpful and results in mismatched records.</p>

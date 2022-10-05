@@ -28,7 +28,6 @@ This workshop covers topics from:
     -   "Outer Joins" - `full_join`,`left_join`,`right_join`
 -   Reshaping data
     -   `pivot_longer`
-
     -   `pivot_wider`
 
 ```{r message=FALSE, warning=FALSE}
