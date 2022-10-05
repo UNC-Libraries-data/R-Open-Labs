@@ -31,6 +31,10 @@ This workshop covers topics from:
 
     -   `pivot_wider`
 
+```{r message:FALSE}
+library(tidyverse)
+```
+
 ## Motivation
 
 In most of our lessons so far, we've typically focused on a single dataset. This week, we'll cover different methods for combining multiple datasets and transforming the shape of our data.
@@ -67,8 +71,6 @@ print(a1)
 **Datasets combined**
 
 ```{r}
-library(tidyverse)
-
 bind_rows(a0,a1)
 ```
 
