@@ -64,7 +64,7 @@ For these plots, we'll use `moddf` provided via the code below.  The `url` funct
 We'll look at the code to generate `moddf` at the end of this section.
 
 ```{r message=FALSE}
-moddf <- read_csv(url("https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week10_models/moddf.csv"))
+moddf <- read_csv(url("https://unc-libraries-data.github.io/R-Open-Labs/week10_models/moddf.csv"))
 head(moddf)
 ```
 
