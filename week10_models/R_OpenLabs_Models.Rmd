@@ -209,7 +209,7 @@ d$residuals <- residuals(fit2)
 
 
 d %>% 
-  gather(key = "iv", value = "x", -mpg, -predicted, -residuals) %>% 
+  pivot_longer(-c(mpg,predicted,residuals),names_to = "iv", values_to="x") %>% 
   ggplot(aes(x = x, y = mpg)) + 
   geom_point(aes(y = predicted), shape = 1) +
   facet_grid(~ iv, scales = "free") +
