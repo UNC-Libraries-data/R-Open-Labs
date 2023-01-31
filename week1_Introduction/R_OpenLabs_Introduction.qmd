@@ -74,34 +74,35 @@ This introductory workshop aims to:
 
 ### Installation
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Mac Installation                                                                                                                                   | PC Installation                                                                                                                   |
-+====================================================================================================================================================+===================================================================================================================================+
-| **Check your version number** and make sure to download the correct version of R/RStudio. Download R from <https://cran.r-project.org/bin/macosx/> | Download R from <https://cran.r-project.org/bin/windows/base/>                                                                    |
-|                                                                                                                                                    |                                                                                                                                   |
-| -   Choose the .pkg link (e.g. R-4.2.1.pkg as of this writing)                                                                                     |                                                                                                                                   |
-+----------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| Download R Studio at <https://www.rstudio.com/products/rstudio/download/#download>                                                                 | Download R Studio at <https://www.rstudio.com/products/rstudio/download/#download>                                                |
-+----------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-| **If possible:**                                                                                                                                   | **If possible:**                                                                                                                  |
-|                                                                                                                                                    |                                                                                                                                   |
-| -   Install XQuartz: <https://www.xquartz.org/>                                                                                                    | -   Install <https://cran.r-project.org/bin/windows/Rtools/>                                                                      |
-|                                                                                                                                                    |        - Make sure to choose the Rtools version that matches your R installation                                                  |
-| -   For macOS **10.13 and higher**, install:                                                                                                       |                                                                                                                                   |
-|                                                                                                                                                    |                                                                                                                                   |
-|     -   XCode: <https://apps.apple.com/us/app/xcode/id497799835>                                                                                   |                                                                                                                                   |
-|                                                                                                                                                    |                                                                                                                                   |
-|     -   gfortran: <https://github.com/fxcoudert/gfortran-for-macOS/releases>                                                                       |                                                                                                                                   |
-|                                                                                                                                                    |                                                                                                                                   |
-| -   For **earlier versions** of macOS:                                                                                                             |                                                                                                                                   |
-|                                                                                                                                                    |                                                                                                                                   |
-|     -   install \*\*clang\*\* and \*\*gfortran\*\* compatible with your version here: <https://cran.r-project.org/bin/macosx/tools/>               |                                                                                                                                   |
-+----------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| Mac Installation                                                                                                                                   | PC Installation                                                                                                           |
++====================================================================================================================================================+===========================================================================================================================+
+| **Check your version number** and make sure to download the correct version of R/RStudio. Download R from <https://cran.r-project.org/bin/macosx/> | Download R from <https://cran.r-project.org/bin/windows/base/>                                                            |
+|                                                                                                                                                    |                                                                                                                           |
+| -   Choose the .pkg link (e.g. R-4.2.1.pkg as of this writing)                                                                                     |                                                                                                                           |
++----------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| Download R Studio at <https://posit.co/download/rstudio-desktop/#download>                                                                         | Download R Studio at <https://posit.co/download/rstudio-desktop/#download>                                                |
+|                                                                                                                                                    |                                                                                                                           |
+| -   Skip to 2: Install RStudio                                                                                                                     | -   Skip to 2: Install RStudio                                                                                            |
++----------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
+| **Optional:**                                                                                                                                      | **Optional:**                                                                                                             |
+|                                                                                                                                                    |                                                                                                                           |
+| -   Install XQuartz: <https://www.xquartz.org/>                                                                                                    | -   Install <https://cran.r-project.org/bin/windows/Rtools/>                                                              |
+|                                                                                                                                                    |     -   Make sure to choose the Rtools version that matches your R installation                                           |
+| -   For macOS **10.13 and higher**, install:                                                                                                       |     -   On the next page, click the link for the "Rtools\<xx\> installer" where \<xx\> is the appropriate version number. |
+|                                                                                                                                                    |                                                                                                                           |
+|     -   XCode: <https://apps.apple.com/us/app/xcode/id497799835>                                                                                   |                                                                                                                           |
+|                                                                                                                                                    |                                                                                                                           |
+|     -   gfortran: <https://github.com/fxcoudert/gfortran-for-macOS/releases>                                                                       |                                                                                                                           |
+|                                                                                                                                                    |                                                                                                                           |
+| -   For **earlier versions** of macOS:                                                                                                             |                                                                                                                           |
+|                                                                                                                                                    |                                                                                                                           |
+|     -   install \*\*clang\*\* and \*\*gfortran\*\* compatible with your version here: <https://cran.r-project.org/bin/macosx/tools/>               |                                                                                                                           |
++----------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------+
 
 ### R Studio orientation
 
 ![](figures/rstudio.png)
-
 
 #### Panes
 
@@ -109,7 +110,7 @@ R Studio shows four panes by default. The two most important for writing, testin
 
 ##### Console (bottom left)
 
-![](figures/console.png) 
+![](figures/console.png)
 
 The console pane allows **immediate execution** of R code. This pane can be used to experiment with new functions and execute one-off commands, like printing sample data or exploratory plots.
 
@@ -164,7 +165,7 @@ For simplicity, today we'll be working with datasets that are included with Base
 data()
 ```
 
-From the Packages pane, we can click on the datasets package, which will take us to the help page: ![](figures/datasetsHelp.png) 
+From the Packages pane, we can click on the datasets package, which will take us to the help page: ![](figures/datasetsHelp.png)
 
 Now we can read up on the available datasets.
 
