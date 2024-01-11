@@ -1,5 +1,5 @@
 ---
-title: "beginR: Joining and Reshaping with tidyr"
+title: "beginR: Joining, Reshaping & Reproducible Reports"
 format: 
   html:
     theme: spacelab
@@ -10,7 +10,7 @@ format:
 
 ### Data and other downloads
 
-[Download data](data/brazilian-ecommerce-subset.zip)
+[Brazilian E-Commerce Subset](data/brazilian-ecommerce-subset.zip)
 
 Data derived from [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/olistbr/brazilian-ecommerce) provided on Kaggle.com under a [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
