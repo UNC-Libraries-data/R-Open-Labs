@@ -232,7 +232,7 @@ There's a lot going on in that one line of code. Let's dissect it.
 Now we can use the code snippet we found on stackoverflow.
 
 ```{r create new data}
-airquality$Date <- as.Date(with(airquality, paste(Year, Month, Day, sep="-"), "%Y-%m-%d"))
+airquality$Date <- as.Date(with(airquality, paste(Year, Month, Day, sep="-")), "%Y-%m-%d")
 ```
 
 Let's figure out why this works using R's help system:
