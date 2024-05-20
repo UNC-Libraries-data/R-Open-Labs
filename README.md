@@ -1,2 +1,2 @@
-# R-Open-Labs
-<a href=http://ropenlabs.web.unc.edu/>Home Page</a>
+# R-Open-Labs is now "beginR"
+<a href=https://tarheels.live/beginr/>Home Page</a>
