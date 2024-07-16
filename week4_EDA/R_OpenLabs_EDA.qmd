@@ -1,0 +1,393 @@
+---
+title: "beginR: Introduction"
+format: 
+  html:
+    theme: spacelab
+    toc: true
+    toc-location: left
+    page-layout: article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data and other downloads
+
+[Boston AirBnB Data](data/Boston_listings.csv)
+
+## Reminders and Notes: 
+### Start a New Project in R
+
+It is best practice to set up a new directory each time we start a new project in R. To do so, complete the following steps:
+
+1. Go to **File > New Project > New Directory > New Project**. 
+2. Type in a name for your directory and click **Browse**. Be sure to pick a place for your directory that you will be able to **find later**.
+3. Go to **Finder** on Mac or **File Explorer** on PC and find the directory you just created.
+4. Inside your project directory, create a new folder called **data**.
+5. Download or copy the **data file** (Boston_listings.csv) into the data folder.
+6. Go to **File > Save As** to give your R script a name and save it in your project directory.
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+listings <- read_csv("data/Boston_listings.csv")
+```
+
+### Note: Tibbles vs Data Frames
+
+Most `tidyverse` functions, including `read_csv`, output tibble objects.  A dataset stored as a tibble will return `tbl` and `tbl_df` in its `class`.
+
+```{r warning=FALSE, message=FALSE}
+class(listings)
+```
+
+A `tbl_df` prints different details than a traditional `data.frame`.
+
+```{r}
+head(listings)
+```
+
+In some cases, when using packages outside the `tidyverse`, we can avoid or fix problems by converting a `tbl_df` into a `data.frame` with `as.data.frame`.  Note that `head` prints **all** columns of the dataset and does not specify the datatype of each column.
+
+```{r}
+listings.df <- as.data.frame(listings)
+class(listings.df)
+head(listings.df)
+```
+
+## What is Exploratory Data Analysis?
+
+Exploratory Data Analysis (EDA) is the process of exploring your data, focused on discovering patterns rather than statistical testing.  [*R for Data Science*](http://r4ds.had.co.nz/exploratory-data-analysis.html) breaks this down into three steps:
+
+> 1. Generate questions about your data.
+> 2. Search for answers by visualizing, transforming and modelling your data.
+> 3. Use what your learn to refine your questions and/or generate new questions.
+
+This process can be repeated many times.
+
+## What do we have? - `dim`, `str`, and `summary`
+
+Before we start asking questions of our dataset, we need to determine the basic contents of the dataset.
+
+```{r}
+dim(listings)
+```
+
+We have 36 variables (columns) across 5957 observations (rows).
+
+### Note: Indexing
+
+In R, we can use square brackets, `[]`, to quickly select a subset of rows and/or columns by position using numeric indices. Unlike some programming languages, R starts counting positions at 1 instead of zero.
+
+For example, if we want to look at row 5, column 3 of our listings data frame, we can do it like so:
+
+```{r}
+listings[5,3]
+```
+
+There are a number of different ways we can use indexing to subset our data:
+
+```{r, results="hide"}
+listings[,1] # column 1
+listings[,7:10] # columns 7 through 10
+listings[,c(1,8,11)] # columns 1, 8 and 11
+listings[2,] # row 2
+listings[3:9,] # rows 3 through 9
+listings[c(7,10),] # rows 7 and 10
+```
+
+For a vector, we only need one number to describe position:
+
+```{r}
+myvec <- c("a","b","c","d","e","f","g")
+myvec
+myvec[1]
+myvec[4:7]
+myvec[c(1,3,7)]
+```
+
+### `str` and `summary` (with Indexing)
+
+We can use `str` and `summary` to learn more about each of these 36 variables. We'll use indexing to get results for only the first four columns with `str`
+
+```{r}
+str(listings[,1:4])
+```
+
+The equivalent way to do this using dplyr and the `%>%` we learned last week would be:
+
+```{r}
+listings %>%
+  select(id, listing_url, neighbourhood, neighbourhood_cleansed) %>%
+  str()
+```
+
+We'll use `summary` with the 5th, 6th, and 12th columns.
+
+```{r}
+summary(listings[,c(5,6,12)])
+```
+
+To get the same results using dplyr and the %>%, we could use:
+
+```{r}
+listings %>%
+  select(city, state, accommodates) %>%
+  summary()
+```
+
+## Frequency - Univariate EDA
+
+A natural starting place for EDA is learning more about individual variables.  We're often interested in the relative frequency of different values of a given variable.
+
+### Categorical Variables
+
+> What types of beds are most popular in Boston AirBnBs?
+
+#### `table`
+
+`table` provides a simple frequency table for a categorical (usually factor or character) variable.  
+
+```{r}
+table(listings$bed_type)
+```
+
+Clearly "Real Bed" is the most popular bed type. Interestingly, it appears that Airbeds are more popular than Couches and Pull-out Sofas combined!
+
+#### Bar Charts with `geom_bar`
+
+We can also represent categorical variables with a bar chart, using `ggplot` and `geom_bar`. By default, `geom_bar` uses the `x` aesthetic and provides a count of the frequency of each category across the dataset.
+
+```{r, fig.height=2,fig.width=6}
+ggplot(data=listings,aes(x=bed_type))+
+  geom_bar(width=0.5)+
+  theme_bw()
+```
+
+Note: Calling `fct_infreq` will quickly re-arrange our categories to be plotted in frequency order. I've also used the `width` parameter for `geom_bar` to make the bars half as wide.
+
+```{r fig.height=2,fig.width=6}
+ggplot(data=listings,aes(x=fct_infreq(bed_type)))+
+  geom_bar(width=0.5)+
+  theme_bw()
+```
+
+### Continuous Variables
+
+> What is the distribution of prices for AirBnB listings in Boston?
+
+Unfortunately, with continuous variables, we usually have too many distinct values to make a table or bar chart useful.
+
+```{r fig.height=2,fig.width=6}
+ggplot(data=listings,aes(x=price))+
+  geom_bar()+
+  theme_bw()
+```
+
+#### Histograms with `geom_hist`
+
+A common way to overcome this problem is to bin values into ranges with a histogram.
+
+```{r fig.height=3, fig.width=10}
+ggplot(data=listings,aes(x=price))+
+  geom_histogram(bins=100)+
+  theme_bw()
+```
+
+It's important to note that a histogram can look very different depending on how many ranges or "bins" we use. 
+
+```{r fig.height=3, fig.width=10,echo=FALSE,message=FALSE}
+library(gridExtra)
+p1 <- ggplot(data=listings,aes(x=price))+geom_histogram(bins=10)+theme_bw()+ggtitle("10 bins")
+p2 <- ggplot(data=listings,aes(x=price))+geom_histogram(bins=100)+theme_bw()+ggtitle("100 bins")
+p3 <- ggplot(data=listings,aes(x=price))+geom_histogram(bins=500)+theme_bw()+ggtitle("500 bins")
+grid.arrange(p1,p2,p3,nrow=1)
+```
+
+We can plot transformations of the data directly. 
+
+For example, it's common to use a logarithm tranformation with skewed positive data. Let's look at $log_{10}(price)$ with `log10`.
+
+```{r fig.height=3, fig.width=10, warning=FALSE}
+ggplot(data=listings,aes(x=log10(price)))+
+  geom_histogram(bins=30)+
+  theme_bw()
+```
+
+#### Boxplots with `geom_boxplot`
+
+The boxplot provides another convenient summary of a continuous variable.  `geom_boxplot` requires a `y` aesthetic instead of an `x` as in boxplot. Here I've used the `coord_flip` function at the end of my code to flip the X and Y axes to make the output more comprable to our histograms above.
+
+```{r, fig.height=3, fig.width=10}
+ggplot(data=listings,aes(y=price))+
+  geom_boxplot()+
+  theme_bw()+
+  coord_flip()
+```
+
+* The box of the boxplot ranges from the 25th to the 75th percentile, and therefore contains half of the observed data.  The line running down the middle of the box is the median. 
+
+* The difference between the 25th and 75th percentiles, the width of the box, is known as the inter-quartile range (IQR).
+
+* The lines extending out to the left and right of the box represent the furthest extent of datapoints that are within 1.5 IQR of the box.  Our lower, left-hand, whisker is much shorter becuase AirBnB prices cannot be negative.
+
+* Finally, the points, representing prices from roughly \$500 up to roughly \$4000 represent outliers.
+
+### Outliers
+
+Outliers are data that are "far" away from your other observations in terms of one or more variables.  There are a number of frequently used cutoffs to help identify outliers in continuous variables.
+
+However, there is no fixed rule as to when you should remove an observation you have identified as an outlier.  In general, you want to remove observations that aren't really in the population you're studying.  This includes values that may have been entered in error or produced by malfunctioning sensors or equipment. In other cases, a suprirsing, but accurate, outlying value, can be the most important result.  **Observations shouldn't be removed just because they're outliers**.
+
+## Covariation - Two or more variables
+
+Once we have a handle on single variables in our dataset, we can start hypothesizing about relationships between variables.
+
+### Continuous vs Continuous
+
+> Do more expensive properties get more reviews?
+
+The most common way to explore the interaction between two continuous variables is with a scatterplot, using `geom_point`.
+
+```{r fig.width=4,fig.height=4, warning=FALSE}
+listings %>% 
+  filter(price<500) %>%
+  ggplot(aes(x=price,y=number_of_reviews))+
+  geom_point()+
+  theme_bw()
+```
+
+As in many large datasets, we have so many points in certain areas that it can be hard to tell how many observations are actually represented.  We can get a better sense of how many observations are in a given area by adding some transparency, using the `alpha` aesthetic of `geom_point`.
+
+```{r fig.width=4,fig.height=4, warning=FALSE}
+listings %>% 
+  filter(price<500) %>% 
+  ggplot(aes(x=price,y=number_of_reviews))+
+  geom_point(alpha=0.05)+
+  theme_bw()
+```
+
+For comparison, let's zoom in on the grid where both price and number of reviews are less than 100:
+
+```{r fig.width=4,fig.height=2,echo=FALSE}
+p1 <- listings %>% 
+  filter(price<100 & number_of_reviews<100) %>%
+  ggplot(aes(x=price,y=number_of_reviews))+geom_point()+theme_bw()
+
+p2 <- listings %>% 
+  filter(price<100 & number_of_reviews<100) %>%
+  ggplot(aes(x=price,y=number_of_reviews))+
+  geom_point(alpha=0.05)+
+  theme_bw()
+
+grid.arrange(p1,p2,nrow=1)
+```
+
+It's clear from our `alpha` plot that most of the AirBnBs with price under 100 also have less than 10 reviews.
+
+## Categorical vs Categorical
+
+> Which room types can accommodate the most people?  
+
+We can use `table` with two variables to get a quick summary.
+
+```{r}
+table(listings$room_type,listings$accommodates)
+```
+
+We can represent this graphically in a number of ways. For example, we can use `geom_count` to plot points sized by frequency. This has the benefit of avoiding overlaping points.  
+
+```{r fig.height=4,fig.width=8}
+ggplot(data=listings, aes(x=accommodates,y=room_type))+
+  geom_count()+
+  theme_bw()
+```
+
+What happens if we use `geom_point` instead?
+
+## Categorical vs Continuous
+
+> Which room types are the most expensive?
+
+Let's continue looking at room types, but lets compare a continous variable, prices, across the categories.  Recall that we can use `group_by` and `summarize` from last week to get a summary table:
+
+```{r}
+listings %>% 
+  group_by(room_type) %>%
+  summarize(mean_price=mean(price),median_price=median(price))
+```
+
+However, we'll usually get a better sense of the data with a visualization.  When we have a reasonable number of categories, we can spread boxplots across categories by adding an aesthetic for the category.
+
+```{r fig.height=5, fig.width=10}
+ggplot(data=listings,aes(y=price,x=room_type))+
+  geom_boxplot()+
+  theme_bw()+
+  coord_flip()
+```
+
+We can control the order of boxplots with `reorder`.  `reorder(room_type,price,mean)` will reorder the categories of room_type based on mean price.  Check the help with `?reorder` for more information.
+
+```{r}
+ggplot(data=listings,aes(y=price,x=reorder(room_type,price,mean)))+
+  geom_boxplot()+
+  theme_bw()+
+  coord_flip()
+```
+
+Unfortunately, for histograms, we already have counts on the y axis by default, so we'll use facets instead. Facets allow you to create multiple plots - one for each level of a categorical variable.
+
+```{r fig.height=5, fig.width=10}
+ggplot(data=listings,aes(x=price))+
+  geom_histogram(bins=50)+
+  facet_grid(rows=vars(room_type))+
+  theme_bw()
+```
+
+To place several histograms in one overlapping plot, we should to convert the bar representation into lines, to make overlaps easier to see and understand.  We'll use the `color` aesthetic to separate our categories.
+
+*`geom_freqpoly` represents each histogram as a line plot through the top of each bar.  We'll use the `size` parameter for `geom_freqpoly` to make the lines a little thicker than the default.
+
+```{r fig.height=4,fig.width=10,message=FALSE, warning=FALSE}
+ggplot(data=listings,aes(x=price,color=room_type))+
+  geom_freqpoly(size=1)+
+  theme_bw()
+```
+
+* `geom_density` provides a "smoothed" and rescaled version of each histogram.  The area under each line is the same, so we lose relative frequency between categories in favor of a better view of relative frequency within each category.
+    + The `bw` parameter controls the extent of smoothing, similar to `bins` for histograms.  Try some other values to see how the plot changes!
+
+```{r fig.height=4,fig.width=10}
+ggplot(data=listings,aes(x=price,color=room_type))+
+  geom_density(bw=10,size=1)+
+  theme_bw()
+```
+
+## Review
+
+1. One Variable
+
+* (Catetgorical) `table` and `geom_bar` with `x` aesthetic
+* (Continuous) `geom_hist` with `x` aesthetic
+* (Continuous) `geom_boxplot` with `y` aesthetic
+
+2. Two Variabes
+
+* (Continuous - Continuous) `geom_point` with `x` and `y` aesthetics
+* (Categorical - Categorical) `table` or `geom_count` with `x` and `y` aesthetics
+* (Categorical - Continuous) 
+      + `geom_boxplot` with `y` (continuous) and `x` (categorical) aesthetics
+      + `geom_histogram` with `x` (continuous) aesthetic and `facet_grid` using the categorical variable
+      + `geom_freqpoly` with `x` (continuous) and `color` (categorical) aesthetic
+      + `geom_density` `x` (continuous) and `color` (categorical) aesthetic
+
+## Exercises
+
+1. Make a scatterplot of review_scores_rating vs reviews_per_month.  Add a best fit linear regression line with `geom_smooth` (check the help with `?geom_smooth`, or refer back to [week one](https://unc-libraries-data.github.io/R-Open-Labs/week1_Introduction/R_OpenLabs_Introduction.html))
+
+2. Which neighborhoods have the highest median price?  Which neighborhoods have the highest variance or largest IQR?  Hint: Use `neighbourhood_cleansed` for neighborhoods.
+
+3. Load the built-in dataset `mpg` with `data(mpg)`.  Use `?mpg` to learn more about the variables included.  Come up with a hypothesis or expectation you have about the data and check it with one of the methods used above. 
+
+4. Load the built-in dataset `msleep` with `data(msleep)`.  Use `?msleep` to learn more about the variables included.  Come up with a hypothesis or expectation you have about the data and check it with one of the methods used above. Note: `msleep` is provided with the `ggplot2` package, so make sure you have the `tidyverse` loaded!
+
