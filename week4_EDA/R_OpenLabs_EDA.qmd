@@ -1,5 +1,7 @@
 ---
 title: "beginR: Introduction"
+execute:
+    echo: true
 format: 
   html:
     theme: spacelab
@@ -7,10 +9,6 @@ format:
     toc-location: left
     page-layout: article
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ## Data and other downloads
 

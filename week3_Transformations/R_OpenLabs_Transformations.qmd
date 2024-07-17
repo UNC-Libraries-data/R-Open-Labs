@@ -1,5 +1,7 @@
 ---
 title: "beginR: Data Transformations"
+execute: 
+  echo: true
 format: 
   html:
     theme: spacelab
