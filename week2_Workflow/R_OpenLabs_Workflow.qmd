@@ -1,5 +1,7 @@
 ---
-title: "beginR: Introduction"
+title: "beginR: Workflows and Objects"
+author: 
+  name: University of North Carolina at Chapel Hill
 execute:
   echo: true
 format: 
@@ -10,19 +12,6 @@ format:
     page-layout: article
 ---
 
-
----
-title: "R Open Labs: Workflows and Objects"
-author:
-- name: University of North Carolina at Chapel Hill
-output: 
-  html_document:
-    toc: true
-    toc_float:
-      collapsed: true
-      smooth_scroll: false
-    theme: spacelab
----
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

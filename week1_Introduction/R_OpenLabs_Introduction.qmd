@@ -1,5 +1,9 @@
 ---
 title: "beginR: Introduction"
+author: 
+  name: University of North Carolina at Chapel Hill
+execute:
+  echo: true
 format: 
   html:
     theme: spacelab

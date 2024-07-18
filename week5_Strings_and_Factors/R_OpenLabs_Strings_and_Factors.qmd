@@ -1,5 +1,7 @@
 ---
-title: "beginR: Introduction"
+title: "beginR: Strings and Factors"
+author: 
+  name: University of North Carolina at Chapel Hill
 execute:
   echo: true
 format: 
@@ -15,7 +17,7 @@ format:
 
 &nbsp;
 
-##Today
+## Today
 
 This workshop aims to cover:
 
