@@ -85,6 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#start-a-new-project-in-r" id="toc-start-a-new-project-in-r" class="nav-link" data-scroll-target="#start-a-new-project-in-r">Start a New Project in R</a></li>
   <li><a href="#loading-the-tidyverse" id="toc-loading-the-tidyverse" class="nav-link" data-scroll-target="#loading-the-tidyverse">Loading the tidyverse</a></li>
+  </ul></li>
   <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing Data</a></li>
   <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
   <li><a href="#relational-and-assignment-operators" id="toc-relational-and-assignment-operators" class="nav-link" data-scroll-target="#relational-and-assignment-operators">Relational and Assignment Operators</a></li>
@@ -95,7 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#summarising-data" id="toc-summarising-data" class="nav-link" data-scroll-target="#summarising-data">Summarising Data</a></li>
   <li><a href="#piping" id="toc-piping" class="nav-link" data-scroll-target="#piping">Piping</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
-  </ul></li>
   </ul>
 </nav>
 </div>
@@ -178,8 +178,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="importing-data" class="level3">
-<h3 class="anchored" data-anchor-id="importing-data">Importing Data</h3>
+</section>
+<section id="importing-data" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data">Importing Data</h2>
 <p>We use the <code>read_csv()</code> function to import our data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Import ------------------------------------------------------</span></span>
@@ -190,8 +191,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The data will be represented as a table in a new tab.</p>
 <p><img src="figures/visual.png" class="img-fluid"></p>
 </section>
-<section id="filtering" class="level3">
-<h3 class="anchored" data-anchor-id="filtering">Filtering</h3>
+<section id="filtering" class="level2">
+<h2 class="anchored" data-anchor-id="filtering">Filtering</h2>
 <p>We have a fairly big data set. What if we want to focus on certain records? For example, let’s say I’m only interested in Chilean wine. I can use the <code>filter()</code> function to only look at wines with “Chile” as their country of origin.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(reviews, country <span class="sc">==</span> <span class="st">"Chile"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -223,8 +224,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Note that this time we are assigining the results to the <strong>same</strong> object we used before. This allows us to replace our previous data for that object with new data. Now, if we click on the “chilean” data frame in our Environment tab, we can see our data set has been limited only to wines from Chile that are $20 or less.</p>
 </section>
-<section id="relational-and-assignment-operators" class="level3">
-<h3 class="anchored" data-anchor-id="relational-and-assignment-operators">Relational and Assignment Operators</h3>
+<section id="relational-and-assignment-operators" class="level2">
+<h2 class="anchored" data-anchor-id="relational-and-assignment-operators">Relational and Assignment Operators</h2>
 <p>Our filter uses some symbols you may not be familiar with, such as <code>==</code> and <code>&lt;=</code>. These are called <strong>relational operators</strong>. We use a relational operator to <strong>check</strong> the relationship between the two <strong>operands</strong> on either side of it.</p>
 <table class="caption-top table">
 <colgroup>
@@ -292,8 +293,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="reordering-data-arrange" class="level3">
-<h3 class="anchored" data-anchor-id="reordering-data-arrange">Reordering Data (arrange)</h3>
+<section id="reordering-data-arrange" class="level2">
+<h2 class="anchored" data-anchor-id="reordering-data-arrange">Reordering Data (arrange)</h2>
 <p>Let’s arrange the rows of our data frame in a way that’s more informative. This time, we’ll just take a look at the results in our console rather than assigning them to an object.</p>
 <p>First, I want to know which wines in my Chilean data set get the highest number of review points. The <code>arrange()</code> function allows us to reorder our data by a particular variable. Below, we’ll reorder by points.</p>
 <div class="cell">
@@ -359,8 +360,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="selecting-data-select" class="level3">
-<h3 class="anchored" data-anchor-id="selecting-data-select">Selecting Data (select)</h3>
+<section id="selecting-data-select" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-data-select">Selecting Data (select)</h2>
 <p>Most real world data sets we want to use in our research are going to be messy, and we’ll need to go through a process of cleaning the data before we can start to explore and analyze it. The first steps in many data cleaning processes involve removing data that we don’t need.</p>
 <p>Going back to our original reviews data frame, let’s imagine we are only interested in the country, province and variety of our wines. We could create a new object called “wine_types” using the <code>select()</code> function. We’ll also <strong>preview</strong> our new object by simply typing its name and running the script.</p>
 <div class="cell">
@@ -470,8 +471,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>In both cases the <code>:</code> symbol means “through” and allows us to select a series of columns at once.</p>
 </section>
-<section id="renaming-columns" class="level3">
-<h3 class="anchored" data-anchor-id="renaming-columns">Renaming Columns</h3>
+<section id="renaming-columns" class="level2">
+<h2 class="anchored" data-anchor-id="renaming-columns">Renaming Columns</h2>
 <p>Renaming our columns is easy to do when we use the <code>rename</code> function. We need to provide the new name we want to use first, and then <strong>assign</strong> the old name to it.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>chilean <span class="ot">&lt;-</span> <span class="fu">rename</span>(chilean, <span class="at">review_points =</span> points)</span>
@@ -495,8 +496,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Above, we’ve changed the name of our “points” column to “review_points”.</p>
 </section>
-<section id="adding-new-variables" class="level3">
-<h3 class="anchored" data-anchor-id="adding-new-variables">Adding New Variables</h3>
+<section id="adding-new-variables" class="level2">
+<h2 class="anchored" data-anchor-id="adding-new-variables">Adding New Variables</h2>
 <p>My chilean data set has prices listed in USD, but suppose I also needed to know how many Euros each wine costs. Currently, the exchange rate is 0.85 Euros for every 1 USD. So, I just need to multiply the price column by 0.85, but how can I store the results of my currency conversion in a new column? The <code>mutate()</code> function makes that possible.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>chilean <span class="ot">&lt;-</span> <span class="fu">mutate</span>(chilean, <span class="at">EUR =</span> price <span class="sc">*</span> <span class="fl">0.85</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -531,8 +532,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Did I mention you can use <code>select()</code> to reorder columns as well? You can!</p>
 </section>
-<section id="summarising-data" class="level3">
-<h3 class="anchored" data-anchor-id="summarising-data">Summarising Data</h3>
+<section id="summarising-data" class="level2">
+<h2 class="anchored" data-anchor-id="summarising-data">Summarising Data</h2>
 <p>Now that we’ve done some cleaning of our data set, we can start to explore it a bit by taking a look at basic summary statistics with the <code>summarise()</code> function. One thing we need to remember when using <code>summarise()</code> is that missing data can cause a problem, so in many cases we will need to tell R to ignore rows with missing data using the <code>na.rm</code> parameter.</p>
 <p>Let’s take a look at the mean review points for all of our Chilean wines. We’ll assign our result to a column named “mean_review_points”.</p>
 <div class="cell">
@@ -576,8 +577,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Now we want to arrange the results from highest to lowest review points, but that would require us creating <strong>another</strong> object to use <code>arrange()</code> on. Instead of creating many different objects that we don’t necessarily need to keep around, let’s use pipes.</p>
 </section>
-<section id="piping" class="level3">
-<h3 class="anchored" data-anchor-id="piping">Piping</h3>
+<section id="piping" class="level2">
+<h2 class="anchored" data-anchor-id="piping">Piping</h2>
 <p>Pipes use the <code>%&gt;%</code> symbol to connect multiple functions without creating multiple objects. To use <code>group_by()</code>, <code>summarise()</code> and <code>arrange()</code> on our data all at once, we use the pipe like so:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>chilean <span class="sc">%&gt;%</span></span>
@@ -642,9 +643,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 68 more rows</code></pre>
 </div>
 </div>
+<p>Note that some resources may use a different, newer, pipe operator: <code>|&gt;</code>. In most cases, this will behave simliarly to <code>%&gt;%</code>.</p>
 </section>
-<section id="exercises" class="level3">
-<h3 class="anchored" data-anchor-id="exercises">Exercises</h3>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <p>Concerning our original “reviews” data set, use the functions we learned this week to answer the following questions:</p>
 <ol type="1">
 <li>What is the price and review score for the most expensive French wine?</li>
@@ -658,7 +660,6 @@ select == (Title, province, country, price) %&gt;%<br>
 filter (country = Germany) %&gt;<br>
 group_by (province) %&gt;%<br>
 Summarise (mean_price == mean(price))</p>
-</section>
 </section>
 
 </main>

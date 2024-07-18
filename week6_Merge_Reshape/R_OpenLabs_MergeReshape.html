@@ -212,8 +212,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change
-1         1 -0.7827177
-2         2  0.1776859</code></pre>
+1         1   0.658844
+2         2  -2.328887</code></pre>
 </div>
 </div>
 <p><strong>Dataset 2</strong></p>
@@ -225,8 +225,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change Semester
-1         3 -0.9431816   Spring
-2         4  0.9681528     Fall</code></pre>
+1         3  0.3544994   Spring
+2         4  1.6968887     Fall</code></pre>
 </div>
 </div>
 <p><strong>Datasets combined</strong></p>
@@ -234,10 +234,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(a0,a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change Semester
-1         1 -0.7827177     &lt;NA&gt;
-2         2  0.1776859     &lt;NA&gt;
-3         3 -0.9431816   Spring
-4         4  0.9681528     Fall</code></pre>
+1         1  0.6588440     &lt;NA&gt;
+2         2 -2.3288868     &lt;NA&gt;
+3         3  0.3544994   Spring
+4         4  1.6968887     Fall</code></pre>
 </div>
 </div>
 <p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a bind_cols function, but in the context below, using bind_cols is unhelpful and results in mismatched records.</p>

@@ -58,7 +58,7 @@ The first few lines of our R script are made up of comments to document the scri
 library(tidyverse)
 ```
 
-### Importing Data
+## Importing Data
 
 We use the `read_csv()` function to import our data.
 
@@ -75,7 +75,7 @@ The data will be represented as a table in a new tab.
 
 ![](figures/visual.png)
 
-### Filtering
+## Filtering
 
 We have a fairly big data set. What if we want to focus on certain records? For example, let's say I'm only interested in Chilean wine. I can use the `filter()` function to only look at wines with "Chile" as their country of origin.
 
@@ -97,7 +97,7 @@ chilean <- filter(reviews, country == "Chile", price <= 20)
 
 Note that this time we are assigining the results to the **same** object we used before. This allows us to replace our previous data for that object with new data. Now, if we click on the "chilean" data frame in our Environment tab, we can see our data set has been limited only to wines from Chile that are \$20 or less.
 
-### Relational and Assignment Operators
+## Relational and Assignment Operators
 
 Our filter uses some symbols you may not be familiar with, such as `==` and `<=`. These are called **relational operators**. We use a relational operator to **check** the relationship between the two **operands** on either side of it.
 
@@ -118,7 +118,7 @@ Above, you'll notice that we use `==` to **check** if something is equal. This i
 |              `age = 52`               | **Assign** the value 52 to a variable called "age"                                        |
 |       `data <- survey_results`        | **Assign** the contents of the object called "survey_results" to an object called "data". |
 
-### Reordering Data (arrange)
+## Reordering Data (arrange)
 
 Let's arrange the rows of our data frame in a way that's more informative. This time, we'll just take a look at the results in our console rather than assigning them to an object.
 
@@ -140,7 +140,7 @@ Now we can see which wines have the highest number of points. But what if we wan
 arrange(chilean, desc(points), price)
 ```
 
-### Selecting Data (select)
+## Selecting Data (select)
 
 Most real world data sets we want to use in our research are going to be messy, and we'll need to go through a process of cleaning the data before we can start to explore and analyze it. The first steps in many data cleaning processes involve removing data that we don't need.
 
@@ -181,7 +181,7 @@ select(reviews, -c(title:winery))
 
 In both cases the `:` symbol means "through" and allows us to select a series of columns at once.
 
-### Renaming Columns
+## Renaming Columns
 
 Renaming our columns is easy to do when we use the `rename` function. We need to provide the new name we want to use first, and then **assign** the old name to it.
 
@@ -192,7 +192,7 @@ chilean
 
 Above, we've changed the name of our "points" column to "review_points".
 
-### Adding New Variables
+## Adding New Variables
 
 My chilean data set has prices listed in USD, but suppose I also needed to know how many Euros each wine costs. Currently, the exchange rate is 0.85 Euros for every 1 USD. So, I just need to multiply the price column by 0.85, but how can I store the results of my currency conversion in a new column? The `mutate()` function makes that possible.
 
@@ -215,7 +215,7 @@ chilean
 
 Did I mention you can use `select()` to reorder columns as well? You can!
 
-### Summarising Data
+## Summarising Data
 
 Now that we've done some cleaning of our data set, we can start to explore it a bit by taking a look at basic summary statistics with the `summarise()` function. One thing we need to remember when using `summarise()` is that missing data can cause a problem, so in many cases we will need to tell R to ignore rows with missing data using the `na.rm` parameter.
 
@@ -234,7 +234,7 @@ summarise(by_prov, mean_review_points = mean(review_points, na.rm = TRUE))
 
 Now we want to arrange the results from highest to lowest review points, but that would require us creating **another** object to use `arrange()` on. Instead of creating many different objects that we don't necessarily need to keep around, let's use pipes.
 
-### Piping
+## Piping
 
 Pipes use the `%>%` symbol to connect multiple functions without creating multiple objects. To use `group_by()`, `summarise()` and `arrange()` on our data all at once, we use the pipe like so:
 
@@ -260,7 +260,9 @@ chilean %>%
   arrange(province, variety, desc(max_price))
 ```
 
-### Exercises
+Note that some resources may use a different, newer, pipe operator: `|>`.  In most cases, this will behave simliarly to ` %>%`.
+
+## Exercises
 
 Concerning our original "reviews" data set, use the functions we learned this week to answer the following questions:
 
