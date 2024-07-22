@@ -1,5 +1,5 @@
 ---
-title: "beginR: Joining and Reshaping with tidyr"
+title: "beginR: Joining, Reshaping & Reproducible Reports"
 author: 
   name: University of North Carolina at Chapel Hill
 execute:
@@ -12,7 +12,7 @@ format:
     page-layout: article
 ---
 
-### Data and other downloads
+## Data and other downloads
 
 [Download data](data/brazilian-ecommerce-subset.zip)
 
