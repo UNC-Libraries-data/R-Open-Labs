@@ -2,10 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="University of North Carolina at Chapel Hill">
 
 <title>beginR: Joining, Reshaping &amp; Reproducible Reports</title>
 <style>
@@ -22,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -95,12 +96,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pivot_wider" id="toc-pivot_wider" class="nav-link" data-scroll-target="#pivot_wider"><code>pivot_wider</code></a></li>
   </ul></li>
   <li><a href="#motivation-reproducible-reports" id="toc-motivation-reproducible-reports" class="nav-link" data-scroll-target="#motivation-reproducible-reports">Motivation: Reproducible Reports</a></li>
-  <li><a href="#rmarkdown-structure" id="toc-rmarkdown-structure" class="nav-link" data-scroll-target="#rmarkdown-structure">RMarkdown Structure</a></li>
+  <li><a href="#rmarkdown-structure" id="toc-rmarkdown-structure" class="nav-link" data-scroll-target="#rmarkdown-structure">RMarkdown Structure</a>
+  <ul class="collapse">
   <li><a href="#header" id="toc-header" class="nav-link" data-scroll-target="#header">Header</a></li>
   <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code Chunks</a></li>
   <li><a href="#formatted-text" id="toc-formatted-text" class="nav-link" data-scroll-target="#formatted-text">Formatted Text</a></li>
   <li><a href="#visual-r-markdown" id="toc-visual-r-markdown" class="nav-link" data-scroll-target="#visual-r-markdown">Visual R Markdown</a></li>
-  <li><a href="#generating-the-html-document" id="toc-generating-the-html-document" class="nav-link" data-scroll-target="#generating-the-html-document">Generating the HTML document</a></li>
+  </ul></li>
+  <li><a href="#generating-the-html-document-example" id="toc-generating-the-html-document-example" class="nav-link" data-scroll-target="#generating-the-html-document-example">Generating the HTML document: Example</a>
+  <ul class="collapse">
   <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import">Data Import</a></li>
   <li><a href="#useful-functions-for-exploring-dataframes" id="toc-useful-functions-for-exploring-dataframes" class="nav-link" data-scroll-target="#useful-functions-for-exploring-dataframes">Useful functions for exploring dataframes</a></li>
   <li><a href="#tables-and-knitrkable" id="toc-tables-and-knitrkable" class="nav-link" data-scroll-target="#tables-and-knitrkable">Tables and <code>knitr::kable</code></a></li>
@@ -108,8 +112,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#selecting-columns" id="toc-selecting-columns" class="nav-link" data-scroll-target="#selecting-columns">Selecting Columns</a></li>
   <li><a href="#renaming-columns" id="toc-renaming-columns" class="nav-link" data-scroll-target="#renaming-columns">Renaming Columns</a></li>
   <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a></li>
+  </ul></li>
   <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises:</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
+  <ul class="collapse">
+  <li><a href="#merge-and-reshape" id="toc-merge-and-reshape" class="nav-link" data-scroll-target="#merge-and-reshape">Merge and Reshape</a></li>
+  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">R Markdown</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -126,17 +135,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>University of North Carolina at Chapel Hill </p>
+          </div>
+  </div>
     
   
     
   </div>
   
 
+
 </header>
 
-<section id="data-and-other-downloads" class="level3">
-<h3 class="anchored" data-anchor-id="data-and-other-downloads">Data and other downloads</h3>
-<p><a href="data/brazilian-ecommerce-subset.zip">Download data</a></p>
+
+<section id="data-and-other-downloads" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-other-downloads">Data and other downloads</h2>
+<p><a href="data/brazilian-ecommerce-subset.zip">Brazilian E-Commerce Subset</a></p>
 <p>Data derived from <a href="https://www.kaggle.com/olistbr/brazilian-ecommerce">Brazilian E-Commerce Public Dataset by Olist</a> provided on Kaggle.com under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 license</a>.</p>
 <p><a href="data/clean_cheese.csv">US Cheese Consumption</a></p>
 <p>Cleaned data courtesy of the <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday project</a></p>
@@ -196,8 +213,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change
-1         1 -0.1134791
-2         2 -0.2133680</code></pre>
+1         1  2.4470452
+2         2  0.6414608</code></pre>
 </div>
 </div>
 <p><strong>Dataset 2</strong></p>
@@ -209,8 +226,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change Semester
-1         3  2.6229480   Spring
-2         4 -0.2196465     Fall</code></pre>
+1         3 -1.1902074   Spring
+2         4 -0.5641581     Fall</code></pre>
 </div>
 </div>
 <p><strong>Datasets combined</strong></p>
@@ -218,10 +235,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(a0,a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change Semester
-1         1 -0.1134791     &lt;NA&gt;
-2         2 -0.2133680     &lt;NA&gt;
-3         3  2.6229480   Spring
-4         4 -0.2196465     Fall</code></pre>
+1         1  2.4470452     &lt;NA&gt;
+2         2  0.6414608     &lt;NA&gt;
+3         3 -1.1902074   Spring
+4         4 -0.5641581     Fall</code></pre>
 </div>
 </div>
 <p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a bind_cols function, but in the context below, using bind_cols is unhelpful and results in mismatched records.</p>
@@ -271,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="types-of-joins" class="level3">
 <h3 class="anchored" data-anchor-id="types-of-joins">Types of Joins</h3>
 <p>We need several different types of joins to facillitate the different ways datasets are organized.</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 50%">
@@ -311,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="join-venn-dark.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Join Types from R for Data Science 13.4.3</figcaption>
+<figcaption>Join Types from R for Data Science 13.4.3</figcaption>
 </figure>
 </div>
 <p>Take a look at these two datasets:</p>
@@ -484,7 +501,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>B),<span class="at">color=</span><span class="st">"blue"</span>) <span class="sc">+</span> </span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Join_Reshape_Reports_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Join_Reshape_Reports_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>However, if we were using a <strong>long</strong> dataset, we could create the plot with less code. Note how our dataset below has a single column for categories A and B.</p>
@@ -510,7 +531,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Join_Reshape_Reports_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Join_Reshape_Reports_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This may not seem like much of a big deal for this particular plot, but what if we were trying to plot hundreds of lines?</p>
@@ -608,7 +633,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"Chapel Hill"</span>,<span class="st">"Durham"</span>,<span class="st">"Raleigh"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Join_Reshape_Reports_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Join_Reshape_Reports_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -627,19 +656,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>To create a new R Markdown document (.Rmd), select File -&gt; New File -&gt; R Markdown.</p>
 <p>You will have the option to select the output: we’ll use the default HTML for this workshop. Give the document a title and enter your name as author: this will create the header for you at the top of your new .html page! RStudio will create a new R Markdown document filled with examples of code chunks and text.</p>
-</section>
-<section id="header" class="level2">
-<h2 class="anchored" data-anchor-id="header">Header</h2>
+<section id="header" class="level3">
+<h3 class="anchored" data-anchor-id="header">Header</h3>
 <p><img src="figures/header.png" class="img-fluid"> At the top of the page is the optional Yet Another Markup Language (YAML) header. This header is a powerful way to edit the formatting of your report (e.g.&nbsp;figure dimensions, presence of a table of contents, identifying the location of a bibliography file).</p>
 </section>
-<section id="code-chunks" class="level2">
-<h2 class="anchored" data-anchor-id="code-chunks">Code Chunks</h2>
+<section id="code-chunks" class="level3">
+<h3 class="anchored" data-anchor-id="code-chunks">Code Chunks</h3>
 <p><img src="figures/code%20chunk.png" class="img-fluid"> R code chunks are surrounded by <code>```</code>. Inside the curly braces, it specifies that this code chunk will use R code (other programming languages are supported), then it names this chunk “setup”. Names are optional.</p>
 <p>After the name, you specify options on whether you want the code or its results to be displayed in the final document. For this chunk, the <code>include=FALSE</code> options tells R Markdown that we want this code to run, but we do not want it to be displayed in the final HTML document. The R code inside the chunk <code>knitr::opts_chunk$set(echo = TRUE)</code> tells R Markdown to display the R code along with the results of the code in the HTML output for <strong>all</strong> code chunks below.</p>
 <p>Use CTRL+ALT+i (PC) or CMD+OPTION+i (Mac) to insert R code blocks.</p>
 </section>
-<section id="formatted-text" class="level2">
-<h2 class="anchored" data-anchor-id="formatted-text">Formatted Text</h2>
+<section id="formatted-text" class="level3">
+<h3 class="anchored" data-anchor-id="formatted-text">Formatted Text</h3>
 <p><img src="figures/text.png" class="img-fluid"></p>
 <p>This is plain text with simple formatting added. The <code>##</code> tells R Markdown that “R Markdown” is a section header. The <code>**</code> around “Knit” tells R Markdown to make that word <strong>bold</strong>.</p>
 <p>The RStudio team has helpfully condensed these code chunk and text formatting options into a <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">cheatsheet</a>.</p>
@@ -647,21 +675,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf</a></p>
 <p><a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a></p>
 </section>
-<section id="visual-r-markdown" class="level2">
-<h2 class="anchored" data-anchor-id="visual-r-markdown">Visual R Markdown</h2>
+<section id="visual-r-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="visual-r-markdown">Visual R Markdown</h3>
 <p>Newer versions of R Studio provide a visual editor for R markdown documents. This can be accessed by toggling between the “Source” and “Visual” options in the top left corner of your Rmd script editor pane. (Note: In some older versions of R Studio, this is available as a compass-shaped icon in the top <em>right</em> corner instead).</p>
 <p>Once activated, this interface is similar to a word processing software like Microsoft Word - shortcuts for bolding, italics, etc. are usually the same and there are icons and drop down menus available for lists, bullets, links, and more.</p>
 <p>You can still use CTRL+ALT+i (PC) or CMD+OPTION+i (Mac) to insert R code blocks, or use the Insert&gt;Code Chunk&gt;R menu in the visual editor.</p>
 <p>Read more about the visual editor here:<br>
 <a href="https://rstudio.github.io/visual-markdown-editing/" class="uri">https://rstudio.github.io/visual-markdown-editing/</a></p>
 </section>
-<section id="generating-the-html-document" class="level2">
-<h2 class="anchored" data-anchor-id="generating-the-html-document">Generating the HTML document</h2>
+</section>
+<section id="generating-the-html-document-example" class="level2">
+<h2 class="anchored" data-anchor-id="generating-the-html-document-example">Generating the HTML document: Example</h2>
 <p>Click the <strong>Knit</strong> button, and R Studio will generate an HTML report based on your R Markdown document.</p>
 <p>Let’s try creating an R Markdown document to explore the US cheese consumption data and review what we learned in weeks 1-3.</p>
-</section>
-<section id="data-import" class="level2">
-<h2 class="anchored" data-anchor-id="data-import">Data Import</h2>
+<section id="data-import" class="level3">
+<h3 class="anchored" data-anchor-id="data-import">Data Import</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/clean_cheese.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -675,8 +703,8 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 </div>
 </div>
 </section>
-<section id="useful-functions-for-exploring-dataframes" class="level2">
-<h2 class="anchored" data-anchor-id="useful-functions-for-exploring-dataframes">Useful functions for exploring dataframes</h2>
+<section id="useful-functions-for-exploring-dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="useful-functions-for-exploring-dataframes">Useful functions for exploring dataframes</h3>
 <p>Include one of the following in your document. We’ve used <code>eval = FALSE</code> here to prevent this code chunk from running!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(consumption)</span>
@@ -684,13 +712,13 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(consumption)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="tables-and-knitrkable" class="level2">
-<h2 class="anchored" data-anchor-id="tables-and-knitrkable">Tables and <code>knitr::kable</code></h2>
+<section id="tables-and-knitrkable" class="level3">
+<h3 class="anchored" data-anchor-id="tables-and-knitrkable">Tables and <code>knitr::kable</code></h3>
 <p>By default, R Markdown will display tables the way they appear in the R console. We can use <code>knitr::kable function</code> to get cleaner tables.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(consumption), <span class="at">caption =</span> <span class="st">"The first six rows of the cheese consumption data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <caption>The first six rows of the cheese consumption data</caption>
 <colgroup>
 <col style="width: 2%">
@@ -852,8 +880,8 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 </div>
 </div>
 </section>
-<section id="adding-a-new-variable" class="level2">
-<h2 class="anchored" data-anchor-id="adding-a-new-variable">Adding a new variable</h2>
+<section id="adding-a-new-variable" class="level3">
+<h3 class="anchored" data-anchor-id="adding-a-new-variable">Adding a new variable</h3>
 <p>We’ve covered two ways to add a new variable to a dataframe.</p>
 <p><strong>Note:</strong> R allows non-standard variable names that include spaces, parentheses, and other special characters. The way to refer to variable names that contain wonky symbols is to use the backtick symbol <code>`</code>, found at the top left of your keyboard with the tilde <code>~</code>.</p>
 <p>The base R way covered in lesson 1 using the <code>$</code> operator and <code>with()</code> function</p>
@@ -874,20 +902,20 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">mutate</span>(consumption, <span class="at">amer_ital_ratio2 =</span> <span class="st">`</span><span class="at">Total American Chese</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">Total Italian Cheese</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="selecting-columns" class="level2">
-<h2 class="anchored" data-anchor-id="selecting-columns">Selecting Columns</h2>
+<section id="selecting-columns" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-columns">Selecting Columns</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">select</span>(consumption, Year, Cheddar, Mozzarella, <span class="st">`</span><span class="at">Cream and Neufchatel</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="renaming-columns" class="level2">
-<h2 class="anchored" data-anchor-id="renaming-columns">Renaming Columns</h2>
+<section id="renaming-columns" class="level3">
+<h3 class="anchored" data-anchor-id="renaming-columns">Renaming Columns</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">rename</span>(consumption, <span class="at">Cream_and_Neufchatel =</span> <span class="st">`</span><span class="at">Cream and Neufchatel</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="plotting" class="level2">
-<h2 class="anchored" data-anchor-id="plotting">Plotting</h2>
+<section id="plotting" class="level3">
+<h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(consumption, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span> </span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Cheddar, <span class="at">col =</span> <span class="st">"Cheddar"</span>)) <span class="sc">+</span> </span>
@@ -895,9 +923,14 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Cream_and_Neufchatel, <span class="at">col =</span> <span class="st">"Cream and Neufchatel"</span>)) <span class="sc">+</span></span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Consumption in Pounds Per Person"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Join_Reshape_Reports_files/figure-html/plot1-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Join_Reshape_Reports_files/figure-html/plot1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+</section>
 </section>
 <section id="bibliography" class="level2">
 <h2 class="anchored" data-anchor-id="bibliography">Bibliography</h2>
@@ -911,7 +944,9 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 </ol>
 </section>
 <section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises:</h2>
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="merge-and-reshape" class="level3">
+<h3 class="anchored" data-anchor-id="merge-and-reshape">Merge and Reshape</h3>
 <p>All of today’s exercises involve the datasets included in <a href="data/brazilian-ecommerce-subset.zip">brazilian-commerce-subset.zip</a>.</p>
 <ol type="1">
 <li><p>Read olist_public_dataset_v2.csv into R. Explore the dataset. If necessary, refer to the metadata provided <a href="https://www.kaggle.com/olistbr/brazilian-ecommerce">here</a>.</p></li>
@@ -929,12 +964,18 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <li><p>Repeat problems 3-6 with <code>order_products_value</code> (i.e.&nbsp;the amount spent vs the quantity purchased). Do you see different patterns? Explore other product categories.</p></li>
 <li><p>Use <code>pivot_longer</code> and then <code>pivot_wider</code> to convert your <code>products</code> dataframe to one where each row is a different <code>product_category_name_english</code> and each column represents a different <code>customer_state</code>.</p></li>
 <li><p>Choose 5 states. Which of these states have the most similar patterns of spending (as measured by correlation)?</p></li>
+</ol>
+</section>
+<section id="r-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="r-markdown">R Markdown</h3>
+<ol start="10" type="1">
 <li><p><a href="https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_Reproducible_Reports/download/cheese.zip">Download the cheese RStudio Project</a> file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.</p></li>
 <li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>setup</strong>. change <code>echo=FALSE</code> to <code>echo=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
 <li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>import</strong>. change <code>message=FALSE</code> to <code>message=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
 <li><p>Create another R Markdown document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom <a href="https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
 <li><p>Once you have created an R Markdown report analyzing cheese production, send the entire R Project to a friend (or us!) and ask them to knit that .Rmd document. If they have RStudio and the tidyverse installed, they should be able to seamlessly generate the exact report you generated, without having to make any changes.</p></li>
 </ol>
+</section>
 </section>
 
 </main>
@@ -1018,10 +1059,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1031,8 +1089,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1044,7 +1111,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1088,6 +1278,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1113,6 +1304,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1173,6 +1390,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

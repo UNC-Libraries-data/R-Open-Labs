@@ -1,5 +1,9 @@
 ---
 title: "beginR: Joining, Reshaping & Reproducible Reports"
+author: 
+  name: University of North Carolina at Chapel Hill
+execute:
+  echo: true
 format: 
   html:
     theme: spacelab
@@ -8,7 +12,7 @@ format:
     page-layout: article
 ---
 
-### Data and other downloads
+## Data and other downloads
 
 [Brazilian E-Commerce Subset](data/brazilian-ecommerce-subset.zip)
 
@@ -363,11 +367,11 @@ To create a new R Markdown document (.Rmd), select File -\> New File -\> R Markd
 
 You will have the option to select the output: we'll use the default HTML for this workshop. Give the document a title and enter your name as author: this will create the header for you at the top of your new .html page! RStudio will create a new R Markdown document filled with examples of code chunks and text.
 
-## Header
+### Header
 
 ![](figures/header.png) At the top of the page is the optional Yet Another Markup Language (YAML) header. This header is a powerful way to edit the formatting of your report (e.g. figure dimensions, presence of a table of contents, identifying the location of a bibliography file).
 
-## Code Chunks
+### Code Chunks
 
 ![](figures/code%20chunk.png) R code chunks are surrounded by ```` ``` ````. Inside the curly braces, it specifies that this code chunk will use R code (other programming languages are supported), then it names this chunk "setup". Names are optional.
 
@@ -375,7 +379,7 @@ After the name, you specify options on whether you want the code or its results 
 
 Use CTRL+ALT+i (PC) or CMD+OPTION+i (Mac) to insert R code blocks.
 
-## Formatted Text
+### Formatted Text
 
 ![](figures/text.png)
 
@@ -389,7 +393,7 @@ You can get pretty far with options in the R Markdown cheatsheet, but R Markdown
 
 <https://bookdown.org/yihui/rmarkdown>
 
-## Visual R Markdown
+### Visual R Markdown
 
 Newer versions of R Studio provide a visual editor for R markdown documents. This can be accessed by toggling between the "Source" and "Visual" options in the top left corner of your Rmd script editor pane. (Note: In some older versions of R Studio, this is available as a compass-shaped icon in the top *right* corner instead).
 
@@ -400,19 +404,19 @@ You can still use CTRL+ALT+i (PC) or CMD+OPTION+i (Mac) to insert R code blocks,
 Read more about the visual editor here:\
 <https://rstudio.github.io/visual-markdown-editing/>
 
-## Generating the HTML document
+## Generating the HTML document: Example
 
 Click the **Knit** button, and R Studio will generate an HTML report based on your R Markdown document.
 
 Let's try creating an R Markdown document to explore the US cheese consumption data and review what we learned in weeks 1-3.
 
-## Data Import
+### Data Import
 
 ```{r import}
 consumption <- read_csv("data/clean_cheese.csv")
 ```
 
-## Useful functions for exploring dataframes
+### Useful functions for exploring dataframes
 
 Include one of the following in your document. We've used `eval = FALSE` here to prevent this code chunk from running!
 
@@ -422,7 +426,7 @@ tail(consumption)
 summary(consumption)
 ```
 
-## Tables and `knitr::kable`
+### Tables and `knitr::kable`
 
 By default, R Markdown will display tables the way they appear in the R console. We can use `knitr::kable function` to get cleaner tables.
 
@@ -430,7 +434,7 @@ By default, R Markdown will display tables the way they appear in the R console.
 knitr::kable(head(consumption), caption = "The first six rows of the cheese consumption data")
 ```
 
-## Adding a new variable
+### Adding a new variable
 
 We've covered two ways to add a new variable to a dataframe.
 
@@ -456,20 +460,20 @@ The tidyverse way covered in lesson 3 using the `mutate()` function
 consumption <- mutate(consumption, amer_ital_ratio2 = `Total American Chese` / `Total Italian Cheese`)
 ```
 
-## Selecting Columns
+### Selecting Columns
 
 ```{r select}
 consumption <- select(consumption, Year, Cheddar, Mozzarella, `Cream and Neufchatel`)
 
 ```
 
-## Renaming Columns
+### Renaming Columns
 
 ```{r rename}
 consumption <- rename(consumption, Cream_and_Neufchatel = `Cream and Neufchatel`)
 ```
 
-## Plotting
+### Plotting
 
 ```{r plot1}
 
@@ -491,7 +495,9 @@ R Markdown also provides a nifty way to incorporate a bibliography and reference
 4.  Add a bibliography field to the YAML header that tells R Markdown the name of your bibliography file, for example `bibliography: references.bib`
 5.  Add citations throughout the document using square brackets.
 
-## Exercises:
+## Exercises
+
+### Merge and Reshape
 
 All of today's exercises involve the datasets included in [brazilian-commerce-subset.zip](data/brazilian-ecommerce-subset.zip).
 
@@ -520,6 +526,8 @@ All of today's exercises involve the datasets included in [brazilian-commerce-su
 8.  Use `pivot_longer` and then `pivot_wider` to convert your `products` dataframe to one where each row is a different `product_category_name_english` and each column represents a different `customer_state`.
 
 9.  Choose 5 states. Which of these states have the most similar patterns of spending (as measured by correlation)?
+
+### R Markdown 
 
 10.  [Download the cheese RStudio Project](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_Reproducible_Reports/download/cheese.zip) file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.
 
