@@ -1,0 +1,141 @@
+---
+title: "Extra - Missing Data Tools"
+author: 
+  name: University of North Carolina at Chapel Hill
+execute:
+  echo: true
+format: 
+  html:
+    theme: spacelab
+    toc: true
+    toc-location: left
+    page-layout: article
+bibliography: missing.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE)
+library(tidyverse)
+
+```
+
+## Necessary Packages
+
+```{r}
+#install.packages("naniar")
+library(naniar)
+#install.packages("Hmisc")
+library(Hmisc)
+```
+
+Missing data is an advanced topic, and this document does not provide a comprehensive treatment of how to handle missing data in statistical modeling. These are just two tools that I'm fond of. For this document, I'll be using the built-in `airquality` dataset. Before you proceed, make sure to install the `naniar` and `Hmisc` R packages.
+
+## Missing data visualization
+
+The `naniar` package provides lots of tools for understanding the nature of the missingness.
+
+```{r airq}
+data("airquality")
+vis_miss(airquality)
+```
+
+`naniar` also includes the upset plot to explore the patterns of missingness. We can clearly see there are only two observations that are missing both Ozone and Solar.R.
+
+```{r upset}
+gg_miss_upset(airquality)
+```
+
+It also introduces a new geom that extends the capabilities of ggplot. By default, ggplot removes rows with missing values.
+
+```{r point}
+ggplot(airquality,
+       aes(x = Ozone,
+           y = Solar.R)) +
+  geom_point()
+```
+
+`geom_miss_point` allows those rows to be included in the plot. We can see the two observations missing both Ozone and Solar.R in the bottom left corner of the plot.
+
+```{r misspoint}
+ggplot(airquality,
+       aes(x = Ozone,
+           y = Solar.R)) +
+  geom_miss_point()
+```
+
+## Missing data summaries
+
+`naniar` also includes lots of special function to summarize the degree of missingness in different ways.
+
+```{r summary}
+
+n_miss(airquality)
+n_complete(airquality)
+prop_miss(airquality)
+prop_complete(airquality)
+pct_miss(airquality)
+pct_complete(airquality)
+```
+
+`naniar` contains many more useful features that you can explore [http://naniar.njtierney.com/articles/getting-started-w-naniar.html].
+
+## Shadow matrices
+
+A shadow matrix is a simple way to keep track of which observations were originally missing. It augments the orignal data with a dataset of the same dimensions, where each cell is either "NA" or "!NA". "NA" indicates that the value in that cell was missing in the original data, and "!NA" indicates that the value in that cell was not missing. One useful application of this is to visualize the quality of the missing data imputation.
+
+```{r bind shadow}
+aq_shadow <- bind_shadow(airquality)
+```
+
+## Missing data imputation
+
+Missing data imputation is an advanced topic that requires careful study. Good references include [@enders_2010] and [@harrell_2016]. When I need a simple, good-enough approach, I turn to the aregImpute function from the Hmisc package. This function:
+
+1) fits a flexible additive regression model to a bootstrap sample from the original data 
+2) uses this model to predict all of original missing and non-missing values for the target variable 
+3) for each missing value for the target or this revised report, variable, it uses predictive mean matching to identify the value among the non-missing values that has the closest predicted value 
+4) uses the non-missing value of the closest match as the imputed value. 
+
+This approach has the advantage that it approximates using the full Bayesian posterior predictive distribution for imputation without having to specify a full Bayesian model, it has no trouble with collinear predictors, and it can naturally handle continuous, ordinal, and nominal variables [@horton2007].
+
+```{r imputation}
+set.seed(1234)  # setting the seed for the random number generator, so the results are reproducible.
+
+# generat a single imputed dataset from the aregImpute function
+# there's nothing on the left hand side of the formula, so aregImpute will fill-in all columns with missing
+# in this case, that's Ozone and Solar.R
+# on the right hand side, we are specifying what data to use to fill-in the missing values.
+# we are specifying that we want to use all 6 variables, which should give us the most information.
+imputed <- aregImpute(~ Ozone + Solar.R + Wind + Temp + Month +Day, data = aq_shadow, nk = 0, n.impute=1)
+
+#extract  the imputation dataset from the imputed object created by the aregImpute object
+impute1 <- impute.transcan(imputed, imputation=1, data=aq_shadow, list.out=TRUE,
+                           pr=FALSE, check=FALSE)
+
+#convert the impute1 list into a dataframe
+completed <- data.frame(impute1)
+
+#remove the "imputed" attribute from 
+attr(completed$Ozone, "imputed") <- NULL
+attr(completed$Solar.R, "imputed") <- NULL
+
+
+```
+You can learn more about [lists here](http://adv-r.had.co.nz/Data-structures.html) and [attributes here](http://adv-r.had.co.nz/Data-structures.html#attributes)
+
+
+We can see that the imputed values (teal) don't stand out from the observed values (red), which is good! They are reasonable values. 
+
+```{r plot}
+#add back in the shadow matrix
+completed_shadow <- cbind(completed, aq_shadow[,7:12])
+
+# now plot the original and imputed values.
+completed_shadow %>%
+  ggplot(aes(x = Temp,
+             y = Ozone,
+             colour = Ozone_NA)) + 
+  geom_point()
+```
+
+## References
