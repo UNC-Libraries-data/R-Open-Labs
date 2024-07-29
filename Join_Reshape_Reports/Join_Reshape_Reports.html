@@ -95,29 +95,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pivot_longer" id="toc-pivot_longer" class="nav-link" data-scroll-target="#pivot_longer"><code>pivot_longer</code></a></li>
   <li><a href="#pivot_wider" id="toc-pivot_wider" class="nav-link" data-scroll-target="#pivot_wider"><code>pivot_wider</code></a></li>
   </ul></li>
-  <li><a href="#motivation-reproducible-reports" id="toc-motivation-reproducible-reports" class="nav-link" data-scroll-target="#motivation-reproducible-reports">Motivation: Reproducible Reports</a></li>
-  <li><a href="#rmarkdown-structure" id="toc-rmarkdown-structure" class="nav-link" data-scroll-target="#rmarkdown-structure">RMarkdown Structure</a>
+  <li><a href="#motivation-reproducible-reports" id="toc-motivation-reproducible-reports" class="nav-link" data-scroll-target="#motivation-reproducible-reports">Motivation: Reproducible Reports</a>
+  <ul class="collapse">
+  <li><a href="#note-r-markdown" id="toc-note-r-markdown" class="nav-link" data-scroll-target="#note-r-markdown">Note: R Markdown</a></li>
+  </ul></li>
+  <li><a href="#quarto-structure" id="toc-quarto-structure" class="nav-link" data-scroll-target="#quarto-structure">Quarto Structure</a>
   <ul class="collapse">
   <li><a href="#header" id="toc-header" class="nav-link" data-scroll-target="#header">Header</a></li>
   <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code Chunks</a></li>
   <li><a href="#formatted-text" id="toc-formatted-text" class="nav-link" data-scroll-target="#formatted-text">Formatted Text</a></li>
-  <li><a href="#visual-r-markdown" id="toc-visual-r-markdown" class="nav-link" data-scroll-target="#visual-r-markdown">Visual R Markdown</a></li>
+  <li><a href="#visual-editor" id="toc-visual-editor" class="nav-link" data-scroll-target="#visual-editor">Visual Editor</a></li>
   </ul></li>
-  <li><a href="#generating-the-html-document-example" id="toc-generating-the-html-document-example" class="nav-link" data-scroll-target="#generating-the-html-document-example">Generating the HTML document: Example</a>
-  <ul class="collapse">
-  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import">Data Import</a></li>
-  <li><a href="#useful-functions-for-exploring-dataframes" id="toc-useful-functions-for-exploring-dataframes" class="nav-link" data-scroll-target="#useful-functions-for-exploring-dataframes">Useful functions for exploring dataframes</a></li>
-  <li><a href="#tables-and-knitrkable" id="toc-tables-and-knitrkable" class="nav-link" data-scroll-target="#tables-and-knitrkable">Tables and <code>knitr::kable</code></a></li>
-  <li><a href="#adding-a-new-variable" id="toc-adding-a-new-variable" class="nav-link" data-scroll-target="#adding-a-new-variable">Adding a new variable</a></li>
-  <li><a href="#selecting-columns" id="toc-selecting-columns" class="nav-link" data-scroll-target="#selecting-columns">Selecting Columns</a></li>
-  <li><a href="#renaming-columns" id="toc-renaming-columns" class="nav-link" data-scroll-target="#renaming-columns">Renaming Columns</a></li>
-  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a></li>
-  </ul></li>
+  <li><a href="#generating-the-html-document" id="toc-generating-the-html-document" class="nav-link" data-scroll-target="#generating-the-html-document">Generating the HTML document</a></li>
   <li><a href="#bibliography" id="toc-bibliography" class="nav-link" data-scroll-target="#bibliography">Bibliography</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a>
   <ul class="collapse">
   <li><a href="#merge-and-reshape" id="toc-merge-and-reshape" class="nav-link" data-scroll-target="#merge-and-reshape">Merge and Reshape</a></li>
-  <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">R Markdown</a></li>
+  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -187,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Data Transformations
 <ul>
-<li>Reproducible Reports using R Markdown</li>
+<li>Reproducible Reports using Quarto</li>
 </ul></li>
 </ul>
 <div class="cell">
@@ -213,8 +207,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change
-1         1  2.4470452
-2         2  0.6414608</code></pre>
+1         1   1.573612
+2         2  -0.469586</code></pre>
 </div>
 </div>
 <p><strong>Dataset 2</strong></p>
@@ -225,20 +219,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID GPA_change Semester
-1         3 -1.1902074   Spring
-2         4 -0.5641581     Fall</code></pre>
+<pre><code>  StudentID  GPA_change Semester
+1         3 -0.07326713   Spring
+2         4 -2.57229916     Fall</code></pre>
 </div>
 </div>
 <p><strong>Datasets combined</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(a0,a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID GPA_change Semester
-1         1  2.4470452     &lt;NA&gt;
-2         2  0.6414608     &lt;NA&gt;
-3         3 -1.1902074   Spring
-4         4 -0.5641581     Fall</code></pre>
+<pre><code>  StudentID  GPA_change Semester
+1         1  1.57361180     &lt;NA&gt;
+2         2 -0.46958602     &lt;NA&gt;
+3         3 -0.07326713   Spring
+4         4 -2.57229916     Fall</code></pre>
 </div>
 </div>
 <p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a bind_cols function, but in the context below, using bind_cols is unhelpful and results in mismatched records.</p>
@@ -644,302 +638,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="motivation-reproducible-reports" class="level2">
 <h2 class="anchored" data-anchor-id="motivation-reproducible-reports">Motivation: Reproducible Reports</h2>
-<p>R Markdown provides a straightforward way to create reports that combine code and the output from that code with text commentary. This allows for the creation of automated, reproducible reports. R Markdown can knit together your analysis results with text and output it directly into HTML, PDF, or Word documents. In fact, we have been using R Markdown to generate the webpage for all of our R Open Labs workshops!</p>
+<p>Quarto provides a straightforward way to create reports that combine code and the output from that code with text commentary. This allows for the creation of automated, reproducible reports. Quarto can knit together your analysis results with text and output it directly into HTML, PDF, or Word documents. In fact, we have been using Quarto to generate the webpage for all of our R Open Labs workshops!</p>
+<section id="note-r-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="note-r-markdown">Note: R Markdown</h3>
+<p>Quarto is very similar to an older tool, R Markdown, that these workshops were originally created in. Quarto and R Markdown syntax and behind the scenes functionality are similar, but Quarto is designed to be more compatible with other languages like Python and Julia. In most cases, you can convert old R Markdown .Rmd documents into Quarto documents with no changes.</p>
 </section>
-<section id="rmarkdown-structure" class="level2">
-<h2 class="anchored" data-anchor-id="rmarkdown-structure">RMarkdown Structure</h2>
-<p>R Markdown has three components.</p>
+</section>
+<section id="quarto-structure" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-structure">Quarto Structure</h2>
+<p>Quarto has three components.</p>
 <ol type="1">
 <li>An (optional) header in a language called YAML. This allows you to specify the type of output file and configure other options.</li>
 <li>R code chunks wrapped by <code>```</code></li>
 <li>Text mixed with simple formatting markup.</li>
 </ol>
-<p>To create a new R Markdown document (.Rmd), select File -&gt; New File -&gt; R Markdown.</p>
-<p>You will have the option to select the output: we’ll use the default HTML for this workshop. Give the document a title and enter your name as author: this will create the header for you at the top of your new .html page! RStudio will create a new R Markdown document filled with examples of code chunks and text.</p>
+<p>To create a new Quarto document (.qmd), select File -&gt; New File -&gt; Quarto Document.</p>
+<p>You will have the option to select the output: we’ll use the default HTML for this workshop. Give the document a title and enter your name as author: this will create the header for you at the top of your new .html page! RStudio will create a new Quarto document filled with examples of code chunks and text.</p>
 <section id="header" class="level3">
 <h3 class="anchored" data-anchor-id="header">Header</h3>
-<p><img src="figures/header.png" class="img-fluid"> At the top of the page is the optional Yet Another Markup Language (YAML) header. This header is a powerful way to edit the formatting of your report (e.g.&nbsp;figure dimensions, presence of a table of contents, identifying the location of a bibliography file).</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>title: "beginR: Joining, Reshaping &amp; Reproducible Reports"</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>author: </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  name: University of North Carolina at Chapel Hill</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>execute:</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  echo: true</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>format: </span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  html:</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>    theme: spacelab</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    toc: true</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    toc-location: left</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>    page-layout: article</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>At the top of the page is the optional Yet Another Markup Language (YAML) header. This header is a powerful way to edit the formatting of your report (e.g.&nbsp;figure dimensions, presence of a table of contents, identifying the location of a bibliography file).</p>
 </section>
 <section id="code-chunks" class="level3">
 <h3 class="anchored" data-anchor-id="code-chunks">Code Chunks</h3>
-<p><img src="figures/code%20chunk.png" class="img-fluid"> R code chunks are surrounded by <code>```</code>. Inside the curly braces, it specifies that this code chunk will use R code (other programming languages are supported), then it names this chunk “setup”. Names are optional.</p>
-<p>After the name, you specify options on whether you want the code or its results to be displayed in the final document. For this chunk, the <code>include=FALSE</code> options tells R Markdown that we want this code to run, but we do not want it to be displayed in the final HTML document. The R code inside the chunk <code>knitr::opts_chunk$set(echo = TRUE)</code> tells R Markdown to display the R code along with the results of the code in the HTML output for <strong>all</strong> code chunks below.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>#| label: setup</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>#| warning: false</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>library(tidyverse)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>R code chunks are surrounded by <code>```</code>. Inside the curly braces, it specifies that this code chunk will use R.</p>
+<p><code>#|</code> precedes options for this code chunk. In this case:</p>
+<ul>
+<li><code>#| label: setup</code> names this chunk “setup”. (Names are optional)</li>
+<li><code>#| warning: false</code> tells Quarto to hide any warnings generated by our code in the final HTML document.</li>
+</ul>
+<p>Finally the code <code>library(tidyverse)</code> is executed as usual. When creating a document, you can use the buttons at the top right of the code chunk to run all code before and run the code in this block respectively.</p>
 <p>Use CTRL+ALT+i (PC) or CMD+OPTION+i (Mac) to insert R code blocks.</p>
 </section>
 <section id="formatted-text" class="level3">
 <h3 class="anchored" data-anchor-id="formatted-text">Formatted Text</h3>
+<div class="sourceCode" id="cb47"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>## Quarto</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see &lt;https://quarto.org&gt;.</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>## Running Code</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="figures/text.png" class="img-fluid"></p>
-<p>This is plain text with simple formatting added. The <code>##</code> tells R Markdown that “R Markdown” is a section header. The <code>**</code> around “Knit” tells R Markdown to make that word <strong>bold</strong>.</p>
-<p>The RStudio team has helpfully condensed these code chunk and text formatting options into a <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">cheatsheet</a>.</p>
-<p>You can get pretty far with options in the R Markdown cheatsheet, but R Markdown is a very powerful, flexible language that we do not have time to fully cover. More detailed references are:</p>
-<p><a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf</a></p>
-<p><a href="https://bookdown.org/yihui/rmarkdown" class="uri">https://bookdown.org/yihui/rmarkdown</a></p>
+<p>This is plain text with simple formatting added. The <code>##</code> tells Quarto that “Quarto” and “Running Code are section headers. The <code>**</code> around”Render” tells Quarto to make that word <strong>bold</strong>.</p>
+<p>The Posit team has helpfully condensed these code chunk and text formatting options into a <a href="https://rstudio.github.io/cheatsheets/quarto.pdf">cheatsheet</a>.</p>
+<p>You can get pretty far with options in the Quarto cheatsheet, but Quarto is a very powerful, flexible language that we do not have time to fully cover. More detailed references are available here: <a href="https://quarto.org/docs/authoring/markdown-basics.html" class="uri">https://quarto.org/docs/authoring/markdown-basics.html</a></p>
 </section>
-<section id="visual-r-markdown" class="level3">
-<h3 class="anchored" data-anchor-id="visual-r-markdown">Visual R Markdown</h3>
-<p>Newer versions of R Studio provide a visual editor for R markdown documents. This can be accessed by toggling between the “Source” and “Visual” options in the top left corner of your Rmd script editor pane. (Note: In some older versions of R Studio, this is available as a compass-shaped icon in the top <em>right</em> corner instead).</p>
+<section id="visual-editor" class="level3">
+<h3 class="anchored" data-anchor-id="visual-editor">Visual Editor</h3>
+<p>R Studio provides a visual editor for Quarto documents. This can be accessed by toggling between the “Source” and “Visual” options in the top left corner of your Qmd script editor pane.</p>
 <p>Once activated, this interface is similar to a word processing software like Microsoft Word - shortcuts for bolding, italics, etc. are usually the same and there are icons and drop down menus available for lists, bullets, links, and more.</p>
 <p>You can still use CTRL+ALT+i (PC) or CMD+OPTION+i (Mac) to insert R code blocks, or use the Insert&gt;Code Chunk&gt;R menu in the visual editor.</p>
 <p>Read more about the visual editor here:<br>
-<a href="https://rstudio.github.io/visual-markdown-editing/" class="uri">https://rstudio.github.io/visual-markdown-editing/</a></p>
+<a href="https://quarto.org/docs/visual-editor/" class="uri">https://quarto.org/docs/visual-editor/</a></p>
 </section>
 </section>
-<section id="generating-the-html-document-example" class="level2">
-<h2 class="anchored" data-anchor-id="generating-the-html-document-example">Generating the HTML document: Example</h2>
-<p>Click the <strong>Knit</strong> button, and R Studio will generate an HTML report based on your R Markdown document.</p>
-<p>Let’s try creating an R Markdown document to explore the US cheese consumption data and review what we learned in weeks 1-3.</p>
-<section id="data-import" class="level3">
-<h3 class="anchored" data-anchor-id="data-import">Data Import</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/clean_cheese.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 48 Columns: 17
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-</section>
-<section id="useful-functions-for-exploring-dataframes" class="level3">
-<h3 class="anchored" data-anchor-id="useful-functions-for-exploring-dataframes">Useful functions for exploring dataframes</h3>
-<p>Include one of the following in your document. We’ve used <code>eval = FALSE</code> here to prevent this code chunk from running!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(consumption)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(consumption)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(consumption)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="tables-and-knitrkable" class="level3">
-<h3 class="anchored" data-anchor-id="tables-and-knitrkable">Tables and <code>knitr::kable</code></h3>
-<p>By default, R Markdown will display tables the way they appear in the R console. We can use <code>knitr::kable function</code> to get cleaner tables.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(consumption), <span class="at">caption =</span> <span class="st">"The first six rows of the cheese consumption data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>The first six rows of the cheese consumption data</caption>
-<colgroup>
-<col style="width: 2%">
-<col style="width: 3%">
-<col style="width: 6%">
-<col style="width: 4%">
-<col style="width: 5%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 3%">
-<col style="width: 8%">
-<col style="width: 2%">
-<col style="width: 7%">
-<col style="width: 6%">
-<col style="width: 7%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Year</th>
-<th style="text-align: right;">Cheddar</th>
-<th style="text-align: right;">American Other</th>
-<th style="text-align: right;">Mozzarella</th>
-<th style="text-align: right;">Italian other</th>
-<th style="text-align: right;">Swiss</th>
-<th style="text-align: right;">Brick</th>
-<th style="text-align: right;">Muenster</th>
-<th style="text-align: right;">Cream and Neufchatel</th>
-<th style="text-align: right;">Blue</th>
-<th style="text-align: right;">Other Dairy Cheese</th>
-<th style="text-align: right;">Processed Cheese</th>
-<th style="text-align: right;">Foods and spreads</th>
-<th style="text-align: right;">Total American Chese</th>
-<th style="text-align: right;">Total Italian Cheese</th>
-<th style="text-align: right;">Total Natural Cheese</th>
-<th style="text-align: right;">Total Processed Cheese Products</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1970</td>
-<td style="text-align: right;">5.79</td>
-<td style="text-align: right;">1.20</td>
-<td style="text-align: right;">1.19</td>
-<td style="text-align: right;">0.87</td>
-<td style="text-align: right;">0.88</td>
-<td style="text-align: right;">0.10</td>
-<td style="text-align: right;">0.17</td>
-<td style="text-align: right;">0.61</td>
-<td style="text-align: right;">0.15</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">3.32</td>
-<td style="text-align: right;">2.20</td>
-<td style="text-align: right;">7.00</td>
-<td style="text-align: right;">2.05</td>
-<td style="text-align: right;">11.37</td>
-<td style="text-align: right;">5.53</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1971</td>
-<td style="text-align: right;">5.91</td>
-<td style="text-align: right;">1.42</td>
-<td style="text-align: right;">1.38</td>
-<td style="text-align: right;">0.92</td>
-<td style="text-align: right;">0.94</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">0.19</td>
-<td style="text-align: right;">0.62</td>
-<td style="text-align: right;">0.15</td>
-<td style="text-align: right;">0.41</td>
-<td style="text-align: right;">3.55</td>
-<td style="text-align: right;">2.31</td>
-<td style="text-align: right;">7.32</td>
-<td style="text-align: right;">2.29</td>
-<td style="text-align: right;">12.03</td>
-<td style="text-align: right;">5.86</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1972</td>
-<td style="text-align: right;">6.01</td>
-<td style="text-align: right;">1.67</td>
-<td style="text-align: right;">1.57</td>
-<td style="text-align: right;">1.02</td>
-<td style="text-align: right;">1.06</td>
-<td style="text-align: right;">0.10</td>
-<td style="text-align: right;">0.22</td>
-<td style="text-align: right;">0.63</td>
-<td style="text-align: right;">0.17</td>
-<td style="text-align: right;">0.56</td>
-<td style="text-align: right;">3.51</td>
-<td style="text-align: right;">2.62</td>
-<td style="text-align: right;">7.68</td>
-<td style="text-align: right;">2.59</td>
-<td style="text-align: right;">13.01</td>
-<td style="text-align: right;">6.13</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1973</td>
-<td style="text-align: right;">6.07</td>
-<td style="text-align: right;">1.76</td>
-<td style="text-align: right;">1.76</td>
-<td style="text-align: right;">1.03</td>
-<td style="text-align: right;">1.06</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">0.21</td>
-<td style="text-align: right;">0.66</td>
-<td style="text-align: right;">0.18</td>
-<td style="text-align: right;">0.65</td>
-<td style="text-align: right;">3.31</td>
-<td style="text-align: right;">2.68</td>
-<td style="text-align: right;">7.83</td>
-<td style="text-align: right;">2.80</td>
-<td style="text-align: right;">13.49</td>
-<td style="text-align: right;">5.99</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1974</td>
-<td style="text-align: right;">6.31</td>
-<td style="text-align: right;">2.16</td>
-<td style="text-align: right;">1.86</td>
-<td style="text-align: right;">1.09</td>
-<td style="text-align: right;">1.18</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">0.23</td>
-<td style="text-align: right;">0.70</td>
-<td style="text-align: right;">0.16</td>
-<td style="text-align: right;">0.61</td>
-<td style="text-align: right;">3.42</td>
-<td style="text-align: right;">2.92</td>
-<td style="text-align: right;">8.47</td>
-<td style="text-align: right;">2.95</td>
-<td style="text-align: right;">14.41</td>
-<td style="text-align: right;">6.34</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1975</td>
-<td style="text-align: right;">6.04</td>
-<td style="text-align: right;">2.11</td>
-<td style="text-align: right;">2.11</td>
-<td style="text-align: right;">1.12</td>
-<td style="text-align: right;">1.09</td>
-<td style="text-align: right;">0.09</td>
-<td style="text-align: right;">0.24</td>
-<td style="text-align: right;">0.74</td>
-<td style="text-align: right;">0.16</td>
-<td style="text-align: right;">0.57</td>
-<td style="text-align: right;">3.35</td>
-<td style="text-align: right;">3.35</td>
-<td style="text-align: right;">8.15</td>
-<td style="text-align: right;">3.23</td>
-<td style="text-align: right;">14.27</td>
-<td style="text-align: right;">6.69</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="adding-a-new-variable" class="level3">
-<h3 class="anchored" data-anchor-id="adding-a-new-variable">Adding a new variable</h3>
-<p>We’ve covered two ways to add a new variable to a dataframe.</p>
-<p><strong>Note:</strong> R allows non-standard variable names that include spaces, parentheses, and other special characters. The way to refer to variable names that contain wonky symbols is to use the backtick symbol <code>`</code>, found at the top left of your keyboard with the tilde <code>~</code>.</p>
-<p>The base R way covered in lesson 1 using the <code>$</code> operator and <code>with()</code> function</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Base R way, covered in lesson 1</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>consumption<span class="sc">$</span>amer_ital_ratio <span class="ot">&lt;-</span> <span class="fu">with</span>(consumption, <span class="st">`</span><span class="at">Total American Cheese</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">Total Italian Cheese</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in eval(substitute(expr), data, enclos = parent.frame()): object 'Total American Cheese' not found</code></pre>
-</div>
-</div>
-<p>Oops. Better check the variable names.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>consumption<span class="sc">$</span>amer_ital_ratio1 <span class="ot">&lt;-</span> <span class="fu">with</span>(consumption, <span class="st">`</span><span class="at">Total American Chese</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">Total Italian Cheese</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The tidyverse way covered in lesson 3 using the <code>mutate()</code> function</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tidyverse way, covered in lesson 3</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">mutate</span>(consumption, <span class="at">amer_ital_ratio2 =</span> <span class="st">`</span><span class="at">Total American Chese</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">Total Italian Cheese</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="selecting-columns" class="level3">
-<h3 class="anchored" data-anchor-id="selecting-columns">Selecting Columns</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">select</span>(consumption, Year, Cheddar, Mozzarella, <span class="st">`</span><span class="at">Cream and Neufchatel</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="renaming-columns" class="level3">
-<h3 class="anchored" data-anchor-id="renaming-columns">Renaming Columns</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>consumption <span class="ot">&lt;-</span> <span class="fu">rename</span>(consumption, <span class="at">Cream_and_Neufchatel =</span> <span class="st">`</span><span class="at">Cream and Neufchatel</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="plotting" class="level3">
-<h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(consumption, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span> </span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Cheddar, <span class="at">col =</span> <span class="st">"Cheddar"</span>)) <span class="sc">+</span> </span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Mozzarella, <span class="at">col =</span> <span class="st">"Mozzarella"</span>)) <span class="sc">+</span> </span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> Cream_and_Neufchatel, <span class="at">col =</span> <span class="st">"Cream and Neufchatel"</span>)) <span class="sc">+</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Consumption in Pounds Per Person"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Join_Reshape_Reports_files/figure-html/plot1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
+<section id="generating-the-html-document" class="level2">
+<h2 class="anchored" data-anchor-id="generating-the-html-document">Generating the HTML document</h2>
+<p>Click the <strong>Render</strong> button, and R Studio will generate an HTML report based on your document.</p>
+<p>Let’s try creating an Quarto document to explore the US cheese consumption data and review what we learned in weeks 1-3.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>###Data Import</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>consumption &lt;- read_csv("data/clean_cheese.csv")</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>### Useful functions for exploring dataframes</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>Include one of the following in your document. We've used `eval = FALSE` here to prevent this code chunk from running!</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>#| label: misc</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>#| eval: FALSE</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>head(consumption)</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>tail(consumption)</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>summary(consumption)</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>### Tables and `knitr::kable`</span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>By default, Quarto will display tables the way they appear in the R console. We can use `knitr::kable function` to get cleaner tables.</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>#| label: kable</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>knitr::kable(head(consumption), caption = "The first six rows of the cheese consumption data")</span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>### Adding a new variable</span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>We've covered two ways to add a new variable to a dataframe.</span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>**Note:** R allows non-standard variable names that include spaces, parentheses, and other special characters. The way to refer to variable names that contain wonky symbols is to use the backtick symbol `` ` ``, found at the top left of your keyboard with the tilde `~`.</span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a>The base R way covered in lesson 1 using the `$` operator and `with()` function</span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a>#| label: ratio1</span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>#| error: TRUE</span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a>#Base R way, covered in lesson 1</span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a>consumption$amer_ital_ratio &lt;- with(consumption, `Total American Cheese` / `Total Italian Cheese`)</span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a>Oops. Better check the variable names.</span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-45"><a href="#cb48-45" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a>#| label: ratio2</span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a>consumption$amer_ital_ratio1 &lt;- with(consumption, `Total American Chese` / `Total Italian Cheese`)</span>
+<span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a>The tidyverse way covered in lesson 3 using the `mutate()` function</span>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-53"><a href="#cb48-53" aria-hidden="true" tabindex="-1"></a>#| label: ratio3</span>
+<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a>#Tidyverse way, covered in lesson 3</span>
+<span id="cb48-55"><a href="#cb48-55" aria-hidden="true" tabindex="-1"></a>consumption &lt;- mutate(consumption, amer_ital_ratio2 = `Total American Chese` / `Total Italian Cheese`)</span>
+<span id="cb48-56"><a href="#cb48-56" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-57"><a href="#cb48-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-58"><a href="#cb48-58" aria-hidden="true" tabindex="-1"></a>### Selecting Columns</span>
+<span id="cb48-59"><a href="#cb48-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-60"><a href="#cb48-60" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-61"><a href="#cb48-61" aria-hidden="true" tabindex="-1"></a>#| label: select</span>
+<span id="cb48-62"><a href="#cb48-62" aria-hidden="true" tabindex="-1"></a>consumption &lt;- select(consumption, Year, Cheddar, Mozzarella, `Cream and Neufchatel`)</span>
+<span id="cb48-63"><a href="#cb48-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-64"><a href="#cb48-64" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-65"><a href="#cb48-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-66"><a href="#cb48-66" aria-hidden="true" tabindex="-1"></a>### Renaming Columns</span>
+<span id="cb48-67"><a href="#cb48-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-68"><a href="#cb48-68" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-69"><a href="#cb48-69" aria-hidden="true" tabindex="-1"></a>#| label: rename</span>
+<span id="cb48-70"><a href="#cb48-70" aria-hidden="true" tabindex="-1"></a>consumption &lt;- rename(consumption, Cream_and_Neufchatel = `Cream and Neufchatel`)</span>
+<span id="cb48-71"><a href="#cb48-71" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb48-72"><a href="#cb48-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-73"><a href="#cb48-73" aria-hidden="true" tabindex="-1"></a>### Plotting</span>
+<span id="cb48-74"><a href="#cb48-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-75"><a href="#cb48-75" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb48-76"><a href="#cb48-76" aria-hidden="true" tabindex="-1"></a>#| label: plot1</span>
+<span id="cb48-77"><a href="#cb48-77" aria-hidden="true" tabindex="-1"></a>#| fig.width: 8</span>
+<span id="cb48-78"><a href="#cb48-78" aria-hidden="true" tabindex="-1"></a>#| fig.height: 5</span>
+<span id="cb48-79"><a href="#cb48-79" aria-hidden="true" tabindex="-1"></a>ggplot(consumption, aes(x = Year)) + </span>
+<span id="cb48-80"><a href="#cb48-80" aria-hidden="true" tabindex="-1"></a>    geom_point(aes(y = Cheddar, col = "Cheddar")) + </span>
+<span id="cb48-81"><a href="#cb48-81" aria-hidden="true" tabindex="-1"></a>    geom_point(aes(y = Mozzarella, col = "Mozzarella")) + </span>
+<span id="cb48-82"><a href="#cb48-82" aria-hidden="true" tabindex="-1"></a>    geom_point(aes(y = Cream_and_Neufchatel, col = "Cream and Neufchatel")) +</span>
+<span id="cb48-83"><a href="#cb48-83" aria-hidden="true" tabindex="-1"></a>    ylab("Consumption in Pounds Per Person")</span>
+<span id="cb48-84"><a href="#cb48-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-85"><a href="#cb48-85" aria-hidden="true" tabindex="-1"></a>```</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="bibliography" class="level2">
 <h2 class="anchored" data-anchor-id="bibliography">Bibliography</h2>
-<p>R Markdown also provides a nifty way to incorporate a bibliography and references. We’ll haven an example of this in the exercises, but here’s a brief summary of the steps required to use a BibTex bibliography.</p>
+<p>Quarto also provides a nifty way to incorporate a bibliography and references. We’ll haven an example of this in the exercises, but here’s a brief summary of the steps required to use a BibTex bibliography.</p>
 <ol type="1">
-<li>Create a plain-text .bib file in the same directory as your .Rmd R Markdown document.</li>
-<li>Fill that .bib file with BibTex citations. The <a href="http://www.citationmachine.net/bibtex/cite-a-book">Citation Machine</a> can generate the BibTex citations for you.</li>
+<li>Create a plain-text .bib file in the same directory as your .qmd document.</li>
+<li>Fill that .bib file with BibTex citations. Many academic databases or the <a href="http://www.citationmachine.net/bibtex/cite-a-book">Citation Machine</a> can generate the BibTex citations for you.</li>
 <li>Make sure each citation has a unique citation-key, the first entry</li>
-<li>Add a bibliography field to the YAML header that tells R Markdown the name of your bibliography file, for example <code>bibliography: references.bib</code></li>
+<li>Add a bibliography field to the YAML header that tells Quarto the name of your bibliography file, for example <code>bibliography: references.bib</code></li>
 <li>Add citations throughout the document using square brackets.</li>
 </ol>
 </section>
@@ -956,9 +824,9 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <li><p>Use <code>pivot_wider</code> to create a new dataframe with a row for each <code>customer_state</code> and a column for each <code>product_category_name_english</code>. Name this dataframe <code>products</code>.</p></li>
 <li><p>Run the two lines of code below (make sure your dataframe from step 4 is called <code>products</code>!)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>products <span class="ot">&lt;-</span> <span class="fu">ungroup</span>(products) <span class="co">#remove grouping </span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>products[<span class="fu">is.na</span>(products)] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#replace missing data with zeroes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>products <span class="ot">&lt;-</span> <span class="fu">ungroup</span>(products) <span class="co">#remove grouping </span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>products[<span class="fu">is.na</span>(products)] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#replace missing data with zeroes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 <li><p>Use <code>ggpairs</code> or other Exploratory Data Analysis techniques to look for relationships between purchases of <code>small_appliances</code>,<code>consoles_games</code>,<code>air_conditioning</code>, and <code>construction_tools_safety</code>. (Remember to run <code>library(GGally)</code> before using <code>ggpairs</code>).</p></li>
 <li><p>Repeat problems 3-6 with <code>order_products_value</code> (i.e.&nbsp;the amount spent vs the quantity purchased). Do you see different patterns? Explore other product categories.</p></li>
@@ -966,14 +834,14 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <li><p>Choose 5 states. Which of these states have the most similar patterns of spending (as measured by correlation)?</p></li>
 </ol>
 </section>
-<section id="r-markdown" class="level3">
-<h3 class="anchored" data-anchor-id="r-markdown">R Markdown</h3>
+<section id="quarto" class="level3">
+<h3 class="anchored" data-anchor-id="quarto">Quarto</h3>
 <ol start="10" type="1">
-<li><p><a href="https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_Reproducible_Reports/download/cheese.zip">Download the cheese RStudio Project</a> file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.</p></li>
-<li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>setup</strong>. change <code>echo=FALSE</code> to <code>echo=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
-<li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>import</strong>. change <code>message=FALSE</code> to <code>message=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
-<li><p>Create another R Markdown document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom <a href="https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
-<li><p>Once you have created an R Markdown report analyzing cheese production, send the entire R Project to a friend (or us!) and ask them to knit that .Rmd document. If they have RStudio and the tidyverse installed, they should be able to seamlessly generate the exact report you generated, without having to make any changes.</p></li>
+<li><p><a href="https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Join_Reshape_Reports/download/cheese.zip">Download the cheese RStudio Project</a> file and extract the R Project contained within. Then, render the cheeseConsumption.qmd report. It should generate an HTML report for you.</p></li>
+<li><p>In the cheeseConsumption.qmd file, find the code chunk named <strong>setup</strong>. change <code>#| echo: FALSE</code> to <code>#| echo: TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
+<li><p>In the cheeseConsumption.qmd file, find the code chunk named <strong>import</strong>. change <code>#| message: FALSE</code> to <code>#| message: TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
+<li><p>Create another Quarto document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom <a href="https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
+<li><p>Once you have created an Quarto report analyzing cheese production, send the entire R Project to a friend (or us!) and ask them to knit that .qmd document. If they have RStudio and the tidyverse installed, they should be able to seamlessly generate the exact report you generated, without having to make any changes.</p></li>
 </ol>
 </section>
 </section>
