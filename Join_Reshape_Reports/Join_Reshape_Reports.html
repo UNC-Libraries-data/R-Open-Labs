@@ -207,8 +207,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change
-1         1   1.573612
-2         2  -0.469586</code></pre>
+1         1  0.6692377
+2         2  1.3409747</code></pre>
 </div>
 </div>
 <p><strong>Dataset 2</strong></p>
@@ -219,20 +219,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID  GPA_change Semester
-1         3 -0.07326713   Spring
-2         4 -2.57229916     Fall</code></pre>
+<pre><code>  StudentID GPA_change Semester
+1         3 -0.4680774   Spring
+2         4 -0.3713489     Fall</code></pre>
 </div>
 </div>
 <p><strong>Datasets combined</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(a0,a1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID  GPA_change Semester
-1         1  1.57361180     &lt;NA&gt;
-2         2 -0.46958602     &lt;NA&gt;
-3         3 -0.07326713   Spring
-4         4 -2.57229916     Fall</code></pre>
+<pre><code>  StudentID GPA_change Semester
+1         1  0.6692377     &lt;NA&gt;
+2         2  1.3409747     &lt;NA&gt;
+3         3 -0.4680774   Spring
+4         4 -0.3713489     Fall</code></pre>
 </div>
 </div>
 <p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a bind_cols function, but in the context below, using bind_cols is unhelpful and results in mismatched records.</p>
@@ -321,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The join types can be represented as Venn Diagrams. The lighter parts of the circles represent unmatched records we are leaving out of the join, while the darker parts represent both matched and unmached records we are keeping in the join.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="join-venn-dark.png" class="img-fluid figure-img"></p>
+<p><img src="figures/join-venn-dark.png" class="img-fluid figure-img"></p>
 <figcaption>Join Types from R for Data Science 13.4.3</figcaption>
 </figure>
 </div>
