@@ -1,0 +1,133 @@
+---
+title: "beginR Extra: Regression Tables"
+author: 
+  name: University of North Carolina at Chapel Hill
+execute:
+  echo: true
+format: 
+  html:
+    theme: spacelab
+    toc: false
+    page-layout: article
+---
+## Necessary Packages
+
+```{r}
+#| message: False
+#| warning: False
+#install.packages(c("modelsummary", "tinytable", "gt", "kableExtra"))
+library(modelsummary)
+```
+
+
+## Formula notation in R
+
+`lm` is R's function for fitting Ordinary Least Squares (OLS) regressions. There are many other specialized regression models available in R, but fortunately the vast majority use similar notation for formulas.
+
+The arguments given to `lm` are:
+
+* Formula: `y~x`
+    + R uses `~` in place of the equals sign in formulas
+    + R automatically includes an intercept term
+    + This formula is therefore equivalent to: 
+    
+      $$y=intercept + slope * x$$
+* Data: 
+    + The dataframe containing the variables of interest.
+    
+
+|Symbol|Role|Example|Equivalent|
+|----|-----------|-----------|-----------------|
+|`+`|Add variable|`mpg~vs+disp`|$$mpg = intercept + \beta_1 vs + \beta_2 disp$$|
+|`*`|Interactions|`mpg~vs*disp`|$$mpg = intercept + \beta_1 vs + \beta_2 disp + \beta_3 vs*disp$$|
+|`.`|Include all variables in dataframe| `mpg~.` | $$mpg = intercept + \beta_1 cyl + \beta_2 disp + ... + \beta_{10} carb$$|
+|`-`|Exclude variable|`mpg~.-disp-hp`|$$mpg = intercept + \beta_1 cyl + \beta_2 drat + ... + \beta_{8} carb$$|
+
+
+ Let's fit a simple model with the `iris` built-in data:
+ 
+## Formatting `lm` style model results 
+
+Once you've fit a linear or some other model, you may want to report results. The `modelsummary` package makes this relatively simple to do, especially in an Quarto document. The code below will produce a common model summary format for a journal or presentation.  
+
+```{r} 
+data(iris)
+mod <- lm(data=iris,Sepal.Length~Species)
+mod1 <- lm(data=iris,Sepal.Length~Petal.Width+Species)
+mod2 <- lm(data=iris,Sepal.Length~Petal.Length+Petal.Width+Species)
+
+model_list <- list("Species"=mod,
+                  "Species+Width" = mod1,
+                  "Species+Width+Length" = mod2)
+
+modelsummary(model_list)
+```
+
+The `list("name"=object)` notation creates a named list in R. This is useful here to provide names for your models.  Names are not required!
+
+Remember, you can use `?modelsummary` to get a full list of parameters to change the output table.  Here are some commonly changed parameters:
+
+```{r}
+modelsummary(model_list, 
+             stars=T, #add significance stars
+             fmt = 2, #2 digits
+             statistic = "[{conf.low}, {conf.high}]", #replace standard errors with confidence intervals
+             coef_rename = c("Petal.Width" = "Petal Width", #rename variables
+                             "Petal,Length" = "Petal Length",
+                             "Speciesversicolor" = "Versicolor",
+                             "Speciesvirginica" = "Virginica"),
+             notes = "These models are fit to Fisher's or Anderson's iris dataset.")
+```
+
+
+### Output Formats
+
+`modelsummary` can output a wide variety of filetypes with the `output` argument.  Some of these outputs may require installing additional packages.
+
+```{r}
+modelsummary(model_list, output = "my_models.xlsx")
+modelsummary(model_list, output = "my_models.docx")
+modelsummary(model_list, output = "my_models.html")
+modelsummary(model_list, output = "my_models.png")
+```
+
+Sometimes it can be useful to output a table to one of the more general table packages in R for formatting.  Some of the most common packages for general tables are:
+
+* `gt`
+* `kableExtra`
+* `flextable`
+* `huxtable`
+
+```{r}
+#install.packages("gt")
+library(gt)
+modelsummary(model_list, output = "gt") %>% 
+  gt::tab_header("My Regression Models") %>% 
+  gt::tab_spanner(label = "Simple Regression", columns = 2) %>% 
+  gt::tab_spanner(label = "Multiple Regression", columns = 3:4)
+```
+
+
+## Data Summaries
+
+The `datasummary` family of functions can be useful for overview tables within `modelsummary`.
+```{r}
+datasummary_skim(iris)
+```
+
+Here's an example with another sample dataset:
+
+```{r}
+#install.packages("palmerpenguins")
+library(palmerpenguins)
+data(penguins)
+datasummary_skim(penguins)
+```
+
+
+## Exercise
+
+* Pick a sample dataset (call `data()` to get a list of available datasets, or use `data(penguins)` from `library(palmerpenguins)`).
+* Pick some variables and use `lm` to fit an OLS model.
+* Create a modelsummary table output.  Embed in a Quarto document or output html.  
+* Use `?modelsummary` to learn about and then change one or more default settings, or use a table package to further format your table.
