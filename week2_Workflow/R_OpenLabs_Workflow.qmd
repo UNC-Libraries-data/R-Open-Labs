@@ -176,14 +176,15 @@ class(airbnb_dc$property_type)
 The `dim()` function will print the dimensions (rows x columns) of your data frame.
 
 `head()` will print the first few rows of your data frame.
+`glimpse()` transposes the data.frame for easier printing of similar output.
 
-`str()` is a very general purpose function that will display the structure of an object. This is especially useful for debugging.
+(Note: `str()` is a general purpose function similar to `glimpse` that will display the structure of an object, often including extra information. This can be useful for debugging.)
 
 ```{r useful}
 # Some useful functions  ----------------------------------------
 dim(airbnb_dc)
 head(airbnb_dc)
-str(airbnb_dc)
+glimpse(airbnb_dc)
 ```
 
 

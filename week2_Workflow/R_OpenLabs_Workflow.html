@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </nav>
 </div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -326,8 +326,8 @@ dbl (10): id, accommodates, bathrooms, bedrooms, price, extra_people, minimu...
 <section id="useful-data.frame-commands" class="level3">
 <h3 class="anchored" data-anchor-id="useful-data.frame-commands">Useful data.frame commands</h3>
 <p>The <code>dim()</code> function will print the dimensions (rows x columns) of your data frame.</p>
-<p><code>head()</code> will print the first few rows of your data frame.</p>
-<p><code>str()</code> is a very general purpose function that will display the structure of an object. This is especially useful for debugging.</p>
+<p><code>head()</code> will print the first few rows of your data frame. <code>glimpse()</code> transposes the data.frame for easier printing of similar output.</p>
+<p>(Note: <code>str()</code> is a general purpose function similar to <code>glimpse</code> that will display the structure of an object, often including extra information. This can be useful for debugging.)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Some useful functions  ----------------------------------------</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(airbnb_dc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -349,41 +349,24 @@ dbl (10): id, accommodates, bathrooms, bedrooms, price, extra_people, minimu...
 #   number_of_reviews &lt;dbl&gt;, review_scores_rating &lt;dbl&gt;,
 #   cancellation_policy &lt;chr&gt;, reviews_per_month &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(airbnb_dc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(airbnb_dc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>spc_tbl_ [7,788 × 14] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ id                  : num [1:7788] 4873463 16736650 14999877 5955860 15655208 ...
- $ name                : chr [1:7788] "Cozy Pied-a-Terre, the Heart of DC" "Large, welcoming studio in a central location" "Newly Renovated Apartment in the Heart of DC" "Spacious Dupont Circle Condo" ...
- $ property_type       : chr [1:7788] "Apartment" "Apartment" "Apartment" "Apartment" ...
- $ room_type           : chr [1:7788] "Entire home/apt" "Entire home/apt" "Entire home/apt" "Entire home/apt" ...
- $ accommodates        : num [1:7788] 3 2 2 3 4 2 3 2 4 2 ...
- $ bathrooms           : num [1:7788] 1 1 1 1 2.5 2.5 1 1 1 1 ...
- $ bedrooms            : num [1:7788] 0 0 1 1 2 1 1 1 2 1 ...
- $ price               : num [1:7788] 95 200 100 129 500 110 225 79 172 110 ...
- $ extra_people        : num [1:7788] 10 0 0 50 0 15 20 0 0 10 ...
- $ minimum_nights      : num [1:7788] 2 1 27 2 2 6 3 3 1 1 ...
- $ number_of_reviews   : num [1:7788] 29 2 0 79 1 7 3 4 24 4 ...
- $ review_scores_rating: num [1:7788] 94 90 NA 85 100 97 100 89 88 100 ...
- $ cancellation_policy : chr [1:7788] "flexible" "flexible" "moderate" "flexible" ...
- $ reviews_per_month   : num [1:7788] 1.01 0.55 NA 3.13 1 0.23 0.82 0.09 0.48 0.67 ...
- - attr(*, "spec")=
-  .. cols(
-  ..   id = col_double(),
-  ..   name = col_character(),
-  ..   property_type = col_character(),
-  ..   room_type = col_character(),
-  ..   accommodates = col_double(),
-  ..   bathrooms = col_double(),
-  ..   bedrooms = col_double(),
-  ..   price = col_double(),
-  ..   extra_people = col_double(),
-  ..   minimum_nights = col_double(),
-  ..   number_of_reviews = col_double(),
-  ..   review_scores_rating = col_double(),
-  ..   cancellation_policy = col_character(),
-  ..   reviews_per_month = col_double()
-  .. )
- - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+<pre><code>Rows: 7,788
+Columns: 14
+$ id                   &lt;dbl&gt; 4873463, 16736650, 14999877, 5955860, 15655208, 4…
+$ name                 &lt;chr&gt; "Cozy Pied-a-Terre, the Heart of DC", "Large, wel…
+$ property_type        &lt;chr&gt; "Apartment", "Apartment", "Apartment", "Apartment…
+$ room_type            &lt;chr&gt; "Entire home/apt", "Entire home/apt", "Entire hom…
+$ accommodates         &lt;dbl&gt; 3, 2, 2, 3, 4, 2, 3, 2, 4, 2, 4, 3, 2, 2, 2, 2, 2…
+$ bathrooms            &lt;dbl&gt; 1.0, 1.0, 1.0, 1.0, 2.5, 2.5, 1.0, 1.0, 1.0, 1.0,…
+$ bedrooms             &lt;dbl&gt; 0, 0, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 0, 0, 1, 0, 1…
+$ price                &lt;dbl&gt; 95, 200, 100, 129, 500, 110, 225, 79, 172, 110, 1…
+$ extra_people         &lt;dbl&gt; 10, 0, 0, 50, 0, 15, 20, 0, 0, 10, 0, 0, 0, 0, 20…
+$ minimum_nights       &lt;dbl&gt; 2, 1, 27, 2, 2, 6, 3, 3, 1, 1, 2, 1, 2, 3, 7, 2, …
+$ number_of_reviews    &lt;dbl&gt; 29, 2, 0, 79, 1, 7, 3, 4, 24, 4, 0, 0, 23, 3, 6, …
+$ review_scores_rating &lt;dbl&gt; 94, 90, NA, 85, 100, 97, 100, 89, 88, 100, NA, NA…
+$ cancellation_policy  &lt;chr&gt; "flexible", "flexible", "moderate", "flexible", "…
+$ reviews_per_month    &lt;dbl&gt; 1.01, 0.55, NA, 3.13, 1.00, 0.23, 0.82, 0.09, 0.4…</code></pre>
 </div>
 </div>
 </section>
@@ -769,18 +752,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -812,7 +784,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -820,7 +814,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
