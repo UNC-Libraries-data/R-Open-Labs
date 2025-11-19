@@ -11,3 +11,41 @@ format:
     toc-location: left
     page-layout: article
 ---
+
+## Importing Data:
+
+### Shapefiles and Geopackages
+
+### File Geodatabases
+
+### ESRI Data Services with `arcgislayers`
+
+### Rasters
+
+## Quick note on projections
+
+### Checking and specifying projections
+
+### Reprojecting data
+
+## Data Operations
+
+### Filtering
+
+### Join on attributes
+
+## Spatial Operations
+
+### Spatial Filtering
+
+### Buffering
+
+### Spatial Joins
+
+#### Nearest Neighbors with `nngeo`
+
+## Plotting Data:
+
+### `sf` and `ggplot`
+
+### `tmap`
