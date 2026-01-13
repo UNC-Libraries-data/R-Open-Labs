@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -27,14 +27,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="GIS_R_files/libs/clipboard/clipboard.min.js"></script>
 <script src="GIS_R_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="GIS_R_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="GIS_R_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="GIS_R_files/libs/quarto-html/popper.min.js"></script>
 <script src="GIS_R_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="GIS_R_files/libs/quarto-html/anchor.min.js"></script>
 <link href="GIS_R_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="GIS_R_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="GIS_R_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="GIS_R_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="GIS_R_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="GIS_R_files/libs/bootstrap/bootstrap-1787b60bcbaecd18fb94062f4d294b29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="GIS_R_files/libs/bootstrap/bootstrap-e261b86ae15e22bf333780d8a72f25c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -51,7 +52,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#shapefiles-and-geopackages" id="toc-shapefiles-and-geopackages" class="nav-link" data-scroll-target="#shapefiles-and-geopackages">Shapefiles and Geopackages</a></li>
   <li><a href="#file-geodatabases" id="toc-file-geodatabases" class="nav-link" data-scroll-target="#file-geodatabases">File Geodatabases</a></li>
-  <li><a href="#esri-data-services-with-arcgislayers" id="toc-esri-data-services-with-arcgislayers" class="nav-link" data-scroll-target="#esri-data-services-with-arcgislayers">ESRI Data Services with <code>arcgislayers</code></a></li>
+  <li><a href="#online-data" id="toc-online-data" class="nav-link" data-scroll-target="#online-data">Online Data:</a></li>
   <li><a href="#rasters" id="toc-rasters" class="nav-link" data-scroll-target="#rasters">Rasters</a></li>
   </ul></li>
   <li><a href="#quick-note-on-projections" id="toc-quick-note-on-projections" class="nav-link" data-scroll-target="#quick-note-on-projections">Quick note on projections</a>
@@ -74,6 +75,11 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#sf-and-ggplot" id="toc-sf-and-ggplot" class="nav-link" data-scroll-target="#sf-and-ggplot"><code>sf</code> and <code>ggplot</code></a></li>
   <li><a href="#tmap" id="toc-tmap" class="nav-link" data-scroll-target="#tmap"><code>tmap</code></a></li>
+  </ul></li>
+  <li><a href="#survey-of-other-useful-packages" id="toc-survey-of-other-useful-packages" class="nav-link" data-scroll-target="#survey-of-other-useful-packages">Survey of other useful packages</a>
+  <ul class="collapse">
+  <li><a href="#geoparquet-duckdb" id="toc-geoparquet-duckdb" class="nav-link" data-scroll-target="#geoparquet-duckdb">geoparquet, duckDB</a></li>
+  <li><a href="#spatialreg" id="toc-spatialreg" class="nav-link" data-scroll-target="#spatialreg"><code>spatialreg</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -115,8 +121,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="file-geodatabases" class="level3">
 <h3 class="anchored" data-anchor-id="file-geodatabases">File Geodatabases</h3>
 </section>
-<section id="esri-data-services-with-arcgislayers" class="level3">
-<h3 class="anchored" data-anchor-id="esri-data-services-with-arcgislayers">ESRI Data Services with <code>arcgislayers</code></h3>
+<section id="online-data" class="level3">
+<h3 class="anchored" data-anchor-id="online-data">Online Data:</h3>
+<section id="tidycensus-and-tigris" class="level4">
+<h4 class="anchored" data-anchor-id="tidycensus-and-tigris"><code>tidycensus</code> and <code>tigris</code></h4>
+</section>
+<section id="esri-data-services-with-arcgislayers" class="level4">
+<h4 class="anchored" data-anchor-id="esri-data-services-with-arcgislayers">ESRI Data Services with <code>arcgislayers</code></h4>
+</section>
 </section>
 <section id="rasters" class="level3">
 <h3 class="anchored" data-anchor-id="rasters">Rasters</h3>
@@ -162,6 +174,15 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tmap" class="level3">
 <h3 class="anchored" data-anchor-id="tmap"><code>tmap</code></h3>
+</section>
+</section>
+<section id="survey-of-other-useful-packages" class="level2">
+<h2 class="anchored" data-anchor-id="survey-of-other-useful-packages">Survey of other useful packages</h2>
+<section id="geoparquet-duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="geoparquet-duckdb">geoparquet, duckDB</h3>
+</section>
+<section id="spatialreg" class="level3">
+<h3 class="anchored" data-anchor-id="spatialreg"><code>spatialreg</code></h3>
 </section>
 </section>
 
@@ -218,13 +239,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

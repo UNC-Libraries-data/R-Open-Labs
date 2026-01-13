@@ -18,7 +18,11 @@ format:
 
 ### File Geodatabases
 
-### ESRI Data Services with `arcgislayers`
+### Online Data:
+
+#### `tidycensus` and `tigris`
+
+#### ESRI Data Services with `arcgislayers`
 
 ### Rasters
 
@@ -49,3 +53,11 @@ format:
 ### `sf` and `ggplot`
 
 ### `tmap`
+
+## Survey of other useful packages
+
+### geoparquet, duckDB
+
+### `spatialreg`
+
+
