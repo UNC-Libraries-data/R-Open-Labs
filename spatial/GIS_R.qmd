@@ -12,6 +12,39 @@ format:
     page-layout: article
 ---
 
+## Important packages
+
+### Basic packages
+
+`install.packages('tidyverse')`
+
+```{r}
+library(tidyverse)
+```
+
+
+### Spatial packages
+
+```
+install.packages(c(
+'sf','nngeo',
+'tidycensus','tigris',
+'arcgislayers',
+'tmap'))
+```
+
+```{r}
+library(sf)
+library(nngeo)
+
+library(tidycensus)
+library(tigris)
+library(arcgislayers)
+
+library(tmap)
+```
+
+
 ## Importing Data:
 
 ### Shapefiles and Geopackages
@@ -22,9 +55,23 @@ format:
 
 #### `tidycensus` and `tigris`
 
+The [`tidycensus`](https://walker-data.com/tidycensus/) and [`tigris`](https://github.com/walkerke/tigris) packages make it easy to pull census data directly from Census APIs into your R session.  `tigris` pulls TIGER/Line data with boundaries and a few fields (FIPS code, Land and Water Area, etc.) for a variety of census geographies.  This is great for various mapping and spatial processing tasks and gives more control over feature resolution.
+
+Sometimes you'll also want to retrieve census *data* along with spatial information.  `tidycensus` makes it easy to retrieve tables from a variety of census datasets.  
+
 #### ESRI Data Services with `arcgislayers`
 
-### Rasters
+```{r}
+furl <- paste0(
+  "https://sampleserver6.arcgisonline.com/arcgis/rest/services/",
+  "EmergencyFacilities/FeatureServer/0"
+)
+
+# use field aliases as column names
+sf_layer <- arc_read(furl, alias = "replace")
+
+```
+
 
 ## Quick note on projections
 
@@ -56,8 +103,14 @@ format:
 
 ## Survey of other useful packages
 
+### Rasters
+
+There are two major raster packages to know about!  `terra` is the successor to the `raster` package and works well for most simple rasters.  `stars` is a better fit for cubes of data - think rasters with many many layers covering lots of different time points.  `stars` itself is short for "Spatiotemporal Arrays"! 
+
 ### geoparquet, duckDB
 
 ### `spatialreg`
+
+
 
 
