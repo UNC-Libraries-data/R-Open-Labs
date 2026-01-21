@@ -26,11 +26,11 @@ Cleaned data courtesy of the [Tidy Tuesday project](https://github.com/rfordatas
 
 This workshop covers topics from:
 
-[Chapter 12](http://r4ds.had.co.nz/tidy-data.html)
+[Chapter 5](https://r4ds.hadley.nz/data-tidy.html)
 
-[Chapter 13](http://r4ds.had.co.nz/relational-data.html)
+[Chapter 19](https://r4ds.hadley.nz/joins.html)
 
-[Chapter 27](https://r4ds.had.co.nz/r-markdown.html)
+[Chapter 28](https://r4ds.hadley.nz/quarto.html)
 
 -   Joining / Merging datasets
     -   `bind_rows` and `bind_cols`
@@ -311,7 +311,7 @@ In the dataset above, we have information stored in separate columns for each ye
 We can also use various other arguments with pivot_longer that allow us to do a number of handy things. For example, the names_prefix argument lets us remove the "x" in front of our year names. Run ?pivot_longer in your console for a full list of arguments that can be used.
 
 ```{r warning=FALSE}
-longpivot <- raw %>%
+longpivot <- raw |>
   pivot_longer(cols = starts_with("x"), 
                names_to = "Year", 
                values_to = "Value", 
@@ -335,7 +335,7 @@ We can reverse our previous transformation with `pivot_wider`. This time, we'll 
 3.  values_from: another **column** whose values we'll use to fill the new columns.
 
 ```{r}
-widepivot <- longpivot %>% 
+widepivot <- longpivot |> 
   pivot_wider(names_from = City, values_from = Value)
 
 print(widepivot)
@@ -346,8 +346,8 @@ Why would we want each city to have its own column? Well, it might be a useful s
 ```{r message=FALSE, warning=FALSE}
 library(GGally)
 
-widepivot %>% 
-  select("Chapel Hill","Durham","Raleigh") %>% 
+widepivot |> 
+  select("Chapel Hill","Durham","Raleigh") |> 
   ggpairs()
 ```
 

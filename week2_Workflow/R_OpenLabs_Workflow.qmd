@@ -29,7 +29,7 @@ This introductory workshop aims to cover:
     + scripts
     + projects
     + saving output
-* [R for Data Science Chapters 4,6,8](http://r4ds.had.co.nz/workflow-basics.html)
+* [R for Data Science Chapters 2,4,6](https://r4ds.hadley.nz/workflow-basics.html)
 
 ## What is reproducibility?
 
