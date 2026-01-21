@@ -366,7 +366,7 @@ ggplot(data=airbnb_dc,aes(x=number_of_reviews,y=review_scores_rating))+
 
 ## Additional resources
 
-[Why setwd() is bad practice](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
+[Why setwd() is bad practice](https://tidyverse.org/blog/2017/12/workflow-vs-script/)
 
 [Concise guide to basic computational reproducibility](https://kbroman.org/steps2rr/)
 

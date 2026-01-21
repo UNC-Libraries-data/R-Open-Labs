@@ -40,10 +40,10 @@ Advantages
 -   Free!
 -   Portable (Windows, macOS, Linux)
 -   [Interactive visualization](https://shiny.rstudio.com/gallery/)
--   [Reproducible reports](https://rmarkdown.rstudio.com/gallery.html)
+-   [Reproducible reports](https://quarto.org/docs/gallery/)
 -   Active user base
     -   Blogs, forums, StackOverflow, etc. provide many avenues of support
-    -   Many new methods (e.g. [lasso regression](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html), [Bayesian multilevel modeling](https://cran.r-project.org/web/packages/brms/vignettes/brms_phylogenetics.html), and [deep learning](https://tensorflow.rstudio.com/learn/gallery.html)) quickly appear as R libraries
+    -   Many new methods (e.g. [lasso regression](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html), [Bayesian multilevel modeling](https://cran.r-project.org/web/packages/brms/vignettes/brms_phylogenetics.html), and [deep learning](https://tensorflow.rstudio.com/examples/)) quickly appear as R libraries
 
 Disadvantages
 
@@ -74,7 +74,7 @@ This introductory workshop aims to:
     -   Tidyverse library
     -   Graphics using ggplot2
     -   Data types
--   [R for Data Science Chapters 1-3](https://r4ds.hadley.nz/introduction.html)
+-   [R for Data Science Introduction, The Whole Game, and Chapter 1](https://r4ds.hadley.nz/intro.html)
 
 ### Installation
 
