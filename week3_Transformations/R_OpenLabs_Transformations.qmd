@@ -101,22 +101,22 @@ Note that this time we are assigining the results to the **same** object we used
 
 Our filter uses some symbols you may not be familiar with, such as `==` and `<=`. These are called **relational operators**. We use a relational operator to **check** the relationship between the two **operands** on either side of it.
 
-| Operator | Relationship Check                                                  |
-|:--------------:|--------------------------------------------------------|
-|   `>`    | Is the left operand **greater than** the right operand?             |
-|   `<`    | Is the left operand **less than** the right operand?                |
-|   `>=`   | Is the left operand **greater than or equal to** the right operand? |
-|   `<=`   | Is the left operand **less than or equal to** the right operand?    |
-|   `==`   | Is the left operand **equal** to the right operand?                 |
-|   `!=`   | Is the left operand **not equal** to the right operand?             |
+| Operator | Relationship Check |
+|:----------------:|------------------------------------------------------|
+| `>` | Is the left operand **greater than** the right operand? |
+| `<` | Is the left operand **less than** the right operand? |
+| `>=` | Is the left operand **greater than or equal to** the right operand? |
+| `<=` | Is the left operand **less than or equal to** the right operand? |
+| `==` | Is the left operand **equal** to the right operand? |
+| `!=` | Is the left operand **not equal** to the right operand? |
 
 Above, you'll notice that we use `==` to **check** if something is equal. This is different from **defining** something as equal. To **set or assign** a value, we use either `=` or `<-` instead of `==`. For example:
 
-|                  Use                  | Meaning                                                                                   |
+| Use | Meaning |
 |:-------------------------:|---------------------------------------------|
-| `filter(reviews, country == "Chile")` | **Check** each review to see if the country is equal to "Chile"                           |
-|              `age = 52`               | **Assign** the value 52 to a variable called "age"                                        |
-|       `data <- survey_results`        | **Assign** the contents of the object called "survey_results" to an object called "data". |
+| `filter(reviews, country == "Chile")` | **Check** each review to see if the country is equal to "Chile" |
+| `age = 52` | **Assign** the value 52 to a variable called "age" |
+| `data <- survey_results` | **Assign** the contents of the object called "survey_results" to an object called "data". |
 
 ## Reordering Data (arrange)
 
@@ -245,6 +245,12 @@ chilean |>
   arrange(desc(mean_review_points))
 ```
 
+To enable the keyboard shortcut, enable the checkbox under:
+
+Tools \> Global Options \> Code \> Use native pipe operator, \|\> (requires R 4.1+)
+
+![](figures/pipe.png){width="800"}
+
 **Shortcut for \|\>:\
 **CMD + SHIFT + m (Mac)**\
 **CTRL + SHIFT + m (PC)
@@ -260,7 +266,7 @@ chilean |>
   arrange(province, variety, desc(max_price))
 ```
 
-Note that some resources may use a different, older, pipe operator: `%>%`.  This is known as [the magrittr pipe](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/), and in most instances will behave simliarly to ` |>`.
+Note that some resources may use a different, older, pipe operator: `%>%`. This is known as [the magrittr pipe](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/), and in most instances will behave simliarly to `|>`.
 
 ## Exercises
 
