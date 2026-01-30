@@ -29,6 +29,8 @@ As a refresher, in R we install packages from CRAN (The Comprehensive R Archive 
 You'll only need to install packages once, then you'll load them into your session with:
 
 ```{r}
+#| warning: false
+#| message: false
 library(tidyverse)
 ```
 
@@ -46,6 +48,8 @@ install.packages(c('sf','nngeo','tidycensus','tigris','arcgislayers','tmap','ggm
 ```
 
 ```{r}
+#| warning: false
+#| message: false
 #Spatial processing
 library(sf)
 library(nngeo)
