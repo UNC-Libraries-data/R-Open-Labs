@@ -12,38 +12,59 @@ format:
     page-layout: article
 ---
 
+## Background on R
+
+This workshop assumes a basic familiarity with the R programming language and some exposure to GIS concepts like projections.
+
+If you'd like a refresher on R, we suggest the [R For Data Science](https://r4ds.hadley.nz/) free e-book and the lessons from our [beginR workshops](https://tarheels.live/beginr/lessons/), including [setup instructions for R and R Studio](https://unc-libraries-data.github.io/R-Open-Labs/week1_Introduction/R_OpenLabs_Introduction.html#setup-r-r-studio).
+
 ## Important packages
 
 ### Basic packages
 
+As a refresher, in R we install packages from CRAN (The Comprehensive R Archive Network) with the following code:
+
 `install.packages('tidyverse')`
+
+You'll only need to install packages once, then you'll load them into your session with:
 
 ```{r}
 library(tidyverse)
 ```
 
+We'll use the `tidyverse` family of packages to do non-spatial data manipulation today.
+
+#### A note on pipes:
+
+Today we'll use the base R pipe (`|>`) as our default. Some attendees may be more familiar with the `magrittr` pipe (`%>%`). The two work very similarly and should usually be interchangeable. If you'd like to use the base R pipe with R Studio's pipe shortcut (CTRL/CMD + SHIFT + m), you can change the default setting in **Tools \> Global Options \> Code \> Use native pipe operator, \|\> (requires R 4.1+)**.
 
 ### Spatial packages
 
-```
-install.packages(c(
-'sf','nngeo',
-'tidycensus','tigris',
-'arcgislayers',
-'tmap'))
+For spatial processing we'll use the following packages today:
+```         
+install.packages(c('sf','nngeo','tidycensus','tigris','arcgislayers','tmap','ggmap'))
 ```
 
 ```{r}
+#Spatial processing
 library(sf)
 library(nngeo)
 
+#Getting spatial data
 library(tidycensus)
 library(tigris)
 library(arcgislayers)
 
+#Thematic mapping
 library(tmap)
+library(ggmap)
 ```
 
+The `sf` packages will be our main spatial processing tool for today.  We'll use `nngeo` to do some nearest-neighbor calculations.
+
+We'll explore some of the most common packages for easily loading spatial data: `tidycensus` for census data, `tigris` for census boundaries, and `arcgislayers for loading data from ESRI Data Services.
+
+Finally we'll use `ggplot` from the tidyverse to do some basic mapping and explore extensions with `tmap` for thematic mapping and `ggmap` for baselayers.
 
 ## Importing Data:
 
@@ -55,9 +76,9 @@ library(tmap)
 
 #### `tidycensus` and `tigris`
 
-The [`tidycensus`](https://walker-data.com/tidycensus/) and [`tigris`](https://github.com/walkerke/tigris) packages make it easy to pull census data directly from Census APIs into your R session.  `tigris` pulls TIGER/Line data with boundaries and a few fields (FIPS code, Land and Water Area, etc.) for a variety of census geographies.  This is great for various mapping and spatial processing tasks and gives more control over feature resolution.
+The [`tidycensus`](https://walker-data.com/tidycensus/) and [`tigris`](https://github.com/walkerke/tigris) packages make it easy to pull census data directly from Census APIs into your R session. `tigris` pulls TIGER/Line data with boundaries and a few fields (FIPS code, Land and Water Area, etc.) for a variety of census geographies. This is great for various mapping and spatial processing tasks and gives more control over feature resolution.
 
-Sometimes you'll also want to retrieve census *data* along with spatial information.  `tidycensus` makes it easy to retrieve tables from a variety of census datasets.  
+Sometimes you'll also want to retrieve census *data* along with spatial information. `tidycensus` makes it easy to retrieve tables from a variety of census datasets, along with spatial data when relevant.
 
 #### ESRI Data Services with `arcgislayers`
 
@@ -71,7 +92,6 @@ furl <- paste0(
 sf_layer <- arc_read(furl, alias = "replace")
 
 ```
-
 
 ## Quick note on projections
 
@@ -101,16 +121,16 @@ sf_layer <- arc_read(furl, alias = "replace")
 
 ### `tmap`
 
-## Survey of other useful packages
+## Other useful packages:
 
 ### Rasters
 
-There are two major raster packages to know about!  `terra` is the successor to the `raster` package and works well for most simple rasters.  `stars` is a better fit for cubes of data - think rasters with many many layers covering lots of different time points.  `stars` itself is short for "Spatiotemporal Arrays"! 
+There are two major raster packages to know about! `terra` is the successor to the `raster` package and works well for most simple rasters. `stars` is a better fit for cubes of data - think rasters with many many layers covering lots of different time points. `stars` itself is short for "Spatiotemporal Arrays"!
 
-### geoparquet, duckDB
+### Leaflet
+
+### Other data formats
+
+geoparquet, duckDB
 
 ### `spatialreg`
-
-
-
-

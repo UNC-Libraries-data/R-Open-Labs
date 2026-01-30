@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -48,12 +83,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link active" data-scroll-target="#importing-data">Importing Data:</a>
+  <li><a href="#background-on-r" id="toc-background-on-r" class="nav-link active" data-scroll-target="#background-on-r">Background on R</a></li>
+  <li><a href="#important-packages" id="toc-important-packages" class="nav-link" data-scroll-target="#important-packages">Important packages</a>
+  <ul class="collapse">
+  <li><a href="#basic-packages" id="toc-basic-packages" class="nav-link" data-scroll-target="#basic-packages">Basic packages</a></li>
+  <li><a href="#spatial-packages" id="toc-spatial-packages" class="nav-link" data-scroll-target="#spatial-packages">Spatial packages</a></li>
+  </ul></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing Data:</a>
   <ul class="collapse">
   <li><a href="#shapefiles-and-geopackages" id="toc-shapefiles-and-geopackages" class="nav-link" data-scroll-target="#shapefiles-and-geopackages">Shapefiles and Geopackages</a></li>
   <li><a href="#file-geodatabases" id="toc-file-geodatabases" class="nav-link" data-scroll-target="#file-geodatabases">File Geodatabases</a></li>
   <li><a href="#online-data" id="toc-online-data" class="nav-link" data-scroll-target="#online-data">Online Data:</a></li>
-  <li><a href="#rasters" id="toc-rasters" class="nav-link" data-scroll-target="#rasters">Rasters</a></li>
   </ul></li>
   <li><a href="#quick-note-on-projections" id="toc-quick-note-on-projections" class="nav-link" data-scroll-target="#quick-note-on-projections">Quick note on projections</a>
   <ul class="collapse">
@@ -76,9 +116,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#sf-and-ggplot" id="toc-sf-and-ggplot" class="nav-link" data-scroll-target="#sf-and-ggplot"><code>sf</code> and <code>ggplot</code></a></li>
   <li><a href="#tmap" id="toc-tmap" class="nav-link" data-scroll-target="#tmap"><code>tmap</code></a></li>
   </ul></li>
-  <li><a href="#survey-of-other-useful-packages" id="toc-survey-of-other-useful-packages" class="nav-link" data-scroll-target="#survey-of-other-useful-packages">Survey of other useful packages</a>
+  <li><a href="#other-useful-packages" id="toc-other-useful-packages" class="nav-link" data-scroll-target="#other-useful-packages">Other useful packages:</a>
   <ul class="collapse">
-  <li><a href="#geoparquet-duckdb" id="toc-geoparquet-duckdb" class="nav-link" data-scroll-target="#geoparquet-duckdb">geoparquet, duckDB</a></li>
+  <li><a href="#rasters" id="toc-rasters" class="nav-link" data-scroll-target="#rasters">Rasters</a></li>
+  <li><a href="#leaflet" id="toc-leaflet" class="nav-link" data-scroll-target="#leaflet">Leaflet</a></li>
+  <li><a href="#other-data-formats" id="toc-other-data-formats" class="nav-link" data-scroll-target="#other-data-formats">Other data formats</a></li>
   <li><a href="#spatialreg" id="toc-spatialreg" class="nav-link" data-scroll-target="#spatialreg"><code>spatialreg</code></a></li>
   </ul></li>
   </ul>
@@ -113,6 +155,88 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="background-on-r" class="level2">
+<h2 class="anchored" data-anchor-id="background-on-r">Background on R</h2>
+<p>This workshop assumes a basic familiarity with the R programming language and some exposure to GIS concepts like projections.</p>
+<p>If you’d like a refresher on R, we suggest the <a href="https://r4ds.hadley.nz/">R For Data Science</a> free e-book and the lessons from our <a href="https://tarheels.live/beginr/lessons/">beginR workshops</a>, including <a href="https://unc-libraries-data.github.io/R-Open-Labs/week1_Introduction/R_OpenLabs_Introduction.html#setup-r-r-studio">setup instructions for R and R Studio</a>.</p>
+</section>
+<section id="important-packages" class="level2">
+<h2 class="anchored" data-anchor-id="important-packages">Important packages</h2>
+<section id="basic-packages" class="level3">
+<h3 class="anchored" data-anchor-id="basic-packages">Basic packages</h3>
+<p>As a refresher, in R we install packages from CRAN (The Comprehensive R Archive Network) with the following code:</p>
+<p><code>install.packages('tidyverse')</code></p>
+<p>You’ll only need to install packages once, then you’ll load them into your session with:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+<p>We’ll use the <code>tidyverse</code> family of packages to do non-spatial data manipulation today.</p>
+<section id="a-note-on-pipes" class="level4">
+<h4 class="anchored" data-anchor-id="a-note-on-pipes">A note on pipes:</h4>
+<p>Today we’ll use the base R pipe (<code>|&gt;</code>) as our default. Some attendees may be more familiar with the <code>magrittr</code> pipe (<code>%&gt;%</code>). The two work very similarly and should usually be interchangeable. If you’d like to use the base R pipe with R Studio’s pipe shortcut (CTRL/CMD + SHIFT + m), you can change the default setting in <strong>Tools &gt; Global Options &gt; Code &gt; Use native pipe operator, |&gt; (requires R 4.1+)</strong>.</p>
+</section>
+</section>
+<section id="spatial-packages" class="level3">
+<h3 class="anchored" data-anchor-id="spatial-packages">Spatial packages</h3>
+<p>For spatial processing we’ll use the following packages today:</p>
+<pre><code>install.packages(c('sf','nngeo','tidycensus','tigris','arcgislayers','tmap','ggmap'))</code></pre>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spatial processing</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.13.1, GDAL 3.11.0, PROJ 9.6.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nngeo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'nngeo' was built under R version 4.5.2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting spatial data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidycensus' was built under R version 4.5.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>To enable caching of data, set `options(tigris_use_cache = TRUE)`
+in your R script or .Rprofile.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arcgislayers)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'arcgislayers' was built under R version 4.5.2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Thematic mapping</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tmap' was built under R version 4.5.2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggmap' was built under R version 4.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Google's Terms of Service: &lt;https://mapsplatform.google.com&gt;
+  Stadia Maps' Terms of Service: &lt;https://stadiamaps.com/terms-of-service&gt;
+  OpenStreetMap's Tile Usage Policy: &lt;https://operations.osmfoundation.org/policies/tiles&gt;
+ℹ Please cite ggmap if you use it! Use `citation("ggmap")` for details.</code></pre>
+</div>
+</div>
+<p>The <code>sf</code> packages will be our main spatial processing tool for today. We’ll use <code>nngeo</code> to do some nearest-neighbor calculations.</p>
+<p>We’ll explore some of the most common packages for easily loading spatial data: <code>tidycensus</code> for census data, <code>tigris</code> for census boundaries, and `arcgislayers for loading data from ESRI Data Services.</p>
+<p>Finally we’ll use <code>ggplot</code> from the tidyverse to do some basic mapping and explore extensions with <code>tmap</code> for thematic mapping and <code>ggmap</code> for baselayers.</p>
+</section>
+</section>
 <section id="importing-data" class="level2">
 <h2 class="anchored" data-anchor-id="importing-data">Importing Data:</h2>
 <section id="shapefiles-and-geopackages" class="level3">
@@ -125,13 +249,26 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="online-data">Online Data:</h3>
 <section id="tidycensus-and-tigris" class="level4">
 <h4 class="anchored" data-anchor-id="tidycensus-and-tigris"><code>tidycensus</code> and <code>tigris</code></h4>
+<p>The <a href="https://walker-data.com/tidycensus/"><code>tidycensus</code></a> and <a href="https://github.com/walkerke/tigris"><code>tigris</code></a> packages make it easy to pull census data directly from Census APIs into your R session. <code>tigris</code> pulls TIGER/Line data with boundaries and a few fields (FIPS code, Land and Water Area, etc.) for a variety of census geographies. This is great for various mapping and spatial processing tasks and gives more control over feature resolution.</p>
+<p>Sometimes you’ll also want to retrieve census <em>data</em> along with spatial information. <code>tidycensus</code> makes it easy to retrieve tables from a variety of census datasets, along with spatial data when relevant.</p>
 </section>
 <section id="esri-data-services-with-arcgislayers" class="level4">
 <h4 class="anchored" data-anchor-id="esri-data-services-with-arcgislayers">ESRI Data Services with <code>arcgislayers</code></h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>furl <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://sampleserver6.arcgisonline.com/arcgis/rest/services/"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"EmergencyFacilities/FeatureServer/0"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use field aliases as column names</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>sf_layer <span class="ot">&lt;-</span> <span class="fu">arc_read</span>(furl, <span class="at">alias =</span> <span class="st">"replace"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'jsonify':
+  method     from    
+  print.json jsonlite</code></pre>
+</div>
+</div>
 </section>
-</section>
-<section id="rasters" class="level3">
-<h3 class="anchored" data-anchor-id="rasters">Rasters</h3>
 </section>
 </section>
 <section id="quick-note-on-projections" class="level2">
@@ -176,10 +313,18 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="tmap"><code>tmap</code></h3>
 </section>
 </section>
-<section id="survey-of-other-useful-packages" class="level2">
-<h2 class="anchored" data-anchor-id="survey-of-other-useful-packages">Survey of other useful packages</h2>
-<section id="geoparquet-duckdb" class="level3">
-<h3 class="anchored" data-anchor-id="geoparquet-duckdb">geoparquet, duckDB</h3>
+<section id="other-useful-packages" class="level2">
+<h2 class="anchored" data-anchor-id="other-useful-packages">Other useful packages:</h2>
+<section id="rasters" class="level3">
+<h3 class="anchored" data-anchor-id="rasters">Rasters</h3>
+<p>There are two major raster packages to know about! <code>terra</code> is the successor to the <code>raster</code> package and works well for most simple rasters. <code>stars</code> is a better fit for cubes of data - think rasters with many many layers covering lots of different time points. <code>stars</code> itself is short for “Spatiotemporal Arrays”!</p>
+</section>
+<section id="leaflet" class="level3">
+<h3 class="anchored" data-anchor-id="leaflet">Leaflet</h3>
+</section>
+<section id="other-data-formats" class="level3">
+<h3 class="anchored" data-anchor-id="other-data-formats">Other data formats</h3>
+<p>geoparquet, duckDB</p>
 </section>
 <section id="spatialreg" class="level3">
 <h3 class="anchored" data-anchor-id="spatialreg"><code>spatialreg</code></h3>
