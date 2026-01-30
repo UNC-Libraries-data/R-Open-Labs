@@ -40,10 +40,10 @@ Advantages
 -   Free!
 -   Portable (Windows, macOS, Linux)
 -   [Interactive visualization](https://shiny.rstudio.com/gallery/)
--   [Reproducible reports](https://rmarkdown.rstudio.com/gallery.html)
+-   [Reproducible reports](https://quarto.org/docs/gallery/)
 -   Active user base
     -   Blogs, forums, StackOverflow, etc. provide many avenues of support
-    -   Many new methods (e.g. [lasso regression](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html), [Bayesian multilevel modeling](https://cran.r-project.org/web/packages/brms/vignettes/brms_phylogenetics.html), and [deep learning](https://tensorflow.rstudio.com/learn/gallery.html)) quickly appear as R libraries
+    -   Many new methods (e.g. [lasso regression](https://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html), [Bayesian multilevel modeling](https://cran.r-project.org/web/packages/brms/vignettes/brms_phylogenetics.html), and [deep learning](https://tensorflow.rstudio.com/examples/)) quickly appear as R libraries
 
 Disadvantages
 
@@ -56,7 +56,7 @@ Disadvantages
 
 R is a big tent that supports a variety of programming styles and tasks, so we can't possibly cover all of it. We will focus instruction on using R for analyzing data. If you are interested in software development in R, you can use the unstructured time for help with that. We'll also provide links to some great online resources for software development in R.
 
-We are going to focus on the [Tidyverse](https://www.tidyverse.org/) family of R packages for data analysis. The authors of the Tidyverse have also written a free ebook, [R for Data Science](http://r4ds.had.co.nz/). We will not follow this book exactly, but for each of our workshops we will announce the corresponding chapters from the book, so you can have an additional perspective and practice on what we are teaching.
+We are going to focus on the [Tidyverse](https://www.tidyverse.org/) family of R packages for data analysis. The authors of the Tidyverse have also written a free ebook, [R for Data Science](https://r4ds.hadley.nz/). We will not follow this book exactly, but for each of our workshops we will announce the corresponding chapters from the book, so you can have an additional perspective and practice on what we are teaching.
 
 This workshop **does not** aim to give a comprehensive introduction to all aspects of R.
 
@@ -74,7 +74,7 @@ This introductory workshop aims to:
     -   Tidyverse library
     -   Graphics using ggplot2
     -   Data types
--   [R for Data Science Chapters 1-3](http://r4ds.had.co.nz/introduction.html)
+-   [R for Data Science Introduction, The Whole Game, and Chapter 1](https://r4ds.hadley.nz/intro.html)
 
 ### Installation
 
@@ -354,9 +354,9 @@ ggplot(airquality, aes(x=Temp, y=Ozone)) + geom_point() + geom_smooth(method = "
 
 #### Beginners
 
-Review today's material by reading [R for Data Science Chapters 1-3](http://r4ds.had.co.nz/introduction.html). Try the exercises in Chapter 3.
+Review today's material by reading [R for Data Science Introduction, The Whole Game, and Chapter 1](https://r4ds.hadley.nz/intro.html). Try the exercises in Chapter 1.
 
-Next week, we'll be covering the material in Chapters 4, 6, and 8 if you'd like to look ahead!
+Next week, we'll be covering the material in Chapters 2, 4, and 6 if you'd like to look ahead!
 
 #### Other Resources
 

@@ -32,7 +32,7 @@ This workshop aims to cover:
     -   Renaming Columns
     -   Adding new Variables (mutate)
     -   Summerising Data
--   [R for Data Science Chapter 5](http://r4ds.had.co.nz/transform.html)
+-   [R for Data Science Chapter 3](https://r4ds.hadley.nz/data-transform.html)
 
 ### Start a New Project in R
 
@@ -101,22 +101,22 @@ Note that this time we are assigining the results to the **same** object we used
 
 Our filter uses some symbols you may not be familiar with, such as `==` and `<=`. These are called **relational operators**. We use a relational operator to **check** the relationship between the two **operands** on either side of it.
 
-| Operator | Relationship Check                                                  |
-|:--------------:|--------------------------------------------------------|
-|   `>`    | Is the left operand **greater than** the right operand?             |
-|   `<`    | Is the left operand **less than** the right operand?                |
-|   `>=`   | Is the left operand **greater than or equal to** the right operand? |
-|   `<=`   | Is the left operand **less than or equal to** the right operand?    |
-|   `==`   | Is the left operand **equal** to the right operand?                 |
-|   `!=`   | Is the left operand **not equal** to the right operand?             |
+| Operator | Relationship Check |
+|:----------------:|------------------------------------------------------|
+| `>` | Is the left operand **greater than** the right operand? |
+| `<` | Is the left operand **less than** the right operand? |
+| `>=` | Is the left operand **greater than or equal to** the right operand? |
+| `<=` | Is the left operand **less than or equal to** the right operand? |
+| `==` | Is the left operand **equal** to the right operand? |
+| `!=` | Is the left operand **not equal** to the right operand? |
 
 Above, you'll notice that we use `==` to **check** if something is equal. This is different from **defining** something as equal. To **set or assign** a value, we use either `=` or `<-` instead of `==`. For example:
 
-|                  Use                  | Meaning                                                                                   |
+| Use | Meaning |
 |:-------------------------:|---------------------------------------------|
-| `filter(reviews, country == "Chile")` | **Check** each review to see if the country is equal to "Chile"                           |
-|              `age = 52`               | **Assign** the value 52 to a variable called "age"                                        |
-|       `data <- survey_results`        | **Assign** the contents of the object called "survey_results" to an object called "data". |
+| `filter(reviews, country == "Chile")` | **Check** each review to see if the country is equal to "Chile" |
+| `age = 52` | **Assign** the value 52 to a variable called "age" |
+| `data <- survey_results` | **Assign** the contents of the object called "survey_results" to an object called "data". |
 
 ## Reordering Data (arrange)
 
@@ -236,16 +236,22 @@ Now we want to arrange the results from highest to lowest review points, but tha
 
 ## Piping
 
-Pipes use the `%>%` symbol to connect multiple functions without creating multiple objects. To use `group_by()`, `summarise()` and `arrange()` on our data all at once, we use the pipe like so:
+Pipes use the `|>` symbol to connect multiple functions without creating multiple objects. To use `group_by()`, `summarise()` and `arrange()` on our data all at once, we use the pipe like so:
 
 ```{r}
-chilean %>%
-  group_by(province) %>%
-  summarise(mean_review_points = mean(review_points, na.rm = TRUE)) %>%
+chilean |>
+  group_by(province) |>
+  summarise(mean_review_points = mean(review_points, na.rm = TRUE)) |>
   arrange(desc(mean_review_points))
 ```
 
-**Shortcut for %\>%:\
+To enable the keyboard shortcut, enable the checkbox under:
+
+Tools \> Global Options \> Code \> Use native pipe operator, \|\> (requires R 4.1+)
+
+![](figures/pipe.png){width="800"}
+
+**Shortcut for \|\>:\
 **CMD + SHIFT + m (Mac)**\
 **CTRL + SHIFT + m (PC)
 
@@ -254,13 +260,13 @@ Not only do the pipes prevent us from having to create lots of objects, they als
 Let's try another sequence of functions using the pipe to answer the following question: What is the highest price for each variety of wine in each province?
 
 ```{r}
-chilean %>%
-  group_by(province, variety) %>%
-  summarise(max_price = max(USD, na.rm = TRUE)) %>%
+chilean |>
+  group_by(province, variety) |>
+  summarise(max_price = max(USD, na.rm = TRUE)) |>
   arrange(province, variety, desc(max_price))
 ```
 
-Note that some resources may use a different, newer, pipe operator: `|>`.  In most cases, this will behave simliarly to ` %>%`.
+Note that some resources may use a different, older, pipe operator: `%>%`. This is known as [the magrittr pipe](https://tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/), and in most instances will behave simliarly to `|>`.
 
 ## Exercises
 
@@ -272,8 +278,8 @@ Concerning our original "reviews" data set, use the functions we learned this we
 4.  You found a website that lets you order any wine for a flat shipping fee of \$15! Find the total price for each wine that includes shipping.
 5.  The following code produces errors. Correct them all:
 
-reviews %\>%\
-select == (Title, province, country, price) %\>%\
-filter (country = Germany) %\>\
-group_by (province) %\>%\
+reviews \|\>\
+select == (Title, province, country, price) \|\>\
+filter (country = Germany) \>\
+group_by (province) \|\>\
 Summarise (mean_price == mean(price))

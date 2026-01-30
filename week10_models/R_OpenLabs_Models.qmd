@@ -28,7 +28,9 @@ library(gridExtra) #combining and organizing multiple ggplots
 
 This workshop aims to introduce some **basic** intuition about modelling in R.
 
-* [R for Data Science, Chapters 22-25](https://r4ds.had.co.nz/model-intro.html)
+* [R for Data Science 1st edition, Chapters 22-25](https://r4ds.had.co.nz/model-intro.html)
+
+Note: we are referring you to the first edition of R4DS here because the second edition dropped the chapters on modeling. The second edition refers readers to the [Tidy Modeling with R](https://www.tmwr.org/), which is the Tidyverse framework for predictive modeling, but we feel it is better to start with the material from the first edition.
 
 &nbsp;
 
@@ -203,14 +205,14 @@ We can use some familiar tidyverse tool to visualize this fit:
 
 ```{r multiple reg}
 
-d <- mtcars %>% select(mpg, vs, disp)
+d <- mtcars |> select(mpg, vs, disp)
 fit2 <- lm(mpg ~ vs + disp, data = d)
 d$predicted <- predict(fit2)
 d$residuals <- residuals(fit2)
 
 
-d %>% 
-  pivot_longer(-c(mpg,predicted,residuals),names_to = "iv", values_to="x") %>% 
+d |> 
+  pivot_longer(-c(mpg,predicted,residuals),names_to = "iv", values_to="x") |> 
   ggplot(aes(x = x, y = mpg)) + 
   geom_point(aes(y = predicted), shape = 1) +
   facet_grid(~ iv, scales = "free") +
