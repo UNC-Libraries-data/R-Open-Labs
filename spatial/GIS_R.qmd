@@ -95,33 +95,68 @@ The [`tidycensus`](https://walker-data.com/tidycensus/) and [`tigris`](https://g
 
 Sometimes you'll also want to retrieve census *data* along with spatial information. `tidycensus` makes it easy to retrieve tables from a variety of census datasets, along with spatial data when relevant.
 
+The `load_variables` function provides a list of the available tables and variables for a given year and census survey, for example 5-year ACS data below:
+
 ```{r}
 ac5_vars <- load_variables(year=2024, dataset = "acs5")
 ```
 
+Let's load B01001_001, the total population of the tract, to start with.
 
 ```{r}
-nc_counties <- get_acs(geography = "county", state = "NC", table = "B01001A",
+nc_tracts<- get_acs(geography = "tract", state = "NC", variables = c("B01001_001","B01001A_001","B01001C_001"),
         output = "wide", geometry = TRUE, year = 2024, cache_table = TRUE)
 ```
 
-```{r}
-plot(st_geometry(nc_counties))
-```
-
+We can quickly plot `sf` data with the `plot` function.  We'll use `ggplot` to make more complicated maps later on!
 
 ```{r}
-nc <- states() |> filter(STUSPS %in% c("NC","SC","VA","GA"))
+plot(nc_tracts['B01001_001E'],border=NA)
 ```
+We can also work with `sf` objects like normal dataframes:
+
 ```{r}
-ggplot(data = nc, aes(fill = STUSPS!="NC"))+
-  geom_sf(color='grey80')+
+hist(nc_tracts$B01001_001E, breaks = 100)
+```
+Which tracts are over 15,000 population?
+
+```{r}
+nc_tracts |> 
+  filter(B01001_001E>15000)
+```
+Since all of these tracts are in Wake County, let's take a closer look at Wake County and the triangle?
+
+We'll use the list of counties in the Combined Statistical Area
+
+```{r}
+tri_counties <- c('37037','37063','37069','37085','37101','37105','37135',
+                  '37145','37181', '37183')
+
+tri_tracts <- nc_tracts |> 
+  mutate(county_fips = str_sub(GEOID,1,5)) |> 
+  filter(county_fips %in% tri_counties)
+```
+
+```{r}
+plot(tri_tracts['B01001_001E'],border = NA)
+```
+It might be helpful to add the county boundaries to this!  Since we don't need any county data, we can pull county information from tigris with the `counties` function, then filter to our Triangle counties.
+
+```{r}
+tri_counties <- counties(state="NC") |> 
+  filter(GEOID %in% tri_counties) 
+```
+
+Once we start layering data, it's a good idea to move to `ggplot` based plots!
+
+```{r}
+ggplot()+
+  #color=NA removes borders
+  geom_sf(data = tri_tracts, aes(fill = B01001_001E), color=NA)+
+  #counties, white border, no fill color and adjusted linewidth
+  geom_sf(data = tri_counties, color = "grey80", fill=NA, lwd = 0.8)+
+  scale_fill_viridis_c()+
   theme_minimal()
-```
-
-
-```{r}
-plot(st_geometry(nc))
 ```
 
 
@@ -143,6 +178,8 @@ sf_layer <- arc_read(furl, alias = "replace")
 ### Checking and specifying projections
 
 ### Reprojecting data
+
+## Basemaps
 
 ## Data Operations
 
