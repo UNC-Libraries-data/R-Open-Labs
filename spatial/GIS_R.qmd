@@ -104,8 +104,10 @@ ac5_vars <- load_variables(year=2024, dataset = "acs5")
 Let's load B01001_001, the total population of the tract, to start with.
 
 ```{r}
+#| message: false
 nc_tracts<- get_acs(geography = "tract", state = "NC", variables = c("B01001_001","B01001A_001","B01001C_001"),
-        output = "wide", geometry = TRUE, year = 2024, cache_table = TRUE)
+        output = "wide", geometry = TRUE, year = 2024, cache_table = TRUE,
+        progress_bar = FALSE)
 ```
 
 We can quickly plot `sf` data with the `plot` function.  We'll use `ggplot` to make more complicated maps later on!
@@ -143,7 +145,8 @@ plot(tri_tracts['B01001_001E'],border = NA)
 It might be helpful to add the county boundaries to this!  Since we don't need any county data, we can pull county information from tigris with the `counties` function, then filter to our Triangle counties.
 
 ```{r}
-tri_counties <- counties(state="NC") |> 
+#| messsage: False
+tri_counties <- counties(state="NC", progress_bar = FALSE) |> 
   filter(GEOID %in% tri_counties) 
 ```
 
