@@ -89,22 +89,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#basic-packages" id="toc-basic-packages" class="nav-link" data-scroll-target="#basic-packages">Basic packages</a></li>
   <li><a href="#spatial-packages" id="toc-spatial-packages" class="nav-link" data-scroll-target="#spatial-packages">Spatial packages</a></li>
   </ul></li>
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing Data:</a>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data:</a>
   <ul class="collapse">
   <li><a href="#csvs-tabular-data" id="toc-csvs-tabular-data" class="nav-link" data-scroll-target="#csvs-tabular-data">CSVs / Tabular data</a></li>
   <li><a href="#shapefiles-and-geopackages" id="toc-shapefiles-and-geopackages" class="nav-link" data-scroll-target="#shapefiles-and-geopackages">Shapefiles and Geopackages</a></li>
   <li><a href="#online-data" id="toc-online-data" class="nav-link" data-scroll-target="#online-data">Online Data:</a></li>
   </ul></li>
+  <li><a href="#basic-maps" id="toc-basic-maps" class="nav-link" data-scroll-target="#basic-maps">Basic Maps</a></li>
+  <li><a href="#plotting-xy-data-from-a-non-spatial-dataframe" id="toc-plotting-xy-data-from-a-non-spatial-dataframe" class="nav-link" data-scroll-target="#plotting-xy-data-from-a-non-spatial-dataframe">Plotting XY data from a non-spatial dataframe</a></li>
   <li><a href="#quick-note-on-projections" id="toc-quick-note-on-projections" class="nav-link" data-scroll-target="#quick-note-on-projections">Quick note on projections</a>
   <ul class="collapse">
   <li><a href="#checking-and-specifying-projections" id="toc-checking-and-specifying-projections" class="nav-link" data-scroll-target="#checking-and-specifying-projections">Checking and specifying projections</a></li>
-  <li><a href="#reprojecting-data" id="toc-reprojecting-data" class="nav-link" data-scroll-target="#reprojecting-data">Reprojecting data</a></li>
-  </ul></li>
-  <li><a href="#basemaps" id="toc-basemaps" class="nav-link" data-scroll-target="#basemaps">Basemaps</a></li>
-  <li><a href="#data-operations" id="toc-data-operations" class="nav-link" data-scroll-target="#data-operations">Data Operations</a>
-  <ul class="collapse">
-  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
-  <li><a href="#join-on-attributes" id="toc-join-on-attributes" class="nav-link" data-scroll-target="#join-on-attributes">Join on attributes</a></li>
   </ul></li>
   <li><a href="#spatial-operations" id="toc-spatial-operations" class="nav-link" data-scroll-target="#spatial-operations">Spatial Operations</a>
   <ul class="collapse">
@@ -200,8 +195,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Finally we’ll use <code>ggplot</code> from the tidyverse to do some basic mapping and explore extensions with <code>tmap</code> for thematic mapping and <code>ggmap</code> for baselayers.</p>
 </section>
 </section>
-<section id="importing-data" class="level2">
-<h2 class="anchored" data-anchor-id="importing-data">Importing Data:</h2>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data:</h2>
 <section id="csvs-tabular-data" class="level3">
 <h3 class="anchored" data-anchor-id="csvs-tabular-data">CSVs / Tabular data</h3>
 <p>Most people first encounter spatial data through spatial points inside a larger table. These can be CSV or any other common tabular format.</p>
@@ -211,8 +206,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Shapefiles are an older format with some significant limitations (like variable name lengths!), but they’re important to be familiar with because they’re very very common and quirky. Despite the name, a shapefile is actually a <em>collection of files that have to be stored together</em> - anywhere from 3 to 12 files! It’s good practice to share them as a zipped folder.</p>
 <p>Geopackages are a newer file format that avoid many of the limitations of shapefiles. We’ll use geopackages for locally storing outputs from our R scripts.</p>
 <p>There are lots of other spatial formats out there like KML, GeoJSON, PostGIS and many more! R can work with many of these but we won’t work with them all today.</p>
-<section id="a-note-on-file-geodatabases" class="level4">
-<h4 class="anchored" data-anchor-id="a-note-on-file-geodatabases">A note on File Geodatabases</h4>
+<section id="file-geodatabases" class="level4">
+<h4 class="anchored" data-anchor-id="file-geodatabases">File Geodatabases</h4>
 </section>
 </section>
 <section id="online-data" class="level3">
@@ -221,30 +216,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="tidycensus-and-tigris"><code>tidycensus</code> and <code>tigris</code></h4>
 <p>The <a href="https://walker-data.com/tidycensus/"><code>tidycensus</code></a> and <a href="https://github.com/walkerke/tigris"><code>tigris</code></a> packages make it easy to pull census data directly from Census APIs into your R session. <code>tigris</code> pulls TIGER/Line data with boundaries and a few fields (FIPS code, Land and Water Area, etc.) for a variety of census geographies. This is great for various mapping and spatial processing tasks and gives more control over feature resolution.</p>
 <p>Sometimes you’ll also want to retrieve census <em>data</em> along with spatial information. <code>tidycensus</code> makes it easy to retrieve tables from a variety of census datasets, along with spatial data when relevant.</p>
-<p>The <code>load_variables</code> function provides a list of the available tables and variables for a given year and census survey, for example 5-year ACS data below:</p>
+</section>
+<section id="esri-data-services-with-arcgislayers" class="level4">
+<h4 class="anchored" data-anchor-id="esri-data-services-with-arcgislayers">ESRI Data Services with <code>arcgislayers</code></h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ac5_vars <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="at">year=</span><span class="dv">2024</span>, <span class="at">dataset =</span> <span class="st">"acs5"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>furl <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://sampleserver6.arcgisonline.com/arcgis/rest/services/"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"EmergencyFacilities/FeatureServer/0"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use field aliases as column names</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>sf_layer <span class="ot">&lt;-</span> <span class="fu">arc_read</span>(furl, <span class="at">alias =</span> <span class="st">"replace"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'jsonify':
+  method     from    
+  print.json jsonlite</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="basic-maps" class="level2">
+<h2 class="anchored" data-anchor-id="basic-maps">Basic Maps</h2>
+<p>The <code>load_variables</code> function from <code>tidycensus</code> provides a list of the available tables and variables for a given year and census survey, for example 5-year ACS data below:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ac5_vars <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="at">year=</span><span class="dv">2024</span>, <span class="at">dataset =</span> <span class="st">"acs5"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s load B01001_001, the total population of the tract, to start with.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nc_tracts<span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"tract"</span>, <span class="at">state =</span> <span class="st">"NC"</span>, <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"B01001_001"</span>,<span class="st">"B01001A_001"</span>,<span class="st">"B01001C_001"</span>),</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">"wide"</span>, <span class="at">geometry =</span> <span class="cn">TRUE</span>, <span class="at">year =</span> <span class="dv">2024</span>, <span class="at">cache_table =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">progress_bar =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nc_tracts<span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"tract"</span>, <span class="at">state =</span> <span class="st">"NC"</span>, <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"B01001_001"</span>,<span class="st">"B01001A_001"</span>,<span class="st">"B01001C_001"</span>),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">"wide"</span>, <span class="at">geometry =</span> <span class="cn">TRUE</span>, <span class="at">year =</span> <span class="dv">2024</span>, <span class="at">cache_table =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">progress_bar =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can quickly plot <code>sf</code> data with the <code>plot</code> function. We’ll use <code>ggplot</code> to make more complicated maps later on!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_tracts[<span class="st">'B01001_001E'</span>],<span class="at">border=</span><span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can also work with <code>sf</code> objects like normal dataframes:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(nc_tracts<span class="sc">$</span>B01001_001E, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_tracts[<span class="st">'B01001_001E'</span>],<span class="at">border=</span><span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -253,10 +259,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>We can also work with <code>sf</code> objects like normal dataframes:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(nc_tracts<span class="sc">$</span>B01001_001E, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>Which tracts are over 15,000 population?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nc_tracts <span class="sc">|&gt;</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(B01001_001E<span class="sc">&gt;</span><span class="dv">15000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nc_tracts <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(B01001_001E<span class="sc">&gt;</span><span class="dv">15000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 3 features and 8 fields
 Geometry type: MULTIPOLYGON
@@ -280,116 +297,580 @@ Geodetic CRS:  NAD83
 <p>Since all of these tracts are in Wake County, let’s take a closer look at Wake County and the triangle?</p>
 <p>We’ll use the list of counties in the Combined Statistical Area</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tri_counties <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'37037'</span>,<span class="st">'37063'</span>,<span class="st">'37069'</span>,<span class="st">'37085'</span>,<span class="st">'37101'</span>,<span class="st">'37105'</span>,<span class="st">'37135'</span>,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'37145'</span>,<span class="st">'37181'</span>, <span class="st">'37183'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>tri_tracts <span class="ot">&lt;-</span> nc_tracts <span class="sc">|&gt;</span> </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">county_fips =</span> <span class="fu">str_sub</span>(GEOID,<span class="dv">1</span>,<span class="dv">5</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(county_fips <span class="sc">%in%</span> tri_counties)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tri_counties <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'37037'</span>,<span class="st">'37063'</span>,<span class="st">'37069'</span>,<span class="st">'37085'</span>,<span class="st">'37101'</span>,<span class="st">'37105'</span>,<span class="st">'37135'</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'37145'</span>,<span class="st">'37181'</span>, <span class="st">'37183'</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>tri_tracts <span class="ot">&lt;-</span> nc_tracts <span class="sc">|&gt;</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">county_fips =</span> <span class="fu">str_sub</span>(GEOID,<span class="dv">1</span>,<span class="dv">5</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(county_fips <span class="sc">%in%</span> tri_counties)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tri_tracts[<span class="st">'B01001_001E'</span>],<span class="at">border =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tri_tracts[<span class="st">'B01001_001E'</span>],<span class="at">border =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>It might be helpful to add the county boundaries to this! Since we don’t need any county data, we can pull county information from tigris with the <code>counties</code> function, then filter to our Triangle counties.</p>
 <div class="cell" data-messsage="false">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tri_counties <span class="ot">&lt;-</span> <span class="fu">counties</span>(<span class="at">state=</span><span class="st">"NC"</span>, <span class="at">progress_bar =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(GEOID <span class="sc">%in%</span> tri_counties) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tri_counties <span class="ot">&lt;-</span> <span class="fu">counties</span>(<span class="at">state=</span><span class="st">"NC"</span>, <span class="at">progress_bar =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(GEOID <span class="sc">%in%</span> tri_counties) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Retrieving data for the year 2024</code></pre>
 </div>
 </div>
 <p>Once we start layering data, it’s a good idea to move to <code>ggplot</code> based plots!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#color=NA removes borders</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_tracts, <span class="fu">aes</span>(<span class="at">fill =</span> B01001_001E), <span class="at">color=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#counties, white border, no fill color and adjusted linewidth</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_counties, <span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">lwd =</span> <span class="fl">0.8</span>)<span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>()<span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#color=NA removes borders</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_tracts, <span class="fu">aes</span>(<span class="at">fill =</span> B01001_001E), <span class="at">color=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#counties, white border, no fill color and adjusted linewidth</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_counties, <span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">lwd =</span> <span class="fl">0.8</span>)<span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>()<span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Let’s normalize these tract populations back to their 2020 populations to look directly at growth. We don’t need geometries this time since we’ll join this to the existing tract boundaries.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>acs_vars20 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="at">year=</span><span class="dv">2020</span>, <span class="at">dataset=</span><span class="st">"acs5"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tri_tract_pop_20 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"tract"</span>, <span class="at">state =</span> <span class="st">"NC"</span>, <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"B01001_001"</span>),</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">"wide"</span>, <span class="at">geometry =</span> <span class="cn">FALSE</span>, <span class="at">year =</span> <span class="dv">2020</span>, <span class="at">cache_table =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">progress_bar =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pop20 =</span> B01001_001E) <span class="sc">|&gt;</span> </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(GEOID, pop20)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>acs_vars20 <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="at">year=</span><span class="dv">2020</span>, <span class="at">dataset=</span><span class="st">"acs5"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>tri_tract_pop_20 <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">"tract"</span>, <span class="at">state =</span> <span class="st">"NC"</span>, <span class="at">variables =</span> <span class="fu">c</span>(<span class="st">"B01001_001"</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">output =</span> <span class="st">"wide"</span>, <span class="at">geometry =</span> <span class="cn">FALSE</span>, <span class="at">year =</span> <span class="dv">2020</span>, <span class="at">cache_table =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">progress_bar =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">pop20 =</span> B01001_001E) <span class="sc">|&gt;</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(GEOID, pop20)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Getting data from the 2016-2020 5-year ACS</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tri_tract_chg <span class="ot">&lt;-</span> <span class="fu">left_join</span>(tri_tracts, tri_tract_pop_20, <span class="at">by =</span> <span class="st">'GEOID'</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pop_change =</span> B01001_001E<span class="sc">-</span>pop20,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">pop_change_pct =</span> pop_change<span class="sc">/</span>pop20)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tri_tract_chg <span class="ot">&lt;-</span> <span class="fu">left_join</span>(tri_tracts, tri_tract_pop_20, <span class="at">by =</span> <span class="st">'GEOID'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pop_change =</span> B01001_001E<span class="sc">-</span>pop20,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">pop_change_pct =</span> pop_change<span class="sc">/</span>pop20)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_tract_chg, <span class="fu">aes</span>(<span class="at">fill =</span> pop_change_pct), <span class="at">color=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_counties, <span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">lwd =</span> <span class="fl">0.8</span>)<span class="sc">+</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low=</span><span class="st">"darkred"</span>,<span class="at">high=</span><span class="st">"darkblue"</span>, <span class="at">mid=</span><span class="st">"white"</span>, <span class="at">labels=</span>scales<span class="sc">::</span>percent)<span class="sc">+</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_tract_chg, <span class="fu">aes</span>(<span class="at">fill =</span> pop_change_pct), <span class="at">color=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tri_counties, <span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">lwd =</span> <span class="fl">0.8</span>)<span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low=</span><span class="st">"red"</span>,<span class="at">high=</span><span class="st">"blue"</span>, <span class="at">mid=</span><span class="st">"white"</span>, <span class="at">labels=</span>scales<span class="sc">::</span>percent)<span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="esri-data-services-with-arcgislayers" class="level4">
-<h4 class="anchored" data-anchor-id="esri-data-services-with-arcgislayers">ESRI Data Services with <code>arcgislayers</code></h4>
+<section id="plotting-xy-data-from-a-non-spatial-dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-xy-data-from-a-non-spatial-dataframe">Plotting XY data from a non-spatial dataframe</h2>
+<p>Often, you’ll have spatial data</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>furl <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://sampleserver6.arcgisonline.com/arcgis/rest/services/"</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"EmergencyFacilities/FeatureServer/0"</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use field aliases as column names</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>sf_layer <span class="ot">&lt;-</span> <span class="fu">arc_read</span>(furl, <span class="at">alias =</span> <span class="st">"replace"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>housing_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/nc_public_housing.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Registered S3 method overwritten by 'jsonify':
-  method     from    
-  print.json jsonlite</code></pre>
+<pre><code>Rows: 228 Columns: 140
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (37): PARTICIPANT_CODE, FORMAL_PARTICIPANT_NAME, DEVELOPMENT_CODE, PROJE...
+dbl (98): X, Y, OBJECTID, TOTAL_UNITS, TOTAL_DWELLING_UNITS, ACC_UNITS, TOTA...
+lgl  (5): PLACE_INC2KX, NECTA_NM, DPVRC, URB_OUT, ZIP_CLASS
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(housing_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 140
+      X     Y OBJECTID PARTICIPANT_CODE FORMAL_PARTICIPANT_NAME DEVELOPMENT_CODE
+  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;                   &lt;chr&gt;           
+1 -80.0  35.9      151 NC006            Housing Authority of t… NC006000024     
+2 -79.8  36.1      152 NC011            Housing Authority of t… NC011030095     
+3 -80.2  36.1      153 NC012            Housing Authority of t… NC012000006     
+4 -80.2  36.1      154 NC012            Housing Authority of t… NC012000030     
+5 -78.0  35.4      155 NC015            Housing Authority of t… NC015000700     
+6 -78.7  35.8      184 NC002            Housing Authority of t… NC002000015     
+# ℹ 134 more variables: PROJECT_NAME &lt;chr&gt;, SCATTERED_SITE_IND &lt;chr&gt;,
+#   PD_STATUS_TYPE_CODE &lt;chr&gt;, TOTAL_UNITS &lt;dbl&gt;, TOTAL_DWELLING_UNITS &lt;dbl&gt;,
+#   ACC_UNITS &lt;dbl&gt;, TOTAL_OCCUPIED &lt;dbl&gt;, REGULAR_VACANT &lt;dbl&gt;,
+#   PHA_TOTAL_UNITS &lt;dbl&gt;, PCT_OCCUPIED &lt;dbl&gt;, NUMBER_REPORTED &lt;dbl&gt;,
+#   PCT_REPORTED &lt;dbl&gt;, MONTHS_SINCE_REPORT &lt;dbl&gt;, PCT_MOVEIN &lt;dbl&gt;,
+#   PEOPLE_PER_UNIT &lt;dbl&gt;, PEOPLE_TOTAL &lt;dbl&gt;, RENT_PER_MONTH &lt;dbl&gt;,
+#   SPENDING_PER_MONTH &lt;dbl&gt;, HH_INCOME &lt;dbl&gt;, PERSON_INCOME &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-</section>
-</section>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>housing <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(housing_raw, </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">coords=</span><span class="fu">c</span>(<span class="st">'X'</span>,<span class="st">'Y'</span>),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">crs =</span> <span class="dv">4326</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can check or <strong>define</strong> the crs (not project into a new crs - this will not change your dataset or coordinates!) with <code>st_crs</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(housing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coordinate Reference System:
+  User input: EPSG:4326 
+  wkt:
+GEOGCRS["WGS 84",
+    ENSEMBLE["World Geodetic System 1984 ensemble",
+        MEMBER["World Geodetic System 1984 (Transit)"],
+        MEMBER["World Geodetic System 1984 (G730)"],
+        MEMBER["World Geodetic System 1984 (G873)"],
+        MEMBER["World Geodetic System 1984 (G1150)"],
+        MEMBER["World Geodetic System 1984 (G1674)"],
+        MEMBER["World Geodetic System 1984 (G1762)"],
+        MEMBER["World Geodetic System 1984 (G2139)"],
+        MEMBER["World Geodetic System 1984 (G2296)"],
+        ELLIPSOID["WGS 84",6378137,298.257223563,
+            LENGTHUNIT["metre",1]],
+        ENSEMBLEACCURACY[2.0]],
+    PRIMEM["Greenwich",0,
+        ANGLEUNIT["degree",0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS["geodetic latitude (Lat)",north,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433]],
+        AXIS["geodetic longitude (Lon)",east,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433]],
+    USAGE[
+        SCOPE["Horizontal component of 3D system."],
+        AREA["World."],
+        BBOX[-90,-180,90,180]],
+    ID["EPSG",4326]]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#basemaps package map services use Web Mercator (ESPG: 3857)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(housing), <span class="at">map_service =</span> <span class="st">"carto"</span>)<span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_transform</span>(housing, <span class="at">crs =</span> <span class="dv">3857</span>))<span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Transforming 'ext' to Web Mercator (EPSG: 3857), since 'ext' has a
+different CRS. The CRS of the returned basemap will be Web Mercator, which is
+the default CRS used by the supported tile services.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading basemap 'voyager' from map service 'carto'...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Coordinate system already present. Adding new coordinate system, which will
+replace the existing one.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can add a state boundary and some space using <code>tigris</code> and <code>st_buffer</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>nc_boundary <span class="ot">&lt;-</span> <span class="fu">states</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STUSPS<span class="sc">==</span><span class="st">"NC"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">3857</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Retrieving data for the year 2024</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |                                                                      |   1%
+  |                                                                            
+  |=                                                                     |   1%
+  |                                                                            
+  |=                                                                     |   2%
+  |                                                                            
+  |==                                                                    |   2%
+  |                                                                            
+  |==                                                                    |   3%
+  |                                                                            
+  |===                                                                   |   4%
+  |                                                                            
+  |===                                                                   |   5%
+  |                                                                            
+  |====                                                                  |   5%
+  |                                                                            
+  |====                                                                  |   6%
+  |                                                                            
+  |=====                                                                 |   7%
+  |                                                                            
+  |=====                                                                 |   8%
+  |                                                                            
+  |======                                                                |   8%
+  |                                                                            
+  |======                                                                |   9%
+  |                                                                            
+  |=======                                                               |   9%
+  |                                                                            
+  |=======                                                               |  10%
+  |                                                                            
+  |=======                                                               |  11%
+  |                                                                            
+  |========                                                              |  11%
+  |                                                                            
+  |========                                                              |  12%
+  |                                                                            
+  |=========                                                             |  12%
+  |                                                                            
+  |=========                                                             |  13%
+  |                                                                            
+  |==========                                                            |  14%
+  |                                                                            
+  |==========                                                            |  15%
+  |                                                                            
+  |===========                                                           |  15%
+  |                                                                            
+  |===========                                                           |  16%
+  |                                                                            
+  |============                                                          |  16%
+  |                                                                            
+  |============                                                          |  17%
+  |                                                                            
+  |============                                                          |  18%
+  |                                                                            
+  |=============                                                         |  18%
+  |                                                                            
+  |=============                                                         |  19%
+  |                                                                            
+  |==============                                                        |  19%
+  |                                                                            
+  |==============                                                        |  20%
+  |                                                                            
+  |==============                                                        |  21%
+  |                                                                            
+  |===============                                                       |  21%
+  |                                                                            
+  |===============                                                       |  22%
+  |                                                                            
+  |================                                                      |  22%
+  |                                                                            
+  |================                                                      |  23%
+  |                                                                            
+  |================                                                      |  24%
+  |                                                                            
+  |=================                                                     |  24%
+  |                                                                            
+  |=================                                                     |  25%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |==================                                                    |  26%
+  |                                                                            
+  |===================                                                   |  26%
+  |                                                                            
+  |===================                                                   |  27%
+  |                                                                            
+  |===================                                                   |  28%
+  |                                                                            
+  |====================                                                  |  28%
+  |                                                                            
+  |====================                                                  |  29%
+  |                                                                            
+  |=====================                                                 |  29%
+  |                                                                            
+  |=====================                                                 |  30%
+  |                                                                            
+  |=====================                                                 |  31%
+  |                                                                            
+  |======================                                                |  31%
+  |                                                                            
+  |======================                                                |  32%
+  |                                                                            
+  |=======================                                               |  32%
+  |                                                                            
+  |=======================                                               |  33%
+  |                                                                            
+  |=======================                                               |  34%
+  |                                                                            
+  |========================                                              |  34%
+  |                                                                            
+  |========================                                              |  35%
+  |                                                                            
+  |=========================                                             |  35%
+  |                                                                            
+  |=========================                                             |  36%
+  |                                                                            
+  |==========================                                            |  37%
+  |                                                                            
+  |==========================                                            |  38%
+  |                                                                            
+  |===========================                                           |  38%
+  |                                                                            
+  |===========================                                           |  39%
+  |                                                                            
+  |============================                                          |  39%
+  |                                                                            
+  |============================                                          |  40%
+  |                                                                            
+  |============================                                          |  41%
+  |                                                                            
+  |=============================                                         |  41%
+  |                                                                            
+  |=============================                                         |  42%
+  |                                                                            
+  |==============================                                        |  42%
+  |                                                                            
+  |==============================                                        |  43%
+  |                                                                            
+  |===============================                                       |  44%
+  |                                                                            
+  |===============================                                       |  45%
+  |                                                                            
+  |================================                                      |  45%
+  |                                                                            
+  |================================                                      |  46%
+  |                                                                            
+  |=================================                                     |  47%
+  |                                                                            
+  |=================================                                     |  48%
+  |                                                                            
+  |==================================                                    |  48%
+  |                                                                            
+  |==================================                                    |  49%
+  |                                                                            
+  |===================================                                   |  49%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |===================================                                   |  51%
+  |                                                                            
+  |====================================                                  |  51%
+  |                                                                            
+  |====================================                                  |  52%
+  |                                                                            
+  |=====================================                                 |  52%
+  |                                                                            
+  |=====================================                                 |  53%
+  |                                                                            
+  |======================================                                |  54%
+  |                                                                            
+  |======================================                                |  55%
+  |                                                                            
+  |=======================================                               |  55%
+  |                                                                            
+  |=======================================                               |  56%
+  |                                                                            
+  |========================================                              |  56%
+  |                                                                            
+  |========================================                              |  57%
+  |                                                                            
+  |========================================                              |  58%
+  |                                                                            
+  |=========================================                             |  58%
+  |                                                                            
+  |=========================================                             |  59%
+  |                                                                            
+  |==========================================                            |  59%
+  |                                                                            
+  |==========================================                            |  60%
+  |                                                                            
+  |==========================================                            |  61%
+  |                                                                            
+  |===========================================                           |  61%
+  |                                                                            
+  |===========================================                           |  62%
+  |                                                                            
+  |============================================                          |  62%
+  |                                                                            
+  |============================================                          |  63%
+  |                                                                            
+  |============================================                          |  64%
+  |                                                                            
+  |=============================================                         |  64%
+  |                                                                            
+  |=============================================                         |  65%
+  |                                                                            
+  |==============================================                        |  65%
+  |                                                                            
+  |==============================================                        |  66%
+  |                                                                            
+  |===============================================                       |  66%
+  |                                                                            
+  |===============================================                       |  67%
+  |                                                                            
+  |===============================================                       |  68%
+  |                                                                            
+  |================================================                      |  68%
+  |                                                                            
+  |================================================                      |  69%
+  |                                                                            
+  |=================================================                     |  69%
+  |                                                                            
+  |=================================================                     |  70%
+  |                                                                            
+  |=================================================                     |  71%
+  |                                                                            
+  |==================================================                    |  71%
+  |                                                                            
+  |==================================================                    |  72%
+  |                                                                            
+  |===================================================                   |  72%
+  |                                                                            
+  |===================================================                   |  73%
+  |                                                                            
+  |===================================================                   |  74%
+  |                                                                            
+  |====================================================                  |  74%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |=====================================================                 |  75%
+  |                                                                            
+  |=====================================================                 |  76%
+  |                                                                            
+  |======================================================                |  77%
+  |                                                                            
+  |======================================================                |  78%
+  |                                                                            
+  |=======================================================               |  78%
+  |                                                                            
+  |=======================================================               |  79%
+  |                                                                            
+  |========================================================              |  79%
+  |                                                                            
+  |========================================================              |  80%
+  |                                                                            
+  |========================================================              |  81%
+  |                                                                            
+  |=========================================================             |  81%
+  |                                                                            
+  |=========================================================             |  82%
+  |                                                                            
+  |==========================================================            |  82%
+  |                                                                            
+  |==========================================================            |  83%
+  |                                                                            
+  |===========================================================           |  84%
+  |                                                                            
+  |===========================================================           |  85%
+  |                                                                            
+  |============================================================          |  85%
+  |                                                                            
+  |============================================================          |  86%
+  |                                                                            
+  |=============================================================         |  87%
+  |                                                                            
+  |=============================================================         |  88%
+  |                                                                            
+  |==============================================================        |  88%
+  |                                                                            
+  |==============================================================        |  89%
+  |                                                                            
+  |===============================================================       |  89%
+  |                                                                            
+  |===============================================================       |  90%
+  |                                                                            
+  |===============================================================       |  91%
+  |                                                                            
+  |================================================================      |  91%
+  |                                                                            
+  |================================================================      |  92%
+  |                                                                            
+  |=================================================================     |  92%
+  |                                                                            
+  |=================================================================     |  93%
+  |                                                                            
+  |==================================================================    |  94%
+  |                                                                            
+  |==================================================================    |  95%
+  |                                                                            
+  |===================================================================   |  95%
+  |                                                                            
+  |===================================================================   |  96%
+  |                                                                            
+  |====================================================================  |  97%
+  |                                                                            
+  |====================================================================  |  98%
+  |                                                                            
+  |===================================================================== |  98%
+  |                                                                            
+  |===================================================================== |  99%
+  |                                                                            
+  |======================================================================|  99%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">dist =</span> <span class="dv">100000</span>)), <span class="co">#distance in meters for geographic coordinates</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_service =</span> <span class="st">"carto"</span>)<span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_transform</span>(housing, <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">3857</span>)))<span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading basemap 'voyager' from map service 'carto'...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Coordinate system already present. Adding new coordinate system, which will
+replace the existing one.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>nc_boundary <span class="ot">&lt;-</span> <span class="fu">states</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STUSPS<span class="sc">==</span><span class="st">"NC"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">3857</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Retrieving data for the year 2024</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">dist =</span> <span class="dv">100000</span>)), <span class="co">#distance in meters for geographic coordinates</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_service =</span> <span class="st">"carto"</span>)<span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_transform</span>(housing, <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">3857</span>)),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">color =</span> UR))<span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()<span class="sc">+</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"right"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading basemap 'voyager' from map service 'carto'...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Coordinate system already present. Adding new coordinate system, which will
+replace the existing one.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>TO DO</strong></p>
+<ul>
+<li>Pull in state maintained roads from ESRI not downloaded shapefile.</li>
+<li>Spatial join public housing to counties
+<ul>
+<li>Two layers don’t match example!</li>
+<li>Use projected coordinates</li>
+</ul></li>
+<li>Lean into spatial analysis/ processing, skip the exercise 5 stuff.</li>
+<li>Bare minimum map elements for R users
+<ul>
+<li>Inset map, ggspatial (compass, scale etc.)</li>
+<li>Using a projection that makes sense</li>
+</ul></li>
+</ul>
 </section>
 <section id="quick-note-on-projections" class="level2">
 <h2 class="anchored" data-anchor-id="quick-note-on-projections">Quick note on projections</h2>
 <section id="checking-and-specifying-projections" class="level3">
 <h3 class="anchored" data-anchor-id="checking-and-specifying-projections">Checking and specifying projections</h3>
-</section>
-<section id="reprojecting-data" class="level3">
-<h3 class="anchored" data-anchor-id="reprojecting-data">Reprojecting data</h3>
-</section>
-</section>
-<section id="basemaps" class="level2">
-<h2 class="anchored" data-anchor-id="basemaps">Basemaps</h2>
-</section>
-<section id="data-operations" class="level2">
-<h2 class="anchored" data-anchor-id="data-operations">Data Operations</h2>
-<section id="filtering" class="level3">
-<h3 class="anchored" data-anchor-id="filtering">Filtering</h3>
-</section>
-<section id="join-on-attributes" class="level3">
-<h3 class="anchored" data-anchor-id="join-on-attributes">Join on attributes</h3>
 </section>
 </section>
 <section id="spatial-operations" class="level2">

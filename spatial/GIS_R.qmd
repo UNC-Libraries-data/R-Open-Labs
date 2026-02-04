@@ -71,7 +71,7 @@ We'll explore some of the most common packages for easily loading spatial data: 
 
 Finally we'll use `ggplot` from the tidyverse to do some basic mapping and explore extensions with `tmap` for thematic mapping and `ggmap` for baselayers.
 
-## Importing Data:
+## Data:
 
 ### CSVs / Tabular data
 
@@ -79,13 +79,13 @@ Most people first encounter spatial data through spatial points inside a larger 
 
 ### Shapefiles and Geopackages
 
-Shapefiles are an older format with some significant limitations (like variable name lengths!), but they're important to be familiar with because they're very very common and quirky. Despite the name, a shapefile is actually a *collection of files that have to be stored together* - anywhere from 3 to 12 files!  It's good practice to share them as a zipped folder.
+Shapefiles are an older format with some significant limitations (like variable name lengths!), but they're important to be familiar with because they're very very common and quirky. Despite the name, a shapefile is actually a *collection of files that have to be stored together* - anywhere from 3 to 12 files! It's good practice to share them as a zipped folder.
 
 Geopackages are a newer file format that avoid many of the limitations of shapefiles. We'll use geopackages for locally storing outputs from our R scripts.
 
-There are lots of other spatial formats out there like KML, GeoJSON, PostGIS and many more!  R can work with many of these but we won't work with them all today.
+There are lots of other spatial formats out there like KML, GeoJSON, PostGIS and many more! R can work with many of these but we won't work with them all today.
 
-#### A note on File Geodatabases
+#### File Geodatabases
 
 ### Online Data:
 
@@ -95,7 +95,22 @@ The [`tidycensus`](https://walker-data.com/tidycensus/) and [`tigris`](https://g
 
 Sometimes you'll also want to retrieve census *data* along with spatial information. `tidycensus` makes it easy to retrieve tables from a variety of census datasets, along with spatial data when relevant.
 
-The `load_variables` function provides a list of the available tables and variables for a given year and census survey, for example 5-year ACS data below:
+#### ESRI Data Services with `arcgislayers`
+
+```{r}
+furl <- paste0(
+  "https://sampleserver6.arcgisonline.com/arcgis/rest/services/",
+  "EmergencyFacilities/FeatureServer/0"
+)
+
+# use field aliases as column names
+sf_layer <- arc_read(furl, alias = "replace")
+
+```
+
+## Basic Maps
+
+The `load_variables` function from `tidycensus` provides a list of the available tables and variables for a given year and census survey, for example 5-year ACS data below:
 
 ```{r}
 ac5_vars <- load_variables(year=2024, dataset = "acs5")
@@ -110,22 +125,25 @@ nc_tracts<- get_acs(geography = "tract", state = "NC", variables = c("B01001_001
         progress_bar = FALSE)
 ```
 
-We can quickly plot `sf` data with the `plot` function.  We'll use `ggplot` to make more complicated maps later on!
+We can quickly plot `sf` data with the `plot` function. We'll use `ggplot` to make more complicated maps later on!
 
 ```{r}
 plot(nc_tracts['B01001_001E'],border=NA)
 ```
+
 We can also work with `sf` objects like normal dataframes:
 
 ```{r}
 hist(nc_tracts$B01001_001E, breaks = 100)
 ```
+
 Which tracts are over 15,000 population?
 
 ```{r}
 nc_tracts |> 
   filter(B01001_001E>15000)
 ```
+
 Since all of these tracts are in Wake County, let's take a closer look at Wake County and the triangle?
 
 We'll use the list of counties in the Combined Statistical Area
@@ -142,7 +160,8 @@ tri_tracts <- nc_tracts |>
 ```{r}
 plot(tri_tracts['B01001_001E'],border = NA)
 ```
-It might be helpful to add the county boundaries to this!  Since we don't need any county data, we can pull county information from tigris with the `counties` function, then filter to our Triangle counties.
+
+It might be helpful to add the county boundaries to this! Since we don't need any county data, we can pull county information from tigris with the `counties` function, then filter to our Triangle counties.
 
 ```{r}
 #| messsage: False
@@ -161,7 +180,8 @@ ggplot()+
   scale_fill_viridis_c()+
   theme_minimal()
 ```
-Let's normalize these tract populations back to their 2020 populations to look directly at growth.  We don't need geometries this time since we'll join this to the existing tract boundaries.
+
+Let's normalize these tract populations back to their 2020 populations to look directly at growth. We don't need geometries this time since we'll join this to the existing tract boundaries.
 
 ```{r}
 acs_vars20 <- load_variables(year=2020, dataset="acs5")
@@ -174,43 +194,90 @@ tri_tract_pop_20 <- get_acs(geography = "tract", state = "NC", variables = c("B0
 tri_tract_chg <- left_join(tri_tracts, tri_tract_pop_20, by = 'GEOID') |> 
   mutate(pop_change = B01001_001E-pop20,
          pop_change_pct = pop_change/pop20)
+
+
 ```
 
 ```{r}
 ggplot()+
   geom_sf(data = tri_tract_chg, aes(fill = pop_change_pct), color=NA)+
   geom_sf(data = tri_counties, color = "grey80", fill=NA, lwd = 0.8)+
-  scale_fill_gradient2(low="darkred",high="darkblue", mid="white", labels=scales::percent)+
+  scale_fill_gradient2(low="red",high="blue", mid="white", labels=scales::percent)+
   theme_minimal()
 ```
 
+## Plotting XY data from a non-spatial dataframe
 
-#### ESRI Data Services with `arcgislayers`
+Often, you'll have spatial data
 
 ```{r}
-furl <- paste0(
-  "https://sampleserver6.arcgisonline.com/arcgis/rest/services/",
-  "EmergencyFacilities/FeatureServer/0"
-)
-
-# use field aliases as column names
-sf_layer <- arc_read(furl, alias = "replace")
-
+housing_raw <- read_csv('data/nc_public_housing.csv')
+head(housing_raw)
 ```
+
+```{r}
+housing <- st_as_sf(housing_raw, 
+                    coords=c('X','Y'),
+                    crs = 4326)
+```
+
+We can check or **define** the crs (not project into a new crs - this will not change your dataset or coordinates!) with `st_crs`.
+
+```{r}
+st_crs(housing)
+```
+
+```{r}
+#basemaps package map services use Web Mercator (ESPG: 3857)
+basemaps::basemap_ggplot(ext = st_bbox(housing), map_service = "carto")+
+  geom_sf(data = st_transform(housing, crs = 3857))+
+  ggmap::theme_nothing()
+```
+
+We can add a state boundary and some space using `tigris` and `st_buffer`.
+
+```{r}
+nc_boundary <- states() |> 
+  filter(STUSPS=="NC") |> 
+  st_transform(crs = 3857)
+
+basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary, 
+                                                 dist = 100000)), #distance in meters for geographic coordinates
+                         map_service = "carto")+
+  geom_sf(data = st_transform(housing, crs = st_crs(3857)))+
+  geom_sf(data = nc_boundary, fill=NA)+
+  ggmap::theme_nothing()
+```
+
+```{r}
+nc_boundary <- states() |> 
+  filter(STUSPS=="NC") |> 
+  st_transform(crs = 3857)
+
+basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary, 
+                                                 dist = 100000)), #distance in meters for geographic coordinates
+                         map_service = "carto")+
+  geom_sf(data = st_transform(housing, crs = st_crs(3857)),
+          aes(color = UR))+
+  geom_sf(data = nc_boundary, fill=NA)+
+  ggmap::theme_nothing()+
+  theme(legend.position="right")
+```
+
+**TO DO**
+
+-   Pull in state maintained roads from ESRI not downloaded shapefile.
+-   Spatial join public housing to counties
+    -   Two layers don't match example!
+    -   Use projected coordinates
+-   Lean into spatial analysis/ processing, skip the exercise 5 stuff.
+-   Bare minimum map elements for R users
+    -   Inset map, ggspatial (compass, scale etc.)
+    -   Using a projection that makes sense
 
 ## Quick note on projections
 
 ### Checking and specifying projections
-
-### Reprojecting data
-
-## Basemaps
-
-## Data Operations
-
-### Filtering
-
-### Join on attributes
 
 ## Spatial Operations
 
