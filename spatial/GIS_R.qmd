@@ -24,7 +24,7 @@ If you'd like a refresher on R, we suggest the [R For Data Science](https://r4ds
 
 As a refresher, in R we install packages from CRAN (The Comprehensive R Archive Network) with the following code:
 
-`install.packages('tidyverse')`
+`install.packages(c('tidyverse','scales'))`
 
 You'll only need to install packages once, then you'll load them into your session with:
 
@@ -159,6 +159,28 @@ ggplot()+
   #counties, white border, no fill color and adjusted linewidth
   geom_sf(data = tri_counties, color = "grey80", fill=NA, lwd = 0.8)+
   scale_fill_viridis_c()+
+  theme_minimal()
+```
+Let's normalize these tract populations back to their 2020 populations to look directly at growth.  We don't need geometries this time since we'll join this to the existing tract boundaries.
+
+```{r}
+acs_vars20 <- load_variables(year=2020, dataset="acs5")
+tri_tract_pop_20 <- get_acs(geography = "tract", state = "NC", variables = c("B01001_001"),
+        output = "wide", geometry = FALSE, year = 2020, cache_table = TRUE,
+        progress_bar = FALSE) |> 
+  rename(pop20 = B01001_001E) |> 
+  select(GEOID, pop20)
+
+tri_tract_chg <- left_join(tri_tracts, tri_tract_pop_20, by = 'GEOID') |> 
+  mutate(pop_change = B01001_001E-pop20,
+         pop_change_pct = pop_change/pop20)
+```
+
+```{r}
+ggplot()+
+  geom_sf(data = tri_tract_chg, aes(fill = pop_change_pct), color=NA)+
+  geom_sf(data = tri_counties, color = "grey80", fill=NA, lwd = 0.8)+
+  scale_fill_gradient2(low="darkred",high="darkblue", mid="white", labels=scales::percent)+
   theme_minimal()
 ```
 
