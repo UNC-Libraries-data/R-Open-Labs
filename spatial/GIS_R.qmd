@@ -264,6 +264,10 @@ basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary,
   theme(legend.position="right")
 ```
 
+Let's add state maintained roads to the map!
+
+
+
 **TO DO**
 
 -   Pull in state maintained roads from ESRI not downloaded shapefile.

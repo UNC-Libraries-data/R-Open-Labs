@@ -16,6 +16,26 @@ format:
 
 [Boston AirBnB Data](data/Boston_listings.csv)
 
+## Today
+
+This workshop aims to cover:
+
+-   Review of Previous Topics
+    -   Starting a New Project
+    -   Tibbles vs Data Frames
+-   Exploratory Data Analysis (EDA)
+    -   Basic summaries
+    -   ggplot
+    -   Univariate EDA
+        - Categorical Variables
+        - Continuous Variables
+    -   Bivariate EDA
+        - Continuous vs Continuous
+        - Categorical vs Categorical
+        - Categorical vs Continuous
+
+-   [R for Data Science Chapter 10](https://r4ds.hadley.nz/EDA.html)
+
 ## Reminders and Notes: 
 ### Start a New Project in R
 
