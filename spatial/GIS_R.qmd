@@ -95,18 +95,6 @@ The [`tidycensus`](https://walker-data.com/tidycensus/) and [`tigris`](https://g
 
 Sometimes you'll also want to retrieve census *data* along with spatial information. `tidycensus` makes it easy to retrieve tables from a variety of census datasets, along with spatial data when relevant.
 
-#### ESRI Data Services with `arcgislayers`
-
-```{r}
-furl <- paste0(
-  "https://sampleserver6.arcgisonline.com/arcgis/rest/services/",
-  "EmergencyFacilities/FeatureServer/0"
-)
-
-# use field aliases as column names
-sf_layer <- arc_read(furl, alias = "replace")
-
-```
 
 ## Basic Maps
 
@@ -230,76 +218,156 @@ st_crs(housing)
 ```{r}
 #basemaps package map services use Web Mercator (ESPG: 3857)
 basemaps::basemap_ggplot(ext = st_bbox(housing), map_service = "carto")+
-  geom_sf(data = st_transform(housing, crs = 3857))+
-  ggmap::theme_nothing()
-```
-
-We can add a state boundary and some space using `tigris` and `st_buffer`.
-
-```{r}
-nc_boundary <- states() |> 
-  filter(STUSPS=="NC") |> 
-  st_transform(crs = 3857)
-
-basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary, 
-                                                 dist = 100000)), #distance in meters for geographic coordinates
-                         map_service = "carto")+
-  geom_sf(data = st_transform(housing, crs = st_crs(3857)))+
-  geom_sf(data = nc_boundary, fill=NA)+
+  geom_sf(data = housing)+
+  coord_sf(crs = 3857)+ #ensures all layers are projected into the correct CRS
   ggmap::theme_nothing()
 ```
 
 ```{r}
+#basemaps package map services use Web Mercator (ESPG: 3857)
+basemaps::basemap_ggplot(ext = st_bbox(housing), map_service = "carto")+
+  geom_sf(data = housing)+
+  coord_sf(crs = 3857)+ #ensures all layers are projected into the correct CRS
+  ggmap::theme_nothing()
+```
+
+We can add a state boundary and some space using `tigris` and `st_buffer`.  Note that we need to use `st_transform` to project the data to match the basemap before running a buffer.
+
+```{r}
 nc_boundary <- states() |> 
-  filter(STUSPS=="NC") |> 
-  st_transform(crs = 3857)
+  filter(STUSPS=="NC") 
 
 basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary, 
                                                  dist = 100000)), #distance in meters for geographic coordinates
                          map_service = "carto")+
-  geom_sf(data = st_transform(housing, crs = st_crs(3857)),
-          aes(color = UR))+
+  geom_sf(data = housing)+
   geom_sf(data = nc_boundary, fill=NA)+
+  coord_sf(crs = 3857)+ #define the crs to match the boxplot
+  ggmap::theme_nothing()
+```
+
+
+Let's add state maintained roads to the map!  We'll use the ESRI data service from NC One Map.
+["NC DOT State Maintained Roads"](https://www.nconemap.gov/maps/157dbc4ef33f4db4aa1ecc1a3182a375/explore) is a *Map Service* that contains multiple layers.  
+
+To load data, we'll need to specify a particular layer. On OneMap, you can click "I want to use this" > "View Data Source" to get to the MapServer directory page:
+[https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer](https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer)
+
+This gives us most of what we'll need to load the layer, but we still need to pick a layer under the "Layers" list.  For today, let's look at the simplest layer - Interstates (layer 2):
+[https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer/2](https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer/2)
+
+The directory can be a nice way to explore what other data is available from a ESRI data service!
+
+```{r}
+roads <- arc_read("https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer/2",
+                  alias = "replace")
+plot(st_geometry(roads))
+```
+Let's add it to our ggplot map!  The order of our geoms is also the order in which they're drawn, so we want to make sure our points are last and contextual layers like the nc boundary and roads come earlier in the code block.
+
+Here we can add some more polish to the plot:
+- add colors for Urban vs Rural and label appropriately, update labels.
+- switch to the "light_no_labels" basemap from carto (see `get_maptypes(map_service = "carto")` for a full list of options).
+- add a scale and north arrow for context
+- various color and line tweaks for aesthetics
+
+```{r}
+#| message: false
+#| warning: false
+basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary, 
+                                                 dist = 20000)), #distance in meters for geographic coordinates
+                         map_service = "carto",
+                         map_type = "light_no_labels")+
+  geom_sf(data = nc_boundary, fill=NA, color = "grey70")+
+  geom_sf(data = roads, color = "red", linewidth = 0.3)+
+  geom_sf(data = housing,
+          aes(color = UR), size = 2)+
+  scale_color_brewer(palette = "Paired" ,labels = c("Rural", "Urban"), name = "Urban/Rural")+
+  coord_sf(crs = 3857)+
   ggmap::theme_nothing()+
-  theme(legend.position="right")
+  theme(legend.position="right")+
+  ggspatial::annotation_scale(pad_x = unit(1.5, "cm"))+
+  ggspatial::annotation_north_arrow(style=ggspatial::north_arrow_minimal)
+```
+We could also forgo the basemap to make a simpler map:
+
+```{r}
+ggplot()+
+  geom_sf(data = nc_boundary, fill="grey90", color = "grey70")+
+  geom_sf(data = roads, color = "red", stroke = 2)+
+  geom_sf(data = housing,
+          aes(color = UR), size=2)+
+  ggmap::theme_nothing()+
+  scale_color_brewer(palette = "Paired" ,labels = c("Rural", "Urban"), name = "Urban/Rural")+
+  coord_sf(crs = 3857)+
+  theme(legend.position="right")+
+  ggspatial::annotation_scale(pad_x = unit(1.5, "cm"))+
+  ggspatial::annotation_north_arrow(style=ggspatial::north_arrow_minimal)
+  
 ```
 
-Let's add state maintained roads to the map!
+## 
+
+Load in 
+
+```{r}
+#| error: true
+
+us_csas <- combined_statistical_areas()
+nc_csas <- us_csas |> 
+  st_filter(housing, .predicate = st_intersects)
+```
+
+This fails because we haven't made sure both our objects are in the same CRS. Let's check.
+
+```{r}
+st_crs(housing)
+```
+```{r}
+st_crs(us_csas)
+```
+Let's go with NAD83 for now, since that's the default for census and tigris data.
+
+```{r}
+housing_nad <- st_transform(housing, crs = 4269)
+nc_csas <- us_csas |> 
+  st_filter(housing_nad, .predicate = st_intersects)
+```
+
+```{r}
+ggplot()+
+  geom_sf(data = nc_csas, aes(fill = CSAFP))+
+  geom_sf(data = nc_boundary, fill = NA, linetype = "dashed")+
+  theme_minimal()
+```
+
+```{r}
+csa_housing <- st_join(nc_csas, housing_nad) |> 
+  st_drop_geometry() |> 
+  group_by(CSAFP) |> 
+  summarize(ct = n(),
+            units = sum(PHA_TOTAL_UNITS, na.rm=T),
+            avg_pct_occ = mean(PCT_OCCUPIED, na.rm=T)) |> 
+  right_join(nc_csas, y = _)
+```
+```{r}
+ggplot()+
+  geom_sf(data = csa_housing, aes(fill = avg_pct_occ))+
+  geom_sf(data = nc_boundary, fill = NA, linetype = "dashed")+
+  geom_sf(data = housing_nad, size = 0.5)+
+  scale_fill_gradient(low = "white", high = "darkred")+
+  theme_minimal()
+```
 
 
 
-**TO DO**
 
--   Pull in state maintained roads from ESRI not downloaded shapefile.
--   Spatial join public housing to counties
-    -   Two layers don't match example!
-    -   Use projected coordinates
--   Lean into spatial analysis/ processing, skip the exercise 5 stuff.
--   Bare minimum map elements for R users
-    -   Inset map, ggspatial (compass, scale etc.)
-    -   Using a projection that makes sense
 
-## Quick note on projections
-
-### Checking and specifying projections
-
-## Spatial Operations
-
-### Spatial Filtering
-
-### Buffering
-
-### Spatial Joins
+## Other useful packages:
 
 #### Nearest Neighbors with `nngeo`
 
-## Plotting Data:
-
-### `sf` and `ggplot`
-
 ### `tmap`
-
-## Other useful packages:
 
 ### Rasters
 
