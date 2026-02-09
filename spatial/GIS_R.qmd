@@ -203,8 +203,8 @@ head(housing_raw)
 This dataset includes latitude and longitude data in two forms, X/Y and LAT/LON. Let's check if they're identical:
 
 ```{r}
-all(housing_raw$X==housing$LON)
-all(housing_raw$Y==housing$LAT)
+all(housing_raw$X==housing_raw$LON)
+all(housing_raw$Y==housing_raw$LAT)
 ```
 
 To use this as spatial data, we need to point out the spatial coordinates and define a coordinate reference system (CRS) with `st_as_sf`. With latitude and longitude data we can usually safely use WGS84 (ESPG: 4326). Even better, you may have documentation of the coordinate system used in the data.
