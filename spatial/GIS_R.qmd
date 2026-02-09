@@ -241,7 +241,7 @@ basemap_ggplot(ext = st_bbox(housing), map_service = "carto")+
 We can add a state boundary and some space using `tigris` and `st_buffer`.
 ```{r}
 #| message: false
-nc_boundary <- states() |> 
+nc_boundary <- states(progress_bar = FALSE) |> 
   filter(STUSPS=="NC") 
 
 basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary, 
@@ -339,7 +339,7 @@ Let's use `tigris` to load polygons for all of the Combined Statistical Areas (C
 
 ```{r}
 #| message: false
-us_csas <- combined_statistical_areas()
+us_csas <- combined_statistical_areas(progress_bar = FALSE)
 ```
 
 We can use our housing dataset to pick out the CSAs that our housing projects touch.  These won't be purely in North Carolina since CSAs often cross state borders.  We'll use `st_filter` to spatially filter our CSAs to those related to the housing layer.  The `.predicate` argument lets us define the relationship we're looking for between the layers.  `?st_intersects` and [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM) provide more information about the relationships available.  You can also define your own!
