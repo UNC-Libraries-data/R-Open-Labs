@@ -97,14 +97,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#ggplot-for-mapping" id="toc-ggplot-for-mapping" class="nav-link" data-scroll-target="#ggplot-for-mapping"><code>ggplot</code> for Mapping</a></li>
   </ul></li>
   <li><a href="#plotting-xy-data-from-a-non-spatial-dataframe" id="toc-plotting-xy-data-from-a-non-spatial-dataframe" class="nav-link" data-scroll-target="#plotting-xy-data-from-a-non-spatial-dataframe">Plotting XY data from a non-spatial dataframe</a></li>
+  <li><a href="#loading-data-from-esri-data-services" id="toc-loading-data-from-esri-data-services" class="nav-link" data-scroll-target="#loading-data-from-esri-data-services">Loading data from ESRI data services</a></li>
   <li><a href="#basic-spatial-operations-in-r" id="toc-basic-spatial-operations-in-r" class="nav-link" data-scroll-target="#basic-spatial-operations-in-r">Basic spatial operations in R</a></li>
   <li><a href="#other-useful-packages" id="toc-other-useful-packages" class="nav-link" data-scroll-target="#other-useful-packages">Other useful packages:</a>
   <ul class="collapse">
+  <li><a href="#nearest-neighbors-with-nngeo" id="toc-nearest-neighbors-with-nngeo" class="nav-link" data-scroll-target="#nearest-neighbors-with-nngeo">Nearest Neighbors with <code>nngeo</code></a></li>
   <li><a href="#tmap" id="toc-tmap" class="nav-link" data-scroll-target="#tmap"><code>tmap</code></a></li>
   <li><a href="#rasters" id="toc-rasters" class="nav-link" data-scroll-target="#rasters">Rasters</a></li>
   <li><a href="#leaflet" id="toc-leaflet" class="nav-link" data-scroll-target="#leaflet">Leaflet</a></li>
   <li><a href="#other-data-formats" id="toc-other-data-formats" class="nav-link" data-scroll-target="#other-data-formats">Other data formats</a></li>
-  <li><a href="#shapefiles-and-geopackages" id="toc-shapefiles-and-geopackages" class="nav-link" data-scroll-target="#shapefiles-and-geopackages">Shapefiles and Geopackages</a></li>
   <li><a href="#spatialreg" id="toc-spatialreg" class="nav-link" data-scroll-target="#spatialreg"><code>spatialreg</code></a></li>
   </ul></li>
   </ul>
@@ -152,9 +153,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>install.packages(c('tidyverse','scales'))</code></p>
 <p>You’ll only need to install packages once, then you’ll load them into your session with:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We’ll use the <code>tidyverse</code> family of packages to do non-spatial data manipulation today.</p>
+<p>We’ll use the <code>tidyverse</code> family of packages to do non-spatial data manipulation today. We’ll use <code>scales</code> to adjust the formatting for some of our maps.</p>
 <section id="a-note-on-pipes" class="level4">
 <h4 class="anchored" data-anchor-id="a-note-on-pipes">A note on pipes:</h4>
 <p>Today we’ll use the base R pipe (<code>|&gt;</code>) as our default. You may be more familiar with the <code>magrittr</code> pipe (<code>%&gt;%</code>). The two work very similarly and should usually be interchangeable. If you’d like to use the base R pipe with R Studio’s pipe shortcut (CTRL/CMD + SHIFT + m), you can change the default setting in <strong>Tools &gt; Global Options &gt; Code &gt; Use native pipe operator, |&gt; (requires R 4.1+)</strong>.</p>
@@ -163,26 +165,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="spatial-packages" class="level3">
 <h3 class="anchored" data-anchor-id="spatial-packages">Spatial packages</h3>
 <p>For spatial processing we’ll use the following packages today:</p>
-<pre><code>install.packages(c('sf','nngeo','tidycensus','tigris','arcgislayers','tmap','ggmap','ggspatial','basemap'))</code></pre>
+<pre><code>install.packages(c('sf','tidycensus','tigris','arcgislayers','ggmap','ggspatial','basemaps'))</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Spatial processing</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nngeo)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting spatial data</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arcgislayers)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Thematic mapping</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(basemaps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting spatial data</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(arcgislayers)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Thematic mapping</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggmap)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(basemaps)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>sf</code> packages will be our main spatial processing tool for today. We’ll use <code>nngeo</code> to do some nearest-neighbor calculations.</p>
 <p>We’ll explore some of the most common packages for easily loading spatial data: <code>tidycensus</code> for census data, <code>tigris</code> for census boundaries, and `arcgislayers for loading data from ESRI Data Services.</p>
 <p>Finally we’ll use <code>ggplot</code> from the tidyverse to do some basic mapping and explore extensions with <code>tmap</code> for thematic mapping and <code>ggmap</code>, <code>ggspatial</code> and <code>basemaps</code>for map annotation, basemaps, and themes.</p>
+<section id="resources-for-r-spatial-packages" class="level4">
+<h4 class="anchored" data-anchor-id="resources-for-r-spatial-packages">Resources for R Spatial packages:</h4>
+<ul>
+<li><p><a href="https://r.geocompx.org/">Geocomputation with R</a> : general spatial computation in R</p></li>
+<li><p><a href="https://r-spatial.org/book/">Spatial Data Science</a>: spatial computation with a focus on statistics</p></li>
+<li><p><a href="https://walker-data.com/census-r/">Analyzing US Census Data</a>: <code>tigris</code> and <code>tidycensus</code></p></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="basic-maps" class="level2">
@@ -330,9 +338,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plotting-xy-data-from-a-non-spatial-dataframe" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-xy-data-from-a-non-spatial-dataframe">Plotting XY data from a non-spatial dataframe</h2>
-<p>Lots of spatial data doesn’t come in an explicitly spatial form. Let’s take a look at a CSV derived from <a href="https://hudgis-hud.opendata.arcgis.com/datasets/HUD::public-housing-developments-1/about">Housing and Urban Development data (HUD)</a>.<br>
-<br>
-<a href="https://unc-libraries-data.github.io/R-Open-Labs/spatial/data/nc_public_housing.csv">Download nc_public_housing.csv</a></p>
+<p>Lots of spatial data doesn’t come in an explicitly spatial form. Let’s take a look at a CSV derived from <a href="https://hudgis-hud.opendata.arcgis.com/datasets/HUD::public-housing-developments-1/about">Housing and Urban Development data (HUD)</a>.</p>
+<p><a href="https://unc-libraries-data.github.io/R-Open-Labs/spatial/data/nc_public_housing.csv">Download nc_public_housing.csv</a></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>housing_raw <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'data/nc_public_housing.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -419,13 +426,13 @@ GEOGCRS["WGS 84",
     ID["EPSG",4326]]</code></pre>
 </div>
 </div>
-<p>There are a number of ways to get basemaps in R, but for today we’ll use the <code>basemaps</code> package.</p>
+<p>There are a number of ways to get basemaps in R, but for today we’ll use the <code>basemaps</code> package. Maps from Carto are freely available without an API key. Most other services available through <code>basemaps</code> require a free sign up. <code>st_bbox</code> converts our set of points into a rectangle to form our plot area. We’ll use <code>theme_nothing</code> from <code>ggmap</code> to remove all axes and other plot elements.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#basemaps package map services use Web Mercator (ESPG: 3857)</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(housing), <span class="at">map_service =</span> <span class="st">"carto"</span>)<span class="sc">+</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing)<span class="sc">+</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span> <span class="co">#ensures all layers are projected into the correct CRS</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span> <span class="co">#ensures all layers are projected to match the basemap</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_nothing</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Transforming 'ext' to Web Mercator (EPSG: 3857), since 'ext' has a
 different CRS. The CRS of the returned basemap will be Web Mercator, which is
@@ -446,39 +453,10 @@ replace the existing one.</code></pre>
 </div>
 </div>
 </div>
+<p>We can add a state boundary and some space using <code>tigris</code> and <code>st_buffer</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#basemaps package map services use Web Mercator (ESPG: 3857)</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(housing), <span class="at">map_service =</span> <span class="st">"carto"</span>)<span class="sc">+</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing)<span class="sc">+</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span> <span class="co">#ensures all layers are projected into the correct CRS</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Transforming 'ext' to Web Mercator (EPSG: 3857), since 'ext' has a
-different CRS. The CRS of the returned basemap will be Web Mercator, which is
-the default CRS used by the supported tile services.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Loading basemap 'voyager' from map service 'carto'...</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Coordinate system already present. Adding new coordinate system, which will
-replace the existing one.</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can add a state boundary and some space using <code>tigris</code> and <code>st_buffer</code>. Note that we need to use <code>st_transform</code> to project the data to match the basemap before running a buffer.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>nc_boundary <span class="ot">&lt;-</span> <span class="fu">states</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STUSPS<span class="sc">==</span><span class="st">"NC"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Retrieving data for the year 2024</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>nc_boundary <span class="ot">&lt;-</span> <span class="fu">states</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STUSPS<span class="sc">==</span><span class="st">"NC"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   |                                                                            
@@ -556,6 +534,8 @@ replace the existing one.</code></pre>
   |                                                                            
   |================                                                      |  23%
   |                                                                            
+  |================                                                      |  24%
+  |                                                                            
   |=================                                                     |  24%
   |                                                                            
   |=================                                                     |  25%
@@ -598,8 +578,6 @@ replace the existing one.</code></pre>
   |                                                                            
   |=========================                                             |  36%
   |                                                                            
-  |==========================                                            |  36%
-  |                                                                            
   |==========================                                            |  37%
   |                                                                            
   |==========================                                            |  38%
@@ -621,8 +599,6 @@ replace the existing one.</code></pre>
   |==============================                                        |  42%
   |                                                                            
   |==============================                                        |  43%
-  |                                                                            
-  |==============================                                        |  44%
   |                                                                            
   |===============================                                       |  44%
   |                                                                            
@@ -662,6 +638,8 @@ replace the existing one.</code></pre>
   |                                                                            
   |=======================================                               |  56%
   |                                                                            
+  |========================================                              |  56%
+  |                                                                            
   |========================================                              |  57%
   |                                                                            
   |========================================                              |  58%
@@ -684,6 +662,8 @@ replace the existing one.</code></pre>
   |                                                                            
   |============================================                          |  63%
   |                                                                            
+  |============================================                          |  64%
+  |                                                                            
   |=============================================                         |  64%
   |                                                                            
   |=============================================                         |  65%
@@ -691,6 +671,8 @@ replace the existing one.</code></pre>
   |==============================================                        |  65%
   |                                                                            
   |==============================================                        |  66%
+  |                                                                            
+  |===============================================                       |  66%
   |                                                                            
   |===============================================                       |  67%
   |                                                                            
@@ -714,6 +696,8 @@ replace the existing one.</code></pre>
   |                                                                            
   |===================================================                   |  73%
   |                                                                            
+  |===================================================                   |  74%
+  |                                                                            
   |====================================================                  |  74%
   |                                                                            
   |====================================================                  |  75%
@@ -721,8 +705,6 @@ replace the existing one.</code></pre>
   |=====================================================                 |  75%
   |                                                                            
   |=====================================================                 |  76%
-  |                                                                            
-  |======================================================                |  76%
   |                                                                            
   |======================================================                |  77%
   |                                                                            
@@ -784,8 +766,6 @@ replace the existing one.</code></pre>
   |                                                                            
   |===================================================================   |  96%
   |                                                                            
-  |====================================================================  |  96%
-  |                                                                            
   |====================================================================  |  97%
   |                                                                            
   |====================================================================  |  98%
@@ -798,13 +778,13 @@ replace the existing one.</code></pre>
   |                                                                            
   |======================================================================| 100%</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">dist =</span> <span class="dv">100000</span>)), <span class="co">#distance in meters for geographic coordinates</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_service =</span> <span class="st">"carto"</span>)<span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing)<span class="sc">+</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span> <span class="co">#define the crs to match the boxplot</span></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">dist =</span> <span class="dv">100000</span>)), <span class="co">#distance in meters for geographic coordinates</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_service =</span> <span class="st">"carto"</span>)<span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing)<span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span> <span class="co">#define the crs to match the boxplot</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Transforming 'ext' to Web Mercator (EPSG: 3857), since 'ext' has a
 different CRS. The CRS of the returned basemap will be Web Mercator, which is
@@ -813,59 +793,62 @@ the default CRS used by the supported tile services.</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>Loading basemap 'voyager' from map service 'carto'...</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Coordinate system already present. Adding new coordinate system, which will
-replace the existing one.</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<section id="a-note-on-coordinate-systems" class="level4">
+<h4 class="anchored" data-anchor-id="a-note-on-coordinate-systems">A note on coordinate systems</h4>
+<p><code>st_buffer</code> is one of many spatial processing tools available in <code>sf</code>. Let’s plot the buffer, bounding box, and the state outline directly:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary)<span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_buffer</span>(nc_boundary, <span class="at">dist =</span> <span class="dv">50000</span>), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sfc</span>(<span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, <span class="at">dist =</span> <span class="dv">50000</span>))), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The jagged edges here are a result of working from a geographic or spherical coordinate system. They aren’t an issue for our use case since we’re just using this to quickly expand our bounding box.<br>
+However, if we were doing a more precise analysis this might be an issue! The solution is to convert our coordinates into a <em>projected coordinate system</em> (ESPG:31129 is a NAD83 state plane for North Carolina in meters) with <code>st_transform</code>. Since this coordinate system uses a plane instead of a sphere our buffers are smoother.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary)<span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_buffer</span>(<span class="fu">st_transform</span>(nc_boundary, <span class="dv">32119</span>), <span class="at">dist =</span> <span class="dv">50000</span>), <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sfc</span>(<span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, <span class="at">dist =</span> <span class="dv">50000</span>))), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">fill =</span> <span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="loading-data-from-esri-data-services" class="level2">
+<h2 class="anchored" data-anchor-id="loading-data-from-esri-data-services">Loading data from ESRI data services</h2>
 <p>Let’s add state maintained roads to the map! We’ll use the ESRI data service from NC One Map. <a href="https://www.nconemap.gov/maps/157dbc4ef33f4db4aa1ecc1a3182a375/explore">“NC DOT State Maintained Roads”</a> is a <em>Map Service</em> that contains multiple layers.</p>
 <p>To load data, we’ll need to specify a particular layer. On OneMap, you can click “I want to use this” &gt; “View Data Source” to get to the MapServer directory page: <a href="https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer" class="uri">https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer</a></p>
 <p>This gives us most of what we’ll need to load the layer, but we still need to pick a layer under the “Layers” list. For today, let’s look at the simplest layer - Interstates (layer 2): <a href="https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer/2" class="uri">https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer/2</a></p>
 <p>The directory can be a nice way to explore what other data is available from a ESRI data service!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">arc_read</span>(<span class="st">"https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer/2"</span>,</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">alias =</span> <span class="st">"replace"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>roads <span class="ot">&lt;-</span> <span class="fu">arc_read</span>(<span class="st">"https://gis11.services.ncdot.gov/arcgis/rest/services/NCDOT_StateMaintainedRoadsQtr/MapServer/2"</span>,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">alias =</span> <span class="st">"replace"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Registered S3 method overwritten by 'jsonify':
   method     from    
   print.json jsonlite</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(roads))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Let’s add it to our ggplot map! The order of our geoms is also the order in which they’re drawn, so we want to make sure our points are last and contextual layers like the nc boundary and roads come earlier in the code block.</p>
-<p>Here we can add some more polish to the plot: - add colors for Urban vs Rural and label appropriately, update labels. - switch to the “light_no_labels” basemap from carto (see <code>get_maptypes(map_service = "carto")</code> for a full list of options). - add a scale and north arrow for context - various color and line tweaks for aesthetics</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, </span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">dist =</span> <span class="dv">20000</span>)), <span class="co">#distance in meters for geographic coordinates</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_service =</span> <span class="st">"carto"</span>,</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_type =</span> <span class="st">"light_no_labels"</span>)<span class="sc">+</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"grey70"</span>)<span class="sc">+</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> roads, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing,</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">color =</span> UR), <span class="at">size =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span> ,<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Rural"</span>, <span class="st">"Urban"</span>), <span class="at">name =</span> <span class="st">"Urban/Rural"</span>)<span class="sc">+</span></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span></span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()<span class="sc">+</span></span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"right"</span>)<span class="sc">+</span></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(<span class="at">pad_x =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>))<span class="sc">+</span></span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(<span class="at">style=</span>ggspatial<span class="sc">::</span>north_arrow_minimal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Loading basemap 'light_no_labels' from map service 'carto'...</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(roads))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -874,19 +857,26 @@ replace the existing one.</code></pre>
 </div>
 </div>
 </div>
-<p>We could also forgo the basemap to make a simpler map:</p>
+<p>Let’s add it to our ggplot map! The order of our geoms is also the order in which they’re drawn, so we want to make sure our points are last and contextual layers like the nc boundary and roads come earlier in the code block.</p>
+<p>Here we can add some more polish to the plot: - add colors for Urban vs Rural and label appropriately, update labels. - switch to the “light_no_labels” basemap from carto (see <code>get_maptypes(map_service = "carto")</code> for a full list of options). - add a scale and north arrow for context - various color and line tweaks for aesthetics</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="st">"grey90"</span>, <span class="at">color =</span> <span class="st">"grey70"</span>)<span class="sc">+</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> roads, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">stroke =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing,</span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">color =</span> UR), <span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  ggmap<span class="sc">::</span><span class="fu">theme_nothing</span>()<span class="sc">+</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span> ,<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Rural"</span>, <span class="st">"Urban"</span>), <span class="at">name =</span> <span class="st">"Urban/Rural"</span>)<span class="sc">+</span></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"right"</span>)<span class="sc">+</span></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(<span class="at">pad_x =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>))<span class="sc">+</span></span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(<span class="at">style=</span>ggspatial<span class="sc">::</span>north_arrow_minimal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>basemaps<span class="sc">::</span><span class="fu">basemap_ggplot</span>(<span class="at">ext =</span> <span class="fu">st_bbox</span>(<span class="fu">st_buffer</span>(nc_boundary, </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">dist =</span> <span class="dv">20000</span>)), <span class="co">#distance in meters for geographic coordinates</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_service =</span> <span class="st">"carto"</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">map_type =</span> <span class="st">"light_no_labels"</span>)<span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"grey70"</span>)<span class="sc">+</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> roads, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">color =</span> UR), <span class="at">size =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span> ,<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Rural"</span>, <span class="st">"Urban"</span>), <span class="at">name =</span> <span class="st">"Urban/Rural"</span>)<span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"right"</span>)<span class="sc">+</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_scale</span>(<span class="at">pad_x =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>))<span class="sc">+</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_north_arrow</span>(<span class="at">style=</span>north_arrow_minimal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading basemap 'light_no_labels' from map service 'carto'...</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -895,15 +885,34 @@ replace the existing one.</code></pre>
 </div>
 </div>
 </div>
+<p>We could also forgo the basemap to make a simpler map:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill=</span><span class="st">"grey90"</span>, <span class="at">color =</span> <span class="st">"grey70"</span>)<span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> roads, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">stroke =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">aes</span>(<span class="at">color =</span> UR), <span class="at">size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span> ,<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Rural"</span>, <span class="st">"Urban"</span>), <span class="at">name =</span> <span class="st">"Urban/Rural"</span>)<span class="sc">+</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">3857</span>)<span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"right"</span>)<span class="sc">+</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_scale</span>(<span class="at">pad_x =</span> <span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"cm"</span>))<span class="sc">+</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotation_north_arrow</span>(<span class="at">style=</span>ggspatial<span class="sc">::</span>north_arrow_minimal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As usual, we could do much more to polish and fine tune these maps but this is a good start!</p>
 </section>
 <section id="basic-spatial-operations-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="basic-spatial-operations-in-r">Basic spatial operations in R</h2>
-<p>Load in</p>
+<p>Let’s use <code>tigris</code> to load polygons for all of the Combined Statistical Areas (CSAs) in the US.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>us_csas <span class="ot">&lt;-</span> <span class="fu">combined_statistical_areas</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Retrieving data for the year 2024</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>us_csas <span class="ot">&lt;-</span> <span class="fu">combined_statistical_areas</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   |                                                                            
@@ -960,6 +969,8 @@ replace the existing one.</code></pre>
   |===========                                                           |  15%
   |                                                                            
   |===========                                                           |  16%
+  |                                                                            
+  |============                                                          |  16%
   |                                                                            
   |============                                                          |  17%
   |                                                                            
@@ -1231,8 +1242,11 @@ replace the existing one.</code></pre>
   |                                                                            
   |======================================================================| 100%</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>nc_csas <span class="ot">&lt;-</span> us_csas <span class="sc">|&gt;</span> </span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_filter</span>(housing, <span class="at">.predicate =</span> st_intersects)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We can use our housing dataset to pick out the CSAs that our housing projects touch. These won’t be purely in North Carolina since CSAs often cross state borders. We’ll use <code>st_filter</code> to spatially filter our CSAs to those related to the housing layer. The <code>.predicate</code> argument lets us define the relationship we’re looking for between the layers. <code>?st_intersects</code> and <a href="https://en.wikipedia.org/wiki/DE-9IM">DE-9IM</a> provide more information about the relationships available. You can also define your own!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>nc_csas <span class="ot">&lt;-</span> us_csas <span class="sc">|&gt;</span> </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_filter</span>(housing, <span class="at">.predicate =</span> st_intersects)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `stopifnot()`:
 i In argument: `&gt;...`.
@@ -1240,9 +1254,9 @@ Caused by error in `st_geos_binop()`:
 ! st_crs(x) == st_crs(y) is not TRUE</code></pre>
 </div>
 </div>
-<p>This fails because we haven’t made sure both our objects are in the same CRS. Let’s check.</p>
+<p>Uh oh! Unlike mapping which can often brush CRS issues under the rug, this fails because we haven’t made sure both our objects are in the same CRS. Let’s check.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(housing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(housing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coordinate Reference System:
   User input: EPSG:4326 
@@ -1277,7 +1291,7 @@ GEOGCRS["WGS 84",
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(us_csas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(us_csas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Coordinate Reference System:
   User input: NAD83 
@@ -1298,44 +1312,21 @@ GEOGCRS["NAD83",
     ID["EPSG",4269]]</code></pre>
 </div>
 </div>
-<p>Let’s go with NAD83 for now, since that’s the default for census and tigris data.</p>
+<p>Let’s go with NAD83 for now, since that’s the default for census data. We can use <code>st_transform</code> to move</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>housing_nad <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(housing, <span class="at">crs =</span> <span class="dv">4269</span>)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>nc_csas <span class="ot">&lt;-</span> us_csas <span class="sc">|&gt;</span> </span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_filter</span>(housing_nad, <span class="at">.predicate =</span> st_intersects)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>housing_nad <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(housing, <span class="at">crs =</span> <span class="dv">4269</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># #or alternatively:</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co"># housing_nad &lt;- st_transform(housing, crs = st_crs(us_csas))</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>nc_csas <span class="ot">&lt;-</span> us_csas <span class="sc">|&gt;</span> </span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_filter</span>(housing_nad, <span class="at">.predicate =</span> st_intersects)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Now that we’ve limited our CSAs, let’s take a look!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_csas, <span class="fu">aes</span>(<span class="at">fill =</span> CSAFP))<span class="sc">+</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="GIS_R_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>csa_housing <span class="ot">&lt;-</span> <span class="fu">st_join</span>(nc_csas, housing_nad) <span class="sc">|&gt;</span> </span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(CSAFP) <span class="sc">|&gt;</span> </span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ct =</span> <span class="fu">n</span>(),</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">units =</span> <span class="fu">sum</span>(PHA_TOTAL_UNITS, <span class="at">na.rm=</span>T),</span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_pct_occ =</span> <span class="fu">mean</span>(PCT_OCCUPIED, <span class="at">na.rm=</span>T)) <span class="sc">|&gt;</span> </span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(nc_csas, <span class="at">y =</span> _)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Joining with `by = join_by(CSAFP)`</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> csa_housing, <span class="fu">aes</span>(<span class="at">fill =</span> avg_pct_occ))<span class="sc">+</span></span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing_nad, <span class="at">size =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)<span class="sc">+</span></span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_csas, <span class="fu">aes</span>(<span class="at">fill =</span> NAME))<span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1344,11 +1335,42 @@ GEOGCRS["NAD83",
 </div>
 </div>
 </div>
+<p>Another very useful spatial operation is the spatial join (<code>st_join</code>). This uses a similar predicate to the spatial filter to determine the relationship to join on. <code>st_intersects</code> is again the default.</p>
+<p>After joining, we drop geometries to do some <code>dplyr</code> transformations to calculate the number of developments, number of housing units, and average percent occupied in each CSA. Dropping geometries speeds up the calculation by simplifying the dataset. Then we rejoin to the spatial data as a last step!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>csa_housing <span class="ot">&lt;-</span> <span class="fu">st_join</span>(nc_csas, housing_nad, <span class="at">join =</span> st_intersects) <span class="sc">|&gt;</span> </span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(CSAFP) <span class="sc">|&gt;</span> </span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ct =</span> <span class="fu">n</span>(),</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">units =</span> <span class="fu">sum</span>(PHA_TOTAL_UNITS, <span class="at">na.rm=</span>T),</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">avg_pct_occ =</span> <span class="fu">mean</span>(PCT_OCCUPIED, <span class="at">na.rm=</span>T)) <span class="sc">|&gt;</span> </span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(nc_csas, <span class="at">y =</span> _)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(CSAFP)`</code></pre>
+</div>
+</div>
+<p>Finally, we can plot our newly calculated values!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> csa_housing, <span class="fu">aes</span>(<span class="at">fill =</span> avg_pct_occ))<span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_boundary, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> housing_nad, <span class="at">size =</span> <span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"darkred"</span>)<span class="sc">+</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="GIS_R_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In practice, these types of calculations may also feed into tables, graphs and other statistical analyses!</p>
 </section>
 <section id="other-useful-packages" class="level2">
 <h2 class="anchored" data-anchor-id="other-useful-packages">Other useful packages:</h2>
-<section id="nearest-neighbors-with-nngeo" class="level4">
-<h4 class="anchored" data-anchor-id="nearest-neighbors-with-nngeo">Nearest Neighbors with <code>nngeo</code></h4>
+<section id="nearest-neighbors-with-nngeo" class="level3">
+<h3 class="anchored" data-anchor-id="nearest-neighbors-with-nngeo">Nearest Neighbors with <code>nngeo</code></h3>
 </section>
 <section id="tmap" class="level3">
 <h3 class="anchored" data-anchor-id="tmap"><code>tmap</code></h3>
@@ -1362,15 +1384,29 @@ GEOGCRS["NAD83",
 </section>
 <section id="other-data-formats" class="level3">
 <h3 class="anchored" data-anchor-id="other-data-formats">Other data formats</h3>
-</section>
-<section id="shapefiles-and-geopackages" class="level3">
-<h3 class="anchored" data-anchor-id="shapefiles-and-geopackages">Shapefiles and Geopackages</h3>
+<section id="shapefiles-and-geopackages" class="level4">
+<h4 class="anchored" data-anchor-id="shapefiles-and-geopackages">Shapefiles and Geopackages</h4>
 <p>Shapefiles are an older format with some significant limitations (like variable name lengths!), but they’re important to be familiar with because they’re very very common and quirky. Despite the name, a shapefile is actually a <em>collection of files that have to be stored together</em> - anywhere from 3 to 12 files! It’s good practice to share them as a zipped folder.</p>
-<p>Geopackages are a newer file format that avoid many of the limitations of shapefiles. We’ll use geopackages for locally storing outputs from our R scripts.</p>
+<p>Geopackages are a newer file format that avoid many of the limitations of shapefiles.</p>
 <p>There are lots of other spatial formats out there like KML, GeoJSON, PostGIS and many more! R can work with many of these but we won’t work with them all today.</p>
-<section id="file-geodatabases" class="level4">
-<h4 class="anchored" data-anchor-id="file-geodatabases">File Geodatabases</h4>
-<p>geoparquet, duckDB</p>
+<section id="file-geodatabases" class="level5">
+<h5 class="anchored" data-anchor-id="file-geodatabases">File Geodatabases</h5>
+<p>File Geodatabases (.gdb) is a folder-based format that can store and manage multiple spatial and non-spatial data sets. It is a common data type if you work frequently in ArcGIS Pro and a proprietary format from Esri. Spatial layers can be read in as sf objects using <code>st_read</code> and specifying the geodatabase and layer names: <code>st_read(dsn, layer)</code></p>
+<p>You can also write a new or modified layer to a file geodatabase using <code>st_write</code>. Here is an example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_write</span>(<span class="at">obj =</span> nc_boundary, </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">dsn =</span> <span class="st">"nc_project.gdb"</span>, </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">layer =</span> <span class="st">"nc"</span>,</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">driver =</span> <span class="st">"OpenFileGDB"</span>,</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">delete_dsn =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">delete_layer =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Where <code>dsn</code> is the path to your geodatabase, <code>layer</code> is the name you like to give the object in the file geodatabase, and <code>delete_dsn</code> specifies if you would like to delete the file geodatabse and create a new one. Typically, you will get an error if a layer of the same name already exists, but <code>delete_layer = TRUE</code> will overwrite the existing feature class.</p>
+<p>“OpenFileGDB” is the built-in driver that works with Esri File Geodatabases. You can also leave out the driver argument; a driver name is typically accurately guessed and allows the object to write.</p>
+</section>
+</section>
+<section id="geoparquet-duckdb" class="level4">
+<h4 class="anchored" data-anchor-id="geoparquet-duckdb">geoparquet, duckDB</h4>
 </section>
 </section>
 <section id="spatialreg" class="level3">
