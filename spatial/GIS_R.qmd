@@ -69,7 +69,7 @@ library(basemaps)
 
 The `sf` packages will be our main spatial processing tool for today.
 
-We'll explore some of the most common packages for easily loading spatial data: `tidycensus` for census data, `tigris` for census boundaries, and \`arcgislayers for loading data from ESRI Data Services.
+We'll explore some of the most common packages for easily loading spatial data: `tidycensus` for census data, `tigris` for census boundaries, and `arcgislayers` for loading data from ESRI Data Services.
 
 Finally we'll use `ggplot` from the tidyverse to do some basic mapping and explore extensions with `tmap` for thematic mapping and `ggmap`, `ggspatial` and `basemaps`for map annotation, basemaps, and themes.
 
@@ -103,7 +103,7 @@ We can view the dataset in a separate tab with `view(acs5_vars)`. Note that the 
 
 ```{r}
 #| message: false
-nc_tracts<- get_acs(geography = "tract", state = "NC", variables = c("B01001_001","B01001A_001","B01001C_001"),
+nc_tracts<- get_acs(geography = "tract", state = "NC", variables = c("B01001_001"),
         output = "wide", geometry = TRUE, year = 2024, cache_table = TRUE,
         progress_bar = FALSE)
 ```
