@@ -1,7 +1,8 @@
 ---
 title: "GIS in R"
 author: 
-  name: University Library, University of North Carolina at Chapel Hill
+  name: UNC University Library, Library Data Services
+  url: https://library.unc.edu/data/
 execute:
   echo: true
 format: 
@@ -78,7 +79,7 @@ Finally we'll use `ggplot` from the tidyverse to do some basic mapping and explo
 
 -   [Spatial Data Science](https://r-spatial.org/book/): spatial computation with a focus on statistics
 
--   [Analyzing US Census Data](<https://walker-data.com/census-r/>): `tigris` and `tidycensus`
+-   [Analyzing US Census Data](https://walker-data.com/census-r/): `tigris` and `tidycensus`
 
 ## Basic Maps
 
@@ -107,6 +108,21 @@ nc_tracts<- get_acs(geography = "tract", state = "NC", variables = c("B01001_001
         progress_bar = FALSE)
 ```
 
+Let's take a look at the data:
+
+```{r}
+nc_tracts |> slice_sample(n=5)
+```
+
+With `slice_sample` we get random rows from anywhere in the dataset - your results probably look different. This looks like a normal R dataframe except for the additional spatial information at the top and the geometry column. In this case, each entry in the geometry column is a set of points defining a (multi)polygon.
+
+[Read more about the geometry types available in `sf`](https://r-spatial.github.io/sf/articles/sf1.html#simple-feature-geometry-types)
+
+```{r}
+# First 10 points of the first feature
+as.matrix(nc_tracts$geometry[[1]])[1:10,]
+```
+
 ### Plotting
 
 We can quickly plot `sf` data with the `plot` function. We'll use `ggplot` to make more complicated maps later on! If you run `plot(nc_tracts)`, every variable will be plotted in a separate map - this can be useful or dangerous depending on your dataset.
@@ -121,7 +137,9 @@ We can also work with `sf` objects like normal dataframes:
 hist(nc_tracts$B01001_001E, breaks = 100)
 ```
 
-Which tracts are over 15,000 population? We can use `dplyr`'s `filter` as usual, but we'll add `st_drop_geometry` to remove the extra spatial information and make our output a little more compact. Removing the geometry can also speed up other operations - it's worth considering whenever you're doing more complicated data transformations. You can always use a key variable to rejoin the geometries later on.
+Which tracts are over 15,000 population? We can use `dplyr`'s `filter` as usual, but we'll add an `sf` function: `st_drop_geometry` to drop the spatial elements to create a normal dataframe. This will make our output a little more compact (try it without st_drop_geometry!). Removing the geometry can also speed up other operations - it's worth considering whenever you're doing more complicated data transformations. You can always use a key variable to rejoin the geometries later on.
+
+Most functions in the `sf` package start with `st_` - we will see many more throughout the workshop.
 
 ```{r}
 nc_tracts |> 
@@ -196,10 +214,9 @@ ggplot()+
   theme_minimal()
 ```
 
-## Plotting XY data from a non-spatial dataframe
+### From non-spatial formats
 
 Lots of spatial data doesn't come in an explicitly spatial form. Let's take a look at a CSV derived from [Housing and Urban Development data (HUD)](https://hudgis-hud.opendata.arcgis.com/datasets/HUD::public-housing-developments-1/about).
-
 
 [Download nc_public_housing.csv](https://unc-libraries-data.github.io/R-Open-Labs/spatial/data/nc_public_housing.csv)
 
@@ -214,6 +231,7 @@ This dataset includes latitude and longitude data in two forms, X/Y and LAT/LON.
 all(housing_raw$X==housing_raw$LON)
 all(housing_raw$Y==housing_raw$LAT)
 ```
+
 To use this as spatial data, we need to point out the spatial coordinates and define a coordinate reference system (CRS) with `st_as_sf`. With latitude and longitude data we can usually safely use WGS84 (ESPG: 4326). Even better, you may have documentation of the coordinate system used in the data.
 
 ```{r}
@@ -228,7 +246,7 @@ We can check or *define* the crs (not project into a new crs - this will not cha
 st_crs(housing)
 ```
 
-There are a number of ways to get basemaps in R, but for today we'll use the `basemaps` package.  Maps from Carto are freely available without an API key. Most other services available through `basemaps` require a free sign up. `st_bbox` converts our set of points into a rectangle to form our plot area. We'll use `theme_nothing` from `ggmap` to remove all axes and other plot elements.
+There are a number of ways to get basemaps in R, but for today we'll use the `basemaps` package. Maps from Carto are freely available without an API key. Most other services available through `basemaps` require a free sign up. `st_bbox` converts our set of points into a rectangle to form our plot area. We'll use `theme_nothing` from `ggmap` to remove all axes and other plot elements.
 
 ```{r}
 #basemaps package map services use Web Mercator (ESPG: 3857)
@@ -239,6 +257,7 @@ basemap_ggplot(ext = st_bbox(housing), map_service = "carto")+
 ```
 
 We can add a state boundary and some space using `tigris` and `st_buffer`.
+
 ```{r}
 #| message: false
 nc_boundary <- states(progress_bar = FALSE) |> 
@@ -254,7 +273,8 @@ basemaps::basemap_ggplot(ext = st_bbox(st_buffer(nc_boundary,
 ```
 
 #### A note on coordinate systems
-`st_buffer` is one of many spatial processing tools available in `sf`.  Let's plot the buffer, bounding box, and the state outline directly:
+
+`st_buffer` is one of many spatial processing tools available in `sf`. Let's plot the buffer, bounding box, and the state outline directly:
 
 ```{r}
 #| fig-height: 3
@@ -264,8 +284,9 @@ ggplot()+
   geom_sf(data = st_buffer(nc_boundary, dist = 50000), color = "blue", fill=NA)+
   geom_sf(data = st_as_sfc(st_bbox(st_buffer(nc_boundary, dist = 50000))), color = "red", fill = NA)
 ```
-The jagged edges here are a result of working from a geographic or spherical coordinate system.  They aren't an issue for our use case since we're just using this to quickly expand our bounding box.  
-However, if we were doing a more precise analysis this might be an issue!  The solution is to convert our coordinates into a *projected coordinate system* (ESPG:31129 is a NAD83 state plane for North Carolina in meters) with `st_transform`.  Since this coordinate system uses a plane instead of a sphere our buffers are smoother.
+
+The jagged edges here are a result of working from a geographic or spherical coordinate system. They aren't an issue for our use case since we're just using this to quickly expand our bounding box.\
+However, if we were doing a more precise analysis this might be an issue! The solution is to convert our coordinates into a *projected coordinate system* (ESPG:31129 is a NAD83 state plane for North Carolina in meters) with `st_transform`. Since this coordinate system uses a plane instead of a sphere our buffers are smoother.
 
 ```{r}
 #| fig-height: 3
@@ -276,7 +297,7 @@ ggplot()+
   geom_sf(data = st_as_sfc(st_bbox(st_buffer(nc_boundary, dist = 50000))), color = "red", fill = NA)
 ```
 
-## Loading data from ESRI data services
+### Loading data from ESRI data services
 
 Let's add state maintained roads to the map! We'll use the ESRI data service from NC One Map. ["NC DOT State Maintained Roads"](https://www.nconemap.gov/maps/157dbc4ef33f4db4aa1ecc1a3182a375/explore) is a *Map Service* that contains multiple layers.
 
@@ -331,9 +352,14 @@ ggplot()+
   annotation_north_arrow(style=ggspatial::north_arrow_minimal)
   
 ```
+
 As usual, we could do much more to polish and fine tune these maps but this is a good start!
 
 ## Basic spatial operations in R
+
+We've already seen a simple spatial operation in `st_buffer` to create a buffered polygon expanding on an existing geometry. There are [many other operations](https://github.com/rstudio/cheatsheets/blob/main/sf.pdf) - we'll focus on two major ideas: spatial filtering and spatial joins.
+
+### Spatial Filtering
 
 Let's use `tigris` to load polygons for all of the Combined Statistical Areas (CSAs) in the US.
 
@@ -342,7 +368,7 @@ Let's use `tigris` to load polygons for all of the Combined Statistical Areas (C
 us_csas <- combined_statistical_areas(progress_bar = FALSE)
 ```
 
-We can use our housing dataset to pick out the CSAs that our housing projects touch.  These won't be purely in North Carolina since CSAs often cross state borders.  We'll use `st_filter` to spatially filter our CSAs to those related to the housing layer.  The `.predicate` argument lets us define the relationship we're looking for between the layers.  `?st_intersects` and [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM) provide more information about the relationships available.  You can also define your own!
+We can use our housing dataset to pick out the CSAs that our housing projects touch. These won't be purely in North Carolina since CSAs often cross state borders. We'll use `st_filter` to spatially filter our CSAs to those related to the housing layer. The `.predicate` argument lets us define the relationship we're looking for between the layers. `?st_intersects` and [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM) provide more information about the relationships available. You can also define your own!
 
 ```{r}
 #| error: true
@@ -361,7 +387,7 @@ st_crs(housing)
 st_crs(us_csas)
 ```
 
-Let's go with NAD83 for now, since that's the default for census data.  We can use `st_transform` to move 
+Let's go with NAD83 for now, since that's the default for census data. We can use `st_transform` to move
 
 ```{r}
 housing_nad <- st_transform(housing, crs = 4269)
@@ -372,7 +398,35 @@ nc_csas <- us_csas |>
   st_filter(housing_nad, .predicate = st_intersects)
 ```
 
-Now that we've limited our CSAs, let's take a look!
+Note that we filter with the housing locations not the NC boundary. There are several CSAs that touch NC and would be captured if we used that as a filter:
+
+```{r}
+nc_csas_border <- us_csas |> 
+  st_filter(nc_boundary, .predicate = st_intersects)
+nrow(nc_csas)
+nrow(nc_csas_border)
+```
+
+However, we could work around this by using the centroids of the CSAs with `st_centroid`.
+
+```{r}
+nc_csas_centroids <- st_centroid(us_csas) |> 
+  st_filter(nc_boundary, .predicate = st_intersects)
+nrow(nc_csas_centroids)
+```
+
+The only downside is this leaves us with centroid geometries instead of polygons.
+
+```{r}
+ggplot()+
+  geom_sf(data = nc_csas_border, fill = "red", alpha = 0.5, color=NA)+
+  geom_sf(data=nc_csas, color=NA)+
+  geom_sf(data=nc_csas_centroids)+
+  geom_sf(data = nc_boundary, fill=NA)+
+  theme_minimal()
+```
+
+We'll work with our original `nc_csas`. Now that we've limited our CSAs, let's take a look at what made the cut.
 
 ```{r}
 ggplot()+
@@ -381,9 +435,11 @@ ggplot()+
   theme_minimal()
 ```
 
-Another very useful spatial operation is the spatial join (`st_join`).  This uses a similar predicate to the spatial filter to determine the relationship to join on.  `st_intersects` is again the default.
+### Spatial Joins
 
-After joining, we drop geometries to do some `dplyr` transformations to calculate the number of developments, number of housing units, and average percent occupied in each CSA. Dropping geometries speeds up the calculation by simplifying the dataset.  Then we rejoin to the spatial data as a last step!
+Another very useful spatial operation is the spatial join (`st_join`). This uses a similar predicate to the spatial filter to determine the relationship to join on. `st_intersects` is again the default.
+
+After joining, we drop geometries to do some `dplyr` transformations to calculate the number of developments, number of housing units, and average percent occupied in each CSA. Dropping geometries speeds up the calculation by simplifying the dataset. Then we rejoin to the spatial data as a last step!
 
 ```{r}
 csa_housing <- st_join(nc_csas, housing_nad, join = st_intersects) |> 
@@ -394,6 +450,7 @@ csa_housing <- st_join(nc_csas, housing_nad, join = st_intersects) |>
             avg_pct_occ = mean(PCT_OCCUPIED, na.rm=T)) |> 
   right_join(nc_csas, y = _)
 ```
+
 Finally, we can plot our newly calculated values!
 
 ```{r}
@@ -404,11 +461,14 @@ ggplot()+
   scale_fill_gradient(low = "white", high = "darkred")+
   theme_minimal()
 ```
-In practice, these types of calculations may also feed into tables, graphs and other statistical analyses! 
 
-## Other useful mapping packages:
+In practice, these types of calculations may also feed into tables, graphs and other statistical analyses!
 
-### `tmap`
+## Other useful packages:
+
+### Mapping
+
+#### `tmap`
 
 [`tmap`](https://r-tmap.github.io/tmap/) is another popular package for making thematic maps.
 
@@ -429,6 +489,7 @@ tm_basemap("CartoDB.Positron")+
   tm_layout(frame = FALSE, 
             inner.margins = c(0.1,0.1,0,0)) #add space inside the plot
 ```
+
 By adding `tmap_mode("view")` before our code, we can make an interactive map.
 
 ```{r}
@@ -450,11 +511,9 @@ tm_basemap("CartoDB.Positron")+
             inner.margins = c(0.1,0.1,0,0)) #add space inside the plot
 ```
 
-
-### Leaflet
+#### Leaflet
 
 [`leaflet`](https://rstudio.github.io/leaflet/articles/leaflet.html) is the R package for creating interactive maps with the [Leaflet](https://leafletjs.com/) JavaScript library.
-
 
 ## Other data formats
 
@@ -473,7 +532,7 @@ There are lots of other spatial formats out there like KML, GeoJSON, PostGIS and
 ### File Geodatabases
 
 File Geodatabases (.gdb) is a folder-based format that can store and manage multiple spatial and non-spatial data sets. It is a common data type if you work frequently in ArcGIS Pro and a proprietary format from Esri. Spatial layers can be read in as sf objects using `st_read` and specifying the geodatabase and layer names: `st_read(dsn, layer)`
- 
+
 You can also write a new or modified layer to a file geodatabase using `st_write`. Here is an example:
 
 ```{r}
@@ -485,8 +544,9 @@ st_write(obj = nc_boundary,
          delete_dsn = FALSE,
          delete_layer = TRUE)
 ```
-Where `dsn` is the path to your geodatabase, `layer` is the name you like to give the object in the file geodatabase, and `delete_dsn` specifies if you would like to delete the file geodatabse and create a new one. Typically, you will get an error if a layer of the same name already exists, but `delete_layer = TRUE` will overwrite the existing feature class. 
- 
+
+Where `dsn` is the path to your geodatabase, `layer` is the name you like to give the object in the file geodatabase, and `delete_dsn` specifies if you would like to delete the file geodatabse and create a new one. Typically, you will get an error if a layer of the same name already exists, but `delete_layer = TRUE` will overwrite the existing feature class.
+
 "OpenFileGDB" is the built-in driver that works with Esri File Geodatabases. You can also leave out the driver argument; a driver name is typically accurately guessed and allows the object to write.
 
 ## Learn more: CRAN Task View
