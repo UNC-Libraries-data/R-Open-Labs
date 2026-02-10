@@ -73,7 +73,7 @@ We'll explore some of the most common packages for easily loading spatial data: 
 
 Finally we'll use `ggplot` from the tidyverse to do some basic mapping and explore extensions with `tmap` for thematic mapping and `ggmap`, `ggspatial` and `basemaps`for map annotation, basemaps, and themes.
 
-#### Resources for R Spatial packages:
+#### Resources for R spatial packages:
 
 -   [Geocomputation with R](https://r.geocompx.org/) : general spatial computation in R
 
@@ -81,7 +81,7 @@ Finally we'll use `ggplot` from the tidyverse to do some basic mapping and explo
 
 -   [Analyzing US Census Data](https://walker-data.com/census-r/): `tigris` and `tidycensus`
 
-## Basic Maps
+## Basic maps
 
 We'll start of with some basic maps using two very useful packages for retrieving data from Census APIs:
 
@@ -164,7 +164,7 @@ tri_tracts <- nc_tracts |>
 plot(tri_tracts['B01001_001E'],border = NA)
 ```
 
-### `ggplot` for Mapping
+### `ggplot` for mapping
 
 It might be helpful to add the county boundaries to this! Since we don't need any county *data*, we can pull county information from `tigris` with the `counties` function, then filter to our Triangle counties.
 
@@ -359,7 +359,7 @@ As usual, we could do much more to polish and fine tune these maps but this is a
 
 We've already seen a simple spatial operation in `st_buffer` to create a buffered polygon expanding on an existing geometry. There are [many other operations](https://github.com/rstudio/cheatsheets/blob/main/sf.pdf) - we'll focus on two major ideas: spatial filtering and spatial joins.
 
-### Spatial Filtering
+### Spatial filters
 
 Let's use `tigris` to load polygons for all of the Combined Statistical Areas (CSAs) in the US.
 
@@ -435,7 +435,7 @@ ggplot()+
   theme_minimal()
 ```
 
-### Spatial Joins
+### Spatial joins
 
 Another very useful spatial operation is the spatial join (`st_join`). This uses a similar predicate to the spatial filter to determine the relationship to join on. `st_intersects` is again the default.
 
@@ -464,11 +464,10 @@ ggplot()+
 
 In practice, these types of calculations may also feed into tables, graphs and other statistical analyses!
 
-## Other useful packages:
 
-### Mapping
+## Other mapping packages
 
-#### `tmap`
+### `tmap`
 
 [`tmap`](https://r-tmap.github.io/tmap/) is another popular package for making thematic maps.
 
@@ -511,7 +510,7 @@ tm_basemap("CartoDB.Positron")+
             inner.margins = c(0.1,0.1,0,0)) #add space inside the plot
 ```
 
-#### Leaflet
+### Leaflet
 
 [`leaflet`](https://rstudio.github.io/leaflet/articles/leaflet.html) is the R package for creating interactive maps with the [Leaflet](https://leafletjs.com/) JavaScript library.
 
@@ -521,7 +520,7 @@ tm_basemap("CartoDB.Positron")+
 
 There are two major raster packages to know about! `terra` is the successor to the `raster` package and works well for most simple rasters. `stars` is a better fit for cubes of data - think rasters with many many layers covering lots of different time points. `stars` itself is short for "Spatiotemporal Arrays"!
 
-### Shapefiles and Geopackages
+### Shapefiles and geopackages
 
 Shapefiles are an older format with some significant limitations (like variable name lengths!), but they're important to be familiar with because they're very very common and quirky. Despite the name, a shapefile is actually a *collection of files that have to be stored together* - anywhere from 3 to 12 files! It's good practice to share them as a zipped folder.
 
@@ -529,7 +528,7 @@ Geopackages are a newer file format that avoid many of the limitations of shapef
 
 There are lots of other spatial formats out there like KML, GeoJSON, PostGIS and many more! R can work with many of these but we won't work with them all today.
 
-### File Geodatabases
+### File geodatabases
 
 File Geodatabases (.gdb) is a folder-based format that can store and manage multiple spatial and non-spatial data sets. It is a common data type if you work frequently in ArcGIS Pro and a proprietary format from Esri. Spatial layers can be read in as sf objects using `st_read` and specifying the geodatabase and layer names: `st_read(dsn, layer)`
 
