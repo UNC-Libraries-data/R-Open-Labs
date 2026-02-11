@@ -67,7 +67,7 @@ For these plots, we'll use `moddf` provided via the code below.  The `url` funct
 We'll look at the code to generate `moddf` at the end of this section.
 
 ```{r message=FALSE}
-moddf <- read_csv(url("https://unc-libraries-data.github.io/R-Open-Labs/week10_models/moddf.csv"))
+moddf <- read_csv(url("https://unc-libraries-data.github.io/beginR/week10_models/moddf.csv"))
 head(moddf)
 ```
 
@@ -408,5 +408,5 @@ ggplot(sim_results) +
 
 3. Fit an `lm` with your selected variables.
 
-4. Use your intial `lm` fit to create a [regression table](https://unc-libraries-data.github.io/R-Open-Labs/Extras/ModelSummary/ModelSummary_Extra.html) output.  Embed in an Quarto document or output an html file.  Use `?modelsummary` to learn about and then change one or more default settings.
+4. Use your intial `lm` fit to create a [regression table](../Extras/ModelSummary/ModelSummary_Extra.html) output.  Embed in an Quarto document or output an html file.  Use `?modelsummary` to learn about and then change one or more default settings.
 

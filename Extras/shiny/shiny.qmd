@@ -20,7 +20,7 @@ format:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<br>![](https://unc-libraries-data.github.io/R-Open-Labs/Extras/shiny/figures/dashboard.jpg)<br>
+<br>![](figures/dashboard.jpg)<br>
 
 ## What is R Shiny?
 
@@ -28,27 +28,27 @@ Have you ever wanted to change your ggplots with the click of a button? Wouldn't
 
 ## Important Links
 
-1. **The data: [ramen-ratings.csv](https://unc-libraries-data.github.io/R-Open-Labs/Extras/shiny/data/ramen-ratings.csv)**<br>
+1. **The data: [ramen-ratings.csv](../../Extras/shiny/data/ramen-ratings.csv)**<br>
 This file includes over 2,500 ratings of different types of ramen collected by the [Ramen Rater](https://www.theramenrater.com/resources-2/the-list/) and published on [kaggle](https://www.kaggle.com/residentmario/ramen-ratings).
 
 2. [The final dashboard](https://lbunc.shinyapps.io/ramen/)
 
-3. [The complete code for the dashboard](https://unc-libraries-data.github.io/R-Open-Labs/Extras/shiny/ramen.R)
+3. [The complete code for the dashboard](ramen.R)
 
 ## Prerequisites
 
 This Extra does not explain concepts already covered in the R Open Labs lessons. Before you begin, you should already know how to do the following:
 
-* [Set up a project in R](https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/R_OpenLabs_Workflow.html#1:_rstudio_projects)
-* [Load packages and data](https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/R_OpenLabs_Workflow.html#2:_import_the_data)
-* [Use numeric indexing](https://unc-libraries-data.github.io/R-Open-Labs/week4_EDA/R_OpenLabs_EDA.html#note:_indexing)
-* [Work with factors and levels](https://unc-libraries-data.github.io/R-Open-Labs/week5_Strings_and_Factors/R_OpenLabs_Strings_and_Factors.html#altering_factors)
-* [Create a ggplot bar chart](https://unc-libraries-data.github.io/R-Open-Labs/week4_EDA/R_OpenLabs_EDA.html#categorical_variables)
-* [Use conditionals](https://unc-libraries-data.github.io/R-Open-Labs/week8_Functions_Conditionals/R_OpenLabs_Functions.html#conditionals)
-* [Group, summarize and arrange data](https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_Transformations.html#reordering_data_(arrange))
-* [Use pipes](https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_Transformations.html#piping)
-* [Filter data](https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_Transformations.html#filtering)
-* [Join multiple datasets](https://unc-libraries-data.github.io/R-Open-Labs/week6_Merge_Reshape/R_OpenLabs_MergeReshape.html)
+* [Set up a project in R](../../week2_Workflow/R_OpenLabs_Workflow.html#1:_rstudio_projects)
+* [Load packages and data](../../week2_Workflow/R_OpenLabs_Workflow.html#2:_import_the_data)
+* [Use numeric indexing](../../week4_EDA/R_OpenLabs_EDA.html#note:_indexing)
+* [Work with factors and levels](../../week5_Strings_and_Factors/R_OpenLabs_Strings_and_Factors.html#altering_factors)
+* [Create a ggplot bar chart](../../week4_EDA/R_OpenLabs_EDA.html#categorical_variables)
+* [Use conditionals](../../week8_Functions_Conditionals/R_OpenLabs_Functions.html#conditionals)
+* [Group, summarize and arrange data](../../week3_Transformations/R_OpenLabs_Transformations.html#reordering_data_(arrange))
+* [Use pipes](../../week3_Transformations/R_OpenLabs_Transformations.html#piping)
+* [Filter data](../../week3_Transformations/R_OpenLabs_Transformations.html#filtering)
+* [Join multiple datasets](../../week6_Merge_Reshape/R_OpenLabs_MergeReshape.html)
 
 In addition, when using web application tools like R Shiny, it is always helpful have a **basic, working familiarity with HTML and CSS**. You will be able to complete this Extra without adding any HTML or CSS, but the finished web page will not look as nice! If you are new to web markup languages, the tutorials at [w3schools](https://www.w3schools.com/) are a good place to start.
 
@@ -56,21 +56,21 @@ In addition, when using web application tools like R Shiny, it is always helpful
 
 Begin by creating a new project in R Studio, but be sure to select **Shiny Web Application**. 
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/newproject.jpg)</br>
+<br>![](figures/newproject.jpg)</br>
 
 You will be provided with a new file called "app.R" which already has some code written for you. This file will serve as a template for creating your R Shiny app. Take a look at the code in action by clicking the **Run App** button in the upper right corner of the script editor. 
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/runapp.jpg)</br>
+<br>![](figures/runapp.jpg)</br>
 
 A new tab should open up in your web browser and display something that looks like this:
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/example.jpg)</br>
+<br>![](figures/example.jpg)</br>
 
 Try moving the "Number of bins" slider up and down and watch what happens to the histogram. This is a basic example of the type of interactive controls you can create in a Shiny web app.
 
 Now, close the browser tab and return to R studio. Take a look at your console. It will say something like "Listening on h<span></span>ttp://127.0.0.1:xxx". This means our app is still running locally, and we will be unable to run any new code in R until we stop it. Click on the **stop sign icon** in the upper right hand corner of your console to terminate the app.
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/stop.jpg)</br>
+<br>![](figures/stop.jpg)</br>
 
 ## The Template
 
@@ -316,7 +316,7 @@ Note that our conditional and filter use `input$style`. Here, you can see how ou
 
 Let's see if it works. Run your app and make a selection from the menu. It should look something like this:
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/stylemenu.jpg)</br>
+<br>![](figures/stylemenu.jpg)</br>
 
 Now our users can select a specific style of ramen they're interested in, but what if they want to look at the top brands for a specicific **country**? We can use the same process to create a country menu. First, in the UI section, add the following below the Style menu:
 
@@ -342,7 +342,7 @@ This gives the user two different options for filtering the bar chart (and other
 
 Click **Run App** again and play around with the menus. You'll notice that with some combinations of filters, our bar chart becomes **blank** because we've filtered all the data from our dataset.
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/blank.jpg)</br>
+<br>![](figures/blank.jpg)</br>
 
 Luckily, there are methods for handling these kinds of problems in Shiny.
 
@@ -358,7 +358,7 @@ validate (
 
 The `validate()` function above can contain any number of tests for displaying different error messages. All tests are defined in nested, separate `need()` functions. In this case, we are testing `nrow(ratings) > 0`, or, is the number of rows that remain in our ratings data frame greater than zero? If the test evaluates to `FALSE`, then the error message is displayed. Run the app again, then select "Bowl" and "Bangladesh" from the menus to see what happens.
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/message.jpg)</br>
+<br>![](figures/message.jpg)</br>
 
 ## Create a Map
 
@@ -394,7 +394,7 @@ The `addTiles()` function loads whatever basemap imagery we want to use. In this
 
 We're also setting our map view to 0 lattitude and 0 longitude (the center of the world) at zoom level 1. Click **Run App** to take a look.
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/basemap.jpg)</br>
+<br>![](figures/basemap.jpg)</br>
 
 We want to create a [choropleth map](https://datavizcatalogue.com/methods/choropleth.html) in which each country is represented by a polygon of a different color depending on the country's average review score. In order to do that, we'll first need to get the average review score for each country. The following code should go within the `renderLeaflet()` function but above the code for the basemap.
 
@@ -453,7 +453,7 @@ Time to add the polygons to the map. Our code should look like this:
 
 The `addPolygons()` function takes our spatial data column and applies it to the map. What does it look like now? Click **Run App** to find out.
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/choropleth.jpg)</br>
+<br>![](figures/choropleth.jpg)</br>
 
 Obviously, we still have some work to do! In order to give the countries different colors depending on their average rating, we need to create a **color palette**. Also, roll over one of the polygons on the map and note what happens to the mouse pointer. It changes! That's because we have an option of adding **roll over text labels** for each of our countries, so let's take advantage of that as well.
 
@@ -520,7 +520,7 @@ Aside from what we've addressed above, there are many, many more ways to customi
 
 *Now* what does our map look like? Click **Run App** to find out, and be sure to roll the mouse cursor over the different countries.
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/colormap.jpg)</br>
+<br>![](figures/colormap.jpg)</br>
 
 Great! But what happens when we select a style or country from the menus at the top? Right now, they only work on our bar chart. To make them work on the map as well, let's copy and paste the filters and `validate()` function from `renderPlot()` into `renderLeaflet()`. The full code on the server for generating the map should now look like this:
 
@@ -643,7 +643,7 @@ output$table <- renderDataTable({
 
 Click **Run App** to take a look at the results.
 
-<br>![](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/main/Extras/shiny/figures/table.jpg)</br>
+<br>![](figures/table.jpg)</br>
 
 ## Make it Look Good
 

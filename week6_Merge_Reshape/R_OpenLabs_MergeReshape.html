@@ -214,9 +214,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  StudentID GPA_change
-1         1 0.17969405
-2         2 0.04846606</code></pre>
+<pre><code>  StudentID  GPA_change
+1         1 -0.02043998
+2         2  0.06541826</code></pre>
 </div>
 </div>
 <p><strong>Dataset 2</strong></p>
@@ -228,8 +228,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change Semester
-1         3  1.3367938   Spring
-2         4 -0.8802326     Fall</code></pre>
+1         3  1.4190220   Spring
+2         4  0.9934853     Fall</code></pre>
 </div>
 </div>
 <p><strong>Datasets combined</strong></p>
@@ -237,10 +237,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(a0,a1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID  GPA_change Semester
-1         1  0.17969405     &lt;NA&gt;
-2         2  0.04846606     &lt;NA&gt;
-3         3  1.33679384   Spring
-4         4 -0.88023260     Fall</code></pre>
+1         1 -0.02043998     &lt;NA&gt;
+2         2  0.06541826     &lt;NA&gt;
+3         3  1.41902196   Spring
+4         4  0.99348534     Fall</code></pre>
 </div>
 </div>
 <p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a bind_cols function, but in the context below, using bind_cols is unhelpful and results in mismatched records.</p>
@@ -952,7 +952,7 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <li><p>Read olist_public_dataset_v2.csv into R. Explore the dataset. If necessary, refer to the metadata provided <a href="https://www.kaggle.com/olistbr/brazilian-ecommerce">here</a>.</p></li>
 <li><p>Read product_category_name_translation.csv into R. Merge this dataframe into olist_public_dataset_v2.csv using <code>product_category_name</code> as the key variable.</p>
 <p>Let’s explore which products are most frequently purchased together:</p></li>
-<li><p>Use <code>group_by</code> and <code>summarize</code> to find the total <code>order_items_qty</code> for each <code>product_category_name_english</code> in each <code>customer state</code>. <a href="https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html">Review</a></p></li>
+<li><p>Use <code>group_by</code> and <code>summarize</code> to find the total <code>order_items_qty</code> for each <code>product_category_name_english</code> in each <code>customer state</code>. <a href="../week3_Transformations/R_OpenLabs_3_Transformations.html">Review</a></p></li>
 <li><p>Use <code>pivot_wider</code> to create a new dataframe with a row for each <code>customer_state</code> and a column for each <code>product_category_name_english</code>. Name this dataframe <code>products</code>.</p></li>
 <li><p>Run the two lines of code below (make sure your dataframe from step 4 is called <code>products</code>!)</p>
 <div class="cell">
@@ -972,7 +972,7 @@ dbl (17): Year, Cheddar, American Other, Mozzarella, Italian other, Swiss, B...
 <li><p><a href="../week7_Reproducible_Reports/download/cheese.zip">Download the cheese RStudio Project</a> file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.</p></li>
 <li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>setup</strong>. change <code>echo=FALSE</code> to <code>echo=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
 <li><p>In the cheeseConsumption.Rmd file, find the code chunk named <strong>import</strong>. change <code>message=FALSE</code> to <code>message=TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
-<li><p>Create another R Markdown document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom <a href="https://unc-libraries-data.github.io/R-Open-Labs/week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
+<li><p>Create another R Markdown document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom <a href="../week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
 <li><p>Once you have created an R Markdown report analyzing cheese production, send the entire R Project to a friend (or us!) and ask them to knit that .Rmd document. If they have RStudio and the tidyverse installed, they should be able to seamlessly generate the exact report you generated, without having to make any changes.</p></li>
 </ol>
 </section>

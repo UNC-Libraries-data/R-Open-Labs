@@ -17,7 +17,7 @@ format:
 
 This workshop assumes a basic familiarity with the R programming language and some exposure to GIS concepts like projections.
 
-If you'd like a refresher on R, we suggest the [R For Data Science](https://r4ds.hadley.nz/) free e-book and the lessons from our [beginR workshops](https://tarheels.live/beginr/lessons/), including [setup instructions for R and R Studio](https://unc-libraries-data.github.io/R-Open-Labs/week1_Introduction/R_OpenLabs_Introduction.html#setup-r-r-studio).
+If you'd like a refresher on R, we suggest the [R For Data Science](https://r4ds.hadley.nz/) free e-book and the lessons from our [beginR workshops](https://tarheels.live/beginr/lessons/), including [setup instructions for R and R Studio](../week1_Introduction/R_OpenLabs_Introduction.html#setup-r-r-studio).
 
 ## Important packages
 
@@ -218,7 +218,7 @@ ggplot()+
 
 Lots of spatial data doesn't come in an explicitly spatial form. Let's take a look at a CSV derived from [Housing and Urban Development data (HUD)](https://hudgis-hud.opendata.arcgis.com/datasets/HUD::public-housing-developments-1/about).
 
-[Download nc_public_housing.csv](https://unc-libraries-data.github.io/R-Open-Labs/spatial/data/nc_public_housing.csv)
+[Download nc_public_housing.csv](data/nc_public_housing.csv)
 
 ```{r}
 housing_raw <- read_csv('data/nc_public_housing.csv')

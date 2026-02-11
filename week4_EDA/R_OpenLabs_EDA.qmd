@@ -403,7 +403,7 @@ ggplot(data=listings,aes(x=price,color=room_type))+
 
 ## Exercises
 
-1. Make a scatterplot of review_scores_rating vs reviews_per_month.  Add a best fit linear regression line with `geom_smooth` (check the help with `?geom_smooth`, or refer back to [week one](https://unc-libraries-data.github.io/R-Open-Labs/week1_Introduction/R_OpenLabs_Introduction.html))
+1. Make a scatterplot of review_scores_rating vs reviews_per_month.  Add a best fit linear regression line with `geom_smooth` (check the help with `?geom_smooth`, or refer back to [week one](../week1_Introduction/R_OpenLabs_Introduction.html))
 
 2. Which neighborhoods have the highest median price?  Which neighborhoods have the highest variance or largest IQR?  Hint: Use `neighbourhood_cleansed` for neighborhoods.
 

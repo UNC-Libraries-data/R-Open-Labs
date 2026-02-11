@@ -79,7 +79,7 @@ The code between the curly brackets, or the **body** of the loop, tells R what t
 
 ## Output
 
-Before we start the loop, we should assign a sufficient space for the output by creating an output object. If we want to store our output in a vector, we can use the `vector` function to create one. `vector` takes two arguments: the type of the vector and the length. For more information on object classes and types, review [Week 2.3: Objects and classes](https://unc-libraries-data.github.io/R-Open-Labs/week2_Workflow/R_OpenLabs_2_Workflow.html#3:_objects_and_classes).
+Before we start the loop, we should assign a sufficient space for the output by creating an output object. If we want to store our output in a vector, we can use the `vector` function to create one. `vector` takes two arguments: the type of the vector and the length. For more information on object classes and types, review [Week 2.3: Objects and classes](../week2_Workflow/R_OpenLabs_2_Workflow.html#3:_objects_and_classes).
 
 Below, we're creating an empty numeric vector called "output" with 5 columns. 
 

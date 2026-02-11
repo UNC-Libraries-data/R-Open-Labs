@@ -70,7 +70,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="R_OpenLabs_Models_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="R_OpenLabs_Models_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="R_OpenLabs_Models_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="R_OpenLabs_Models_files/libs/bootstrap/bootstrap-3d0e9a627679db782712830cff2cbe70.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="R_OpenLabs_Models_files/libs/bootstrap/bootstrap-e261b86ae15e22bf333780d8a72f25c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -206,7 +206,7 @@ window.Quarto = {
 <p>For these plots, we’ll use <code>moddf</code> provided via the code below. The <code>url</code> function combined with <code>read_csv</code> allows us to directly import content from the internet into our R session.</p>
 <p>We’ll look at the code to generate <code>moddf</code> at the end of this section.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>moddf <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">url</span>(<span class="st">"https://unc-libraries-data.github.io/R-Open-Labs/week10_models/moddf.csv"</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>moddf <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">url</span>(<span class="st">"https://unc-libraries-data.github.io/beginR/week10_models/moddf.csv"</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(moddf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
@@ -697,7 +697,7 @@ F-statistic: 70.44 on 4 and 28 DF,  p-value: 3.339e-14</code></pre>
 <li><p>Explore the datasets included with the built-in <code>datasets</code> package by running <code>data(package="datasets")</code>. You can get more information about any given dataset with <code>?&lt;dataset name&gt;</code>. Choose a dataset with at least a few numeric variables.</p></li>
 <li><p>Use <code>str</code>, <code>head</code>, <code>summary</code> and any of our EDA techniques to explore the dataset. Pick a continuous outcome variable of interest and choose some predictors.</p></li>
 <li><p>Fit an <code>lm</code> with your selected variables.</p></li>
-<li><p>Use your intial <code>lm</code> fit to create a <a href="https://unc-libraries-data.github.io/R-Open-Labs/Extras/ModelSummary/ModelSummary_Extra.html">regression table</a> output. Embed in an Quarto document or output an html file. Use <code>?modelsummary</code> to learn about and then change one or more default settings.</p></li>
+<li><p>Use your intial <code>lm</code> fit to create a <a href="../Extras/ModelSummary/ModelSummary_Extra.html">regression table</a> output. Embed in an Quarto document or output an html file. Use <code>?modelsummary</code> to learn about and then change one or more default settings.</p></li>
 </ol>
 </section>
 
