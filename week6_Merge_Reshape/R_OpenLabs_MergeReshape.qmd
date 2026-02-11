@@ -529,7 +529,7 @@ All of today's exercises involve the datasets included in [brazilian-commerce-su
 
 ### R Markdown 
 
-10.  [Download the cheese RStudio Project](https://github.com/UNC-Libraries-data/R-Open-Labs/raw/master/week7_Reproducible_Reports/download/cheese.zip) file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.
+10.  [Download the cheese RStudio Project](../week7_Reproducible_Reports/download/cheese.zip) file and extract the R Project contained within. Then, knit the cheeseConsumption.Rmd report. It should generate an HTML report for you.
 
 11.  In the cheeseConsumption.Rmd file, find the code chunk named **setup**. change `echo=FALSE` to `echo=TRUE`. Try knitting the document again. What changed? Did this affect the whole document?
 
