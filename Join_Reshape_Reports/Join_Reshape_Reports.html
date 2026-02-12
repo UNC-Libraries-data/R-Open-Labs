@@ -210,8 +210,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change
-1         1 -0.5608000
-2         2  0.9511497</code></pre>
+1         1 -0.4334150
+2         2 -0.2838291</code></pre>
 </div>
 </div>
 <p><strong>Dataset 2</strong></p>
@@ -223,8 +223,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change Semester
-1         3 -0.2720005   Spring
-2         4 -1.0052680     Fall</code></pre>
+1         3   2.361660   Spring
+2         4  -1.313888     Fall</code></pre>
 </div>
 </div>
 <p><strong>Datasets combined</strong></p>
@@ -232,10 +232,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(a0,a1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  StudentID GPA_change Semester
-1         1 -0.5608000     &lt;NA&gt;
-2         2  0.9511497     &lt;NA&gt;
-3         3 -0.2720005   Spring
-4         4 -1.0052680     Fall</code></pre>
+1         1 -0.4334150     &lt;NA&gt;
+2         2 -0.2838291     &lt;NA&gt;
+3         3  2.3616602   Spring
+4         4 -1.3138883     Fall</code></pre>
 </div>
 </div>
 <p>When we refer to <strong>merging</strong> or <strong>joining</strong>, we usually do not mean appending or adding observations to a dataset in this way. Instead, joining usuallly intends to add columns or variables to our dataframe. R does have a bind_cols function, but in the context below, using bind_cols is unhelpful and results in mismatched records.</p>
@@ -413,7 +413,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4  Tamera   NA           8</code></pre>
 </div>
 </div>
-<p><em>Note: All of these join functions come from the <code>dplyr</code> package, so we can use them with pipes ( %&gt;% )</em></p>
 </section>
 </section>
 </section>
@@ -843,7 +842,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><a href="../Join_Reshape_Reports/download/cheese.zip">Download the cheese RStudio Project</a> file and extract the R Project contained within. Then, render the cheeseConsumption.qmd report. It should generate an HTML report for you.</p></li>
 <li><p>In the cheeseConsumption.qmd file, find the code chunk named <strong>setup</strong>. change <code>#| echo: FALSE</code> to <code>#| echo: TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
 <li><p>In the cheeseConsumption.qmd file, find the code chunk named <strong>import</strong>. change <code>#| message: FALSE</code> to <code>#| message: TRUE</code>. Try knitting the document again. What changed? Did this affect the whole document?</p></li>
-<li><p>Create another Quarto document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the group-by %&gt;% summarize idiom <a href="../week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that group-by %&gt;% summarize step into knitr::kable() to get a prettier table for your report.</p></li>
+<li><p>Create another Quarto document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29">here</a> to make sense of the different variables. <strong>Hint</strong>: you’ll need to use the <code>group_by |&gt; summarize</code> idiom <a href="../week3_Transformations/R_OpenLabs_3_Transformations.html#piping">we learned in Week 3</a> to sum up all the state level data within each year. You’ll probably want to feed the output from that <code>group_by |&gt; summarize</code> step into knitr::kable() to get a prettier table for your report.</p></li>
 <li><p>Once you have created an Quarto report analyzing cheese production, send the entire R Project to a friend (or us!) and ask them to knit that .qmd document. If they have RStudio and the tidyverse installed, they should be able to seamlessly generate the exact report you generated, without having to make any changes.</p></li>
 </ol>
 </section>

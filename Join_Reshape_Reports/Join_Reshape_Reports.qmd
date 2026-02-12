@@ -183,7 +183,6 @@ left_join(b0,b1,by=c("name"="person"))
 right_join(b0,b1,by=c("name"="person"))
 ```
 
-*Note: All of these join functions come from the `dplyr` package, so we can use them with pipes ( %\>% )*
 
 ### Extensions
 
@@ -587,6 +586,6 @@ All of today's exercises involve the datasets included in [brazilian-commerce-su
 
 12. In the cheeseConsumption.qmd file, find the code chunk named **import**. change `#| message: FALSE` to `#| message: TRUE`. Try knitting the document again. What changed? Did this affect the whole document?
 
-13. Create another Quarto document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29) to make sense of the different variables. **Hint**: you'll need to use the group-by %\>% summarize idiom [we learned in Week 3](../week3_Transformations/R_OpenLabs_3_Transformations.html#piping) to sum up all the state level data within each year. You'll probably want to feed the output from that group-by %\>% summarize step into knitr::kable() to get a prettier table for your report.
+13. Create another Quarto document analyzing cheese production data contained in the state_milk_productions.csv file. You can use the data dictionary found [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29) to make sense of the different variables. **Hint**: you'll need to use the `group_by |> summarize` idiom [we learned in Week 3](../week3_Transformations/R_OpenLabs_3_Transformations.html#piping) to sum up all the state level data within each year. You'll probably want to feed the output from that `group_by |> summarize` step into knitr::kable() to get a prettier table for your report.
 
 14. Once you have created an Quarto report analyzing cheese production, send the entire R Project to a friend (or us!) and ask them to knit that .qmd document. If they have RStudio and the tidyverse installed, they should be able to seamlessly generate the exact report you generated, without having to make any changes.
